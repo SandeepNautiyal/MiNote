@@ -1,28 +1,33 @@
 package com.gp.app.professionalpa.start;
 
-import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.R.id;
-import com.gp.app.professionalpa.R.layout;
-import com.gp.app.professionalpa.R.menu;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.layout.NotesLayoutManagerActivity;
 
 public class StartProfessionalPAApplicationActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_start_professional_pa_application);
+		
+		Intent startLayoutManager = new Intent(this, NotesLayoutManagerActivity.class);
+		
+		startLayoutManager.setAction("START_LAYOUT_MANAGER_ACTIVITY");
+		
+		startActivity(startLayoutManager);
+		
+//		setContentView(R.layout.activity_start_professional_pa_application);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater()
-				.inflate(R.menu.start_professional_paapplication, menu);
+		getMenuInflater().inflate(R.menu.start_professional_paapplication, menu);
 		return true;
 	}
 
