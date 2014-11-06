@@ -1,16 +1,11 @@
 package com.gp.app.professionalpa.layout;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.R.id;
-import com.gp.app.professionalpa.R.layout;
-import com.gp.app.professionalpa.R.menu;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import android.app.ActionBar;
 
 public class NotesLayoutManagerActivity extends Activity {
 
