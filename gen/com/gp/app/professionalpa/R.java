@@ -29,8 +29,9 @@ public final class R {
     public static final class id {
         public static final int action_add_notes=0x7f080001;
         public static final int action_clear_all_notes=0x7f080002;
-        public static final int action_exit_professional_pa_application=0x7f080003;
-        public static final int action_search=0x7f080004;
+        public static final int action_display_calender=0x7f080003;
+        public static final int action_exit_professional_pa_application=0x7f080004;
+        public static final int action_search=0x7f080005;
         public static final int action_settings=0x7f080000;
     }
     public static final class layout {
@@ -46,9 +47,10 @@ public final class R {
         public static final int action_settings=0x7f050001;
         public static final int add_note=0x7f050004;
         public static final int app_name=0x7f050000;
-        public static final int application_title=0x7f050007;
+        public static final int application_title=0x7f050008;
         public static final int clear_all_notes=0x7f050005;
-        public static final int exit=0x7f050006;
+        public static final int display_calender=0x7f050006;
+        public static final int exit=0x7f050007;
         public static final int notes_layout_manager_activity_title=0x7f050003;
     }
     public static final class style {

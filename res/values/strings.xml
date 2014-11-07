@@ -6,6 +6,7 @@
     <string name="notes_layout_manager_activity_title">Notes</string>
     <string name="add_note">Add Note</string>
     <string name="clear_all_notes">Clear All Notes</string>
+    <string name="display_calender">Calender</string>
     <string name="exit">Exit</string>
     <string name="application_title">Professional PA</string>
 </resources>
