@@ -47,6 +47,7 @@ public final class R {
         public static final int action_settings=0x7f050001;
         public static final int add_note=0x7f050004;
         public static final int app_name=0x7f050000;
+        public static final int application_alarm=0x7f050009;
         public static final int application_title=0x7f050008;
         public static final int clear_all_notes=0x7f050005;
         public static final int display_calender=0x7f050006;
