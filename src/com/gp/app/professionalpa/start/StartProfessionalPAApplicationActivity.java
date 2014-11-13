@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.layout.NotesLayoutManagerActivity;
+import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
 
 public class StartProfessionalPAApplicationActivity extends Activity {
 

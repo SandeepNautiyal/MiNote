@@ -6,11 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gp.app.professionalpa.layout.NotesLayoutManagerActivity" >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/notes_layout_manager_activity_title" />
+    android:id="@+id/notes_layout_activity_manager"
+    tools:context="com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity" >
 
 </RelativeLayout>

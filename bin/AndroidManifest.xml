@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.gp.app.professionalpa.layout.NotesLayoutManagerActivity"
+            android:name="com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity"
             android:label="@string/notes_layout_manager_activity_title" >
         </activity>
     </application>

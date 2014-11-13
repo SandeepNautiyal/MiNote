@@ -5,10 +5,12 @@
     <string name="action_search">Search</string>
     <string name="notes_layout_manager_activity_title">Notes</string>
     <string name="add_note">Add Note</string>
+    <string name="action_create_list_view">List View</string>
     <string name="clear_all_notes">Clear All Notes</string>
     <string name="display_calender">Calender</string>
     <string name="exit">Exit</string>
     <string name="application_title">Professional PA</string>
+    <string name="change_importance">Change Importance</string>
     <string name="application_alarm">Alarm</string>
-    <string name="action_create_list_view">List View</string>
+    <string name="add_list_item">Add more items</string>
 </resources>
