@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ public class ListViewItemAdapter extends ArrayAdapter<ListViewItem>
 	private List<ListViewItem> listItems = null;
 	
 	
-	public ListViewItemAdapter(Context context, ListViewItem [] values) {
+	public ListViewItemAdapter(Context context, List<ListViewItem> values) {
 		
 		super(context, R.layout.composite_control_for_list_view, values);
 		
@@ -30,7 +31,7 @@ public class ListViewItemAdapter extends ArrayAdapter<ListViewItem>
 		
 		if(values != null)
 		{
-			listItems = Arrays.asList(values);
+			listItems = values;
 		}
 		// TODO Auto-generated constructor stub
 	}
@@ -40,20 +41,21 @@ public class ListViewItemAdapter extends ArrayAdapter<ListViewItem>
 	    LayoutInflater inflater = (LayoutInflater) context
 	        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	    
-	    View rowView = inflater.inflate(R.layout.composite_control_for_list_view, parent, false);
+	    if(convertView == null)
+	        convertView = inflater.inflate(R.layout.composite_control_for_list_view, parent, false);
 	    
-	    TextView textView = (TextView) rowView.findViewById(R.id.composite_control_text_box);
+	    TextView textView = (TextView) convertView.findViewById(R.id.composite_control_text_box);
 	    
-	    ImageButton importanceImageButton = (ImageButton) rowView.findViewById(R.id.composite_control_importance_button);
+	    ImageButton importanceImageButton = (ImageButton) convertView.findViewById(R.id.composite_control_importance_button);
 	    
-	    ImageButton alarmImageButton = (ImageButton)rowView.findViewById(R.id.composite_control_alarm_button);
+	    ImageButton alarmImageButton = (ImageButton)convertView.findViewById(R.id.composite_control_alarm_button);
 	    
 	    if(listItems != null)
 	    {
 		    textView.setText(listItems.get(position).getTextViewData());
 	    }
 	    
-	    return rowView;
+	    return convertView;
 	  }
-
+	
 }

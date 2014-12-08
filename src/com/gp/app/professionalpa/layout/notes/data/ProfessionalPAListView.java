@@ -1,11 +1,14 @@
 package com.gp.app.professionalpa.layout.notes.data;
 
+import java.util.Arrays;
+import java.util.List;
+
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.data.ListViewItem;
@@ -14,7 +17,7 @@ import com.gp.app.professionalpa.data.ListViewItemAdapter;
 public class ProfessionalPAListView extends ListFragment
 {
 
-	private BaseAdapter mAdapter = null;
+	private ArrayAdapter<ListViewItem> mAdapter = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class ProfessionalPAListView extends ListFragment
 		
 //		View view = inflater.inflate(R.layout.composite_control_for_list_view, null);
 		
-		ListViewItem [] values = {new ListViewItem("")};
+		List<ListViewItem> values = Arrays.asList(new ListViewItem(""));
 		
 		mAdapter = new ListViewItemAdapter(getActivity(), values);
 		
@@ -56,6 +59,13 @@ public class ProfessionalPAListView extends ListFragment
 	public void onDetach() {
 		// TODO Auto-generated method stub
 		super.onDetach();
+	}
+	
+	public void addEmptyItemInList()
+	{
+        mAdapter.add(new ListViewItem(""));
+        
+        mAdapter.notifyDataSetChanged();
 	}
 
 }

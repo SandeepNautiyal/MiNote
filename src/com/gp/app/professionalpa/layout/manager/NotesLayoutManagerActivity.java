@@ -1,20 +1,32 @@
 package com.gp.app.professionalpa.layout.manager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewParent;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.layout.notes.data.ProfessionalPAListView;
 
 public class NotesLayoutManagerActivity extends FragmentActivity {
 
+	FragmentManager fragmentManager = null;
+	
+	Map<Integer, ProfessionalPAListView> fragments = new HashMap<Integer, ProfessionalPAListView>();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		fragmentManager = getFragmentManager();
+		
 		setContentView(R.layout.activity_notes_layout_manager);
 	}
 
@@ -28,7 +40,7 @@ public class NotesLayoutManagerActivity extends FragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
-		FragmentManager fragmentManager = getFragmentManager();
+		
 		
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
@@ -38,9 +50,14 @@ public class NotesLayoutManagerActivity extends FragmentActivity {
 		{
 //			Log.d("list view button clicked", "list view clicked");
 			
-			ProfessionalPAListView listViewFragment = new ProfessionalPAListView();
+			Intent intent = new Intent(getApplicationContext(), ListItemCreatorActivity.class);
 			
-			fragmentManager.beginTransaction().add(R.id.notes_layout_activity_manager, listViewFragment).commit();
+//			intent.putExtra("ASSOCIATED_FRAGMENT_ID", listViewFragment.getId());
+			
+			startActivity(intent);
+			
+//			
+//			
 		}
 		
 		return super.onOptionsItemSelected(item);
