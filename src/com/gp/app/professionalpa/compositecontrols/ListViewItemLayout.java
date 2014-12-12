@@ -20,9 +20,14 @@ public class ListViewItemLayout extends RelativeLayout
 	
 	private ImageButton alarmImageButton = null;
 	
-	private int id;
-	
 	private int stateToSave;
+	
+	public ListViewItemLayout(Context context) 
+	{
+		super(context);
+		
+		initControls(context);
+	}
 	
 	public ListViewItemLayout(Context context, AttributeSet attributeSet) {
 		super(context, attributeSet);
@@ -32,7 +37,7 @@ public class ListViewItemLayout extends RelativeLayout
 	}
 	private void initControls(Context context) {
 		
-		id = (int)Math.abs(Math.random()*100000);
+		super.setId((int)Math.abs(Math.random()*100000));
 		
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
@@ -76,23 +81,10 @@ public class ListViewItemLayout extends RelativeLayout
 	    super.onRestoreInstanceState(state);
 	  }
 	  
-	public ListViewItemLayout(Context context) 
-	{
-		super(context);
-		
-		initControls(context);
-	}
-
 	public EditText getListItemEditView() {
 		return textView;
 	}
 	
-	@Override
-	public int getId()
-	{
-		return id;
-	}
-
 	public ImageButton getImportanceImageButton() {
 		return importanceImageButton;
 	}
