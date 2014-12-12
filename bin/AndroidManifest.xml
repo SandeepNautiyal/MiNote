@@ -12,7 +12,7 @@
         android:allowBackup="true"
         android:icon="@drawable/professional_pa_ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.Light" >
+        android:theme="@android:style/Theme.Holo.Light">
         <activity
             android:name=".start.StartProfessionalPAApplicationActivity"
             android:label="@string/app_name" >
@@ -24,11 +24,13 @@
         </activity>
         <activity
             android:name=".layout.manager.NotesLayoutManagerActivity"
-            android:label="@string/notes_layout_manager_activity_title" >
+            android:label="@string/notes_layout_manager_activity_title" 
+            android:configChanges="orientation|screenSize">>
         </activity>
         <activity
             android:name="com.gp.app.professionalpa.layout.manager.ListItemCreatorActivity"
-            android:label="@string/title_activity_list_item_creator" >
+            android:label="@string/title_activity_list_item_creator" 
+            android:configChanges="orientation|screenSize">
         </activity>
     </application>
 
