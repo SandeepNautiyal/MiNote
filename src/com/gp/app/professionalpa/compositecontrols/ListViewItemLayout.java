@@ -1,12 +1,13 @@
 package com.gp.app.professionalpa.compositecontrols;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
 
@@ -20,6 +21,8 @@ public class ListViewItemLayout extends RelativeLayout
 	private ImageButton alarmImageButton = null;
 	
 	private int id;
+	
+	private int stateToSave;
 	
 	public ListViewItemLayout(Context context, AttributeSet attributeSet) {
 		super(context, attributeSet);
@@ -41,7 +44,40 @@ public class ListViewItemLayout extends RelativeLayout
 		
 		alarmImageButton = (ImageButton) findViewById(R.id.composite_control_alarm_button);
 	}
-	public ListViewItemLayout(Context context) {
+	
+	  // ... variables
+
+	  @Override
+	  public Parcelable onSaveInstanceState() 
+	  {
+
+	    Bundle bundle = new Bundle();
+	    
+	    bundle.putParcelable("instanceState", super.onSaveInstanceState());
+	    
+	    bundle.putInt("stateToSave", this.stateToSave);
+	    // ... save everything
+	    return bundle;
+	  }
+
+	  @Override
+	  public void onRestoreInstanceState(Parcelable state) 
+	  {
+
+	    if (state instanceof Bundle) 
+	    {
+	      Bundle bundle = (Bundle) state;
+	      
+	      this.stateToSave = bundle.getInt("stateToSave");
+	      // ... load everything
+	      state = bundle.getParcelable("instanceState");
+	    }
+	    
+	    super.onRestoreInstanceState(state);
+	  }
+	  
+	public ListViewItemLayout(Context context) 
+	{
 		super(context);
 		
 		initControls(context);

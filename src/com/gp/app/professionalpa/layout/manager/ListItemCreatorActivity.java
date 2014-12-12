@@ -5,25 +5,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
-import com.gp.app.professionalpa.data.ListViewItem;
+import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.layout.notes.data.ProfessionalPAListView;
 
-public class ListItemCreatorActivity extends Activity {
+public class ListItemCreatorActivity extends Activity implements OnClickListener{
 	
 	private FragmentManager fragmentManager = null;
 	
@@ -41,20 +41,23 @@ public class ListItemCreatorActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-        LayoutInflater inflater = getLayoutInflater();
+		if(lastAddedListItem == null)
+		{
+			LayoutInflater inflater = getLayoutInflater();
 
-        activityLayout = (RelativeLayout)inflater.inflate(R.layout.list_item_creator_activity, null);
+	        activityLayout = (RelativeLayout)inflater.inflate(R.layout.list_item_creator_activity, null);
 
-		lastAddedListItem = (ListViewItemLayout)inflater.inflate(R.layout.compound_control_layout, null);
+			lastAddedListItem = (ListViewItemLayout)inflater.inflate(R.layout.compound_control_layout, null);
+			
+			listItems.add(lastAddedListItem);
+			
+			activityLayout.addView(lastAddedListItem);
+			
+			addSaveAndAddItemButton();
+			
+			setContentView(activityLayout);
+		}
 		
-		listItems.add(lastAddedListItem);
-		
-		activityLayout.addView(lastAddedListItem);
-		
-		addSaveAndAddItemButton();
-		
-		setContentView(activityLayout);
-
 //		RelativeLayout listDataCreator = (RelativeLayout)getApplicationContext().findViewById(R.id.list_item_creator_activity);
 //		
 //		ListViewItemLayout listViewControl = (ListViewItemLayout)findViewById(R.id.composite_control_layout);
@@ -123,18 +126,30 @@ public class ListItemCreatorActivity extends Activity {
 
 	private void addSaveAndAddItemButton() 
 	{
-		View saveButton = findViewById(R.id.save_list);
+		Button saveButton = (Button)findViewById(ProfessionalPAConstants.SAVE_BUTTON_ID);
 		
-		View addNewListItem = findViewById(R.id.add_more_items);
+		Button addNewListItem = (Button)findViewById(ProfessionalPAConstants.ADD_BUTTON_ID);
 		
-        activityLayout.removeView(saveButton);
+		activityLayout.removeView(saveButton);
 		
 		activityLayout.removeView(addNewListItem);
 		
+		saveButton = new Button(this);
+		
+		saveButton.setText("Save");
+		
+		saveButton.setId(ProfessionalPAConstants.SAVE_BUTTON_ID);
+
+		addNewListItem = new Button(this);
+		
+		addNewListItem.setText("Add");
+		
+		addNewListItem.setOnClickListener(this);
+		
+		saveButton.setId(ProfessionalPAConstants.ADD_BUTTON_ID);
+		
 		RelativeLayout.LayoutParams layoutParamsForSaveButton = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-		
-		Log.e("BELOW", "item added below:"+lastAddedListItem+" id:"+lastAddedListItem.getId());
 		
 		layoutParamsForSaveButton.addRule(RelativeLayout.BELOW, lastAddedListItem.getId());
 		
@@ -143,22 +158,24 @@ public class ListItemCreatorActivity extends Activity {
 		RelativeLayout.LayoutParams layoutParamsForAddListItem = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		
-		layoutParamsForAddListItem.addRule(RelativeLayout.RIGHT_OF, saveButton.getId());
-		
-		layoutParamsForAddListItem.addRule(RelativeLayout.ALIGN_BASELINE, saveButton.getId());
-		
-		layoutParamsForAddListItem.setMargins(30, 0, 0, 0);
+//		layoutParamsForAddListItem.addRule(RelativeLayout.BELOW, lastAddedListItem.getId());
 		
 		layoutParamsForAddListItem.addRule(RelativeLayout.RIGHT_OF, saveButton.getId());
+		
+//		layoutParamsForAddListItem.addRule(RelativeLayout.ALIGN_BASELINE, saveButton.getId());
+		
+		layoutParamsForAddListItem.addRule(RelativeLayout.ALIGN_BOTTOM, saveButton.getId());
 		
 		addNewListItem.setLayoutParams(layoutParamsForAddListItem);
 		
 		activityLayout.addView(saveButton, listItems.size());
 		
 		activityLayout.addView(addNewListItem);
+	}
 
-		
-		
-		
+	@Override
+	public void onClick(View view) 
+	{
+		addNewListItem(view);
 	}
 }

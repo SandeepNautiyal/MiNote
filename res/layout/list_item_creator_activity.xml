@@ -15,7 +15,7 @@
         android:layout_height="70dip"
         android:hint="@string/change_importance"/> -->
         
-    <Button
+    <!--Button
         android:id="@+id/save_list"
         android:layout_width= "30dip"
         android:layout_height="30dip"
@@ -33,6 +33,6 @@
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@+id/save_list"
         android:hint="@string/add_more_items"
-        android:onClick="addNewListItem"/>
+        android:onClick="addNewListItem"/> -->
         
 </RelativeLayout>
