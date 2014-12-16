@@ -1,10 +1,12 @@
 package com.gp.app.professionalpa.layout.notes.data;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,15 +34,31 @@ public class ProfessionalPAListView extends ListFragment
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		
-//		View view = inflater.inflate(R.layout.composite_control_for_list_view, null);
-		
-		List<ListViewItem> values = Arrays.asList(new ListViewItem(""));
-		
-		mAdapter = new ListViewItemAdapter(getActivity(), values);
-		
-		setListAdapter(mAdapter);
-		
 		return inflater.inflate(R.layout.professional_pa_list_view_layout, container, false);
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) 
+	{
+		super.onActivityCreated(savedInstanceState);
+		
+		Bundle bundle = this.getArguments();
+		
+		if(bundle != null)
+		{
+			Parcelable[] parceables = bundle.getParcelableArray("LIST_ITEMS");
+			
+			List<ListViewItem> values = new ArrayList<ListViewItem>();
+			
+			for(int i = 0, size = parceables == null ? 0 : parceables.length; i < size; i++)
+			{
+				values.add((ListViewItem)parceables[i]);
+			}
+			
+			mAdapter = new ListViewItemAdapter(getActivity(), values);
+			
+			setListAdapter(mAdapter);
+		}
 	}
 
 	@Override

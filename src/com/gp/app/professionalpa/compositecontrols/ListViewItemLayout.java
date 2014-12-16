@@ -81,8 +81,8 @@ public class ListViewItemLayout extends RelativeLayout
 	    super.onRestoreInstanceState(state);
 	  }
 	  
-	public EditText getListItemEditView() {
-		return textView;
+	public String getText() {
+		return textView.getText().toString();
 	}
 	
 	public ImageButton getImportanceImageButton() {

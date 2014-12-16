@@ -3,20 +3,22 @@ package com.gp.app.professionalpa.layout.manager;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewParent;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.data.ListViewItem;
 import com.gp.app.professionalpa.layout.notes.data.ProfessionalPAListView;
 
 public class NotesLayoutManagerActivity extends FragmentActivity {
 
+	private static final int LIST_ACTIVITY_RESULT_CREATED = 1;
+	
 	FragmentManager fragmentManager = null;
 	
 	Map<Integer, ProfessionalPAListView> fragments = new HashMap<Integer, ProfessionalPAListView>();
@@ -54,7 +56,7 @@ public class NotesLayoutManagerActivity extends FragmentActivity {
 			
 //			intent.putExtra("ASSOCIATED_FRAGMENT_ID", listViewFragment.getId());
 			
-			startActivity(intent);
+			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
 			
 //			
 //			
@@ -62,4 +64,19 @@ public class NotesLayoutManagerActivity extends FragmentActivity {
 		
 		return super.onOptionsItemSelected(item);
 	}
+	
+	@Override
+	  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (data == null) {return;}
+	    
+	    Fragment fragment = new ProfessionalPAListView();
+	    
+	    Bundle bundle = new Bundle();
+	    
+	    bundle.putParcelableArray("LIST_ITEMS", data.getParcelableArrayExtra("LIST_ITEMS"));
+	    
+	    fragment.setArguments(bundle);
+	    
+	    fragmentManager.beginTransaction().add(R.id.notes_layout_activity_manager, fragment).commit();
+	  }
 }

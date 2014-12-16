@@ -7,7 +7,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,13 +17,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
+import com.gp.app.professionalpa.data.ListViewItem;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.layout.notes.data.ProfessionalPAListView;
 
-public class ListItemCreatorActivity extends Activity implements OnClickListener{
+public class ListItemCreatorActivity extends Activity{
 	
 	private FragmentManager fragmentManager = null;
 	
@@ -32,6 +34,8 @@ public class ListItemCreatorActivity extends Activity implements OnClickListener
 	private List<ListViewItemLayout> listItems = new ArrayList<ListViewItemLayout>();
 			
 	private ListViewItemLayout lastAddedListItem = null;
+	
+	private ScrollView scrollView = null;
 	
 	private RelativeLayout activityLayout = null;
 	
@@ -45,8 +49,10 @@ public class ListItemCreatorActivity extends Activity implements OnClickListener
 		{
 			LayoutInflater inflater = getLayoutInflater();
 
-	        activityLayout = (RelativeLayout)inflater.inflate(R.layout.list_item_creator_activity, null);
-
+			scrollView = (ScrollView)inflater.inflate(R.layout.list_item_creator_activity, null);
+			
+			activityLayout = (RelativeLayout)scrollView.findViewById(R.id.list_item_creator_activity_layout);
+			
 			lastAddedListItem = (ListViewItemLayout)inflater.inflate(R.layout.compound_control_layout, null);
 			
 			listItems.add(lastAddedListItem);
@@ -55,7 +61,7 @@ public class ListItemCreatorActivity extends Activity implements OnClickListener
 			
 			addSaveAndAddItemButton();
 			
-			setContentView(activityLayout);
+			setContentView(scrollView);
 		}
 		
 //		RelativeLayout listDataCreator = (RelativeLayout)getApplicationContext().findViewById(R.id.list_item_creator_activity);
@@ -116,7 +122,7 @@ public class ListItemCreatorActivity extends Activity implements OnClickListener
 		
 		addSaveAndAddItemButton();
 		
-		setContentView(activityLayout);
+		setContentView(scrollView);
 		
 //		fragmentManager.beginTransaction().add(R.id.notes_layout_activity_manager, listViewFragment).commit();
 //		
@@ -138,13 +144,29 @@ public class ListItemCreatorActivity extends Activity implements OnClickListener
 		
 		saveButton.setText("Save");
 		
+		saveButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v)
+			{
+				saveListOfItems();
+			}
+		});
+		
 		saveButton.setId(ProfessionalPAConstants.SAVE_BUTTON_ID);
 
 		addNewListItem = new Button(this);
 		
 		addNewListItem.setText("Add");
 		
-		addNewListItem.setOnClickListener(this);
+		addNewListItem.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View view)
+			{
+				addNewListItem(view);
+			}
+		});
 		
 		saveButton.setId(ProfessionalPAConstants.ADD_BUTTON_ID);
 		
@@ -173,9 +195,25 @@ public class ListItemCreatorActivity extends Activity implements OnClickListener
 		activityLayout.addView(addNewListItem);
 	}
 
-	@Override
-	public void onClick(View view) 
+	private void saveListOfItems() 
 	{
-		addNewListItem(view);
+		ListViewItem [] listViewItems = new ListViewItem[listItems.size()];
+		
+		for(int i = 0, size = listItems.size(); i < size; i++)
+		{
+			ListViewItemLayout compoundControl = listItems.get(i);
+			
+            ListViewItem listItem = new ListViewItem(compoundControl.getText());
+			
+            listViewItems[i] = listItem;
+		}
+
+		Intent returnIntent = new Intent();
+		
+		returnIntent.putExtra("LIST_ITEMS", listViewItems);
+		
+		setResult(RESULT_OK,returnIntent);
+		
+		finish();
 	}
 }
