@@ -20,6 +20,13 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f040000;
         public static final int activity_vertical_margin=0x7f040001;
+        public static final int composite_control_alarm_button_compressed_width=0x7f040007;
+        public static final int composite_control_height=0x7f040002;
+        public static final int composite_control_importance_button_compressed_width=0x7f040006;
+        public static final int composite_control_textview_compressed_width=0x7f040005;
+        public static final int composite_control_textview_height_compressed=0x7f040004;
+        public static final int composite_control_textview_width=0x7f040003;
+        public static final int list_element_width=0x7f040008;
     }
     public static final class drawable {
         public static final int professional_pa_action_search=0x7f020000;
@@ -28,20 +35,25 @@ public final class R {
         public static final int professional_pa_list_view=0x7f020003;
     }
     public static final class id {
-        public static final int ScrollView01=0x7f080006;
-        public static final int action_add_notes=0x7f08000b;
-        public static final int action_clear_all_notes=0x7f08000c;
-        public static final int action_create_list_view=0x7f080008;
-        public static final int action_display_calender=0x7f08000d;
-        public static final int action_exit_professional_pa_application=0x7f08000e;
-        public static final int action_search=0x7f080009;
-        public static final int action_settings=0x7f08000a;
-        public static final int composite_control_alarm_button=0x7f080004;
-        public static final int composite_control_importance_button=0x7f080003;
-        public static final int composite_control_layout=0x7f080001;
-        public static final int composite_control_text_box=0x7f080002;
-        public static final int list_item=0x7f080005;
-        public static final int list_item_creator_activity_layout=0x7f080007;
+        public static final int ScrollView01=0x7f08000b;
+        public static final int action_add_notes=0x7f080010;
+        public static final int action_clear_all_notes=0x7f080011;
+        public static final int action_create_list_view=0x7f08000d;
+        public static final int action_display_calender=0x7f080012;
+        public static final int action_exit_professional_pa_application=0x7f080013;
+        public static final int action_search=0x7f08000e;
+        public static final int action_settings=0x7f08000f;
+        public static final int composite_control_alarm_button=0x7f080009;
+        public static final int composite_control_importance_button=0x7f080008;
+        public static final int composite_control_layout=0x7f080006;
+        public static final int composite_control_text_box=0x7f080007;
+        public static final int linearLayout1=0x7f080001;
+        public static final int linearLayout2=0x7f080002;
+        public static final int linearLayout3=0x7f080003;
+        public static final int linearLayout4=0x7f080004;
+        public static final int linearLayout5=0x7f080005;
+        public static final int list_item=0x7f08000a;
+        public static final int list_item_creator_activity_layout=0x7f08000c;
         public static final int notes_layout_activity_manager=0x7f080000;
     }
     public static final class layout {
@@ -74,6 +86,8 @@ public final class R {
         public static final int exit=0x7f050008;
         public static final int notes_layout_manager_activity_title=0x7f050003;
         public static final int save=0x7f05000f;
+        public static final int set_alarm=0x7f050012;
+        public static final int set_importance=0x7f050011;
         public static final int title_activity_list_item_creator=0x7f05000d;
     }
     public static final class style {

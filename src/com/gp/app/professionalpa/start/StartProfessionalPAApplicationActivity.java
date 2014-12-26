@@ -3,11 +3,13 @@ package com.gp.app.professionalpa.start;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
+import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class StartProfessionalPAApplicationActivity extends Activity {
 
@@ -19,6 +21,20 @@ public class StartProfessionalPAApplicationActivity extends Activity {
 		
 		startLayoutManager.setAction("START_LAYOUT_MANAGER_ACTIVITY");
 		
+		ProfessionalPAParameters.setApplicationContext(getApplicationContext());
+		
+        DisplayMetrics metrics = new DisplayMetrics();
+	    
+	    getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+	    int height = metrics.heightPixels;
+	    int width = metrics.widthPixels;
+	    
+	    ProfessionalPAParameters.setScreenWidth(width);
+	    
+	    ProfessionalPAParameters.setScreenHeight(height);
+	    
+	    
 		startActivity(startLayoutManager);
 		
 //		setContentView(R.layout.activity_start_professional_pa_application);

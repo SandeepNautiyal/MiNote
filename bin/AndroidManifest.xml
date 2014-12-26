@@ -24,8 +24,7 @@
         </activity>
         <activity
             android:name=".layout.manager.NotesLayoutManagerActivity"
-            android:label="@string/notes_layout_manager_activity_title" 
-            android:configChanges="orientation|screenSize">>
+            android:label="@string/notes_layout_manager_activity_title">
         </activity>
         <activity
             android:name="com.gp.app.professionalpa.layout.manager.ListItemCreatorActivity"

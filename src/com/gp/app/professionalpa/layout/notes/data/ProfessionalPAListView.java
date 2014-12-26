@@ -32,9 +32,12 @@ public class ProfessionalPAListView extends ListFragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		
-		return inflater.inflate(R.layout.professional_pa_list_view_layout, container, false);
+		View view = (View)inflater.inflate(R.layout.professional_pa_list_view_layout, container, false);
+		
+		System.out.println("view height ="+view.getHeight()+" view width ="+view.getWidth());
+		
+		return view;
 	}
 
 	@Override

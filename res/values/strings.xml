@@ -18,5 +18,6 @@
     <string name="add_more_items">Add more items</string>
     <string name="save">Save</string>
     <string name="add">Add</string>
-    
+    <string name="set_importance">Set Importance</string>
+    <string name="set_alarm">Set Alarm</string>
 </resources>
