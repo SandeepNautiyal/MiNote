@@ -67,7 +67,10 @@ public class ListViewItem implements Parcelable
 	}
 
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(Parcel dest, int flags) 
+	{
+		System.out.println("writeToParcel -> textViewData="+textViewData);
+		
 		dest.writeString(textViewData);
 
 		dest.writeBooleanArray(new boolean[] { isImportanceHigh, isAlarmActive });
@@ -88,6 +91,8 @@ public class ListViewItem implements Parcelable
 			
 			boolean isAlarmActive = attributes[ALARM_ACTIVE_INDEX];
 			
+			System.out.println("createFromParcel -> textViewData="+textViewData);
+
 			return new ListViewItem(textViewData, isImportanceHigh, isAlarmActive);
 		}
 
@@ -96,4 +101,14 @@ public class ListViewItem implements Parcelable
 			return new ListViewItem[size];
 		}
 	};
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("textViewData="+textViewData);
+		
+		return builder.toString();
+	}
 }

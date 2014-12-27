@@ -3,24 +3,22 @@ package com.gp.app.professionalpa.layout.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.layout.notes.data.ProfessionalPAListView;
-import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
-public class NotesLayoutManagerActivity extends FragmentActivity {
+public class NotesLayoutManagerActivity extends Activity {
 
 	private static final int LIST_ACTIVITY_RESULT_CREATED = 1;
 	
@@ -42,8 +40,6 @@ public class NotesLayoutManagerActivity extends FragmentActivity {
 	
     byte numberOfLinearLayouts = -1;
 	
-	FragmentManager fragmentManager = null;
-	
 	List<FrameLayout> childFrames = new ArrayList<FrameLayout>();
 	
 	List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
@@ -54,11 +50,7 @@ public class NotesLayoutManagerActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		fragmentManager = getFragmentManager();
-		
 		activityLayout = (LinearLayout)getLayoutInflater().inflate(R.layout.activity_notes_layout_manager, null);
-		
-		numberOfLinearLayouts = getNumberOfLinearLayouts();
 		
 		setContentView(activityLayout);
 	}
@@ -69,15 +61,19 @@ public class NotesLayoutManagerActivity extends FragmentActivity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		
-		LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayout1);
+		numberOfLinearLayouts = getNumberOfLinearLayouts();
 		
-		System.out.println("onResume -> width="+layout.getWidth());
+		fillLinearLayoutList();
 		
-		ProfessionalPAParameters.setParentLinearLayoutWidth(layout.getWidth());
-		
-	    fillLinearLayoutList();
-
-		updateActivityView();
+//		LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayout1);
+//		
+//		System.out.println("onResume -> width="+layout.getWidth());
+//		
+//		ProfessionalPAParameters.setParentLinearLayoutWidth(layout.getWidth());
+//		
+//	    fillLinearLayoutList();
+//
+//		updateActivityView();
 	}
 
 
@@ -148,12 +144,14 @@ public class NotesLayoutManagerActivity extends FragmentActivity {
 		    
 		    fragment.setArguments(bundle);
 		    
-		    FrameLayout frameLayout = new FrameLayout(this);
+		    FrameLayout frameLayout = (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null);
 		    
-		    frameLayout.setId(ProfessionalPAParameters.getId());
+		    System.out.println("adding fragment ->");
 		    
-		    fragmentManager.beginTransaction().add(frameLayout.getId(), fragment).commit();
+		    getFragmentManager().beginTransaction().add(R.id.professional_pa_frame_layout, fragment).commit();
 		    
+		    System.out.println("fragment added <- return");
+
 		    addFrameLayoutToActivtyView(frameLayout);
 		    
 		    updateActivityView();
@@ -209,6 +207,8 @@ public class NotesLayoutManagerActivity extends FragmentActivity {
 	{
 		for(int i = 0; i < numberOfLinearLayouts; i++)
 		{
+			System.out.println("updateActivityView -> i="+i);
+			
 			LinearLayout linearLayout = linearLayouts.get(i);
 			
 			linearLayout.removeAllViews();

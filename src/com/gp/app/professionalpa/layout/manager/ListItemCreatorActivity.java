@@ -195,7 +195,7 @@ public class ListItemCreatorActivity extends Activity{
 		activityLayout.addView(addNewListItem);
 	}
 
-	private void saveListOfItems() 
+	private void saveListOfItems()
 	{
 		ListViewItem [] listViewItems = new ListViewItem[listItems.size()];
 		

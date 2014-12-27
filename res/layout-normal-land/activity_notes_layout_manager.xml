@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="2dip"
         android:background="#ffb5d6e1">
     </LinearLayout>
     
@@ -26,7 +26,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="2dip"
         android:background="#f1b5a6e2">
     </LinearLayout>
     
@@ -36,6 +36,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1"
+        android:layout_marginRight="0dip"
         android:background="#ffbaf6d1">
     </LinearLayout>
 </LinearLayout>

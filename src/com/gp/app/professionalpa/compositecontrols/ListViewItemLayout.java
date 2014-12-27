@@ -61,6 +61,9 @@ public class ListViewItemLayout extends RelativeLayout
 	    bundle.putParcelable("instanceState", super.onSaveInstanceState());
 	    
 	    bundle.putInt("stateToSave", this.stateToSave);
+	    
+	    bundle.putString("TEXT_VALUE", textView.getText().toString());
+	    
 	    // ... save everything
 	    return bundle;
 	  }
@@ -74,6 +77,9 @@ public class ListViewItemLayout extends RelativeLayout
 	      Bundle bundle = (Bundle) state;
 	      
 	      this.stateToSave = bundle.getInt("stateToSave");
+	      
+	      this.textView.setText(bundle.getString("TEXT_VALUE"));
+	      
 	      // ... load everything
 	      state = bundle.getParcelable("instanceState");
 	    }
