@@ -9,6 +9,4 @@
     <dimen name="composite_control_importance_button_compressed_width">18dip</dimen>
     <dimen name="composite_control_alarm_button_compressed_width">18dip</dimen>
     <dimen name="list_element_width">132dip</dimen>
-    
-    
 </resources>

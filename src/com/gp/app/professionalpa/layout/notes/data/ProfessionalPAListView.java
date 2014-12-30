@@ -53,6 +53,10 @@ public class ProfessionalPAListView extends ListFragment
 			
 			setListAdapter(mAdapter);
 			
+			getListView().setDivider(null);
+			
+			getListView().setDividerHeight(0);			
+			
 			mAdapter.notifyDataSetChanged();
 		}
 		

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
@@ -58,37 +59,20 @@ public class ListViewItemAdapter extends ArrayAdapter<ListViewItem>
 	    
 	    params.height = (int)androidResources.getDimension(R.dimen.composite_control_textview_height_compressed);
     
-////	    params.width = ProfessionalPAParameters.getParentLinearLayoutWidth();//(int)androidResources.getDimension(R.dimen.composite_control_textview_compressed_width);
-
 	    textView.setLayoutParams(params);
-//	    
-//	    ImageButton importanceImageButton = (ImageButton) convertView.findViewById(R.id.composite_control_importance_button);
-//	    
-//        LayoutParams importanceButtonParams = importanceImageButton.getLayoutParams();
-//	    
-//        importanceImageButton.setVisibility(View.INVISIBLE);
-//        
-//        importanceButtonParams.height =  params.height;
-//        
-//        importanceButtonParams.width = (int)androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
-//
-//        //(int)androidResources.getDimension(R.dimen.composite_control_image_button_height_compressed);
-//
-//        importanceImageButton.setLayoutParams(importanceButtonParams);
+	    
+	    ImageButton importanceImageButton = (ImageButton) convertView.findViewById(R.id.composite_control_importance_button);
+
+	    LayoutParams importanceButtonParams = importanceImageButton.getLayoutParams();
+        importanceButtonParams.height =  params.height;
+        importanceButtonParams.width = (int)androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
+        importanceImageButton.setLayoutParams(importanceButtonParams);
         
-//	    ImageButton alarmImageButton = (ImageButton)convertView.findViewById(R.id.composite_control_alarm_button);
-//	    
-//	    alarmImageButton.setVisibility(View.INVISIBLE);
-//
-//        LayoutParams alarmButtonParams = alarmImageButton.getLayoutParams();
-//
-//        alarmButtonParams.height = params.height;
-//        
-//        alarmButtonParams.width = (int)androidResources.getDimension(R.dimen.composite_control_alarm_button_compressed_width);
-//        
-//        //(int)androidResources.getDimension(R.dimen.composite_control_image_button_height_compressed);
-//
-//	    alarmImageButton.setLayoutParams(alarmButtonParams);
+	    ImageButton alarmImageButton = (ImageButton)convertView.findViewById(R.id.composite_control_alarm_button);
+        LayoutParams alarmButtonParams = alarmImageButton.getLayoutParams();
+        alarmButtonParams.height = params.height;
+        alarmButtonParams.width = (int)androidResources.getDimension(R.dimen.composite_control_alarm_button_compressed_width);
+	    alarmImageButton.setLayoutParams(alarmButtonParams);
 	    
 	    if(listItems != null)
 	    {
@@ -97,8 +81,9 @@ public class ListViewItemAdapter extends ArrayAdapter<ListViewItem>
 		    System.out.println("getView -> listItems.get(position)="+listItems.get(position).getTextViewData());
 	    }
 	    
-	    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 5);
+	    textView.setActivated(false);
 	    
+	    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 //	    LayoutParams layoutParamsForConvertView = convertView.getLayoutParams();
 //	    
 //	    layoutParamsForConvertView.height = params.height;
