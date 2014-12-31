@@ -5,13 +5,13 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -145,6 +145,8 @@ public class NotesLayoutManagerActivity extends Activity {
 		    fragment.setArguments(bundle);
 		    
 		    FrameLayout frameLayout = (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null);
+		    
+		    LayoutParams frameLayoutParams = frameLayout.getLayoutParams();
 		    
 		    System.out.println("adding fragment ->");
 		    
