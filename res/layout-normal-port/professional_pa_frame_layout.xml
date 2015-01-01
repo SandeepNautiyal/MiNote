@@ -5,5 +5,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/list_view_border"
     android:padding="5dip"
-    android:layout_marginBottom="6dip">
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip"
+    android:paddingBottom="5dip"
+    android:paddingTop="5dip"
+    android:layout_marginBottom="10dip">
 </FrameLayout>

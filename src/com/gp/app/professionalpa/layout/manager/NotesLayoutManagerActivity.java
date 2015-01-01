@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.layout.notes.data.ProfessionalPAListView;
+import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NotesLayoutManagerActivity extends Activity {
 
@@ -146,11 +147,13 @@ public class NotesLayoutManagerActivity extends Activity {
 		    
 		    FrameLayout frameLayout = (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null);
 		    
-		    LayoutParams frameLayoutParams = frameLayout.getLayoutParams();
+		    int id = ProfessionalPAParameters.getId();
+		    
+		    frameLayout.setId(id);
 		    
 		    System.out.println("adding fragment ->");
 		    
-		    getFragmentManager().beginTransaction().add(R.id.professional_pa_frame_layout, fragment).commit();
+		    getFragmentManager().beginTransaction().add(id, fragment).commit();
 		    
 		    System.out.println("fragment added <- return");
 
@@ -213,6 +216,8 @@ public class NotesLayoutManagerActivity extends Activity {
 			
 			LinearLayout linearLayout = linearLayouts.get(i);
 			
+			System.out.println("updateActivityView -> linearLayout Id="+linearLayout.getId());
+			
 			linearLayout.removeAllViews();
 			
 			int index = 0;
@@ -221,11 +226,15 @@ public class NotesLayoutManagerActivity extends Activity {
 			{
 				FrameLayout frameLayout = childFrames.get(j);
 				
+				System.out.println("updateActivityView -> frameLayout id="+frameLayout.getId());
+
 //				 FrameLayout.LayoutParams frameLayoutParams = new FrameLayout.LayoutParams(linearLayout.getWidth(), 60);
 //
 //				 frameLayout.setLayoutParams(frameLayoutParams);
 
 				linearLayout.addView(frameLayout, index);
+				
+				System.out.println("updateActivityView -> index="+index);
 				
 				index++;
 			}

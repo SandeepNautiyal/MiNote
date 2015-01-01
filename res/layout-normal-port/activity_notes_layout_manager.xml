@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/notes_layout_activity_manager"
     android:orientation="horizontal"
+    android:baselineAligned="false"
     tools:context="com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity" >
     
     <LinearLayout
