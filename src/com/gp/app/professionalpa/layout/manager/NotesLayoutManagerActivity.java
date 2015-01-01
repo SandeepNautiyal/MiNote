@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup.LayoutParams;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -145,18 +145,20 @@ public class NotesLayoutManagerActivity extends Activity {
 		    
 		    fragment.setArguments(bundle);
 		    
-		    FrameLayout frameLayout = (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null);
+//		    Resources resources =  this.getResources();
+//
+//		    XmlPullParser parser = resources.getXml(R.layout.professional_pa_frame_layout);
+//		    
+//		    AttributeSet attributes = Xml.asAttributeSet(parser);
+		    
+		    FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		    
 		    int id = ProfessionalPAParameters.getId();
 		    
 		    frameLayout.setId(id);
 		    
-		    System.out.println("adding fragment ->");
-		    
 		    getFragmentManager().beginTransaction().add(id, fragment).commit();
 		    
-		    System.out.println("fragment added <- return");
-
 		    addFrameLayoutToActivtyView(frameLayout);
 		    
 		    updateActivityView();
@@ -166,6 +168,8 @@ public class NotesLayoutManagerActivity extends Activity {
 	private void addFrameLayoutToActivtyView(FrameLayout frameLayout) 
 	{
 		childFrames.add(0, frameLayout);
+		
+		System.out.println("addFrameLayoutToActivtyView -> frameLayout id="+frameLayout.getId());
 	}
 
 	
@@ -212,11 +216,7 @@ public class NotesLayoutManagerActivity extends Activity {
 	{
 		for(int i = 0; i < numberOfLinearLayouts; i++)
 		{
-			System.out.println("updateActivityView -> i="+i);
-			
 			LinearLayout linearLayout = linearLayouts.get(i);
-			
-			System.out.println("updateActivityView -> linearLayout Id="+linearLayout.getId());
 			
 			linearLayout.removeAllViews();
 			
@@ -226,15 +226,20 @@ public class NotesLayoutManagerActivity extends Activity {
 			{
 				FrameLayout frameLayout = childFrames.get(j);
 				
-				System.out.println("updateActivityView -> frameLayout id="+frameLayout.getId());
-
+				LinearLayout parentView = (LinearLayout)frameLayout.getParent();
+				
+				if(parentView != null)
+				{
+					parentView.removeView(frameLayout);
+				}
+				
+				System.out.println("updateActivityView -> frameLayout parent="+frameLayout.getParent());
+				
 //				 FrameLayout.LayoutParams frameLayoutParams = new FrameLayout.LayoutParams(linearLayout.getWidth(), 60);
 //
 //				 frameLayout.setLayoutParams(frameLayoutParams);
 
 				linearLayout.addView(frameLayout, index);
-				
-				System.out.println("updateActivityView -> index="+index);
 				
 				index++;
 			}
