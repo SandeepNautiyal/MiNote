@@ -2,16 +2,17 @@ package com.gp.app.professionalpa.layout.manager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -20,6 +21,10 @@ import com.gp.app.professionalpa.layout.notes.data.ProfessionalPAListView;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NotesLayoutManagerActivity extends Activity {
+
+	private static final String FRAGMENT_TAGS = "FRAGMENT_TAGS";
+
+	private static final String NUMBER_OF_LINEAR_LAYOUTS = "NUMBER_OF_LINEAR_LAYOUTS";
 
 	private static final int LIST_ACTIVITY_RESULT_CREATED = 1;
 	
@@ -43,6 +48,8 @@ public class NotesLayoutManagerActivity extends Activity {
 	
 	List<FrameLayout> childFrames = new ArrayList<FrameLayout>();
 	
+	List<String> fragmentTags = new ArrayList<String>();
+	
 	List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
 	
 	LinearLayout activityLayout = null;
@@ -51,32 +58,89 @@ public class NotesLayoutManagerActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		System.out.println("onCreate -> ");
+
 		activityLayout = (LinearLayout)getLayoutInflater().inflate(R.layout.activity_notes_layout_manager, null);
 		
 		setContentView(activityLayout);
-	}
-
-	
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
 		
 		numberOfLinearLayouts = getNumberOfLinearLayouts();
 		
 		fillLinearLayoutList();
-		
-//		LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayout1);
-//		
-//		System.out.println("onResume -> width="+layout.getWidth());
-//		
-//		ProfessionalPAParameters.setParentLinearLayoutWidth(layout.getWidth());
-//		
-//	    fillLinearLayoutList();
-//
-//		updateActivityView();
 	}
 
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		
+		System.out.println("Activity -> onSaveInstanceState -> fragmentTags="+fragmentTags);
+		
+		outState.putStringArrayList(FRAGMENT_TAGS, (ArrayList<String>)fragmentTags);
+		
+		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, numberOfLinearLayouts);
+		
+	    super.onSaveInstanceState(outState);
+	    
+		System.out.println("Ativity -> onSaveInstanceState <- return=");
+
+	}
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		
+		System.out.println("Activity -> onRestoreInstanceState -> ");
+
+		// TODO Auto-generated method stub
+		super.onRestoreInstanceState(savedInstanceState);
+		
+		fragmentTags.addAll(savedInstanceState.getStringArrayList(FRAGMENT_TAGS));
+		
+		numberOfLinearLayouts = (byte)savedInstanceState.getByte(NUMBER_OF_LINEAR_LAYOUTS);
+		
+		updateNumberOfLinearLayoutsOnScreenChange(getResources().getConfiguration());
+		
+		fillLinearLayoutList();
+		
+		System.out.println("Activity -> onRestoreInstanceState -> fragmentTags="+fragmentTags);
+
+		ListIterator<String> iterator = fragmentTags.listIterator();
+		
+		while(iterator.hasNext())
+		{
+			String tag = iterator.next();
+			
+			Fragment fragment = getFragmentManager().findFragmentByTag(tag);
+			
+			if(fragment != null)
+			{
+				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+				
+				System.out.println("onRestoreInstanceState ->tag="+tag+" fragment="+fragment);
+				fragmentTransaction.remove(fragment);
+				
+				fragmentTransaction.commit();
+				
+				getFragmentManager().executePendingTransactions();
+				
+				fragmentTransaction = getFragmentManager().beginTransaction();
+				
+				fragmentTransaction.commit();
+				
+				createActivityLayout(fragment);
+				
+				iterator.add(fragment.getTag());
+			}
+			else
+			{
+				iterator.remove();
+			}
+			
+			//TODO data in list inconsistent. To be made consistent.
+		}
+		
+		System.out.println("Ativity -> onRestoreInstanceState <- return="+"numberoglayouts :"+numberOfLinearLayouts);
+
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,9 +176,10 @@ public class NotesLayoutManagerActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
+	public void updateNumberOfLinearLayoutsOnScreenChange(Configuration newConfig) {
 	    super.onConfigurationChanged(newConfig);
+
+		System.out.println("onConfigurationChanged ->");
 
 	    // Checks the orientation of the screen
 	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) 
@@ -125,8 +190,6 @@ public class NotesLayoutManagerActivity extends Activity {
 	    {
 	    	numberOfLinearLayouts = (byte)(numberOfLinearLayouts-1);
 	    }
-	    
-	    updateActivityView();
 	}
 	
 	@Override
@@ -151,20 +214,49 @@ public class NotesLayoutManagerActivity extends Activity {
 //		    
 //		    AttributeSet attributes = Xml.asAttributeSet(parser);
 		    
-		    FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
+		    createActivityLayout(fragment);
 		    
-		    int id = ProfessionalPAParameters.getId();
-		    
-		    frameLayout.setId(id);
-		    
-		    getFragmentManager().beginTransaction().add(id, fragment).commit();
-		    
-		    addFrameLayoutToActivtyView(frameLayout);
-		    
-		    updateActivityView();
+			fragmentTags.add(fragment.getTag());
 	    }
 	}
+
+
+	private void createActivityLayout(Fragment fragment) {
+		
+		FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
+		
+		int id = ProfessionalPAParameters.getId();
+		
+		frameLayout.setId(id);
+		
+		String tag = fragment.getTag() != null ? fragment.getTag() : "Tag-"+ProfessionalPAParameters.getId();
+		
+		System.out.println("Activity -> createActivityLayout -> tag="+tag);
+
+		getFragmentManager().beginTransaction().add(id, fragment, tag).commit();
+		
+		System.out.println("createActivityLayout -> fragmentTags="+fragmentTags);
+		
+		addFrameLayoutToActivtyView(frameLayout);
+		
+		updateActivityView();
+	}
 	
+	@Override
+	protected void onDestroy() {
+		
+		System.out.println("onDestroy ->");
+		super.onDestroy();
+		
+		
+//		childFrames.clear();
+//		
+//		fragmentTags.clear();
+//		
+//		linearLayouts.clear();
+	}
+
+
 	private void addFrameLayoutToActivtyView(FrameLayout frameLayout) 
 	{
 		childFrames.add(0, frameLayout);
@@ -217,8 +309,6 @@ public class NotesLayoutManagerActivity extends Activity {
 		for(int i = 0; i < numberOfLinearLayouts; i++)
 		{
 			LinearLayout linearLayout = linearLayouts.get(i);
-			
-			linearLayout.removeAllViews();
 			
 			int index = 0;
 			

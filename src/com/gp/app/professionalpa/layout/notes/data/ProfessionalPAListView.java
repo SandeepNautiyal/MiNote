@@ -21,19 +21,32 @@ public class ProfessionalPAListView extends ListFragment
 
 	private ArrayList<ListViewItem> values = new ArrayList<ListViewItem>();
 	
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		
+//        setRetainInstance(true);
+	}
+
 	@Override
 	public void onSaveInstanceState(Bundle outState) 
 	{
+		System.out.println("Fragment -> onSaveInstanceState -> ");
+
 	    super.onSaveInstanceState(outState);
 	    
-	    outState.putParcelableArrayList("Values", values);  
+	    ListViewItem[] valuesInListFragment = new ListViewItem[values.size()];
+	    
+	    outState.putParcelableArray("LIST_ITEMS", values.toArray(valuesInListFragment));  
+	    
+		System.out.println("Fragment -> onSaveInstanceState <- return="+values);
 	 }
-
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) 
 	{
-		System.out.println("onActivityCreated ->");
-		
 		super.onActivityCreated(savedInstanceState);
 		
 		Bundle bundle = this.getArguments();
@@ -42,11 +55,17 @@ public class ProfessionalPAListView extends ListFragment
 		{
 			Parcelable[] parceables = bundle.getParcelableArray("LIST_ITEMS");
 			
+			System.out.println("onActivityCreated -> values="+values);
+
+			values.clear();
+			
 			for(int i = 0, size = parceables == null ? 0 : parceables.length; i < size; i++)
 			{
 				values.add((ListViewItem)parceables[i]);
 			}
 			
+			System.out.println("onActivityCreated -> values1="+values);
+
 			System.out.println("onActivityCreated -> values ="+values);
 
 			ListViewItemAdapter mAdapter = new ListViewItemAdapter(getActivity(), values);

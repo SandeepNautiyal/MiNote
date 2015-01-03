@@ -68,8 +68,7 @@ public final class R {
         public static final int listview_for_list_fragment=0x7f030005;
         public static final int professiona_pa_array_adapter_row_layout=0x7f030006;
         public static final int professional_pa_frame_layout=0x7f030007;
-        public static final int professional_pa_list_view_layout=0x7f030008;
-        public static final int professional_pa_paragraph_view_layout=0x7f030009;
+        public static final int professional_pa_paragraph_view_layout=0x7f030008;
     }
     public static final class menu {
         public static final int notes_layout_manager=0x7f070000;
