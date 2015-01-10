@@ -1,12 +1,9 @@
 package com.gp.app.professionalpa.layout.manager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,16 +18,11 @@ import android.widget.ScrollView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
-import com.gp.app.professionalpa.data.ListViewItem;
+import com.gp.app.professionalpa.data.NotesListItem;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.layout.notes.data.ProfessionalPAListView;
 
-public class ListItemCreatorActivity extends Activity{
-	
-	private FragmentManager fragmentManager = null;
-	
-	private List<View> listViewControls = new ArrayList<View>();
-
+public class ListItemCreatorActivity extends Activity
+{
 	private List<ListViewItemLayout> listItems = new ArrayList<ListViewItemLayout>();
 			
 	private ListViewItemLayout lastAddedListItem = null;
@@ -38,8 +30,6 @@ public class ListItemCreatorActivity extends Activity{
 	private ScrollView scrollView = null;
 	
 	private RelativeLayout activityLayout = null;
-	
-	Map<Integer, ProfessionalPAListView> fragments = new HashMap<Integer, ProfessionalPAListView>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -197,13 +187,13 @@ public class ListItemCreatorActivity extends Activity{
 
 	private void saveListOfItems()
 	{
-		ListViewItem [] listViewItems = new ListViewItem[listItems.size()];
+		NotesListItem [] listViewItems = new NotesListItem[listItems.size()];
 		
 		for(int i = 0, size = listItems.size(); i < size; i++)
 		{
 			ListViewItemLayout compoundControl = listItems.get(i);
 			
-            ListViewItem listItem = new ListViewItem(compoundControl.getText());
+            NotesListItem listItem = new NotesListItem(compoundControl.getText());
 			
             listViewItems[i] = listItem;
 		}
@@ -215,5 +205,11 @@ public class ListItemCreatorActivity extends Activity{
 		setResult(RESULT_OK,returnIntent);
 		
 		finish();
+	}
+	
+	@Override
+	public void onBackPressed() 
+	{
+	    super.onBackPressed();
 	}
 }

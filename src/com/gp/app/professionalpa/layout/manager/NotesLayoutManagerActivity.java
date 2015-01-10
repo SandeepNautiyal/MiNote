@@ -3,11 +3,15 @@ package com.gp.app.professionalpa.layout.manager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Set;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -21,6 +25,8 @@ import com.gp.app.professionalpa.layout.notes.data.ProfessionalPAListView;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NotesLayoutManagerActivity extends Activity {
+
+	private static final String PROFESSIONALPA_SHARED_PREFERENCES = "com.gp.app.professionalpa.ProfessionalPASharedPreferences";
 
 	private static final String FRAGMENT_TAGS = "FRAGMENT_TAGS";
 
@@ -46,20 +52,36 @@ public class NotesLayoutManagerActivity extends Activity {
 	
     byte numberOfLinearLayouts = -1;
 	
-	List<FrameLayout> childFrames = new ArrayList<FrameLayout>();
+	private List<FrameLayout> childFrames = new ArrayList<FrameLayout>();
 	
-	List<String> fragmentTags = new ArrayList<String>();
+	private List<String> fragmentTags = new ArrayList<String>();
 	
-	List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
+	private List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
 	
-	LinearLayout activityLayout = null;
+	private LinearLayout activityLayout = null;
 	
+	@Override
+	protected void onResume() 
+	{
+		super.onResume();
+	}
+
+
+	@Override
+	protected void onPause() 
+	{
+		SharedPreferences sharedPrefernces = getSharedPreferences(PROFESSIONALPA_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+		
+		Editor editor = sharedPrefernces.edit();
+		
+		super.onPause();
+	}
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		System.out.println("onCreate -> ");
-
 		activityLayout = (LinearLayout)getLayoutInflater().inflate(R.layout.activity_notes_layout_manager, null);
 		
 		setContentView(activityLayout);
@@ -86,23 +108,46 @@ public class NotesLayoutManagerActivity extends Activity {
 	}
 	
 	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		
-		System.out.println("Activity -> onRestoreInstanceState -> ");
-
-		// TODO Auto-generated method stub
+	protected void onRestoreInstanceState(Bundle savedInstanceState) 
+	{
 		super.onRestoreInstanceState(savedInstanceState);
 		
-		fragmentTags.addAll(savedInstanceState.getStringArrayList(FRAGMENT_TAGS));
-		
 		numberOfLinearLayouts = (byte)savedInstanceState.getByte(NUMBER_OF_LINEAR_LAYOUTS);
+
+		fragmentTags.addAll(savedInstanceState.getStringArrayList(FRAGMENT_TAGS));
+
+		if(fragmentTags.size() > 0)
+		{
+			createActivityLayoutInCaseOfConfigurationChange();
+		}
+		else
+		{
+			createActivityLayoutInCaseOfActivityStartUp();
+		}
 		
+	}
+
+
+	private void createActivityLayoutInCaseOfActivityStartUp() 
+	{
+        Set<String> tags = ProfessionalPAParameters.getSharedPreferences().getStringSet("TAGS", null);
+		
+		if(tags != null)
+		{
+			for(String tag : tags)
+			{
+				Set<String> fragmentState = ProfessionalPAParameters.getSharedPreferences().getStringSet(tag, null);
+			}
+		}
+		
+	}
+
+
+	private void createActivityLayoutInCaseOfConfigurationChange() {
 		updateNumberOfLinearLayoutsOnScreenChange(getResources().getConfiguration());
 		
 		fillLinearLayoutList();
 		
-		System.out.println("Activity -> onRestoreInstanceState -> fragmentTags="+fragmentTags);
-
 		ListIterator<String> iterator = fragmentTags.listIterator();
 		
 		while(iterator.hasNext())
@@ -115,7 +160,6 @@ public class NotesLayoutManagerActivity extends Activity {
 			{
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				
-				System.out.println("onRestoreInstanceState ->tag="+tag+" fragment="+fragment);
 				fragmentTransaction.remove(fragment);
 				
 				fragmentTransaction.commit();
@@ -134,12 +178,7 @@ public class NotesLayoutManagerActivity extends Activity {
 			{
 				iterator.remove();
 			}
-			
-			//TODO data in list inconsistent. To be made consistent.
 		}
-		
-		System.out.println("Ativity -> onRestoreInstanceState <- return="+"numberoglayouts :"+numberOfLinearLayouts);
-
 	}
 
 	@Override
@@ -151,8 +190,8 @@ public class NotesLayoutManagerActivity extends Activity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		
+	public boolean onOptionsItemSelected(MenuItem item) 
+	{
 		int id = item.getItemId();
 		
 		if (id == R.id.action_settings) {
@@ -161,26 +200,16 @@ public class NotesLayoutManagerActivity extends Activity {
 		
 		else if(id == R.id.action_create_list_view)
 		{
-//			Log.d("list view button clicked", "list view clicked");
-			
 			Intent intent = new Intent(getApplicationContext(), ListItemCreatorActivity.class);
 			
-//			intent.putExtra("ASSOCIATED_FRAGMENT_ID", listViewFragment.getId());
-			
 			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
-			
-//			
-//			
 		}
 		
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public void updateNumberOfLinearLayoutsOnScreenChange(Configuration newConfig) {
-	    super.onConfigurationChanged(newConfig);
-
-		System.out.println("onConfigurationChanged ->");
-
+	public void updateNumberOfLinearLayoutsOnScreenChange(Configuration newConfig)
+	{
 	    // Checks the orientation of the screen
 	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) 
 	    {
@@ -193,7 +222,8 @@ public class NotesLayoutManagerActivity extends Activity {
 	}
 	
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
 	    if (data == null) {return;}
 	    
 	    Fragment fragment = new ProfessionalPAListView();
@@ -207,12 +237,6 @@ public class NotesLayoutManagerActivity extends Activity {
 	    	bundle.putParcelableArray("LIST_ITEMS", values);
 		    
 		    fragment.setArguments(bundle);
-		    
-//		    Resources resources =  this.getResources();
-//
-//		    XmlPullParser parser = resources.getXml(R.layout.professional_pa_frame_layout);
-//		    
-//		    AttributeSet attributes = Xml.asAttributeSet(parser);
 		    
 		    createActivityLayout(fragment);
 		    
@@ -231,11 +255,7 @@ public class NotesLayoutManagerActivity extends Activity {
 		
 		String tag = fragment.getTag() != null ? fragment.getTag() : "Tag-"+ProfessionalPAParameters.getId();
 		
-		System.out.println("Activity -> createActivityLayout -> tag="+tag);
-
 		getFragmentManager().beginTransaction().add(id, fragment, tag).commit();
-		
-		System.out.println("createActivityLayout -> fragmentTags="+fragmentTags);
 		
 		addFrameLayoutToActivtyView(frameLayout);
 		
@@ -243,25 +263,15 @@ public class NotesLayoutManagerActivity extends Activity {
 	}
 	
 	@Override
-	protected void onDestroy() {
-		
-		System.out.println("onDestroy ->");
+	protected void onDestroy() 
+	{
 		super.onDestroy();
-		
-		
-//		childFrames.clear();
-//		
-//		fragmentTags.clear();
-//		
-//		linearLayouts.clear();
 	}
 
 
 	private void addFrameLayoutToActivtyView(FrameLayout frameLayout) 
 	{
 		childFrames.add(0, frameLayout);
-		
-		System.out.println("addFrameLayoutToActivtyView -> frameLayout id="+frameLayout.getId());
 	}
 
 	
@@ -360,5 +370,11 @@ public class NotesLayoutManagerActivity extends Activity {
 		    	linearLayouts.add(layout);
 		    	break;
 		}
+	}
+	
+	@Override
+	public void onBackPressed() 
+	{
+	    super.onBackPressed();
 	}
 }

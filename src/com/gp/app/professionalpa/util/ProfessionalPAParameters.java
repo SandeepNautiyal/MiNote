@@ -1,6 +1,7 @@
 package com.gp.app.professionalpa.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 public class ProfessionalPAParameters 
 {
@@ -11,6 +12,8 @@ public class ProfessionalPAParameters
 	private static int screenHeight = 0;
 
 	private static int parentLayoutWidth;
+	
+	private static SharedPreferences professionalPASharedPrefs = null;
 	
     public static void setApplicationContext(Context context)
     {
@@ -55,6 +58,15 @@ public class ProfessionalPAParameters
 	public static int getId()
 	{
 		 return (int)Math.abs(Math.random()*1000000);
-
+	}
+	
+	public static SharedPreferences getSharedPreferences()
+	{
+		if(professionalPASharedPrefs ==  null)
+		{
+			professionalPASharedPrefs = applicationContext.getSharedPreferences("ProfessionalPASharedPreference", Context.MODE_PRIVATE);
+		}
+		
+		return professionalPASharedPrefs;
 	}
 }

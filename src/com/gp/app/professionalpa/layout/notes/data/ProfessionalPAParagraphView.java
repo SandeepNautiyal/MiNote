@@ -4,5 +4,6 @@ import android.app.Fragment;
 
 public class ProfessionalPAParagraphView extends Fragment
 {
+	
 
 }

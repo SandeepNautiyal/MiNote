@@ -2,33 +2,35 @@ package com.gp.app.professionalpa.data;
 
 import java.io.Serializable;
 
+import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ListViewItem implements Parcelable 
+public class NotesListItem implements Parcelable 
 {
 	private static final byte HIGH_IMPORTANCE_INDEX = 0;
 	
 	private static final byte ALARM_ACTIVE_INDEX = 1;
 	
-	private String textViewData = null;
+	private String itemText = null;
 
 	private boolean isImportanceHigh = false;
 
 	private boolean isAlarmActive = false;
 
-	public ListViewItem(String textViewData) {
-		this.textViewData = textViewData;
+	public NotesListItem(String textViewData) {
+		this.itemText = textViewData;
 	}
 
-	public ListViewItem(String textViewData, boolean isImportanceHigh) {
+	public NotesListItem(String textViewData, boolean isImportanceHigh) {
 
 		this(textViewData);
 
 		this.isImportanceHigh = isImportanceHigh;
 	}
 
-	public ListViewItem(String textViewData, boolean isImportanceHigh,
+	public NotesListItem(String textViewData, boolean isImportanceHigh,
 			boolean isAlarmActive) {
 
 		this(textViewData, isImportanceHigh);
@@ -37,11 +39,11 @@ public class ListViewItem implements Parcelable
 	}
 
 	public String getTextViewData() {
-		return textViewData;
+		return itemText;
 	}
 
 	public void setTextViewData(String textViewData) {
-		this.textViewData = textViewData;
+		this.itemText = textViewData;
 	}
 
 	public boolean isImportanceHigh() {
@@ -69,17 +71,15 @@ public class ListViewItem implements Parcelable
 	@Override
 	public void writeToParcel(Parcel dest, int flags) 
 	{
-		System.out.println("writeToParcel -> textViewData="+textViewData);
-		
-		dest.writeString(textViewData);
+		dest.writeString(itemText);
 
 		dest.writeBooleanArray(new boolean[] { isImportanceHigh, isAlarmActive });
 	}
 
-	public static final Parcelable.Creator<ListViewItem> CREATOR = new Parcelable.Creator<ListViewItem>() {
+	public static final Parcelable.Creator<NotesListItem> CREATOR = new Parcelable.Creator<NotesListItem>() {
 
 		@Override
-		public ListViewItem createFromParcel(Parcel source) {
+		public NotesListItem createFromParcel(Parcel source) {
 			
 			String textViewData = source.readString();
 			
@@ -93,12 +93,12 @@ public class ListViewItem implements Parcelable
 			
 			System.out.println("createFromParcel -> textViewData="+textViewData);
 
-			return new ListViewItem(textViewData, isImportanceHigh, isAlarmActive);
+			return new NotesListItem(textViewData, isImportanceHigh, isAlarmActive);
 		}
 
 		@Override
-		public ListViewItem[] newArray(int size) {
-			return new ListViewItem[size];
+		public NotesListItem[] newArray(int size) {
+			return new NotesListItem[size];
 		}
 	};
 	
@@ -107,8 +107,37 @@ public class ListViewItem implements Parcelable
 	{
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append("textViewData="+textViewData);
+		builder.append("textViewData="+itemText);
 		
 		return builder.toString();
+	}
+	
+	public String convertToString()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(ProfessionalPAConstants.LIST_ITEM_STRING_START_DELIMITER);
+		
+		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_DELIMITER);
+		
+		sb.append("ITEM_TEXT="+itemText);
+		
+		String importanceText = isImportanceHigh ? "true":"false";
+		
+		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_DELIMITER);
+
+		sb.append("ITEM_IMPORTANCE="+importanceText);
+		
+		String alarmActiveText = isAlarmActive ? "true":"false";
+		
+		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_DELIMITER);
+
+		sb.append("ACTIVE_ALARM="+alarmActiveText);
+		
+		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_DELIMITER);
+		
+		sb.append(ProfessionalPAConstants.LIST_ITEM_STRING_END_DELIMITER);
+		
+		return sb.toString();
 	}
 }
