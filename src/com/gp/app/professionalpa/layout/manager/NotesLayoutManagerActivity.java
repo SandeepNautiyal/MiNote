@@ -61,24 +61,6 @@ public class NotesLayoutManagerActivity extends Activity {
 	private LinearLayout activityLayout = null;
 	
 	@Override
-	protected void onResume() 
-	{
-		super.onResume();
-	}
-
-
-	@Override
-	protected void onPause() 
-	{
-		SharedPreferences sharedPrefernces = getSharedPreferences(PROFESSIONALPA_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-		
-		Editor editor = sharedPrefernces.edit();
-		
-		super.onPause();
-	}
-
-
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -201,6 +183,12 @@ public class NotesLayoutManagerActivity extends Activity {
 		else if(id == R.id.action_create_list_view)
 		{
 			Intent intent = new Intent(getApplicationContext(), ListItemCreatorActivity.class);
+			
+			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
+		}
+		else if(id == R.id.action_create_paragraph_view)
+		{
+            Intent intent = new Intent(getApplicationContext(), ParagraphNoteCreatorActivity.class);
 			
 			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
 		}
@@ -376,5 +364,22 @@ public class NotesLayoutManagerActivity extends Activity {
 	public void onBackPressed() 
 	{
 	    super.onBackPressed();
+	}
+	
+	@Override
+	protected void onResume() 
+	{
+		super.onResume();
+	}
+
+
+	@Override
+	protected void onPause() 
+	{
+		SharedPreferences sharedPrefernces = getSharedPreferences(PROFESSIONALPA_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+		
+		Editor editor = sharedPrefernces.edit();
+		
+		super.onPause();
 	}
 }

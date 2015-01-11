@@ -66,9 +66,10 @@ public class ListItemCreatorActivity extends Activity
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.list_item_creator, menu);
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
+        getMenuInflater().inflate(R.menu.list_creator_activity_menu_items, menu);
+        
 		return true;
 	}
 

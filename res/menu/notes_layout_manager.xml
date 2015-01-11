@@ -3,7 +3,12 @@
     tools:context="com.gp.app.professionalpa.NotesLayoutManagerActivity" >
 
     <item android:id="@+id/action_create_list_view"
-        android:icon="@drawable/professional_pa_list_view"
+        android:icon="@drawable/professional_pa_list_view1"
+        android:title="@string/action_create_list_view"
+        android:showAsAction="always" />
+    
+    <item android:id="@+id/action_create_paragraph_view"
+        android:icon="@drawable/professional_pa_paragraph_view1"
         android:title="@string/action_create_list_view"
         android:showAsAction="always" />
     

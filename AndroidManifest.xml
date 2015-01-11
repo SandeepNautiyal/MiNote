@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="21"/>
 
     <application
         android:allowBackup="true"
@@ -25,6 +25,10 @@
         <activity
             android:name=".layout.manager.NotesLayoutManagerActivity"
             android:label="@string/notes_layout_manager_activity_title">
+        </activity>
+        <activity
+            android:name="com.gp.app.professionalpa.layout.manager.ParagraphNoteCreatorActivity"
+            android:label="@string/paragraph_note_creator_activity_title">
         </activity>
         <activity
             android:name="com.gp.app.professionalpa.layout.manager.ListItemCreatorActivity"
