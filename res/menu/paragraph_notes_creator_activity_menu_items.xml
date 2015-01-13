@@ -1,0 +1,37 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.gp.app.professionalpa.ParagraphNoteCreatorActivity" >
+
+    <item android:id="@+id/action_save_paragraph_note"
+        android:icon="@drawable/save_notes"
+        android:title="@string/save"
+        android:showAsAction="always" />
+    
+    <item android:id="@+id/action_create_paragraph_view"
+        android:icon="@drawable/professional_pa_paragraph_view1"
+        android:title="@string/action_create_list_view"
+        android:showAsAction="always" />
+    
+    <item android:id="@+id/action_search"
+        android:icon="@drawable/professional_pa_action_search"
+        android:title="@string/action_search"
+        android:showAsAction="always" />
+    
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
+    
+    <item
+        android:id="@+id/action_clear_all_notes"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/clear_all_notes"/>
+    
+    <item
+        android:id="@+id/action_exit_professional_pa_application"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/exit"/>
+</menu>
