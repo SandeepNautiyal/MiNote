@@ -203,6 +203,8 @@ public class ListItemCreatorActivity extends Activity
 		
 		returnIntent.putExtra("LIST_ITEMS", listViewItems);
 		
+		returnIntent.putExtra(ProfessionalPAConstants.IS_PARAGRAPH_NOTE, false);
+
 		setResult(RESULT_OK,returnIntent);
 		
 		finish();

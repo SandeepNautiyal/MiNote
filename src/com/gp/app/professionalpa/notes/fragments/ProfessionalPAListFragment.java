@@ -1,6 +1,5 @@
-package com.gp.app.professionalpa.layout.notes.data;
+package com.gp.app.professionalpa.notes.fragments;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,34 +12,26 @@ import android.os.Parcelable;
 
 import com.gp.app.professionalpa.data.ListViewItemAdapter;
 import com.gp.app.professionalpa.data.NotesListItem;
-import com.gp.app.professionalpa.notes.save.Writable;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
-public class ProfessionalPAListView extends ListFragment implements Serializable, Writable
+public class ProfessionalPAListFragment extends ListFragment
 {
 	private ArrayList<NotesListItem> values = new ArrayList<NotesListItem>();
 	
-	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+	public void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
-		
-//        setRetainInstance(true);
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) 
 	{
-		System.out.println("Fragment -> onSaveInstanceState -> ");
-
 	    super.onSaveInstanceState(outState);
 	    
 	    NotesListItem[] valuesInListFragment = new NotesListItem[values.size()];
 	    
 	    outState.putParcelableArray("LIST_ITEMS", values.toArray(valuesInListFragment));  
-	    
-		System.out.println("Fragment -> onSaveInstanceState <- return="+values);
 	 }
 	
 	@Override
@@ -54,8 +45,6 @@ public class ProfessionalPAListView extends ListFragment implements Serializable
 		{
 			Parcelable[] parceables = bundle.getParcelableArray("LIST_ITEMS");
 			
-			System.out.println("onActivityCreated -> values="+values);
-
 			values.clear();
 			
 			for(int i = 0, size = parceables == null ? 0 : parceables.length; i < size; i++)
@@ -65,22 +54,16 @@ public class ProfessionalPAListView extends ListFragment implements Serializable
 			
 			persistListElement();
 			
-			System.out.println("onActivityCreated -> values1="+values);
-
-			System.out.println("onActivityCreated -> values ="+values);
-
-			ListViewItemAdapter mAdapter = new ListViewItemAdapter(getActivity(), values);
+			ListViewItemAdapter adapter = new ListViewItemAdapter(getActivity(), values);
 			
-			setListAdapter(mAdapter);
+			setListAdapter(adapter);
 			
 			getListView().setDivider(null);
 			
 			getListView().setDividerHeight(0);			
 			
-			mAdapter.notifyDataSetChanged();
+			adapter.notifyDataSetChanged();
 		}
-		
-		System.out.println("onActivityCreated <- return");
 	}
 	
 	private void persistListElement() 
@@ -121,7 +104,7 @@ public class ProfessionalPAListView extends ListFragment implements Serializable
 		
 	}
 	
-	public ProfessionalPAListView createFragmentFromFile()
+	public ProfessionalPAListFragment createFragmentFromFile()
 	{
 		return null;
 	}

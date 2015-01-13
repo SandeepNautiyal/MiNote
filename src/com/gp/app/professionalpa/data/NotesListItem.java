@@ -118,23 +118,27 @@ public class NotesListItem implements Parcelable
 		
 		sb.append(ProfessionalPAConstants.LIST_ITEM_STRING_START_DELIMITER);
 		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_DELIMITER);
+		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_START_DELIMITER);
 		
 		sb.append("ITEM_TEXT="+itemText);
 		
+		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_END_DELIMITER);
+
 		String importanceText = isImportanceHigh ? "true":"false";
 		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_DELIMITER);
+		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_START_DELIMITER);
 
 		sb.append("ITEM_IMPORTANCE="+importanceText);
 		
+		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_END_DELIMITER);
+
 		String alarmActiveText = isAlarmActive ? "true":"false";
 		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_DELIMITER);
+		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_START_DELIMITER);
 
 		sb.append("ACTIVE_ALARM="+alarmActiveText);
 		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_DELIMITER);
+		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_END_DELIMITER);
 		
 		sb.append(ProfessionalPAConstants.LIST_ITEM_STRING_END_DELIMITER);
 		

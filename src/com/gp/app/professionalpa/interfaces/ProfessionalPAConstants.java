@@ -10,5 +10,9 @@ public interface ProfessionalPAConstants
 
 	public static final String LIST_ITEM_STRING_END_DELIMITER = "$^END^$";
 
-	public static final String LIST_ITEM_VALUE_DELIMITER = "(&^*^&)";
+	public static final String LIST_ITEM_VALUE_START_DELIMITER = "(&^*ITEM_START*^&)";
+	
+	public static final String LIST_ITEM_VALUE_END_DELIMITER = "(&^*ITEM_END*^&)";
+	
+	public static final String IS_PARAGRAPH_NOTE = "IS_PARAGRAPH_NOTE";
 }

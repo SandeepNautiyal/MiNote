@@ -21,7 +21,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.layout.notes.data.ProfessionalPAListView;
+import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.notes.fragments.ProfessionalPAListFragment;
+import com.gp.app.professionalpa.notes.fragments.ProfessionalPAParagraphFragment;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NotesLayoutManagerActivity extends Activity {
@@ -214,11 +216,15 @@ public class NotesLayoutManagerActivity extends Activity {
 	{
 	    if (data == null) {return;}
 	    
-	    Fragment fragment = new ProfessionalPAListView();
-	    
 	    Bundle bundle = new Bundle();
 	    
 	    Parcelable[] values = data.getParcelableArrayExtra("LIST_ITEMS");
+	    
+	    boolean isParagraphNote = data.getBooleanExtra(ProfessionalPAConstants.IS_PARAGRAPH_NOTE, false);
+	    
+	    System.out.println("onActivityResult -> isParagraphNote="+isParagraphNote);
+	    
+	    Fragment fragment = isParagraphNote ? new ProfessionalPAParagraphFragment() : new ProfessionalPAListFragment();
 	    
 	    if(values != null)
 	    {

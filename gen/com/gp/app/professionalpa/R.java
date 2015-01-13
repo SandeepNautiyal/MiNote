@@ -37,6 +37,7 @@ public final class R {
         public static final int professional_pa_list_view1=0x7f020005;
         public static final int professional_pa_paragraph_view=0x7f020006;
         public static final int professional_pa_paragraph_view1=0x7f020007;
+        public static final int save_notes=0x7f020008;
     }
     public static final class id {
         public static final int ScrollView01=0x7f08000b;

@@ -1,19 +1,12 @@
 package com.gp.app.professionalpa.notes.save;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.List;
-
-import android.content.res.AssetManager;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.gp.app.professionalpa.data.NotesListItem;
-import com.gp.app.professionalpa.layout.notes.data.ProfessionalPAListView;
-import com.gp.app.professionalpa.util.ProfessionalPAParameters;
+import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 
 public class ProfessionalPAListItemReader 
 {
@@ -50,7 +43,20 @@ public class ProfessionalPAListItemReader
 	{
 		List<NotesListItem> notes = null;
 		
+
+		Pattern pattern = Pattern.compile(ProfessionalPAConstants.LIST_ITEM_STRING_START_DELIMITER+".*.+"+ProfessionalPAConstants.LIST_ITEM_STRING_END_DELIMITER);
 		
+		Matcher matcher = pattern.matcher(NotesListItemString);
+
+		        boolean found = false;
+		        while (matcher.find()) {
+		            System.out.println("I found the text: " + matcher.group().toString());
+		            found = true;
+		        }
+		        if (!found) {
+		            System.out.println("I didn't found the text");
+		        }
+		        
 //		ProfessionalPAListView result = null;
 //				
 //		try 
