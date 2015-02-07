@@ -74,19 +74,6 @@ public class ListViewItemAdapter extends ArrayAdapter<NotesListItem>
 		    textView.setText(listItems.get(position).getTextViewData());
 	    }
 	    
-	    EditTextSizeCalculator editTextSizeCalculator = new EditTextSizeCalculator(textView);
-	    
-	    textView.post(editTextSizeCalculator);
-	    
-	    try 
-	    {
-			Thread.sleep(50);
-		} 
-	    catch (InterruptedException e) 
-	    {
-			e.printStackTrace();
-		}
-	    
 	    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
 	    textView.setActivated(false);
@@ -109,8 +96,6 @@ public class ListViewItemAdapter extends ArrayAdapter<NotesListItem>
 		
 		public int getEditTextHeight() 
 		{
-			System.out.println("getEditTextHeight -> editTextHeight="+editTextHeight);
-			
 			return editTextHeight;
 		}
 

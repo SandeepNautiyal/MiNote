@@ -1,5 +1,10 @@
 package com.gp.app.professionalpa.util;
 
+import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesParser;
+import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
+import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -14,6 +19,13 @@ public class ProfessionalPAParameters
 	private static int parentLayoutWidth;
 	
 	private static SharedPreferences professionalPASharedPrefs = null;
+	
+	private static ProfessionalPANotesWriter notesWriter = null;
+	
+	private static ProfessionalPANotesParser notesParser = null;
+	
+	private static ProfessionalPANotesReader notesReader = null;
+
 	
     public static void setApplicationContext(Context context)
     {
@@ -68,5 +80,35 @@ public class ProfessionalPAParameters
 		}
 		
 		return professionalPASharedPrefs;
+	}
+	
+	public static ProfessionalPANotesParser getProfessionalPANotesParser() throws ProfessionalPABaseException
+	{
+		if(notesParser == null)
+		{
+			notesParser = new ProfessionalPANotesParser();
+		}
+		
+		return notesParser;
+	}
+	
+	public static ProfessionalPANotesWriter getProfessionalPANotesWriter() throws ProfessionalPABaseException
+	{
+		if(notesWriter == null)
+		{
+			notesWriter = new ProfessionalPANotesWriter();
+		}
+		
+		return notesWriter;
+	}
+
+	public static ProfessionalPANotesReader getProfessionalPANotesReader() throws ProfessionalPABaseException
+	{
+		if(notesReader == null)
+		{
+			notesReader = new ProfessionalPANotesReader();
+		}
+		
+		return notesReader;
 	}
 }

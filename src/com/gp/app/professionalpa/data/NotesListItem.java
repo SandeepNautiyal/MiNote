@@ -19,23 +19,27 @@ public class NotesListItem implements Parcelable
 
 	private boolean isAlarmActive = false;
 
-	public NotesListItem(String textViewData) {
+	public NotesListItem(String textViewData, boolean isParagraphNote) {
 		this.itemText = textViewData;
 	}
 
-	public NotesListItem(String textViewData, boolean isImportanceHigh) {
+	public NotesListItem(String textViewData, boolean isParagraphNote, boolean isImportanceHigh) {
 
-		this(textViewData);
+		this(textViewData, isParagraphNote);
 
 		this.isImportanceHigh = isImportanceHigh;
 	}
 
-	public NotesListItem(String textViewData, boolean isImportanceHigh,
+	public NotesListItem(String textViewData,boolean isParagraphNote, boolean isImportanceHigh,
 			boolean isAlarmActive) {
 
-		this(textViewData, isImportanceHigh);
+		this(textViewData, isParagraphNote, isImportanceHigh);
 
 		this.isAlarmActive = isAlarmActive;
+	}
+
+	public NotesListItem() 
+	{
 	}
 
 	public String getTextViewData() {
@@ -91,8 +95,6 @@ public class NotesListItem implements Parcelable
 			
 			boolean isAlarmActive = attributes[ALARM_ACTIVE_INDEX];
 			
-			System.out.println("createFromParcel -> textViewData="+textViewData);
-
 			return new NotesListItem(textViewData, isImportanceHigh, isAlarmActive);
 		}
 
@@ -107,8 +109,12 @@ public class NotesListItem implements Parcelable
 	{
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append("textViewData="+itemText);
+		builder.append("textViewData="+itemText+"\n");
 		
+		builder.append("isImportant="+isImportanceHigh+"\n");
+
+		builder.append("isAlarm="+isAlarmActive+"\n");
+
 		return builder.toString();
 	}
 	

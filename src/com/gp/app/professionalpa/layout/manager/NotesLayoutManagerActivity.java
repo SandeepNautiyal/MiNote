@@ -1,6 +1,7 @@
 package com.gp.app.professionalpa.layout.manager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
@@ -21,9 +22,13 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.data.NotesListItem;
+import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.fragments.ProfessionalPAListFragment;
 import com.gp.app.professionalpa.notes.fragments.ProfessionalPAParagraphFragment;
+import com.gp.app.professionalpa.notes.xml.ParsedNote;
+import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NotesLayoutManagerActivity extends Activity {
@@ -69,26 +74,24 @@ public class NotesLayoutManagerActivity extends Activity {
 		activityLayout = (LinearLayout)getLayoutInflater().inflate(R.layout.activity_notes_layout_manager, null);
 		
 		setContentView(activityLayout);
-		
+
 		numberOfLinearLayouts = getNumberOfLinearLayouts();
 		
 		fillLinearLayoutList();
+		
+
 	}
 
 	
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		
-		System.out.println("Activity -> onSaveInstanceState -> fragmentTags="+fragmentTags);
-		
+				
 		outState.putStringArrayList(FRAGMENT_TAGS, (ArrayList<String>)fragmentTags);
 		
 		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, numberOfLinearLayouts);
 		
 	    super.onSaveInstanceState(outState);
 	    
-		System.out.println("Ativity -> onSaveInstanceState <- return=");
-
 	}
 	
 	@Override
@@ -221,12 +224,10 @@ public class NotesLayoutManagerActivity extends Activity {
 	    Parcelable[] values = data.getParcelableArrayExtra("LIST_ITEMS");
 	    
 	    boolean isParagraphNote = data.getBooleanExtra(ProfessionalPAConstants.IS_PARAGRAPH_NOTE, false);
-	    
-	    System.out.println("onActivityResult -> isParagraphNote="+isParagraphNote);
-	    
+	    	    
 	    Fragment fragment = isParagraphNote ? new ProfessionalPAParagraphFragment() : new ProfessionalPAListFragment();
-	    
-	    if(values != null)
+	    	    
+	    if(values != null && values.length > 0)
 	    {
 	    	bundle.putParcelableArray("LIST_ITEMS", values);
 		    
@@ -244,16 +245,17 @@ public class NotesLayoutManagerActivity extends Activity {
 		FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
 		int id = ProfessionalPAParameters.getId();
-		
+				
 		frameLayout.setId(id);
-		
+
 		String tag = fragment.getTag() != null ? fragment.getTag() : "Tag-"+ProfessionalPAParameters.getId();
-		
+				
 		getFragmentManager().beginTransaction().add(id, fragment, tag).commit();
 		
 		addFrameLayoutToActivtyView(frameLayout);
 		
 		updateActivityView();
+		
 	}
 	
 	@Override
@@ -309,7 +311,7 @@ public class NotesLayoutManagerActivity extends Activity {
 	}
 	
 	private void updateActivityView() 
-	{
+	{		
 		for(int i = 0; i < numberOfLinearLayouts; i++)
 		{
 			LinearLayout linearLayout = linearLayouts.get(i);
@@ -326,9 +328,7 @@ public class NotesLayoutManagerActivity extends Activity {
 				{
 					parentView.removeView(frameLayout);
 				}
-				
-				System.out.println("updateActivityView -> frameLayout parent="+frameLayout.getParent());
-				
+								
 //				 FrameLayout.LayoutParams frameLayoutParams = new FrameLayout.LayoutParams(linearLayout.getWidth(), 60);
 //
 //				 frameLayout.setLayoutParams(frameLayoutParams);
@@ -338,7 +338,6 @@ public class NotesLayoutManagerActivity extends Activity {
 				index++;
 			}
 		}
-	    
 	}
 
 
@@ -376,6 +375,39 @@ public class NotesLayoutManagerActivity extends Activity {
 	protected void onResume() 
 	{
 		super.onResume();
+		
+		try 
+		{
+			ProfessionalPANotesReader parser = ProfessionalPAParameters.getProfessionalPANotesReader();
+			
+			List<ParsedNote> parsedNotes = parser.readNotes();
+			
+			for(int i = 0; i < parsedNotes.size(); i++)
+			{
+				ParsedNote note = parsedNotes.get(i);
+				
+				Intent intent = new Intent();
+				
+				List<NotesListItem> listItems = note.getNoteItems();
+				
+				if(listItems != null && listItems.size() > 0)
+				{
+					NotesListItem [] items = new NotesListItem[1];
+					
+					items = listItems.toArray(items);
+					
+					intent.putExtra("LIST_ITEMS", items);
+					
+					intent.putExtra(ProfessionalPAConstants.IS_PARAGRAPH_NOTE, note.isParagraphNote());
+					
+					onActivityResult(0, 0, intent);
+				}
+			}
+			
+		} catch (ProfessionalPABaseException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 
 

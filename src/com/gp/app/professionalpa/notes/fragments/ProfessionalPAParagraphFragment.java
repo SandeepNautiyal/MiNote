@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Set;
 
 import android.app.ListFragment;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Parcelable;
 
-import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
 import com.gp.app.professionalpa.data.ListViewItemAdapter;
 import com.gp.app.professionalpa.data.NotesListItem;
+import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ProfessionalPAParagraphFragment extends ListFragment
@@ -55,8 +55,6 @@ public class ProfessionalPAParagraphFragment extends ListFragment
 				values.add((NotesListItem)parceables[i]);
 			}
 			
-			persistListElement();
-			
 			ListViewItemAdapter adapter = new ListViewItemAdapter(getActivity(), values);
 			
 			setListAdapter(adapter);
@@ -66,47 +64,62 @@ public class ProfessionalPAParagraphFragment extends ListFragment
 			getListView().setDividerHeight(0);			
 			
 			adapter.notifyDataSetChanged();
-		}
-	}
-	
-	private void persistListElement() 
-	{
-		Set<String> fragmentState = new HashSet<String>();
-		
-		for(NotesListItem listItem : values)
-		{
-			String listItemState = listItem.convertToString();
 			
-			fragmentState.add(listItemState);
+			try
+			{
+				persistListElement();
+			}
+			catch(ProfessionalPABaseException exception)
+			{
+				//TODO improve
+			}
 		}
-		
-		String tag = this.getTag();
-
-		SharedPreferences sharedPrefernces = ProfessionalPAParameters.getSharedPreferences();
-		
-		Editor editor = sharedPrefernces.edit();
-		
-        Set<String> tags = sharedPrefernces.getStringSet("TAGS", null);
-		
-		if(tags == null)
-		{
-			tags = new HashSet<String>();
-		}
-		
-		tags.add(tag);
-		
-		editor.putStringSet(tag, fragmentState);
-		
-		editor.putStringSet("TAGS", tags);
-		
-		editor.commit();
-	}
-
-	public void saveNote()
-	{
-		
 	}
 	
+//	private void persistListElement() 
+//	{
+//		Set<String> fragmentState = new HashSet<String>();
+//		
+//		for(NotesListItem listItem : values)
+//		{
+//			String listItemState = listItem.convertToString();
+//			
+//			fragmentState.add(listItemState);
+//		}
+//		
+//		String tag = this.getTag();
+//
+//		SharedPreferences sharedPrefernces = ProfessionalPAParameters.getSharedPreferences();
+//		
+//		Editor editor = sharedPrefernces.edit();
+//		
+//        Set<String> tags = sharedPrefernces.getStringSet("TAGS", null);
+//		
+//		if(tags == null)
+//		{
+//			tags = new HashSet<String>();
+//		}
+//		
+//		tags.add(tag);
+//		
+//		editor.putStringSet(tag, fragmentState);
+//		
+//		editor.putStringSet("TAGS", tags);
+//		
+//		editor.commit();
+//	}
+	
+	private void persistListElement() throws ProfessionalPABaseException
+	{
+//		dummyMethod();
+		
+		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
+		
+		fragmentWriter.writeNotes("ParagraphNote", values);
+		
+		fragmentWriter.completeWritingProcess();
+	}
+
 	public ProfessionalPAListFragment createFragmentFromFile()
 	{
 		return null;

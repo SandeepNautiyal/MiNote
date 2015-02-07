@@ -194,7 +194,7 @@ public class ListItemCreatorActivity extends Activity
 		{
 			ListViewItemLayout compoundControl = listItems.get(i);
 			
-            NotesListItem listItem = new NotesListItem(compoundControl.getText());
+            NotesListItem listItem = new NotesListItem(compoundControl.getText(), false);
 			
             listViewItems[i] = listItem;
 		}

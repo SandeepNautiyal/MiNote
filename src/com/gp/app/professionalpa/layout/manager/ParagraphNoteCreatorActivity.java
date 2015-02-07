@@ -44,7 +44,6 @@ public class ParagraphNoteCreatorActivity extends Activity
 			
 			String paragraphData = paragraphEditText.getText().toString();
 			
-			System.out.println("onOptionsItemSelected -> paragraphData="+paragraphData);
 			saveParagraph(paragraphData);
 		}
 		
@@ -55,10 +54,8 @@ public class ParagraphNoteCreatorActivity extends Activity
 	{
 		NotesListItem [] listViewItems = new NotesListItem[1];
 
-		NotesListItem listItem = new NotesListItem(paragraphData);
+		NotesListItem listItem = new NotesListItem(paragraphData, true);
 			
-		System.out.println("saveParagraph -> paragraphData="+paragraphData);
-		
 		listViewItems[0] = listItem;
 		
 		Intent returnIntent = new Intent();

@@ -2,6 +2,7 @@ package com.gp.app.professionalpa.notes.fragments;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import android.app.ListFragment;
@@ -12,11 +13,14 @@ import android.os.Parcelable;
 
 import com.gp.app.professionalpa.data.ListViewItemAdapter;
 import com.gp.app.professionalpa.data.NotesListItem;
+import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
+import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ProfessionalPAListFragment extends ListFragment
 {
-	private ArrayList<NotesListItem> values = new ArrayList<NotesListItem>();
+	private List<NotesListItem> values = new ArrayList<NotesListItem>();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
@@ -52,8 +56,6 @@ public class ProfessionalPAListFragment extends ListFragment
 				values.add((NotesListItem)parceables[i]);
 			}
 			
-			persistListElement();
-			
 			ListViewItemAdapter adapter = new ListViewItemAdapter(getActivity(), values);
 			
 			setListAdapter(adapter);
@@ -63,11 +65,42 @@ public class ProfessionalPAListFragment extends ListFragment
 			getListView().setDividerHeight(0);			
 			
 			adapter.notifyDataSetChanged();
+			
+			try
+			{
+				persistListElement();
+			}
+			catch(ProfessionalPABaseException exception)
+			{
+				//TODO improve
+			}
+			
+			try 
+			{
+				ProfessionalPANotesReader reader = ProfessionalPAParameters.getProfessionalPANotesReader();
+				
+				reader.readNotes();
+			} 
+			catch (ProfessionalPABaseException exception) 
+			{
+				//TODO improve
+			}
+			
 		}
 	}
 	
-	private void persistListElement() 
+	private void persistListElement() throws ProfessionalPABaseException
 	{
+//		dummyMethod();
+		
+		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
+		
+		fragmentWriter.writeNotes("NotesList", values);
+		
+		fragmentWriter.completeWritingProcess();
+	}
+
+	private void dummyMethod() {
 		Set<String> fragmentState = new HashSet<String>();
 		
 		for(NotesListItem listItem : values)

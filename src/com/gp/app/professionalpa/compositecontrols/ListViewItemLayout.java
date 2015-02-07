@@ -35,6 +35,7 @@ public class ListViewItemLayout extends RelativeLayout
 		initControls(context);
 		// TODO Auto-generated constructor stub
 	}
+	
 	private void initControls(Context context) {
 		
 		super.setId((int)Math.abs(Math.random()*100000));
