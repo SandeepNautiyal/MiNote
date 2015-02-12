@@ -18,15 +18,15 @@ import android.widget.ImageButton;
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
-public class ListViewItemAdapter extends ArrayAdapter<NotesListItem>
+public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 {
 
 	private Context context = null;
 	
-	private List<NotesListItem> listItems = null;
+	private List<NoteListItem> listItems = null;
 	
 	
-	public ListViewItemAdapter(Context context, List<NotesListItem> values) {
+	public ListViewItemAdapter(Context context, List<NoteListItem> values) {
 		
 		super(context, 0, values);
 		

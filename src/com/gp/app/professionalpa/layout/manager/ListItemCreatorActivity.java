@@ -18,7 +18,8 @@ import android.widget.ScrollView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
-import com.gp.app.professionalpa.data.NotesListItem;
+import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 
 public class ListItemCreatorActivity extends Activity
@@ -188,22 +189,22 @@ public class ListItemCreatorActivity extends Activity
 
 	private void saveListOfItems()
 	{
-		NotesListItem [] listViewItems = new NotesListItem[listItems.size()];
+		List<NoteListItem> item = new ArrayList<NoteListItem>();
 		
 		for(int i = 0, size = listItems.size(); i < size; i++)
 		{
 			ListViewItemLayout compoundControl = listItems.get(i);
 			
-            NotesListItem listItem = new NotesListItem(compoundControl.getText(), false);
+            NoteListItem listItem = new NoteListItem(compoundControl.getText(), false);
 			
-            listViewItems[i] = listItem;
+            item.add(listItem);
 		}
 
 		Intent returnIntent = new Intent();
 		
-		returnIntent.putExtra("LIST_ITEMS", listViewItems);
+		ProfessionalPANote note = new ProfessionalPANote(false, item);
 		
-		returnIntent.putExtra(ProfessionalPAConstants.IS_PARAGRAPH_NOTE, false);
+		returnIntent.putExtra(ProfessionalPAConstants.NOTE_DATA, note);
 
 		setResult(RESULT_OK,returnIntent);
 		

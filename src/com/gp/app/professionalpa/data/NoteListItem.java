@@ -7,7 +7,7 @@ import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class NotesListItem implements Parcelable 
+public class NoteListItem implements Parcelable 
 {
 	private static final byte HIGH_IMPORTANCE_INDEX = 0;
 	
@@ -19,26 +19,26 @@ public class NotesListItem implements Parcelable
 
 	private boolean isAlarmActive = false;
 
-	public NotesListItem(String textViewData, boolean isParagraphNote) {
+	public NoteListItem(String textViewData) {
 		this.itemText = textViewData;
 	}
 
-	public NotesListItem(String textViewData, boolean isParagraphNote, boolean isImportanceHigh) {
+	public NoteListItem(String textViewData, boolean isImportanceHigh) {
 
-		this(textViewData, isParagraphNote);
-
+		this.itemText = textViewData;
+		
 		this.isImportanceHigh = isImportanceHigh;
 	}
 
-	public NotesListItem(String textViewData,boolean isParagraphNote, boolean isImportanceHigh,
+	public NoteListItem(String textViewData, boolean isImportanceHigh,
 			boolean isAlarmActive) {
 
-		this(textViewData, isParagraphNote, isImportanceHigh);
+		this(textViewData, isImportanceHigh);
 
 		this.isAlarmActive = isAlarmActive;
 	}
 
-	public NotesListItem() 
+	public NoteListItem() 
 	{
 	}
 
@@ -67,8 +67,8 @@ public class NotesListItem implements Parcelable
 	}
 
 	@Override
-	public int describeContents() {
-		// TODO Auto-generated method stub
+	public int describeContents() 
+	{
 		return 0;
 	}
 
@@ -80,10 +80,10 @@ public class NotesListItem implements Parcelable
 		dest.writeBooleanArray(new boolean[] { isImportanceHigh, isAlarmActive });
 	}
 
-	public static final Parcelable.Creator<NotesListItem> CREATOR = new Parcelable.Creator<NotesListItem>() {
+	public static final Parcelable.Creator<NoteListItem> CREATOR = new Parcelable.Creator<NoteListItem>() {
 
 		@Override
-		public NotesListItem createFromParcel(Parcel source) {
+		public NoteListItem createFromParcel(Parcel source) {
 			
 			String textViewData = source.readString();
 			
@@ -95,12 +95,12 @@ public class NotesListItem implements Parcelable
 			
 			boolean isAlarmActive = attributes[ALARM_ACTIVE_INDEX];
 			
-			return new NotesListItem(textViewData, isImportanceHigh, isAlarmActive);
+			return new NoteListItem(textViewData, isImportanceHigh, isAlarmActive);
 		}
 
 		@Override
-		public NotesListItem[] newArray(int size) {
-			return new NotesListItem[size];
+		public NoteListItem[] newArray(int size) {
+			return new NoteListItem[size];
 		}
 	};
 	

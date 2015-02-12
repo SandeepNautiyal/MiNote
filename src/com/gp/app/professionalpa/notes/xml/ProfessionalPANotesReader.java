@@ -1,27 +1,29 @@
 package com.gp.app.professionalpa.notes.xml;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import android.os.Environment;
+import org.xml.sax.SAXException;
 
+import android.os.Environment;
+import android.util.Log;
+
+import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 
 public class ProfessionalPANotesReader 
 {
-	ProfessionalPANotesParser parser = null;
-	
 	SAXParserFactory factory = null;
 	
 	SAXParser saxParser = null;
 	
 	public ProfessionalPANotesReader() throws ProfessionalPABaseException
 	{
-		parser = new ProfessionalPANotesParser();
-		
 		factory = SAXParserFactory.newInstance();
 		
 		try 
@@ -34,9 +36,11 @@ public class ProfessionalPANotesReader
 		} 
 	}
 	
-	public List<ParsedNote> readNotes() throws ProfessionalPABaseException
+	public List<ProfessionalPANote> readNotes() throws ProfessionalPABaseException
 	{
-		List<ParsedNote> notes = null;
+		ProfessionalPANotesParser parser = new ProfessionalPANotesParser();
+		
+		List<ProfessionalPANote> notes = null;
 		
 		try 
 		{
@@ -48,7 +52,11 @@ public class ProfessionalPANotesReader
 			
 			notes = parser.getNotes();
 		}
-		catch (Exception exception) 
+		catch(IOException exception)
+		{
+			Log.i("FILE_NOT_CREATED_YET", "FILE_NOT_CREATED_YET");
+		}
+		catch (SAXException exception) 
 		{
 			throw  new ProfessionalPABaseException("NOTES_XML_FILES_PARSING_FAILED", exception);
 		}

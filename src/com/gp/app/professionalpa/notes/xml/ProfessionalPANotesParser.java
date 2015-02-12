@@ -1,10 +1,8 @@
 package com.gp.app.professionalpa.notes.xml;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -14,16 +12,20 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.gp.app.professionalpa.data.NotesListItem;
+import android.text.format.DateFormat;
+
+import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.interfaces.XMLEntity;
 
 public class ProfessionalPANotesParser extends DefaultHandler
 {
-	private List<ParsedNote> notes = new ArrayList<ParsedNote>();
+	private List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
 	
-	private ParsedNote currentNote = null;
+	private ProfessionalPANote currentNote = null;
 	
-	private NotesListItem currentNoteItem = null;
+	private NoteListItem currentNoteItem = null;
 	
 	private SAXParserFactory factory = null;
 	
@@ -59,27 +61,25 @@ public class ProfessionalPANotesParser extends DefaultHandler
     {
 		if (qName.equalsIgnoreCase("note"))
 		{
-			currentNote = new ParsedNote();
+			currentNote = new ProfessionalPANote();
 			
 			//Fetching the ID of TownCenter, we use it as a reference to fetch the child nodes.
-			typeOfList = attributes.getValue("type");
+			typeOfList = attributes.getValue("isParagraphNote");
 			
-			if(typeOfList != null)
-			{
-				if(typeOfList.equalsIgnoreCase("NotesList"))
-				{
-					currentNote.setTypeOfNote(false);
-				}
-				else
-				{
-					currentNote.setTypeOfNote(true);
-				}
-			}
+			long CreationTime = 0L;//new Date(attributes.getValue("creationTime")).getTime();
+			
+			long lastEditedTime = 0L; //new Date(attributes.getValue("lastEditedTime")).getTime();
+			
+			currentNote.setCreationTime(CreationTime);
+			
+			currentNote.setLastEditedTime(lastEditedTime);
+			
+			currentNote.setTypeOfNote(Boolean.parseBoolean(typeOfList));
 		}
  
 		if(qName.equalsIgnoreCase("NoteItem"))
 		{
-			currentNoteItem = new NotesListItem();
+			currentNoteItem = new NoteListItem();
 		}
 		if (qName.equalsIgnoreCase("data")) 
 		{
@@ -132,6 +132,8 @@ public class ProfessionalPANotesParser extends DefaultHandler
 		if (qName.equalsIgnoreCase("note"))
 		{
 			notes.add(currentNote);
+			
+			currentNote.setState(XMLEntity.READ_STATE);
 		}
  
 
@@ -167,7 +169,7 @@ public class ProfessionalPANotesParser extends DefaultHandler
 		}
 	}
 	
-	public List<ParsedNote> getNotes()
+	public List<ProfessionalPANote> getNotes()
 	{
 		return notes;
 	}

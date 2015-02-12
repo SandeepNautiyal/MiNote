@@ -1,7 +1,9 @@
 <!DOCTYPE notes [
 <!ELEMENT notes (note) #REQUIRED>
 <!ELEMENT note (noteItem+)>
-<!ATTLIST note type PCDATA #REQUIRED>
+<!ATTLIST note isParagraphNote PCDATA #REQUIRED>
+<!ATTLIST note creationTime PCDATA #REQUIRED>
+<!ATTLIST note lastEditedTime PCDATA #REQUIRED>
 <!ELEMENT noteItem (data,isAlarm,isImportant)>
 <!ELEMENT data (#PCDATA)>
 <!ELEMENT isAlarm (#PCDATA)>

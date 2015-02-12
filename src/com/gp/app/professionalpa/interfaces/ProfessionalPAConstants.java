@@ -6,6 +6,8 @@ public interface ProfessionalPAConstants
     
     int SAVE_BUTTON_ID = 100001;
 
+	public static final String NOTE_DATA = "LIST_ITEMS";
+
 	public static final String LIST_ITEM_STRING_START_DELIMITER = "$^START^$";
 
 	public static final String LIST_ITEM_STRING_END_DELIMITER = "$^END^$";

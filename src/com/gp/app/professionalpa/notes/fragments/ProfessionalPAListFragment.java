@@ -12,15 +12,19 @@ import android.os.Bundle;
 import android.os.Parcelable;
 
 import com.gp.app.professionalpa.data.ListViewItemAdapter;
-import com.gp.app.professionalpa.data.NotesListItem;
+import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.exceptions.ProfessionPARuntimeException;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.interfaces.XMLEntity;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ProfessionalPAListFragment extends ListFragment
 {
-	private List<NotesListItem> values = new ArrayList<NotesListItem>();
+	private ArrayList<NoteListItem> values = new ArrayList<NoteListItem>();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
@@ -33,9 +37,7 @@ public class ProfessionalPAListFragment extends ListFragment
 	{
 	    super.onSaveInstanceState(outState);
 	    
-	    NotesListItem[] valuesInListFragment = new NotesListItem[values.size()];
-	    
-	    outState.putParcelableArray("LIST_ITEMS", values.toArray(valuesInListFragment));  
+//	    outState.putParcelableArrayList(ProfessionalPAConstants.NOTE_DATA, values);  
 	 }
 	
 	@Override
@@ -47,96 +49,62 @@ public class ProfessionalPAListFragment extends ListFragment
 		
 		if(bundle != null)
 		{
-			Parcelable[] parceables = bundle.getParcelableArray("LIST_ITEMS");
+			ProfessionalPANote note = bundle.getParcelable(ProfessionalPAConstants.NOTE_DATA);
 			
-			values.clear();
-			
-			for(int i = 0, size = parceables == null ? 0 : parceables.length; i < size; i++)
-			{
-				values.add((NotesListItem)parceables[i]);
-			}
-			
-			ListViewItemAdapter adapter = new ListViewItemAdapter(getActivity(), values);
-			
-			setListAdapter(adapter);
-			
-			getListView().setDivider(null);
-			
-			getListView().setDividerHeight(0);			
-			
-			adapter.notifyDataSetChanged();
-			
-			try
-			{
-				persistListElement();
-			}
-			catch(ProfessionalPABaseException exception)
-			{
-				//TODO improve
-			}
-			
-			try 
-			{
-				ProfessionalPANotesReader reader = ProfessionalPAParameters.getProfessionalPANotesReader();
+		    if(note != null)
+		    {
+		    	values.clear();
+		    	
+		    	values.addAll(note.getNoteItems());
+		    	
+			    System.out.println("onActivityCreated -> note.getNoteItems()="+note.getNoteItems().size()+" state="+note.getState());
+			    
+				ListViewItemAdapter adapter = new ListViewItemAdapter(getActivity(), note.getNoteItems());
 				
-				reader.readNotes();
-			} 
-			catch (ProfessionalPABaseException exception) 
-			{
-				//TODO improve
-			}
-			
+				setListAdapter(adapter);
+				
+				getListView().setDivider(null);
+				
+				getListView().setDividerHeight(0);			
+				
+				adapter.notifyDataSetChanged();
+				
+				if(note.getState() != XMLEntity.READ_STATE)
+				{
+					try
+					{
+						persistListElement();
+					}
+					catch(ProfessionalPABaseException exception)
+					{
+						//TODO improve
+					}
+				}
+		    }
 		}
 	}
 	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+	}
+
 	private void persistListElement() throws ProfessionalPABaseException
 	{
 //		dummyMethod();
 		
 		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
 		
-		fragmentWriter.writeNotes("NotesList", values);
+		ProfessionalPANote note = new ProfessionalPANote(false, values);
 		
-		fragmentWriter.completeWritingProcess();
+		note.setCreationTime(System.currentTimeMillis());
+		
+		fragmentWriter.writeNotes(note);
+		
+//		fragmentWriter.completeWritingProcess();
 	}
 
-	private void dummyMethod() {
-		Set<String> fragmentState = new HashSet<String>();
-		
-		for(NotesListItem listItem : values)
-		{
-			String listItemState = listItem.convertToString();
-			
-			fragmentState.add(listItemState);
-		}
-		
-		String tag = this.getTag();
-
-		SharedPreferences sharedPrefernces = ProfessionalPAParameters.getSharedPreferences();
-		
-		Editor editor = sharedPrefernces.edit();
-		
-        Set<String> tags = sharedPrefernces.getStringSet("TAGS", null);
-		
-		if(tags == null)
-		{
-			tags = new HashSet<String>();
-		}
-		
-		tags.add(tag);
-		
-		editor.putStringSet(tag, fragmentState);
-		
-		editor.putStringSet("TAGS", tags);
-		
-		editor.commit();
-	}
-
-	public void saveNote()
-	{
-		
-	}
-	
 	public ProfessionalPAListFragment createFragmentFromFile()
 	{
 		return null;

@@ -1,6 +1,9 @@
 package com.gp.app.professionalpa.layout.manager;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +13,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
-import com.gp.app.professionalpa.data.NotesListItem;
+import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 
 public class ParagraphNoteCreatorActivity extends Activity
@@ -52,17 +55,15 @@ public class ParagraphNoteCreatorActivity extends Activity
 	
 	private void saveParagraph(String paragraphData)
 	{
-		NotesListItem [] listViewItems = new NotesListItem[1];
-
-		NotesListItem listItem = new NotesListItem(paragraphData, true);
-			
-		listViewItems[0] = listItem;
+		List<NoteListItem> item = new ArrayList<NoteListItem>();
 		
+		item.add(new NoteListItem(paragraphData));
+		
+		ProfessionalPANote note = new ProfessionalPANote(true, item);
+			
 		Intent returnIntent = new Intent();
 		
-		returnIntent.putExtra("LIST_ITEMS", listViewItems);
-		
-		returnIntent.putExtra(ProfessionalPAConstants.IS_PARAGRAPH_NOTE, true);
+		returnIntent.putExtra(ProfessionalPAConstants.NOTE_DATA, note);
 		
 		setResult(RESULT_OK,returnIntent);
 		

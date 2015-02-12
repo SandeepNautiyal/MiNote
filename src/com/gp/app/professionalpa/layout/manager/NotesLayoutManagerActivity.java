@@ -22,18 +22,16 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.data.NotesListItem;
+import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.fragments.ProfessionalPAListFragment;
 import com.gp.app.professionalpa.notes.fragments.ProfessionalPAParagraphFragment;
-import com.gp.app.professionalpa.notes.xml.ParsedNote;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NotesLayoutManagerActivity extends Activity {
-
-	private static final String PROFESSIONALPA_SHARED_PREFERENCES = "com.gp.app.professionalpa.ProfessionalPASharedPreferences";
 
 	private static final String FRAGMENT_TAGS = "FRAGMENT_TAGS";
 
@@ -61,8 +59,6 @@ public class NotesLayoutManagerActivity extends Activity {
 	
 	private List<FrameLayout> childFrames = new ArrayList<FrameLayout>();
 	
-	private List<String> fragmentTags = new ArrayList<String>();
-	
 	private List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
 	
 	private LinearLayout activityLayout = null;
@@ -78,15 +74,13 @@ public class NotesLayoutManagerActivity extends Activity {
 		numberOfLinearLayouts = getNumberOfLinearLayouts();
 		
 		fillLinearLayoutList();
-		
-
 	}
 
 	
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 				
-		outState.putStringArrayList(FRAGMENT_TAGS, (ArrayList<String>)fragmentTags);
+//		outState.putStringArrayList(FRAGMENT_TAGS, (ArrayList<String>)fragmentTags);
 		
 		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, numberOfLinearLayouts);
 		
@@ -97,36 +91,16 @@ public class NotesLayoutManagerActivity extends Activity {
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) 
 	{
-		super.onRestoreInstanceState(savedInstanceState);
-		
+//		super.onRestoreInstanceState(savedInstanceState);
+//		
 		numberOfLinearLayouts = (byte)savedInstanceState.getByte(NUMBER_OF_LINEAR_LAYOUTS);
-
-		fragmentTags.addAll(savedInstanceState.getStringArrayList(FRAGMENT_TAGS));
-
-		if(fragmentTags.size() > 0)
-		{
+//
+//		fragmentTags.addAll(savedInstanceState.getStringArrayList(FRAGMENT_TAGS));
+//
+//		if(fragmentTags.size() > 0)
+//		{
 			createActivityLayoutInCaseOfConfigurationChange();
-		}
-		else
-		{
-			createActivityLayoutInCaseOfActivityStartUp();
-		}
-		
-	}
-
-
-	private void createActivityLayoutInCaseOfActivityStartUp() 
-	{
-        Set<String> tags = ProfessionalPAParameters.getSharedPreferences().getStringSet("TAGS", null);
-		
-		if(tags != null)
-		{
-			for(String tag : tags)
-			{
-				Set<String> fragmentState = ProfessionalPAParameters.getSharedPreferences().getStringSet(tag, null);
-			}
-		}
-		
+//		}
 	}
 
 
@@ -135,37 +109,70 @@ public class NotesLayoutManagerActivity extends Activity {
 		
 		fillLinearLayoutList();
 		
-		ListIterator<String> iterator = fragmentTags.listIterator();
+//		ListIterator<String> iterator = fragmentTags.listIterator();
+//		
+//		try 
+//		{
+//			ProfessionalPANotesReader parser = ProfessionalPAParameters.getProfessionalPANotesReader();
+//			
+//			List<ParsedNote> parsedNotes = parser.readNotes();
+//			
+//			for(int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++)
+//			{
+//				ParsedNote note = parsedNotes.get(i);
+//				
+//				Intent intent = new Intent();
+//				
+//				List<NotesListItem> listItems = note.getNoteItems();
+//				
+//				if(listItems != null && listItems.size() > 0)
+//				{
+//					NotesListItem [] items = new NotesListItem[1];
+//					
+//					items = listItems.toArray(items);
+//					
+//					intent.putExtra("LIST_ITEMS", items);
+//					
+//					intent.putExtra(ProfessionalPAConstants.IS_PARAGRAPH_NOTE, note.isParagraphNote());
+//					
+//					onActivityResult(0, 0, intent);
+//				}
+//			}
+//			
+//		} catch (ProfessionalPABaseException e) 
+//		{
+////			e.printStackTrace();
+//		}
 		
-		while(iterator.hasNext())
-		{
-			String tag = iterator.next();
-			
-			Fragment fragment = getFragmentManager().findFragmentByTag(tag);
-			
-			if(fragment != null)
-			{
-				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-				
-				fragmentTransaction.remove(fragment);
-				
-				fragmentTransaction.commit();
-				
-				getFragmentManager().executePendingTransactions();
-				
-				fragmentTransaction = getFragmentManager().beginTransaction();
-				
-				fragmentTransaction.commit();
-				
-				createActivityLayout(fragment);
-				
-				iterator.add(fragment.getTag());
-			}
-			else
-			{
-				iterator.remove();
-			}
-		}
+//		while(iterator.hasNext())
+//		{
+//			String tag = iterator.next();
+//			
+//			Fragment fragment = getFragmentManager().findFragmentByTag(tag);
+//			
+//			if(fragment != null)
+//			{
+//				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//				
+//				fragmentTransaction.remove(fragment);
+//				
+//				fragmentTransaction.commit();
+//				
+//				getFragmentManager().executePendingTransactions();
+//				
+//				fragmentTransaction = getFragmentManager().beginTransaction();
+//				
+//				fragmentTransaction.commit();
+//				
+//				createActivityLayout(fragment);
+//				
+//				iterator.add(fragment.getTag());
+//			}
+//			else
+//			{
+//				iterator.remove();
+//			}
+//		}
 	}
 
 	@Override
@@ -221,21 +228,21 @@ public class NotesLayoutManagerActivity extends Activity {
 	    
 	    Bundle bundle = new Bundle();
 	    
-	    Parcelable[] values = data.getParcelableArrayExtra("LIST_ITEMS");
+	    ProfessionalPANote note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
 	    
-	    boolean isParagraphNote = data.getBooleanExtra(ProfessionalPAConstants.IS_PARAGRAPH_NOTE, false);
+	    System.out.println("onActivityResult -> note="+note.getNoteItems().size());
+	    
+	    Fragment fragment = note.isParagraphNote() ? new ProfessionalPAParagraphFragment() : new ProfessionalPAListFragment();
 	    	    
-	    Fragment fragment = isParagraphNote ? new ProfessionalPAParagraphFragment() : new ProfessionalPAListFragment();
-	    	    
-	    if(values != null && values.length > 0)
+	    if(note != null)
 	    {
-	    	bundle.putParcelableArray("LIST_ITEMS", values);
+	    	bundle.putParcelable(ProfessionalPAConstants.NOTE_DATA, note);
 		    
 		    fragment.setArguments(bundle);
 		    
 		    createActivityLayout(fragment);
 		    
-			fragmentTags.add(fragment.getTag());
+//			fragmentTags.add(fragment.getTag());
 	    }
 	}
 
@@ -262,6 +269,8 @@ public class NotesLayoutManagerActivity extends Activity {
 	protected void onDestroy() 
 	{
 		super.onDestroy();
+		
+		System.out.println("on destroy for activity called");
 	}
 
 
@@ -374,31 +383,23 @@ public class NotesLayoutManagerActivity extends Activity {
 	@Override
 	protected void onResume() 
 	{
-		super.onResume();
-		
 		try 
 		{
 			ProfessionalPANotesReader parser = ProfessionalPAParameters.getProfessionalPANotesReader();
 			
-			List<ParsedNote> parsedNotes = parser.readNotes();
+			List<ProfessionalPANote> parsedNotes = parser.readNotes();
 			
-			for(int i = 0; i < parsedNotes.size(); i++)
+			System.out.println("onResume -> parsedNotes="+parsedNotes);
+			
+			for(int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++)
 			{
-				ParsedNote note = parsedNotes.get(i);
+				ProfessionalPANote note = parsedNotes.get(i);
 				
-				Intent intent = new Intent();
-				
-				List<NotesListItem> listItems = note.getNoteItems();
-				
-				if(listItems != null && listItems.size() > 0)
+				if(note != null)
 				{
-					NotesListItem [] items = new NotesListItem[1];
+					Intent intent = new Intent();
 					
-					items = listItems.toArray(items);
-					
-					intent.putExtra("LIST_ITEMS", items);
-					
-					intent.putExtra(ProfessionalPAConstants.IS_PARAGRAPH_NOTE, note.isParagraphNote());
+					intent.putExtra(ProfessionalPAConstants.NOTE_DATA, note);
 					
 					onActivityResult(0, 0, intent);
 				}
@@ -406,18 +407,16 @@ public class NotesLayoutManagerActivity extends Activity {
 			
 		} catch (ProfessionalPABaseException e) 
 		{
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
+		
+		super.onResume();
 	}
 
 
 	@Override
 	protected void onPause() 
 	{
-		SharedPreferences sharedPrefernces = getSharedPreferences(PROFESSIONALPA_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-		
-		Editor editor = sharedPrefernces.edit();
-		
 		super.onPause();
 	}
 }

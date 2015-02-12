@@ -3,7 +3,6 @@ package com.gp.app.professionalpa.notes.xml;
  
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,12 +17,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import android.content.Context;
 import android.os.Environment;
 
-import com.gp.app.professionalpa.data.NotesListItem;
+import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
-import com.gp.app.professionalpa.util.ProfessionalPAParameters;
  
  
 public class ProfessionalPANotesWriter 
@@ -54,13 +52,13 @@ public class ProfessionalPANotesWriter
 		xmlDocument.appendChild(rootElement);
 	}
     
-    public Node writeNotes(String type, List<NotesListItem> noteListItem) 
+    public Node writeNotes(ProfessionalPANote note) 
     {
-        Element note = xmlDocument.createElement("Note");
+        Element noteElement = xmlDocument.createElement("Note");
  
-        note.setAttribute("type", type);
+        noteElement.setAttribute("type", Boolean.toString(note.isParagraphNote()));
         
-        rootElement.appendChild(note);
+        rootElement.appendChild(noteElement);
         
 //        Element noteType = xmlDocument.createElement("type");
 //    	
@@ -68,16 +66,16 @@ public class ProfessionalPANotesWriter
         
 //    	note.appendChild(noteType);
     	
-    	for(int i = 0; i < noteListItem.size(); i++)
+    	for(int i = 0, size = note.getNoteItems().size(); i < size; i++)
     	{
-    		createNoteItem(note, noteListItem.get(i));
+    		createNoteItem(noteElement, note.getNoteItems().get(i));
     	}
  
-        return note;
+        return noteElement;
     }
  
  
-    private void createNoteItem(Element note, NotesListItem noteListItem) 
+    private void createNoteItem(Element note, NoteListItem noteListItem) 
     {
         Element noteItem = xmlDocument.createElement("NoteItem");
         
@@ -86,7 +84,7 @@ public class ProfessionalPANotesWriter
         createNoteListItem(noteItem, noteListItem);
     }
     
-    private void createNoteListItem(Element noteItem, NotesListItem noteListItem) 
+    private void createNoteListItem(Element noteItem, NoteListItem noteListItem) 
     {
         Element data = xmlDocument.createElement("data");
     	
