@@ -95,7 +95,5 @@ public class ParagraphNoteCreatorActivity extends Activity
 		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
 		
 		fragmentWriter.writeNotes(note);
-		
-		fragmentWriter.completeWritingProcess();
 	}
 }

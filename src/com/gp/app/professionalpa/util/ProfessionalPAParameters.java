@@ -105,16 +105,6 @@ public class ProfessionalPAParameters
 		return notesWriter;
 	}
 
-	public static ProfessionalPANotesReader getProfessionalPANotesReader() throws ProfessionalPABaseException
-	{
-		if(notesReader == null)
-		{
-			notesReader = new ProfessionalPANotesReader();
-		}
-		
-		return notesReader;
-	}
-
 	public static FragmentCreationManager getFragmentCreationManager() 
 	{
 		if(fragmentCreationManager == null)

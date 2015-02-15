@@ -1,5 +1,5 @@
 <!DOCTYPE notes [
-<!ELEMENT notes (note) #REQUIRED>
+<!ELEMENT notes (note+) #REQUIRED>
 <!ELEMENT note (noteItem+)>
 <!ATTLIST note isParagraphNote PCDATA #REQUIRED>
 <!ATTLIST note creationTime PCDATA #REQUIRED>

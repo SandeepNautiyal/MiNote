@@ -241,7 +241,5 @@ public class ListItemCreatorActivity extends Activity
 		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
 		
 		fragmentWriter.writeNotes(note);
-		
-		fragmentWriter.completeWritingProcess();
 	}
 }

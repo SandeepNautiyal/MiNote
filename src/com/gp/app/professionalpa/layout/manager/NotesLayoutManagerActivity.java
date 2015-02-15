@@ -54,7 +54,8 @@ public class NotesLayoutManagerActivity extends Activity {
 	private LinearLayout activityLayout = null;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		
 		activityLayout = (LinearLayout)getLayoutInflater().inflate(R.layout.activity_notes_layout_manager, null);
@@ -68,7 +69,8 @@ public class NotesLayoutManagerActivity extends Activity {
 
 	
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
+	protected void onSaveInstanceState(Bundle outState) 
+	{
 				
 //		outState.putStringArrayList(FRAGMENT_TAGS, (ArrayList<String>)fragmentTags);
 		
@@ -415,9 +417,7 @@ public class NotesLayoutManagerActivity extends Activity {
 		
 		try 
 		{
-			ProfessionalPANotesReader parser = ProfessionalPAParameters.getProfessionalPANotesReader();
-
-			List<ProfessionalPANote> parsedNotes = parser.readNotes();
+			List<ProfessionalPANote> parsedNotes = ProfessionalPANotesReader.readNotes();
 
 			for (int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++) 
 			{

@@ -4,12 +4,13 @@ package com.gp.app.professionalpa.notes.xml;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -18,7 +19,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import android.os.Environment;
 
@@ -35,6 +36,7 @@ public class ProfessionalPANotesWriter
     
 	public ProfessionalPANotesWriter() throws ProfessionalPABaseException 
 	{
+		SAXParserFactory.newInstance();
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
 		DocumentBuilder dBuilder;
@@ -54,35 +56,50 @@ public class ProfessionalPANotesWriter
 
 		xmlDocument.appendChild(rootElement);
 		
-		createEmptyNoteXml();
+		List<ProfessionalPANote> notes = ProfessionalPANotesReader.readNotes();
+		
+		for(int i = 0, size = notes == null ? 0 : notes.size(); i < size; i++)
+		{
+			writeNotes(notes.get(i));
+		}
 	}
     
-    private void createEmptyNoteXml() throws ProfessionalPABaseException 
+	public void writeNotes(ProfessionalPANote note) throws ProfessionalPABaseException
     {
+		NodeList nodeList = rootElement.getChildNodes();
+		
+		Element noteElement = xmlDocument.createElement("Note");
+
+		noteElement.setAttribute("type",
+				Boolean.toString(note.isParagraphNote()));
+
+		Date creationTime = new Date(note.getCreationTime());
+
+		System.out.println("writeNotes -> creationTime="
+				+ note.getCreationTime());
+
+		SimpleDateFormat formatter = new SimpleDateFormat(
+				"E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
+
+		String creationDate = formatter.format(creationTime);
+
+		System.out.println("writeNotes -> folderName=" + creationDate);
+
+		noteElement.setAttribute("creationTime", creationDate);
+
+		noteElement.setAttribute("lastEditedTime", creationDate);
+
+		rootElement.appendChild(noteElement);
+
+		for (int i = 0, size = note.getNoteItems().size(); i < size; i++) 
+		{
+			createNoteItem(noteElement, note.getNoteItems().get(i));
+		}
+		
 		completeWritingProcess();
-	}
-
-	public Node writeNotes(ProfessionalPANote note) 
-    {
-        Element noteElement = xmlDocument.createElement("Note");
- 
-        noteElement.setAttribute("type", Boolean.toString(note.isParagraphNote()));
+		
+		System.out.println("node list : "+rootElement.getChildNodes().getLength());
         
-        Date creationTime = new Date(note.getCreationTime());
-     
-        System.out.println("writeNotes -> creationTime="+note.getCreationTime());
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
-     
-        String creationDate = formatter.format(creationTime);
-        
-        System.out.println("writeNotes -> folderName="+creationDate);
-        
-        noteElement.setAttribute("creationTime", creationDate);
-
-        noteElement.setAttribute("lastEditedTime", creationDate);
-        
-        rootElement.appendChild(noteElement);
         
 //        Element noteType = xmlDocument.createElement("type");
 //    	
@@ -90,12 +107,8 @@ public class ProfessionalPANotesWriter
         
 //    	note.appendChild(noteType);
     	
-    	for(int i = 0, size = note.getNoteItems().size(); i < size; i++)
-    	{
-    		createNoteItem(noteElement, note.getNoteItems().get(i));
-    	}
+    	
  
-        return noteElement;
     }
  
  
@@ -129,7 +142,7 @@ public class ProfessionalPANotesWriter
         noteItem.appendChild(isImportant);
 	}
 
-	public void completeWritingProcess() throws ProfessionalPABaseException
+	private void completeWritingProcess() throws ProfessionalPABaseException
     {
     	try 
 		{

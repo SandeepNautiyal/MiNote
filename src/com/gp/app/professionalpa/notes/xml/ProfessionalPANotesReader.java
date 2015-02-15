@@ -19,13 +19,16 @@ import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 
 public class ProfessionalPANotesReader 
 {
-	SAXParserFactory factory = null;
-	
-	SAXParser saxParser = null;
-	
-	public ProfessionalPANotesReader() throws ProfessionalPABaseException
+	private ProfessionalPANotesReader() throws ProfessionalPABaseException
 	{
-		factory = SAXParserFactory.newInstance();
+		
+	}
+	
+	public static List<ProfessionalPANote> readNotes() throws ProfessionalPABaseException
+	{
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+		
+		SAXParser saxParser = null;
 		
 		try 
 		{
@@ -35,10 +38,7 @@ public class ProfessionalPANotesReader
 		{
 			throw  new ProfessionalPABaseException("NOTES_XML_FILES_PARSING_FAILED", exception);
 		} 
-	}
-	
-	public List<ProfessionalPANote> readNotes() throws ProfessionalPABaseException
-	{
+		
 		ProfessionalPANotesParser parser = new ProfessionalPANotesParser();
 		
 		List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
