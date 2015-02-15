@@ -57,8 +57,6 @@ public class ProfessionalPAListFragment extends ListFragment
 		    	
 		    	values.addAll(note.getNoteItems());
 		    	
-			    System.out.println("onActivityCreated -> note.getNoteItems()="+note.getNoteItems().size()+" state="+note.getState());
-			    
 				ListViewItemAdapter adapter = new ListViewItemAdapter(getActivity(), note.getNoteItems());
 				
 				setListAdapter(adapter);
@@ -68,18 +66,6 @@ public class ProfessionalPAListFragment extends ListFragment
 				getListView().setDividerHeight(0);			
 				
 				adapter.notifyDataSetChanged();
-				
-				if(note.getState() != XMLEntity.READ_STATE)
-				{
-					try
-					{
-						persistListElement();
-					}
-					catch(ProfessionalPABaseException exception)
-					{
-						//TODO improve
-					}
-				}
 		    }
 		}
 	}
@@ -88,21 +74,6 @@ public class ProfessionalPAListFragment extends ListFragment
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-	}
-
-	private void persistListElement() throws ProfessionalPABaseException
-	{
-//		dummyMethod();
-		
-		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
-		
-		ProfessionalPANote note = new ProfessionalPANote(false, values);
-		
-		note.setCreationTime(System.currentTimeMillis());
-		
-		fragmentWriter.writeNotes(note);
-		
-//		fragmentWriter.completeWritingProcess();
 	}
 
 	public ProfessionalPAListFragment createFragmentFromFile()

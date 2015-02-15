@@ -122,31 +122,15 @@ public class NoteListItem implements Parcelable
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_STRING_START_DELIMITER);
-		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_START_DELIMITER);
-		
 		sb.append("ITEM_TEXT="+itemText);
 		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_END_DELIMITER);
-
 		String importanceText = isImportanceHigh ? "true":"false";
 		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_START_DELIMITER);
-
-		sb.append("ITEM_IMPORTANCE="+importanceText);
+		sb.append("\n ITEM_IMPORTANCE="+importanceText);
 		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_END_DELIMITER);
-
 		String alarmActiveText = isAlarmActive ? "true":"false";
 		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_START_DELIMITER);
-
-		sb.append("ACTIVE_ALARM="+alarmActiveText);
-		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_VALUE_END_DELIMITER);
-		
-		sb.append(ProfessionalPAConstants.LIST_ITEM_STRING_END_DELIMITER);
+		sb.append("\n ACTIVE_ALARM="+alarmActiveText);
 		
 		return sb.toString();
 	}

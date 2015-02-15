@@ -1,33 +1,23 @@
 package com.gp.app.professionalpa.layout.manager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Set;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.notes.fragments.ProfessionalPAListFragment;
-import com.gp.app.professionalpa.notes.fragments.ProfessionalPAParagraphFragment;
+import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
@@ -55,8 +45,8 @@ public class NotesLayoutManagerActivity extends Activity {
 	
 	private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_LANDSCAPE = 5;
 	
-    byte numberOfLinearLayouts = -1;
-	
+    private byte numberOfLinearLayouts = -1;
+    
 	private List<FrameLayout> childFrames = new ArrayList<FrameLayout>();
 	
 	private List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
@@ -104,10 +94,20 @@ public class NotesLayoutManagerActivity extends Activity {
 	}
 
 
-	private void createActivityLayoutInCaseOfConfigurationChange() {
+	private void createActivityLayoutInCaseOfConfigurationChange() 
+	{
 		updateNumberOfLinearLayoutsOnScreenChange(getResources().getConfiguration());
 		
 		fillLinearLayoutList();
+		
+		List<Fragment> fragments  = ProfessionalPAParameters.getFragmentCreationManager().getFragments();
+		
+		for(int i = 0; i < fragments.size(); i++)
+		{
+			Fragment fragment = fragments.get(i);
+			
+			createActivityLayout(fragment);
+		}
 		
 //		ListIterator<String> iterator = fragmentTags.listIterator();
 //		
@@ -176,6 +176,13 @@ public class NotesLayoutManagerActivity extends Activity {
 	}
 
 	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		// TODO Auto-generated method stub
+		super.onConfigurationChanged(newConfig);
+	}
+
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.notes_layout_manager, menu);
@@ -226,28 +233,33 @@ public class NotesLayoutManagerActivity extends Activity {
 	{
 	    if (data == null) {return;}
 	    
-	    Bundle bundle = new Bundle();
-	    
 	    ProfessionalPANote note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
 	    
-	    System.out.println("onActivityResult -> note="+note.getNoteItems().size());
-	    
-	    Fragment fragment = note.isParagraphNote() ? new ProfessionalPAParagraphFragment() : new ProfessionalPAListFragment();
-	    	    
+	    createFragmentForNote(note);
+	}
+
+
+	private void createFragmentForNote(ProfessionalPANote note) 
+	{
 	    if(note != null)
 	    {
-	    	bundle.putParcelable(ProfessionalPAConstants.NOTE_DATA, note);
-		    
-		    fragment.setArguments(bundle);
-		    
-		    createActivityLayout(fragment);
-		    
-//			fragmentTags.add(fragment.getTag());
+	    	FragmentCreationManager fragmentManager = ProfessionalPAParameters.getFragmentCreationManager();
+	    	
+	    	Fragment fragment = fragmentManager.createFragment(note);
+	    	
+	    	if(fragment != null)
+	    	{
+	    		System.out.println("createFragmentForNote -> fragment="+fragment);
+	    		
+			    createActivityLayout(fragment);
+	    	}
 	    }
 	}
 
 
 	private void createActivityLayout(Fragment fragment) {
+		
+		System.out.println("createActivityLayout -> fragment="+fragment);
 		
 		FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
@@ -262,15 +274,12 @@ public class NotesLayoutManagerActivity extends Activity {
 		addFrameLayoutToActivtyView(frameLayout);
 		
 		updateActivityView();
-		
 	}
 	
 	@Override
 	protected void onDestroy() 
 	{
 		super.onDestroy();
-		
-		System.out.println("on destroy for activity called");
 	}
 
 
@@ -284,36 +293,53 @@ public class NotesLayoutManagerActivity extends Activity {
 		
 		byte numberOfLinearLayouts = -1;
 		
-		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
-
-			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) 
+		{
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) 
+			{
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_PORTRAIT;
-			} else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			} 
+			else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+			{
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_LANDSCAPE;
 			}
 
 		}
-		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {
-
-			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) 
+		{
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) 
+			{
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_LARGE_SCREEN_PORTRAIT;
-			} else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			} 
+			else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) 
+			{
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_LARGE_SCREEN_LANDSCAPE;
 			}
-		} else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
-			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+		} 
+		else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL)
+		{
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) 
+			{
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_NORMAL_SCREEN_PORTRAIT;
-			} else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			} 
+			else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) 
+			{
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_NORMAL_SCREEN_LANDSCAPE;
 			}
-		} else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
-
-			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+		} 
+		else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) 
+		{
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) 
+			{
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_SMALL_SCREEN_PORTRAIT;
-			} else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			} 
+			else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) 
+			{
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_SMALL_SCREEN_LANDSCAPE;
 			}
-		} else {
+		} 
+		else 
+		{
 		}
 
 		return numberOfLinearLayouts;
@@ -383,34 +409,32 @@ public class NotesLayoutManagerActivity extends Activity {
 	@Override
 	protected void onResume() 
 	{
+		super.onResume();
+
+		System.out.println("onResume ->");
+		
 		try 
 		{
 			ProfessionalPANotesReader parser = ProfessionalPAParameters.getProfessionalPANotesReader();
-			
+
 			List<ProfessionalPANote> parsedNotes = parser.readNotes();
-			
-			System.out.println("onResume -> parsedNotes="+parsedNotes);
-			
-			for(int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++)
+
+			for (int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++) 
 			{
 				ProfessionalPANote note = parsedNotes.get(i);
-				
-				if(note != null)
+
+				if (note != null) 
 				{
-					Intent intent = new Intent();
-					
-					intent.putExtra(ProfessionalPAConstants.NOTE_DATA, note);
-					
-					onActivityResult(0, 0, intent);
+					createFragmentForNote(note);
 				}
 			}
-			
-		} catch (ProfessionalPABaseException e) 
+
+		} catch (ProfessionalPABaseException e)
 		{
-//			e.printStackTrace();
+
+			// TODO improve
+			// e.printStackTrace();
 		}
-		
-		super.onResume();
 	}
 
 

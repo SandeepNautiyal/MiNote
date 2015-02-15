@@ -1,6 +1,7 @@
 package com.gp.app.professionalpa.util;
 
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesParser;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
@@ -25,6 +26,8 @@ public class ProfessionalPAParameters
 	private static ProfessionalPANotesParser notesParser = null;
 	
 	private static ProfessionalPANotesReader notesReader = null;
+
+	private static FragmentCreationManager fragmentCreationManager;
 
 	
     public static void setApplicationContext(Context context)
@@ -110,5 +113,15 @@ public class ProfessionalPAParameters
 		}
 		
 		return notesReader;
+	}
+
+	public static FragmentCreationManager getFragmentCreationManager() 
+	{
+		if(fragmentCreationManager == null)
+		{
+			fragmentCreationManager = new FragmentCreationManager();
+		}
+		
+		return fragmentCreationManager;
 	}
 }

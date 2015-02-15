@@ -3,6 +3,9 @@ package com.gp.app.professionalpa.notes.xml;
  
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -50,13 +53,34 @@ public class ProfessionalPANotesWriter
 		rootElement = xmlDocument.createElementNS("rootElement", "Notes");
 
 		xmlDocument.appendChild(rootElement);
+		
+		createEmptyNoteXml();
 	}
     
-    public Node writeNotes(ProfessionalPANote note) 
+    private void createEmptyNoteXml() throws ProfessionalPABaseException 
+    {
+		completeWritingProcess();
+	}
+
+	public Node writeNotes(ProfessionalPANote note) 
     {
         Element noteElement = xmlDocument.createElement("Note");
  
         noteElement.setAttribute("type", Boolean.toString(note.isParagraphNote()));
+        
+        Date creationTime = new Date(note.getCreationTime());
+     
+        System.out.println("writeNotes -> creationTime="+note.getCreationTime());
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
+     
+        String creationDate = formatter.format(creationTime);
+        
+        System.out.println("writeNotes -> folderName="+creationDate);
+        
+        noteElement.setAttribute("creationTime", creationDate);
+
+        noteElement.setAttribute("lastEditedTime", creationDate);
         
         rootElement.appendChild(noteElement);
         

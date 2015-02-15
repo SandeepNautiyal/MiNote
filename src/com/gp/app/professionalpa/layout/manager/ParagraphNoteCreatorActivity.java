@@ -15,7 +15,10 @@ import android.widget.RelativeLayout;
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
+import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ParagraphNoteCreatorActivity extends Activity
 {
@@ -61,6 +64,21 @@ public class ParagraphNoteCreatorActivity extends Activity
 		
 		ProfessionalPANote note = new ProfessionalPANote(true, item);
 			
+        long creationTime = System.currentTimeMillis();
+		
+		note.setCreationTime(creationTime);
+		
+		note.setLastEditedTime(creationTime);
+		
+		try
+		{
+			persistListElement(note);
+		} 
+		catch (ProfessionalPABaseException exception) 
+		{
+			// TODO improve
+		}
+		
 		Intent returnIntent = new Intent();
 		
 		returnIntent.putExtra(ProfessionalPAConstants.NOTE_DATA, note);
@@ -68,5 +86,16 @@ public class ParagraphNoteCreatorActivity extends Activity
 		setResult(RESULT_OK,returnIntent);
 		
 		finish();
+	}
+	
+	private void persistListElement(ProfessionalPANote note) throws ProfessionalPABaseException
+	{
+//		dummyMethod();
+		
+		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
+		
+		fragmentWriter.writeNotes(note);
+		
+		fragmentWriter.completeWritingProcess();
 	}
 }

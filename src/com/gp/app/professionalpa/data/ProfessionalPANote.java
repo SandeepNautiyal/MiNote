@@ -1,16 +1,18 @@
 package com.gp.app.professionalpa.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.interfaces.XMLEntity;
 
 
-public class ProfessionalPANote implements XMLEntity, Parcelable 
+public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<ProfessionalPANote>
 {
 	byte state = XMLEntity.INSERT_STATE;
 	
@@ -132,6 +134,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 
 			source.readLongArray(timeAttributes);
 			
+			System.out.println("createFromParcel -> timeAttributes="+Arrays.toString(timeAttributes));
 			byte state = source.readByte();
 			
 			ProfessionalPANote note = new ProfessionalPANote(isParagraphNote, noteItems);
@@ -155,5 +158,38 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 	public int describeContents() 
 	{
 		return 0;
+	}
+
+	public int hashCode()
+	{
+		return (int)lastEditedTime;
+	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		return this.convertToString().equals(((ProfessionalPANote)obj).convertToString());
+	}
+	
+	@Override
+	public int compareTo(ProfessionalPANote note) 
+	{
+		return this.convertToString().compareTo(((ProfessionalPANote)note).convertToString());
+	}
+	
+	public String convertToString()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("\n creationTime="+creationTime);
+		
+		sb.append("lastEditedTime="+lastEditedTime);
+		
+		for(int i = 0; i < notes.size(); i++)
+		{
+			sb.append("\n Note-"+i+"="+notes.get(i).convertToString());
+		}
+		
+	return sb.toString();
 	}
 }

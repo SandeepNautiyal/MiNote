@@ -1,5 +1,7 @@
 package com.gp.app.professionalpa.notes.xml;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,8 +13,6 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-import android.text.format.DateFormat;
 
 import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
@@ -34,8 +34,6 @@ public class ProfessionalPANotesParser extends DefaultHandler
 	private boolean note = false;
 	private boolean data = false;
 	private boolean isAlarm = false;
-	private String typeOfList = null;
-
 	private boolean isImportant;
 	
 	public ProfessionalPANotesParser() throws ProfessionalPABaseException
@@ -64,15 +62,36 @@ public class ProfessionalPANotesParser extends DefaultHandler
 			currentNote = new ProfessionalPANote();
 			
 			//Fetching the ID of TownCenter, we use it as a reference to fetch the child nodes.
-			typeOfList = attributes.getValue("isParagraphNote");
+			String typeOfList = attributes.getValue("isParagraphNote");
 			
-			long CreationTime = 0L;//new Date(attributes.getValue("creationTime")).getTime();
+			SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
 			
-			long lastEditedTime = 0L; //new Date(attributes.getValue("lastEditedTime")).getTime();
+            String CreationTime = attributes.getValue("creationTime");//new Date(attributes.getValue("creationTime")).getTime();
 			
-			currentNote.setCreationTime(CreationTime);
+			String lastEditedTime = attributes.getValue("lastEditedTime"); //new Date(attributes.getValue("lastEditedTime")).getTime();
+
+            System.out.println("startElement -> CreationTime="+CreationTime+
+            		"lastEditedTime="+lastEditedTime);
 			
-			currentNote.setLastEditedTime(lastEditedTime);
+			try 
+			{
+		 
+				Date creationDate = formatter.parse(CreationTime);
+				
+				currentNote.setCreationTime(creationDate.getTime());
+				
+				System.out.println("read creation date="+creationDate.getTime());
+				
+				Date lastEditedDate = formatter.parse(lastEditedTime);
+				
+				currentNote.setLastEditedTime(lastEditedDate.getTime());
+				
+				System.out.println("last edited date="+lastEditedDate.getTime());
+			} 
+			catch (ParseException exception)
+			{
+				//TODO improve
+			}
 			
 			currentNote.setTypeOfNote(Boolean.parseBoolean(typeOfList));
 		}

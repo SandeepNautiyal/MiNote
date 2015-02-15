@@ -20,7 +20,11 @@ import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
 import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.interfaces.XMLEntity;
+import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
+import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ListItemCreatorActivity extends Activity
 {
@@ -204,6 +208,21 @@ public class ListItemCreatorActivity extends Activity
 		
 		ProfessionalPANote note = new ProfessionalPANote(false, item);
 		
+		long creationTime = System.currentTimeMillis();
+		
+		note.setCreationTime(creationTime);
+		
+		note.setLastEditedTime(creationTime);
+		
+		try
+		{
+			persistListElement(note);
+		} 
+		catch (ProfessionalPABaseException exception) 
+		{
+			// TODO improve
+		}
+		
 		returnIntent.putExtra(ProfessionalPAConstants.NOTE_DATA, note);
 
 		setResult(RESULT_OK,returnIntent);
@@ -215,5 +234,14 @@ public class ListItemCreatorActivity extends Activity
 	public void onBackPressed() 
 	{
 	    super.onBackPressed();
+	}
+	
+	private void persistListElement(ProfessionalPANote note) throws ProfessionalPABaseException
+	{
+		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
+		
+		fragmentWriter.writeNotes(note);
+		
+		fragmentWriter.completeWritingProcess();
 	}
 }

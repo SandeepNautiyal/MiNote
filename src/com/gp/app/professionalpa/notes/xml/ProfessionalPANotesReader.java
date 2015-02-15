@@ -3,6 +3,7 @@ package com.gp.app.professionalpa.notes.xml;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
@@ -40,7 +41,7 @@ public class ProfessionalPANotesReader
 	{
 		ProfessionalPANotesParser parser = new ProfessionalPANotesParser();
 		
-		List<ProfessionalPANote> notes = null;
+		List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
 		
 		try 
 		{

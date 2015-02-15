@@ -121,11 +121,9 @@ public class ProfessionalPAParagraphFragment extends ListFragment
 		
         ProfessionalPANote note = new ProfessionalPANote(true, values);
 		
-		note.setCreationTime(System.currentTimeMillis());
-		
 		fragmentWriter.writeNotes(note);
 		
-//		fragmentWriter.completeWritingProcess();
+		fragmentWriter.completeWritingProcess();
 	}
 
 	public ProfessionalPAListFragment createFragmentFromFile()
