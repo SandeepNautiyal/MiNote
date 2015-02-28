@@ -29,16 +29,12 @@ import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionPARuntimeException;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
-import com.gp.app.professionalpa.interfaces.XMLDataChangeListener;
-import com.gp.app.professionalpa.interfaces.XMLDataChangePublisher;
 import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
  
  
-public class ProfessionalPANotesWriter implements XMLDataChangePublisher
+public class ProfessionalPANotesWriter
 {
-	List<XMLDataChangeListener> listeners = new ArrayList<XMLDataChangeListener>();
-	
     private Document xmlDocument = null;
     
     private Element rootElement = null;
@@ -183,11 +179,4 @@ public class ProfessionalPANotesWriter implements XMLDataChangePublisher
 			throw new ProfessionalPABaseException("PROBLEM_WRITING_XML", exception);
 		}
     }
-
-	@Override
-	public void addXMLDataChangeListener(XMLDataChangeListener listener) 
-	{
-		listeners.add(listener);
-	}
- 
 }

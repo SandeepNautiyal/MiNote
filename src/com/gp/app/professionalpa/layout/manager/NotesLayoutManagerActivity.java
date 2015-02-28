@@ -24,13 +24,11 @@ import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.export.ProfessionalPANotesExporter;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.interfaces.XMLDataChangeListener;
-import com.gp.app.professionalpa.interfaces.XMLDataChangePublisher;
 import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
-public class NotesLayoutManagerActivity extends Activity implements XMLDataChangeListener
+public class NotesLayoutManagerActivity extends Activity
 {
 	private static final String FRAGMENT_TAGS = "FRAGMENT_TAGS";
 
@@ -83,10 +81,6 @@ public class NotesLayoutManagerActivity extends Activity implements XMLDataChang
 		numberOfLinearLayouts = getNumberOfLinearLayouts();
 		
 		fillLinearLayoutList();
-		
-        XMLDataChangePublisher publisher = ProfessionalPAParameters.getProfessionalPANotesWriter();
-		
-		publisher.addXMLDataChangeListener(this);
 		
 		try 
 		{
@@ -423,113 +417,5 @@ public class NotesLayoutManagerActivity extends Activity implements XMLDataChang
 	protected void onPause() 
 	{
 		super.onPause();
-	}
-
-	@Override
-	public void notifyXMLDataChange() 
-	{
-		lock.lock();
-
-		Condition condition = lock.newCondition();
-
-		try 
-		{
-			condition.await();
-		} 
-		catch (InterruptedException e)
-		{
-			// TODO improve
-			e.printStackTrace();
-		} 
-		finally 
-		{
-			lock.unlock();
-		}
-		
-		try 
-		{
-			createNotes();
-
-		} catch (ProfessionalPABaseException e)
-		{
-
-			// TODO improve
-			// e.printStackTrace();
-		}
-	}
-	
-	public class ActivityStateMonitor extends Application implements ActivityLifecycleCallbacks
-	{
-		boolean isInterestingActivityVisible;
-
-	    @Override
-	    public void onCreate() 
-	    {
-	        super.onCreate();
-
-	        registerActivityLifecycleCallbacks(this);
-	    }
-
-	    public boolean isInterestingActivityVisible() 
-	    {
-	        return isInterestingActivityVisible;
-	    }
-
-	    @Override
-	    public void onActivityResumed(Activity activity) 
-	    {
-	        if (activity instanceof NotesLayoutManagerActivity)
-	        {
-	             isInterestingActivityVisible = true;
-	             
-	             Condition condition = lock.newCondition();
-	             
-	             condition.signalAll();
-	        }
-	    }
-
-	    @Override
-	    public void onActivityStopped(Activity activity) 
-	    {
-	        if (activity instanceof NotesLayoutManagerActivity) 
-	        {
-	             isInterestingActivityVisible = false;
-	        }
-	    }
-
-		@Override
-		public void onActivityCreated(Activity arg0, Bundle arg1) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onActivityDestroyed(Activity arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onActivityPaused(Activity arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onActivitySaveInstanceState(Activity arg0, Bundle arg1) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onActivityStarted(Activity arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		public boolean isNotesLayoutManagerActivityResumed()
-		{
-			return isInterestingActivityVisible;
-		}
 	}
 }
