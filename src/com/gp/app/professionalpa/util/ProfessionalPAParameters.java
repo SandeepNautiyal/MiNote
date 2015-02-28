@@ -95,7 +95,7 @@ public class ProfessionalPAParameters
 		return notesParser;
 	}
 	
-	public static ProfessionalPANotesWriter getProfessionalPANotesWriter() throws ProfessionalPABaseException
+	public static ProfessionalPANotesWriter getProfessionalPANotesWriter()
 	{
 		if(notesWriter == null)
 		{

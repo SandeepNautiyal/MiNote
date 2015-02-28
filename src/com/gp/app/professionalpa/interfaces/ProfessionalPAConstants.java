@@ -8,13 +8,12 @@ public interface ProfessionalPAConstants
 
 	public static final String NOTE_DATA = "LIST_ITEMS";
 
-	public static final String LIST_ITEM_STRING_START_DELIMITER = "$^START^$";
+	public static final String PROFESSIONAL_PA_XML_FILE_NAME = "notes.xml";
 
-	public static final String LIST_ITEM_STRING_END_DELIMITER = "$^END^$";
-
-	public static final String LIST_ITEM_VALUE_START_DELIMITER = "(&^*ITEM_START*^&)";
-	
-	public static final String LIST_ITEM_VALUE_END_DELIMITER = "(&^*ITEM_END*^&)";
-	
 	public static final String IS_PARAGRAPH_NOTE = "IS_PARAGRAPH_NOTE";
+	
+	public static final String PROFESSIONAL_PA_EXPORT_PATH = "/ProfessionalPA//Export";
+	
+	public static final String PROFESSIONAL_PA_IMPORT_PATH = PROFESSIONAL_PA_EXPORT_PATH+"//"
+	    +PROFESSIONAL_PA_XML_FILE_NAME;
 }

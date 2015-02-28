@@ -70,23 +70,15 @@ public class ProfessionalPANotesParser extends DefaultHandler
 			
 			String lastEditedTime = attributes.getValue("lastEditedTime"); //new Date(attributes.getValue("lastEditedTime")).getTime();
 
-            System.out.println("startElement -> CreationTime="+CreationTime+
-            		"lastEditedTime="+lastEditedTime);
-			
 			try 
 			{
-		 
 				Date creationDate = formatter.parse(CreationTime);
 				
 				currentNote.setCreationTime(creationDate.getTime());
 				
-				System.out.println("read creation date="+creationDate.getTime());
-				
 				Date lastEditedDate = formatter.parse(lastEditedTime);
 				
 				currentNote.setLastEditedTime(lastEditedDate.getTime());
-				
-				System.out.println("last edited date="+lastEditedDate.getTime());
 			} 
 			catch (ParseException exception)
 			{

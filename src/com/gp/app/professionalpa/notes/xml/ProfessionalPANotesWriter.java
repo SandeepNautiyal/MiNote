@@ -4,6 +4,7 @@ package com.gp.app.professionalpa.notes.xml;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,22 +20,31 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 
 import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.exceptions.ProfessionPARuntimeException;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.interfaces.XMLDataChangeListener;
+import com.gp.app.professionalpa.interfaces.XMLDataChangePublisher;
+import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
+import com.gp.app.professionalpa.util.ProfessionalPAParameters;
  
  
-public class ProfessionalPANotesWriter 
+public class ProfessionalPANotesWriter implements XMLDataChangePublisher
 {
+	List<XMLDataChangeListener> listeners = new ArrayList<XMLDataChangeListener>();
+	
     private Document xmlDocument = null;
     
     private Element rootElement = null;
     
-	public ProfessionalPANotesWriter() throws ProfessionalPABaseException 
+    //TODO exception handling in this method can be improved.
+	public ProfessionalPANotesWriter()
 	{
 		SAXParserFactory.newInstance();
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -47,7 +57,7 @@ public class ProfessionalPANotesWriter
 		}
 		catch (ParserConfigurationException exception) 
 		{
-			throw new ProfessionalPABaseException("DOCUMENT_BUILDER_NOT_INITIALIZED", exception);
+			throw new ProfessionPARuntimeException("DOCUMENT_BUILDER_NOT_INITIALIZED", exception);
 		}
 
 		xmlDocument = dBuilder.newDocument();
@@ -56,17 +66,36 @@ public class ProfessionalPANotesWriter
 
 		xmlDocument.appendChild(rootElement);
 		
-		List<ProfessionalPANote> notes = ProfessionalPANotesReader.readNotes();
-		
-		for(int i = 0, size = notes == null ? 0 : notes.size(); i < size; i++)
+		try
 		{
-			writeNotes(notes.get(i));
+			List<ProfessionalPANote> notes = ProfessionalPANotesReader.readNotes(false);
+			
+			for(int i = 0, size = notes == null ? 0 : notes.size(); i < size; i++)
+			{
+				writeNote(notes.get(i));
+			}
 		}
+		catch(ProfessionalPABaseException exception)
+		{
+			//TODO
+		}
+		
 	}
     
-	public void writeNotes(ProfessionalPANote note) throws ProfessionalPABaseException
+	public void writeNotes(List<ProfessionalPANote> notes) throws ProfessionalPABaseException
+	{
+		for(int i = 0, size = notes == null ? 0 : notes.size(); i < size; i++)
+		{
+			writeNote(notes.get(i));
+		}
+	}
+	
+	private void writeNote(ProfessionalPANote note) throws ProfessionalPABaseException
     {
-		NodeList nodeList = rootElement.getChildNodes();
+		if(note == null)
+		{
+			return;
+		}
 		
 		Element noteElement = xmlDocument.createElement("Note");
 
@@ -75,15 +104,10 @@ public class ProfessionalPANotesWriter
 
 		Date creationTime = new Date(note.getCreationTime());
 
-		System.out.println("writeNotes -> creationTime="
-				+ note.getCreationTime());
-
 		SimpleDateFormat formatter = new SimpleDateFormat(
 				"E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
 
 		String creationDate = formatter.format(creationTime);
-
-		System.out.println("writeNotes -> folderName=" + creationDate);
 
 		noteElement.setAttribute("creationTime", creationDate);
 
@@ -97,18 +121,6 @@ public class ProfessionalPANotesWriter
 		}
 		
 		completeWritingProcess();
-		
-		System.out.println("node list : "+rootElement.getChildNodes().getLength());
-        
-        
-//        Element noteType = xmlDocument.createElement("type");
-//    	
-//        noteType.appendChild(xmlDocument.createTextNode(type));
-        
-//    	note.appendChild(noteType);
-    	
-    	
- 
     }
  
  
@@ -171,5 +183,11 @@ public class ProfessionalPANotesWriter
 			throw new ProfessionalPABaseException("PROBLEM_WRITING_XML", exception);
 		}
     }
+
+	@Override
+	public void addXMLDataChangeListener(XMLDataChangeListener listener) 
+	{
+		listeners.add(listener);
+	}
  
 }

@@ -1,7 +1,6 @@
 package com.gp.app.professionalpa.notes.xml;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,20 +10,20 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
-import android.os.Environment;
 import android.util.Log;
 
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.util.ProfessionalPATools;
 
 public class ProfessionalPANotesReader 
 {
-	private ProfessionalPANotesReader() throws ProfessionalPABaseException
+	private ProfessionalPANotesReader() 
 	{
 		
 	}
 	
-	public static List<ProfessionalPANote> readNotes() throws ProfessionalPABaseException
+	public static List<ProfessionalPANote> readNotes(boolean isImportedFile) throws ProfessionalPABaseException
 	{
         SAXParserFactory factory = SAXParserFactory.newInstance();
 		
@@ -43,11 +42,11 @@ public class ProfessionalPANotesReader
 		
 		List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
 		
+		String filePath =  isImportedFile ? ProfessionalPATools.createExportedFilePath() :
+			ProfessionalPATools.createInternalXMLFilePath();
 		try 
 		{
-			File directory = Environment.getExternalStorageDirectory();
-			  // assumes that a file article.rss is available on the SD card
-			File file = new File(directory + "/notes.xml");
+			File file = new File(filePath);
 			
 			saxParser.parse(file, parser);
 			

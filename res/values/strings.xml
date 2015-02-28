@@ -21,4 +21,6 @@
     <string name="set_importance">Set Importance</string>
     <string name="set_alarm">Set Alarm</string>
     <string name="paragraph_note_creator_activity_title">Create Note</string>
+    <string name="export_notes">Export Notes</string>
+    <string name="import_notes">Import Notes</string>
 </resources>

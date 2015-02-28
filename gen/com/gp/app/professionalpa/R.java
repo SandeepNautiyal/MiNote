@@ -45,9 +45,9 @@ public final class R {
         public static final int action_clear_all_notes=0x7f080016;
         public static final int action_create_list_view=0x7f080018;
         public static final int action_create_paragraph_view=0x7f080013;
-        public static final int action_display_calender=0x7f08001a;
+        public static final int action_display_calender=0x7f08001c;
         public static final int action_exit_professional_pa_application=0x7f080017;
-        public static final int action_save_paragraph_note=0x7f08001b;
+        public static final int action_save_paragraph_note=0x7f08001d;
         public static final int action_search=0x7f080014;
         public static final int action_settings=0x7f080015;
         public static final int adapter_row_layout=0x7f080010;
@@ -55,6 +55,8 @@ public final class R {
         public static final int composite_control_importance_button=0x7f080009;
         public static final int composite_control_layout=0x7f080006;
         public static final int composite_control_text_box=0x7f080007;
+        public static final int export_notes=0x7f08001a;
+        public static final int import_notes=0x7f08001b;
         public static final int linearLayout1=0x7f080001;
         public static final int linearLayout2=0x7f080002;
         public static final int linearLayout3=0x7f080003;
@@ -102,6 +104,8 @@ public final class R {
         public static final int clear_all_notes=0x7f050006;
         public static final int display_calender=0x7f050007;
         public static final int exit=0x7f050008;
+        public static final int export_notes=0x7f050014;
+        public static final int import_notes=0x7f050015;
         public static final int notes_layout_manager_activity_title=0x7f050003;
         public static final int paragraph_note_creator_activity_title=0x7f050013;
         public static final int save=0x7f05000f;

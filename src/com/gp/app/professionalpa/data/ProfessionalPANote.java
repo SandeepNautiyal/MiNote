@@ -134,7 +134,6 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 
 			source.readLongArray(timeAttributes);
 			
-			System.out.println("createFromParcel -> timeAttributes="+Arrays.toString(timeAttributes));
 			byte state = source.readByte();
 			
 			ProfessionalPANote note = new ProfessionalPANote(isParagraphNote, noteItems);

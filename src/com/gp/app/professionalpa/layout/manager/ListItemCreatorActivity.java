@@ -214,9 +214,13 @@ public class ListItemCreatorActivity extends Activity
 		
 		note.setLastEditedTime(creationTime);
 		
+		List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
+		
+		notes.add(note);
+		
 		try
 		{
-			persistListElement(note);
+			persistListElement(notes);
 		} 
 		catch (ProfessionalPABaseException exception) 
 		{
@@ -236,10 +240,10 @@ public class ListItemCreatorActivity extends Activity
 	    super.onBackPressed();
 	}
 	
-	private void persistListElement(ProfessionalPANote note) throws ProfessionalPABaseException
+	private void persistListElement(List<ProfessionalPANote> notes) throws ProfessionalPABaseException
 	{
 		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
 		
-		fragmentWriter.writeNotes(note);
+		fragmentWriter.writeNotes(notes);
 	}
 }

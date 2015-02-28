@@ -2,9 +2,14 @@ package com.gp.app.professionalpa.layout.manager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import android.app.Activity;
+import android.app.Application;
 import android.app.Fragment;
+import android.app.Application.ActivityLifecycleCallbacks;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -14,15 +19,19 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.activity.state.ActivityStateMonitor;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.export.ProfessionalPANotesExporter;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.interfaces.XMLDataChangeListener;
+import com.gp.app.professionalpa.interfaces.XMLDataChangePublisher;
 import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
-public class NotesLayoutManagerActivity extends Activity {
-
+public class NotesLayoutManagerActivity extends Activity implements XMLDataChangeListener
+{
 	private static final String FRAGMENT_TAGS = "FRAGMENT_TAGS";
 
 	private static final String NUMBER_OF_LINEAR_LAYOUTS = "NUMBER_OF_LINEAR_LAYOUTS";
@@ -53,6 +62,15 @@ public class NotesLayoutManagerActivity extends Activity {
 	
 	private LinearLayout activityLayout = null;
 	
+	private Lock lock = null;
+	
+	public NotesLayoutManagerActivity()
+	{
+		super();
+		
+		lock = new ReentrantLock();
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -65,6 +83,20 @@ public class NotesLayoutManagerActivity extends Activity {
 		numberOfLinearLayouts = getNumberOfLinearLayouts();
 		
 		fillLinearLayoutList();
+		
+        XMLDataChangePublisher publisher = ProfessionalPAParameters.getProfessionalPANotesWriter();
+		
+		publisher.addXMLDataChangeListener(this);
+		
+		try 
+		{
+			createNotes();
+		} 
+		catch (ProfessionalPABaseException e) 
+		{
+			//TODO improve
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -110,71 +142,6 @@ public class NotesLayoutManagerActivity extends Activity {
 			
 			createActivityLayout(fragment);
 		}
-		
-//		ListIterator<String> iterator = fragmentTags.listIterator();
-//		
-//		try 
-//		{
-//			ProfessionalPANotesReader parser = ProfessionalPAParameters.getProfessionalPANotesReader();
-//			
-//			List<ParsedNote> parsedNotes = parser.readNotes();
-//			
-//			for(int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++)
-//			{
-//				ParsedNote note = parsedNotes.get(i);
-//				
-//				Intent intent = new Intent();
-//				
-//				List<NotesListItem> listItems = note.getNoteItems();
-//				
-//				if(listItems != null && listItems.size() > 0)
-//				{
-//					NotesListItem [] items = new NotesListItem[1];
-//					
-//					items = listItems.toArray(items);
-//					
-//					intent.putExtra("LIST_ITEMS", items);
-//					
-//					intent.putExtra(ProfessionalPAConstants.IS_PARAGRAPH_NOTE, note.isParagraphNote());
-//					
-//					onActivityResult(0, 0, intent);
-//				}
-//			}
-//			
-//		} catch (ProfessionalPABaseException e) 
-//		{
-////			e.printStackTrace();
-//		}
-		
-//		while(iterator.hasNext())
-//		{
-//			String tag = iterator.next();
-//			
-//			Fragment fragment = getFragmentManager().findFragmentByTag(tag);
-//			
-//			if(fragment != null)
-//			{
-//				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//				
-//				fragmentTransaction.remove(fragment);
-//				
-//				fragmentTransaction.commit();
-//				
-//				getFragmentManager().executePendingTransactions();
-//				
-//				fragmentTransaction = getFragmentManager().beginTransaction();
-//				
-//				fragmentTransaction.commit();
-//				
-//				createActivityLayout(fragment);
-//				
-//				iterator.add(fragment.getTag());
-//			}
-//			else
-//			{
-//				iterator.remove();
-//			}
-//		}
 	}
 
 	@Override
@@ -197,7 +164,8 @@ public class NotesLayoutManagerActivity extends Activity {
 	{
 		int id = item.getItemId();
 		
-		if (id == R.id.action_settings) {
+		if (id == R.id.action_settings) 
+		{
 			return true;
 		}
 		
@@ -212,6 +180,34 @@ public class NotesLayoutManagerActivity extends Activity {
             Intent intent = new Intent(getApplicationContext(), ParagraphNoteCreatorActivity.class);
 			
 			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
+		}
+		else if(id == R.id.export_notes)
+		{
+			try
+			{
+				ProfessionalPANotesExporter.export();
+			}
+			catch(ProfessionalPABaseException exception)
+			{
+				//TODO
+			}
+		}
+		else if(id == R.id.import_notes)
+		{
+			List<ProfessionalPANote> notes;
+			
+			try 
+			{
+				notes = ProfessionalPANotesReader.readNotes(true);
+				
+				ProfessionalPAParameters.getProfessionalPANotesWriter().writeNotes(notes);
+			} 
+			catch (ProfessionalPABaseException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return super.onOptionsItemSelected(item);
@@ -251,18 +247,14 @@ public class NotesLayoutManagerActivity extends Activity {
 	    	
 	    	if(fragment != null)
 	    	{
-	    		System.out.println("createFragmentForNote -> fragment="+fragment);
-	    		
 			    createActivityLayout(fragment);
 	    	}
 	    }
 	}
 
 
-	private void createActivityLayout(Fragment fragment) {
-		
-		System.out.println("createActivityLayout -> fragment="+fragment);
-		
+	private void createActivityLayout(Fragment fragment) 
+	{
 		FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
 		int id = ProfessionalPAParameters.getId();
@@ -366,10 +358,6 @@ public class NotesLayoutManagerActivity extends Activity {
 					parentView.removeView(frameLayout);
 				}
 								
-//				 FrameLayout.LayoutParams frameLayoutParams = new FrameLayout.LayoutParams(linearLayout.getWidth(), 60);
-//
-//				 frameLayout.setLayoutParams(frameLayoutParams);
-
 				linearLayout.addView(frameLayout, index);
 				
 				index++;
@@ -378,7 +366,8 @@ public class NotesLayoutManagerActivity extends Activity {
 	}
 
 
-	private void fillLinearLayoutList() {
+	private void fillLinearLayoutList() 
+	{
 		LinearLayout layout = null;
 
 		switch(numberOfLinearLayouts)
@@ -412,28 +401,20 @@ public class NotesLayoutManagerActivity extends Activity {
 	protected void onResume() 
 	{
 		super.onResume();
+	}
 
-		System.out.println("onResume ->");
-		
-		try 
+	private void createNotes() throws ProfessionalPABaseException
+	{
+		List<ProfessionalPANote> parsedNotes = ProfessionalPANotesReader.readNotes(false);
+
+		for (int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++) 
 		{
-			List<ProfessionalPANote> parsedNotes = ProfessionalPANotesReader.readNotes();
+			ProfessionalPANote note = parsedNotes.get(i);
 
-			for (int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++) 
+			if (note != null) 
 			{
-				ProfessionalPANote note = parsedNotes.get(i);
-
-				if (note != null) 
-				{
-					createFragmentForNote(note);
-				}
+				createFragmentForNote(note);
 			}
-
-		} catch (ProfessionalPABaseException e)
-		{
-
-			// TODO improve
-			// e.printStackTrace();
 		}
 	}
 
@@ -442,5 +423,113 @@ public class NotesLayoutManagerActivity extends Activity {
 	protected void onPause() 
 	{
 		super.onPause();
+	}
+
+	@Override
+	public void notifyXMLDataChange() 
+	{
+		lock.lock();
+
+		Condition condition = lock.newCondition();
+
+		try 
+		{
+			condition.await();
+		} 
+		catch (InterruptedException e)
+		{
+			// TODO improve
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			lock.unlock();
+		}
+		
+		try 
+		{
+			createNotes();
+
+		} catch (ProfessionalPABaseException e)
+		{
+
+			// TODO improve
+			// e.printStackTrace();
+		}
+	}
+	
+	public class ActivityStateMonitor extends Application implements ActivityLifecycleCallbacks
+	{
+		boolean isInterestingActivityVisible;
+
+	    @Override
+	    public void onCreate() 
+	    {
+	        super.onCreate();
+
+	        registerActivityLifecycleCallbacks(this);
+	    }
+
+	    public boolean isInterestingActivityVisible() 
+	    {
+	        return isInterestingActivityVisible;
+	    }
+
+	    @Override
+	    public void onActivityResumed(Activity activity) 
+	    {
+	        if (activity instanceof NotesLayoutManagerActivity)
+	        {
+	             isInterestingActivityVisible = true;
+	             
+	             Condition condition = lock.newCondition();
+	             
+	             condition.signalAll();
+	        }
+	    }
+
+	    @Override
+	    public void onActivityStopped(Activity activity) 
+	    {
+	        if (activity instanceof NotesLayoutManagerActivity) 
+	        {
+	             isInterestingActivityVisible = false;
+	        }
+	    }
+
+		@Override
+		public void onActivityCreated(Activity arg0, Bundle arg1) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onActivityDestroyed(Activity arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onActivityPaused(Activity arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onActivitySaveInstanceState(Activity arg0, Bundle arg1) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onActivityStarted(Activity arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		public boolean isNotesLayoutManagerActivityResumed()
+		{
+			return isInterestingActivityVisible;
+		}
 	}
 }

@@ -70,14 +70,9 @@ public class ParagraphNoteCreatorActivity extends Activity
 		
 		note.setLastEditedTime(creationTime);
 		
-		try
-		{
-			persistListElement(note);
-		} 
-		catch (ProfessionalPABaseException exception) 
-		{
-			// TODO improve
-		}
+        List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
+		
+		notes.add(note);
 		
 		Intent returnIntent = new Intent();
 		
@@ -85,15 +80,24 @@ public class ParagraphNoteCreatorActivity extends Activity
 		
 		setResult(RESULT_OK,returnIntent);
 		
+		try
+		{
+			persistListElement(notes);
+		} 
+		catch (ProfessionalPABaseException exception) 
+		{
+			// TODO improve
+		}
+		
 		finish();
 	}
 	
-	private void persistListElement(ProfessionalPANote note) throws ProfessionalPABaseException
+	private void persistListElement(List<ProfessionalPANote> notes) throws ProfessionalPABaseException
 	{
 //		dummyMethod();
 		
 		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
 		
-		fragmentWriter.writeNotes(note);
+		fragmentWriter.writeNotes(notes);
 	}
 }

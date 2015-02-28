@@ -23,16 +23,12 @@ public class FragmentCreationManager
 	
 	public Fragment createFragment(ProfessionalPANote note)
 	{
-		System.out.println("createFragment -> note="+note.convertToString()+" fragments="+fragments);
-		
 		for(Fragment fragment : fragments)
 		{
 			Bundle bundle = fragment.getArguments();
 			
 			ProfessionalPANote fragmentNote = bundle.getParcelable(ProfessionalPAConstants.NOTE_DATA);
 			
-			System.out.println("createFragment -> fragmentNote="+fragmentNote.convertToString());
-
 			if(fragmentNote != null)
 			{
 				int result = comparator.compare(note, fragmentNote);
