@@ -7,6 +7,9 @@ import android.app.Application;
 import android.app.Application.ActivityLifecycleCallbacks;
 import android.os.Bundle;
 
+/**
+ * TODO to be removed if not needed.
+ */
 public class ActivityStateMonitor extends Application implements ActivityLifecycleCallbacks
 {
 	private static boolean isInterestingActivityVisible;
@@ -49,13 +52,15 @@ public class ActivityStateMonitor extends Application implements ActivityLifecyc
 	}
 
 	@Override
-	public void onActivityDestroyed(Activity arg0) {
+	public void onActivityDestroyed(Activity arg0) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onActivityPaused(Activity arg0) {
+	public void onActivityPaused(Activity arg0) 
+	{
 		// TODO Auto-generated method stub
 		
 	}

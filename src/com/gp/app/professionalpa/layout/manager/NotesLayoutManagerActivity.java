@@ -1,25 +1,29 @@
 package com.gp.app.professionalpa.layout.manager;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import android.app.Activity;
-import android.app.Application;
 import android.app.Fragment;
-import android.app.Application.ActivityLifecycleCallbacks;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.activity.state.ActivityStateMonitor;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.export.ProfessionalPANotesExporter;
@@ -54,19 +58,21 @@ public class NotesLayoutManagerActivity extends Activity
 	
     private byte numberOfLinearLayouts = -1;
     
-	private List<FrameLayout> childFrames = new ArrayList<FrameLayout>();
+	private Map<Integer, FrameLayout> childFrames = new LinkedHashMap<Integer, FrameLayout>();
 	
 	private List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
 	
 	private LinearLayout activityLayout = null;
 	
-	private Lock lock = null;
+	private FrameLayoutTouchListener touchListener = null;
+	
+	private List<Integer> selectedViewIds = new ArrayList<Integer>();
 	
 	public NotesLayoutManagerActivity()
 	{
 		super();
 		
-		lock = new ReentrantLock();
+		touchListener = new FrameLayoutTouchListener();
 	}
 	
 	@Override
@@ -146,9 +152,9 @@ public class NotesLayoutManagerActivity extends Activity
 
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.notes_layout_manager, menu);
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
+		getMenuInflater().inflate(R.menu.notes_layout_manager_menu, menu);
 		
 		return true;
 	}
@@ -251,10 +257,16 @@ public class NotesLayoutManagerActivity extends Activity
 	{
 		FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
+		registerForContextMenu(frameLayout);
+		
+//		frameLayout.setOnTouchListener(touchListener);
+		
 		int id = ProfessionalPAParameters.getId();
-				
+			
 		frameLayout.setId(id);
 
+		System.out.println("createActivityLayout -> id="+id);
+		
 		String tag = fragment.getTag() != null ? fragment.getTag() : "Tag-"+ProfessionalPAParameters.getId();
 				
 		getFragmentManager().beginTransaction().add(id, fragment, tag).commit();
@@ -273,7 +285,7 @@ public class NotesLayoutManagerActivity extends Activity
 
 	private void addFrameLayoutToActivtyView(FrameLayout frameLayout) 
 	{
-		childFrames.add(0, frameLayout);
+		childFrames.put(frameLayout.getId(), frameLayout);
 	}
 
 	
@@ -335,28 +347,43 @@ public class NotesLayoutManagerActivity extends Activity
 	
 	private void updateActivityView() 
 	{		
-		for(int i = 0; i < numberOfLinearLayouts; i++)
+		int index = 0;
+		
+		int linearLayoutIndex = 0;
+		
+		for(int i = 0; i < linearLayouts.size(); i++)
 		{
-			LinearLayout linearLayout = linearLayouts.get(i);
+			LinearLayout layout = linearLayouts.get(i);
 			
-			int index = 0;
-			
-			for(int j = i; j < childFrames.size(); j = j+numberOfLinearLayouts)
+			layout.removeAllViews();
+		}
+		
+		for (Entry<Integer, FrameLayout> entry : childFrames.entrySet()) 
+		{
+			LinearLayout linearLayout = linearLayouts.get(index);
+
+			FrameLayout frameLayout = entry.getValue();
+
+			LinearLayout parentView = (LinearLayout) frameLayout.getParent();
+
+			if (parentView != null) 
 			{
-				FrameLayout frameLayout = childFrames.get(j);
+				parentView.removeView(frameLayout);
+			}
+
+			linearLayout.addView(frameLayout, linearLayoutIndex);
+
+			index++;
+			
+			if (index % linearLayouts.size() == 0) 
+			{
+				index = 0;
 				
-				LinearLayout parentView = (LinearLayout)frameLayout.getParent();
-				
-				if(parentView != null)
-				{
-					parentView.removeView(frameLayout);
-				}
-								
-				linearLayout.addView(frameLayout, index);
-				
-				index++;
+				linearLayoutIndex++;
 			}
 		}
+			
+		
 	}
 
 
@@ -383,6 +410,7 @@ public class NotesLayoutManagerActivity extends Activity
 		    	linearLayouts.add(layout);
 		    	break;
 		}
+		
 	}
 	
 	@Override
@@ -417,5 +445,100 @@ public class NotesLayoutManagerActivity extends Activity
 	protected void onPause() 
 	{
 		super.onPause();
+	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) 
+	{
+	    super.onCreateContextMenu(menu, v, menuInfo);
+	    
+	    System.out.println("onCreateContextMenu -> v="+v.getId());
+	    
+	    selectedViewIds.add(v.getId());
+	    
+	    MenuInflater inflater = getMenuInflater();
+	    
+	    inflater.inflate(R.menu.notes_selection_menu, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	    
+	    System.out.println("item id:"+item.getItemId()+" info="+info);
+	    
+	    switch (item.getItemId()) 
+	    {
+	        case R.id.action_discard_notes:
+	        	clearSelectedNotes();
+//	            System.out.println("context menu id :"+info.id);
+	        default:
+	            return super.onContextItemSelected(item);
+	    }
+	}
+	
+	/**
+	 * 
+	 */
+	private void clearSelectedNotes() 
+	{
+		for(int i = 0; i < selectedViewIds.size(); i++)
+		{
+			int selectedViewId = selectedViewIds.get(i);
+			
+			Fragment noteFragment = getFragmentManager().findFragmentById(selectedViewId);
+			
+			Bundle bundle = noteFragment.getArguments();
+			
+			ProfessionalPANote fragmentNote = bundle.getParcelable(ProfessionalPAConstants.NOTE_DATA);
+
+			System.out.println("clearSelectedNotes -> fragmentNote.getCreationTime()="+fragmentNote.getCreationTime());
+			
+			try 
+			{
+				ProfessionalPAParameters.getProfessionalPANotesWriter().deleteXmlElement(fragmentNote.getCreationTime());
+				
+				System.out.println("childFrames size1="+childFrames.size()+" frames ="+childFrames);
+				
+	        	childFrames.remove(selectedViewId);
+	        	
+	        	ProfessionalPAParameters.getFragmentCreationManager().removeFragment(noteFragment);
+	        	
+				System.out.println("childFrames size2="+childFrames.size()+" selectedViewId="+selectedViewId);
+
+	    		updateActivityView();
+			}
+			catch (ProfessionalPABaseException e)
+			{
+				// TODO improve
+			}
+
+//			for(int j = 0; j < childFrames.size(); j++)
+//			{
+//				FrameLayout layout = childFrames.get(j);
+//				
+//				if(layout != null)
+//				{
+//					if(layout.getId() == selectedViewId)
+//					{
+//						
+//						childFrames.remove(layout);
+//					}
+//				}
+//			}
+		}
+	}
+
+	class FrameLayoutTouchListener implements OnTouchListener
+	{
+		@Override
+		public boolean onTouch(View v, MotionEvent event) 
+		{
+			System.out.println("onTouch -> id="+v.getId());
+			selectedViewIds.add(v.getId());
+			
+			return true;
+		}
+		
 	}
 }

@@ -23,4 +23,5 @@
     <string name="paragraph_note_creator_activity_title">Create Note</string>
     <string name="export_notes">Export Notes</string>
     <string name="import_notes">Import Notes</string>
+    <string name="action_discard_notes">Delete</string>
 </resources>

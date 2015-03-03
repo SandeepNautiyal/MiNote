@@ -18,6 +18,7 @@ import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.XMLEntity;
+import com.gp.app.professionalpa.util.ProfessionalPATools;
 
 public class ProfessionalPANotesParser extends DefaultHandler
 {
@@ -64,21 +65,15 @@ public class ProfessionalPANotesParser extends DefaultHandler
 			//Fetching the ID of TownCenter, we use it as a reference to fetch the child nodes.
 			String typeOfList = attributes.getValue("isParagraphNote");
 			
-			SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
-			
             String CreationTime = attributes.getValue("creationTime");//new Date(attributes.getValue("creationTime")).getTime();
 			
 			String lastEditedTime = attributes.getValue("lastEditedTime"); //new Date(attributes.getValue("lastEditedTime")).getTime();
 
 			try 
 			{
-				Date creationDate = formatter.parse(CreationTime);
-				
-				currentNote.setCreationTime(creationDate.getTime());
-				
-				Date lastEditedDate = formatter.parse(lastEditedTime);
-				
-				currentNote.setLastEditedTime(lastEditedDate.getTime());
+				currentNote.setCreationTime(ProfessionalPATools.parseDateAndTimeString(CreationTime));
+
+				currentNote.setLastEditedTime(ProfessionalPATools.parseDateAndTimeString(lastEditedTime));
 			} 
 			catch (ParseException exception)
 			{
@@ -107,7 +102,7 @@ public class ProfessionalPANotesParser extends DefaultHandler
 			isImportant = true;
 		}
 	}
- 
+
 	public void endElement(String uri, String localName, String qName) throws SAXException 
     {
 		if (qName.equalsIgnoreCase("note"))

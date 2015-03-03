@@ -53,6 +53,16 @@ public class FragmentCreationManager
 		return fragment;
 	}
 	
+	public void removeFragment(Fragment fragment)
+	{
+		System.out.println("removeFragment1 ="+fragments.size());
+		
+		fragments.remove(fragment);
+		
+		System.out.println("removeFragment2 ="+fragments.size());
+
+	}
+	
 	public List<Fragment> getFragments()
 	{
 		return fragments;

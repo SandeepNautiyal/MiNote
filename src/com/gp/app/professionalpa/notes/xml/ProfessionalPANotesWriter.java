@@ -3,8 +3,8 @@ package com.gp.app.professionalpa.notes.xml;
  
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,19 +18,20 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Environment;
 
 import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionPARuntimeException;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
-import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
-import com.gp.app.professionalpa.util.ProfessionalPAParameters;
+import com.gp.app.professionalpa.util.ProfessionalPATools;
  
  
 public class ProfessionalPANotesWriter
@@ -179,4 +180,57 @@ public class ProfessionalPANotesWriter
 			throw new ProfessionalPABaseException("PROBLEM_WRITING_XML", exception);
 		}
     }
+
+	public void deleteXmlElement(long creationTime) throws ProfessionalPABaseException 
+	{
+		Element notesElement = xmlDocument.getDocumentElement();
+		
+		System.out.println("deleteXmlElement -> noteElement="+notesElement);
+		
+		NodeList nodeList = notesElement.getChildNodes();
+		
+		for(int i = 0; i < nodeList.getLength(); i++)
+		{
+			Node noteElement = nodeList.item(i);
+			
+			if (noteElement.hasAttributes()) {
+                Attr attr = (Attr) noteElement.getAttributes().getNamedItem("creationTime");
+                if (attr != null) {
+                    String attribute= attr.getValue();                      
+                    System.out.println("attribute: " + attribute); 
+                    
+                    try 
+                    {
+						long readCreationTime = ProfessionalPATools.parseDateAndTimeString(attribute);
+						
+						if(readCreationTime == creationTime)
+						{
+							notesElement.removeChild(noteElement);
+							
+							System.out.println("creation time found");
+							
+							completeWritingProcess();
+
+							break;
+						}
+					}
+                    catch (ParseException e) 
+                    {
+						e.printStackTrace();
+					}
+                }
+            }
+			
+			NamedNodeMap noteAttributes = noteElement.getAttributes();
+			
+			System.out.println("creation time :"+noteAttributes.getNamedItem(Long.toString(creationTime)));
+			
+			System.out.println("\nattributes :"+noteAttributes+" string content:"+noteElement.getTextContent()+
+					"name:"+noteElement.getNodeName()+"type="+noteElement.getNodeType()+"value="+noteElement.getNodeValue());
+			
+			
+		}
+
+		
+	}
 }
