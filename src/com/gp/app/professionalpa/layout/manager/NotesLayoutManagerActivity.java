@@ -209,6 +209,10 @@ public class NotesLayoutManagerActivity extends Activity
 			}
 			
 		}
+		else if(id == R.id.action_click_photo)
+		{
+			
+		}
 		
 		return super.onOptionsItemSelected(item);
 	}

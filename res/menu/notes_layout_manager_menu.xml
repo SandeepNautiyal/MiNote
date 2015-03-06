@@ -2,6 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gp.app.professionalpa.NotesLayoutManagerActivity" >
 
+    <item android:id="@+id/action_click_photo"
+        android:icon="@drawable/professional_pa_camera"
+        android:title="@string/action_click_photo"
+        android:showAsAction="always" />
+     
     <item android:id="@+id/action_create_list_view"
         android:icon="@drawable/professional_pa_list_view1"
         android:title="@string/action_create_list_view"
