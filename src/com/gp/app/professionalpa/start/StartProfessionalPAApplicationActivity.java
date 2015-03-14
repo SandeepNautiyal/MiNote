@@ -30,11 +30,6 @@ public class StartProfessionalPAApplicationActivity extends Activity {
 	    int height = metrics.heightPixels;
 	    int width = metrics.widthPixels;
 	    
-	    ProfessionalPAParameters.setScreenWidth(width);
-	    
-	    ProfessionalPAParameters.setScreenHeight(height);
-	    
-	    
 		startActivity(startLayoutManager);
 		
 //		setContentView(R.layout.activity_start_professional_pa_application);

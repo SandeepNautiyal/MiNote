@@ -4,8 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.graphics.Bitmap;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
@@ -44,7 +44,9 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 	    if(convertView == null)
 	        convertView = LayoutInflater.from(getContext()).inflate(R.layout.composite_control_for_list_view, parent, false);
 	    
-	    final EditText textView = (EditText) convertView.findViewById(R.id.composite_control_text_box);
+	    NoteListItem noteListItem = listItems.get(position);
+	    
+	    EditText textView = (EditText) convertView.findViewById(R.id.composite_control_text_box);
 	    
 	    Resources androidResources = ProfessionalPAParameters.getApplicationContext().getResources();
 	    
@@ -52,61 +54,71 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 
 	    ImageButton importanceImageButton = (ImageButton) convertView.findViewById(R.id.composite_control_importance_button);
 
-	    LayoutParams importanceButtonParams = importanceImageButton.getLayoutParams();
-        importanceButtonParams.height =  compressedViewHeight;
-        importanceButtonParams.width = (int)androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
-        importanceImageButton.setLayoutParams(importanceButtonParams);
-        
 	    ImageButton alarmImageButton = (ImageButton)convertView.findViewById(R.id.composite_control_alarm_button);
-        LayoutParams alarmButtonParams = alarmImageButton.getLayoutParams();
-        alarmButtonParams.height = compressedViewHeight;
-        alarmButtonParams.width = (int)androidResources.getDimension(R.dimen.composite_control_alarm_button_compressed_width);
-	    alarmImageButton.setLayoutParams(alarmButtonParams);
-	    
-	    final LayoutParams params = textView.getLayoutParams();
 
-	    params.height =  LayoutParams.WRAP_CONTENT;
-
-	    textView.setLayoutParams(params);
-
-	    if(listItems != null)
+	    if(noteListItem.isOnlyTextItem())
 	    {
-		    textView.setText(listItems.get(position).getTextViewData());
+		    LayoutParams importanceButtonParams = importanceImageButton.getLayoutParams();
+	        importanceButtonParams.height =  compressedViewHeight;
+	        importanceButtonParams.width = (int)androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
+	        importanceImageButton.setLayoutParams(importanceButtonParams);
+	        
+	        LayoutParams alarmButtonParams = alarmImageButton.getLayoutParams();
+	        alarmButtonParams.height = compressedViewHeight;
+	        alarmButtonParams.width = (int)androidResources.getDimension(R.dimen.composite_control_alarm_button_compressed_width);
+		    alarmImageButton.setLayoutParams(alarmButtonParams);
+		    
+		    final LayoutParams params = textView.getLayoutParams();
+
+		    params.height =  LayoutParams.WRAP_CONTENT;
+
+		    textView.setLayoutParams(params);
+
+		    if(listItems != null && listItems.size() > 0)
+		    {
+			    textView.setText(listItems.get(position).getTextViewData());
+		    }
+		    
+		    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+
+		    textView.setActivated(false);
+
+		    textView.setLayoutParams(params);
+	    }
+	    else if(noteListItem.isOnlyImageItem())
+	    {
+		    LayoutParams importanceButtonParams = importanceImageButton.getLayoutParams();
+	        importanceButtonParams.height =  0;
+	        importanceButtonParams.width = 0;
+	        importanceImageButton.setLayoutParams(importanceButtonParams);
+	        
+	        LayoutParams params = textView.getLayoutParams();
+		    params.height =  0;
+		    params.width = 0;
+		    textView.setLayoutParams(params);
+		    
+	        LayoutParams alarmButtonParams = alarmImageButton.getLayoutParams();
+	        alarmButtonParams.height = 0;
+	        alarmButtonParams.width = 0;
+		    alarmImageButton.setLayoutParams(alarmButtonParams);
+		    
+	        textView.setVisibility(View.INVISIBLE);
+	        importanceImageButton.setVisibility(View.INVISIBLE);
+	        textView.setVisibility(View.INVISIBLE);
+	        alarmImageButton.setVisibility(View.INVISIBLE);
+	        
+	        ImageView imageView = (ImageView) convertView.findViewById(R.id.composite_control_image_view);
+
+		    LayoutParams imageViewParams = imageView.getLayoutParams();
+		    imageViewParams.height =  LayoutParams.MATCH_PARENT;
+		    imageViewParams.width = LayoutParams.MATCH_PARENT;
+		    Bitmap image = Bitmap.createScaledBitmap(noteListItem.getImageData(), 300, 300,
+	                true);
+		    imageView.setImageBitmap(image);
+		    imageView.setLayoutParams(imageViewParams);
 	    }
 	    
-	    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-
-	    textView.setActivated(false);
-
-	    textView.setLayoutParams(params);
 
 	    return convertView;
 	}
-	
-	class EditTextSizeCalculator extends Thread
-	{
-		private EditText editText = null;
-		
-		private int editTextHeight = 0;
-		
-		public EditTextSizeCalculator(EditText editText)
-		{
-			this.editText = editText;
-		}
-		
-		public int getEditTextHeight() 
-		{
-			return editTextHeight;
-		}
-
-		@Override
-		public void run() 
-		{
-			editTextHeight = editText.getLineCount();
-		}
-		
-	}
-	
-	
-	
 }

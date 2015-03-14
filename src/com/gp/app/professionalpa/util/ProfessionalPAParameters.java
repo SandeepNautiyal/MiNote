@@ -13,7 +13,7 @@ public class ProfessionalPAParameters
 {
 	private static Context applicationContext;
 	
-	private static int screenWidth = 0;
+	private static int linearLayoutWidth = 0;
 	
 	private static int screenHeight = 0;
 
@@ -28,7 +28,6 @@ public class ProfessionalPAParameters
 	private static ProfessionalPANotesReader notesReader = null;
 
 	private static FragmentCreationManager fragmentCreationManager;
-
 	
     public static void setApplicationContext(Context context)
     {
@@ -40,28 +39,22 @@ public class ProfessionalPAParameters
     	return applicationContext;
     }
 
-	public static void setScreenWidth(int width) {
-		screenWidth = width;
-	}
-
-	public static void setScreenHeight(int height) {
+	public static void setLinearLayoutWidth(int width) 
+	{
+		System.out.println("setLinearLayoutWidth -> width="+width);
 		
-		screenHeight = height;
-		
+		linearLayoutWidth = width;
 	}
 	
-	public static int getScreenWidth() {
-		return screenWidth;
+	public static int getLinearLayoutWidth() 
+	{
+		System.out.println("getLinearLayoutWidth -> linearLayoutWidth="+linearLayoutWidth);
+
+		return linearLayoutWidth;
 	}
 
-	public static int getScreenHeight() {
-		
-		return screenHeight;
-		
-	}
-
-	public static void setParentLinearLayoutWidth(int width) {
-		// TODO Auto-generated method stub
+	public static void setParentLinearLayoutWidth(int width) 
+	{
 		parentLayoutWidth = width;
 	}
 	

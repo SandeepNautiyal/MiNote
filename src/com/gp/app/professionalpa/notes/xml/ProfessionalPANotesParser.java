@@ -63,7 +63,7 @@ public class ProfessionalPANotesParser extends DefaultHandler
 			currentNote = new ProfessionalPANote();
 			
 			//Fetching the ID of TownCenter, we use it as a reference to fetch the child nodes.
-			String typeOfList = attributes.getValue("isParagraphNote");
+			String typeOfNote = attributes.getValue("type");
 			
             String CreationTime = attributes.getValue("creationTime");//new Date(attributes.getValue("creationTime")).getTime();
 			
@@ -80,7 +80,7 @@ public class ProfessionalPANotesParser extends DefaultHandler
 				//TODO improve
 			}
 			
-			currentNote.setTypeOfNote(Boolean.parseBoolean(typeOfList));
+			currentNote.setTypeOfNote(Byte.valueOf(typeOfNote));
 		}
  
 		if(qName.equalsIgnoreCase("NoteItem"))

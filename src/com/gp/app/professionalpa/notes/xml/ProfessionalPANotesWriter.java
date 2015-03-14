@@ -96,8 +96,7 @@ public class ProfessionalPANotesWriter
 		
 		Element noteElement = xmlDocument.createElement("Note");
 
-		noteElement.setAttribute("type",
-				Boolean.toString(note.isParagraphNote()));
+		noteElement.setAttribute("type", Byte.toString(note.getNoteType()));
 
 		Date creationTime = new Date(note.getCreationTime());
 

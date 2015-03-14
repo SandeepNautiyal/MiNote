@@ -20,7 +20,10 @@
         android:layout_height="@dimen/composite_control_height"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:contentDescription="@string/set_alarm" />
+        android:contentDescription="@string/set_alarm" 
+        android:scaleType="fitStart"
+        android:adjustViewBounds="true"
+        android:layout_alignParentLeft="true"/>
 
     <ImageButton
         android:id="@+id/composite_control_importance_button"

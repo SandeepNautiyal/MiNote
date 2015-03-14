@@ -204,9 +204,7 @@ public class ListItemCreatorActivity extends Activity
             item.add(listItem);
 		}
 
-		Intent returnIntent = new Intent();
-		
-		ProfessionalPANote note = new ProfessionalPANote(false, item);
+		ProfessionalPANote note = new ProfessionalPANote(ProfessionalPAConstants.LIST_NOTE, item);
 		
 		long creationTime = System.currentTimeMillis();
 		
@@ -227,6 +225,8 @@ public class ListItemCreatorActivity extends Activity
 			// TODO improve
 		}
 		
+		Intent returnIntent = new Intent();
+
 		returnIntent.putExtra(ProfessionalPAConstants.NOTE_DATA, note);
 
 		setResult(RESULT_OK,returnIntent);

@@ -62,7 +62,7 @@ public class ParagraphNoteCreatorActivity extends Activity
 		
 		item.add(new NoteListItem(paragraphData));
 		
-		ProfessionalPANote note = new ProfessionalPANote(true, item);
+		ProfessionalPANote note = new ProfessionalPANote(ProfessionalPAConstants.PARAGRAPH_NOTE, item);
 			
         long creationTime = System.currentTimeMillis();
 		

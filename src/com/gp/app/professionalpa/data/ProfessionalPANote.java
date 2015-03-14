@@ -16,7 +16,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 {
 	byte state = XMLEntity.INSERT_STATE;
 	
-	private boolean isParagraphNote = false;
+	private byte noteType = ProfessionalPAConstants.LIST_NOTE;
 	
 	private List<NoteListItem> notes = new ArrayList<NoteListItem>();
 	
@@ -25,9 +25,9 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 	private long lastEditedTime = 0L;
 	
 
-	public ProfessionalPANote(boolean isParagraphNote, List<NoteListItem> values) 
+	public ProfessionalPANote(byte noteType, List<NoteListItem> values) 
 	{
-		this.isParagraphNote = isParagraphNote;
+		this.noteType = noteType;
 		
 		if(values != null)
 		{
@@ -39,14 +39,29 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 	{
 	}
 
+	public byte getNoteType()
+	{
+		return noteType;
+	}
+	
 	public boolean isParagraphNote() 
 	{
-		return isParagraphNote;
+		return noteType == ProfessionalPAConstants.PARAGRAPH_NOTE;
+	}
+	
+	public boolean isImageNote() 
+	{
+		return noteType == ProfessionalPAConstants.IMAGE_NOTE;
+	}
+	
+	public boolean isListNote() 
+	{
+		return noteType == ProfessionalPAConstants.LIST_NOTE;
 	}
 
-	public void setTypeOfNote(boolean isParagraphNote) 
+	public void setTypeOfNote(byte noteType) 
 	{
-		this.isParagraphNote = isParagraphNote;
+		this.noteType = noteType;
 	}
 
 	public void addNoteItem(NoteListItem item)
@@ -68,7 +83,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("isParagraph note:"+isParagraphNote);
+		sb.append("isParagraph note:"+noteType);
 		
 		sb.append("Note item :"+notes);
 		
@@ -110,11 +125,9 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 	{
 		dest.writeTypedList(notes);
 
-		dest.writeBooleanArray(new boolean[] {isParagraphNote});
+		dest.writeByteArray(new byte[]{noteType, state});
 		
 		dest.writeLongArray(new long[]{creationTime, lastEditedTime});
-		
-		dest.writeByte(state);
 	}
 
 	public static final Parcelable.Creator<ProfessionalPANote> CREATOR = new Parcelable.Creator<ProfessionalPANote>() {
@@ -124,25 +137,21 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 			
 			List<NoteListItem> noteItems = source.createTypedArrayList(NoteListItem.CREATOR);
 			
-			boolean [] attributes = new boolean[1];
+			byte [] noteState = new byte[2];
 			
-			source.readBooleanArray(attributes);
-			
-			boolean isParagraphNote = attributes[0];
+			source.readByteArray(noteState);
 			
 			long [] timeAttributes = new long[2];
 
 			source.readLongArray(timeAttributes);
 			
-			byte state = source.readByte();
-			
-			ProfessionalPANote note = new ProfessionalPANote(isParagraphNote, noteItems);
+			ProfessionalPANote note = new ProfessionalPANote(noteState[0], noteItems);
 			
 			note.setCreationTime(timeAttributes[0]);
 
 			note.setLastEditedTime(timeAttributes[1]);
 			
-			note.setState(state);
+			note.setState(noteState[1]);
 			
 			return note;
 		}

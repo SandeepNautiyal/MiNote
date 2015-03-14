@@ -1,12 +1,18 @@
 package com.gp.app.professionalpa.compositecontrols;
 
+import java.io.ByteArrayOutputStream;
+
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.gp.app.professionalpa.R;
@@ -15,6 +21,8 @@ public class ListViewItemLayout extends RelativeLayout
 {
 	
 	private EditText textView = null;
+	
+	private ImageView imageView = null;
 	
 	private ImageButton importanceImageButton = null;
 	
@@ -46,6 +54,8 @@ public class ListViewItemLayout extends RelativeLayout
 
 		textView = (EditText) findViewById(R.id.composite_control_text_box);
 		
+		imageView  = (ImageView)findViewById(R.id.composite_control_image_view);
+		
 		importanceImageButton = (ImageButton) findViewById(R.id.composite_control_importance_button);
 		
 		alarmImageButton = (ImageButton) findViewById(R.id.composite_control_alarm_button);
@@ -65,6 +75,21 @@ public class ListViewItemLayout extends RelativeLayout
 	    
 	    bundle.putString("TEXT_VALUE", textView.getText().toString());
 	    
+	    if(imageView.getDrawable() != null)
+	    {
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+			Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+			
+			image.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
+			byte[] imageArray = stream.toByteArray();
+
+			bundle.putByteArray("BITMAP_IMAGE", imageArray);
+
+			System.out.println("writeToParcel -> array length="
+					+ imageArray.length);
+	    }
 	    // ... save everything
 	    return bundle;
 	  }
@@ -79,6 +104,12 @@ public class ListViewItemLayout extends RelativeLayout
 	      
 	      this.stateToSave = bundle.getInt("stateToSave");
 	      
+	      byte [] imageBytes = bundle.getByteArray("BITMAP_IMAGE");
+	      
+		  Bitmap image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+			
+		  this.imageView.setImageBitmap(image);
+		  
 	      this.textView.setText(bundle.getString("TEXT_VALUE"));
 	      
 	      // ... load everything

@@ -40,7 +40,7 @@ public class FragmentCreationManager
 			}
 		}
 		
-		Fragment fragment = note.isParagraphNote() ? new ProfessionalPAParagraphFragment() : new ProfessionalPAListFragment();
+		Fragment fragment = new ProfessionalPANoteFragment();
 	    
 		Bundle bundle = new Bundle();
 

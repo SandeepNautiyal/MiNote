@@ -1,5 +1,7 @@
 package com.gp.app.professionalpa.layout.manager;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -10,7 +12,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -24,6 +31,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.export.ProfessionalPANotesExporter;
@@ -67,6 +75,8 @@ public class NotesLayoutManagerActivity extends Activity
 	private FrameLayoutTouchListener touchListener = null;
 	
 	private List<Integer> selectedViewIds = new ArrayList<Integer>();
+	
+	private ImageCaptureManager imageCaptureManager = null;
 	
 	public NotesLayoutManagerActivity()
 	{
@@ -211,7 +221,22 @@ public class NotesLayoutManagerActivity extends Activity
 		}
 		else if(id == R.id.action_click_photo)
 		{
+			if(imageCaptureManager == null)
+			{
+				imageCaptureManager = new ImageCaptureManager();
+			}
 			
+			File imageFile = imageCaptureManager.createNextFile();
+			
+			Uri outputFileUri = Uri.fromFile(imageFile);
+			
+			System.out.println("photo click imageFile="+imageFile.getAbsolutePath());
+			
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); 
+            
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+
+            startActivityForResult(cameraIntent, ProfessionalPAConstants.TAKE_PHOTO_CODE);
 		}
 		
 		return super.onOptionsItemSelected(item);
@@ -233,11 +258,34 @@ public class NotesLayoutManagerActivity extends Activity
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-	    if (data == null) {return;}
+	    ProfessionalPANote note = null;
 	    
-	    ProfessionalPANote note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
+	    if (requestCode == ProfessionalPAConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
+	    {
+	        BitmapFactory.Options options = new BitmapFactory.Options();
+	        
+	        options.inSampleSize = 8;
+	        
+	        final Bitmap image = BitmapFactory.decodeFile(imageCaptureManager.getLastCreatedImagePath(), options);
+	        
+	        ArrayList<NoteListItem> items = new ArrayList<NoteListItem>();
+	        
+	        items.add(new NoteListItem(image));
+	        
+	        note = new ProfessionalPANote(ProfessionalPAConstants.IMAGE_NOTE, items);
+	    }
+	    else
+	    {
+	    	if (data != null)
+	    	{
+			    note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
+	    	}
+	    }
 	    
-	    createFragmentForNote(note);
+	    if(note != null)
+	    {
+		    createFragmentForNote(note);
+	    }
 	}
 
 
@@ -252,6 +300,8 @@ public class NotesLayoutManagerActivity extends Activity
 	    	if(fragment != null)
 	    	{
 			    createActivityLayout(fragment);
+			    
+			    System.out.println("createFragmentForNote -> fragment="+fragment);
 	    	}
 	    }
 	}
@@ -427,6 +477,10 @@ public class NotesLayoutManagerActivity extends Activity
 	protected void onResume() 
 	{
 		super.onResume();
+		
+		ProfessionalPAParameters.setLinearLayoutWidth(linearLayouts.get(0).getWidth());
+		
+		System.out.println("onResume -> linearLayouts.get(0).getWidth()="+linearLayouts.get(0).getWidth());
 	}
 
 	private void createNotes() throws ProfessionalPABaseException
@@ -544,5 +598,78 @@ public class NotesLayoutManagerActivity extends Activity
 			return true;
 		}
 		
+	}
+}
+
+class ImageCaptureManager
+{
+	private static final String IMAGE_NAME_START_STRING = "image";
+
+	private String lastCreatedImageName = null;
+	
+	private String imageDirectoryPath = null;
+	
+	private int imageNameCounter = 1;
+	
+	ImageCaptureManager()
+	{
+		createImageDirectory();
+	}
+	
+	private void createImageDirectory()
+	{
+		final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/ProfessionalPA/"; 
+        
+		File newdir = new File(dir); 
+        
+        if(!newdir.exists())
+        {
+	        newdir.mkdirs();
+        }
+        
+        imageDirectoryPath = dir;
+	}
+	
+	public File createNextFile()
+	{
+        String file = imageDirectoryPath+createNextFileName();
+        
+        File newfile = new File(file);
+        
+        try 
+        {
+            newfile.createNewFile();
+        } 
+        catch (IOException e) 
+        {
+        	//TODO improve
+        } 
+        
+        return newfile;
+	}
+	
+	private String createNextFileName()
+	{
+		lastCreatedImageName = IMAGE_NAME_START_STRING+imageNameCounter+".jpeg";
+		
+		System.out.println("createNextFileName -> lastCreatedImageName="+lastCreatedImageName);
+		
+		imageNameCounter++;
+		
+		return lastCreatedImageName;
+	}
+	
+	private String getLastCreatedImageName()
+	{
+		return lastCreatedImageName;
+	}
+	
+	public String getLastCreatedImagePath()
+	{
+		String imagePath = imageDirectoryPath + getLastCreatedImageName();
+		
+		System.out.println("getLastCreatedImagePath -> lastCreatedImageName="+imagePath);
+
+		return imagePath;
 	}
 }

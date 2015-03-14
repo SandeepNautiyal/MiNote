@@ -25,4 +25,5 @@
     <string name="import_notes">Import Notes</string>
     <string name="action_discard_notes">Delete</string>
     <string name="action_click_photo">Click Picture</string>
+    <string name="note_image">Image Note</string>
 </resources>
