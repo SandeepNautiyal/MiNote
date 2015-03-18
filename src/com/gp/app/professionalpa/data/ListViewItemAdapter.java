@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
@@ -114,6 +115,18 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 		    imageViewParams.width = LayoutParams.MATCH_PARENT;
 		    Bitmap image = Bitmap.createScaledBitmap(noteListItem.getImageData(), 300, 300,
 	                true);
+		    
+		    imageView.setOnLongClickListener(new OnLongClickListener() {
+				
+				@Override
+				public boolean onLongClick(View v) 
+				{
+					System.out.println("long click for image view");
+					
+					return false;
+				}
+			});
+		    
 		    imageView.setImageBitmap(image);
 		    imageView.setLayoutParams(imageViewParams);
 	    }

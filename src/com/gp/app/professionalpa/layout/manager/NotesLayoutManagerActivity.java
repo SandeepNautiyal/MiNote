@@ -2,7 +2,9 @@ package com.gp.app.professionalpa.layout.manager;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,7 @@ import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -29,8 +32,11 @@ import android.view.View.OnTouchListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
 import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
@@ -39,6 +45,7 @@ import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
+import com.gp.app.professionalpa.util.ProfessionalPATools;
 
 public class NotesLayoutManagerActivity extends Activity
 {
@@ -76,7 +83,7 @@ public class NotesLayoutManagerActivity extends Activity
 	
 	private List<Integer> selectedViewIds = new ArrayList<Integer>();
 	
-	private ImageCaptureManager imageCaptureManager = null;
+	private ImagePathInformationManager imageCaptureManager = null;
 	
 	public NotesLayoutManagerActivity()
 	{
@@ -90,9 +97,13 @@ public class NotesLayoutManagerActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		
-		activityLayout = (LinearLayout)getLayoutInflater().inflate(R.layout.activity_notes_layout_manager, null);
+		imageCaptureManager = new ImagePathInformationManager();
 		
-		setContentView(activityLayout);
+		ScrollView scrollView  = (ScrollView)getLayoutInflater().inflate(R.layout.activity_notes_layout_manager, null);
+		
+		activityLayout = (LinearLayout)scrollView.findViewById(R.id.notes_layout_activity_manager);
+		
+		setContentView(scrollView);
 
 		numberOfLinearLayouts = getNumberOfLinearLayouts();
 		
@@ -144,19 +155,35 @@ public class NotesLayoutManagerActivity extends Activity
 		
 		fillLinearLayoutList();
 		
-		List<Fragment> fragments  = ProfessionalPAParameters.getFragmentCreationManager().getFragments();
+//		List<Fragment> fragments  = ProfessionalPAParameters.getFragmentCreationManager().getFragments();
+//		
+//		System.out.println("createActivityLayoutInCaseOfConfigurationChange -> fragments size ="+fragments.size()+" fragments="+fragments);
+//		
+//		for(int i = 0; i < fragments.size(); i++)
+//		{
+//			Fragment fragment = fragments.get(i);
+//			
+//			getFragmentManager().beginTransaction().remove(fragment).commit();
+//			
+//			getFragmentManager().executePendingTransactions();
+//			
+//			createActivityLayout(fragment);
+//		}
 		
-		for(int i = 0; i < fragments.size(); i++)
+		try 
 		{
-			Fragment fragment = fragments.get(i);
-			
-			createActivityLayout(fragment);
+			createNotes();
+		} 
+		catch (ProfessionalPABaseException e) 
+		{
+			//TODO improve
+			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		// TODO Auto-generated method stub
+	public void onConfigurationChanged(Configuration newConfig) 
+	{
 		super.onConfigurationChanged(newConfig);
 	}
 
@@ -221,11 +248,6 @@ public class NotesLayoutManagerActivity extends Activity
 		}
 		else if(id == R.id.action_click_photo)
 		{
-			if(imageCaptureManager == null)
-			{
-				imageCaptureManager = new ImageCaptureManager();
-			}
-			
 			File imageFile = imageCaptureManager.createNextFile();
 			
 			Uri outputFileUri = Uri.fromFile(imageFile);
@@ -233,6 +255,8 @@ public class NotesLayoutManagerActivity extends Activity
 			System.out.println("photo click imageFile="+imageFile.getAbsolutePath());
 			
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); 
+            
+            cameraIntent.putExtra("IMAGE_PATH", imageFile.getAbsolutePath());
             
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
 
@@ -262,17 +286,11 @@ public class NotesLayoutManagerActivity extends Activity
 	    
 	    if (requestCode == ProfessionalPAConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
 	    {
-	        BitmapFactory.Options options = new BitmapFactory.Options();
-	        
-	        options.inSampleSize = 8;
-	        
-	        final Bitmap image = BitmapFactory.decodeFile(imageCaptureManager.getLastCreatedImagePath(), options);
-	        
-	        ArrayList<NoteListItem> items = new ArrayList<NoteListItem>();
-	        
-	        items.add(new NoteListItem(image));
-	        
-	        note = new ProfessionalPANote(ProfessionalPAConstants.IMAGE_NOTE, items);
+//	    	String imagePath = imageCaptureManager.getCreatedImagePath();
+	    	
+	    	System.out.println("onActivityResult -> imagePath="+imageCaptureManager.getMostRecentImageFilePath());
+	    	
+	        note = createProfessionalPANoteFromImage(imageCaptureManager.getMostRecentImageFilePath());
 	    }
 	    else
 	    {
@@ -288,6 +306,41 @@ public class NotesLayoutManagerActivity extends Activity
 	    }
 	}
 
+	private ProfessionalPANote createProfessionalPANoteFromImage(String imagePath) 
+	{
+		ProfessionalPANote note;
+		
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		
+		options.inSampleSize = 8;
+		
+		final Bitmap image = BitmapFactory.decodeFile(imagePath, options);
+		
+		ArrayList<NoteListItem> items = new ArrayList<NoteListItem>();
+		
+		items.add(new NoteListItem(image));
+		
+		note = new ProfessionalPANote(ProfessionalPAConstants.IMAGE_NOTE, items);
+		
+		//TODO improve exception handling
+		try 
+		{
+			long creationTime = imageCaptureManager.imageCreationTime(imagePath);
+			
+			note.setCreationTime(creationTime);
+			
+			note.setLastEditedTime(creationTime);
+
+		} 
+		catch (ProfessionalPABaseException e)
+		{
+			e.printStackTrace();
+		}
+		
+		note.setLastEditedTime(System.currentTimeMillis());
+		return note;
+	}
+
 
 	private void createFragmentForNote(ProfessionalPANote note) 
 	{
@@ -300,8 +353,6 @@ public class NotesLayoutManagerActivity extends Activity
 	    	if(fragment != null)
 	    	{
 			    createActivityLayout(fragment);
-			    
-			    System.out.println("createFragmentForNote -> fragment="+fragment);
 	    	}
 	    }
 	}
@@ -311,6 +362,8 @@ public class NotesLayoutManagerActivity extends Activity
 	{
 		FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
+		System.out.println("Registered for context menu");
+		
 		registerForContextMenu(frameLayout);
 		
 //		frameLayout.setOnTouchListener(touchListener);
@@ -318,11 +371,9 @@ public class NotesLayoutManagerActivity extends Activity
 		int id = ProfessionalPAParameters.getId();
 			
 		frameLayout.setId(id);
-
-		System.out.println("createActivityLayout -> id="+id);
 		
 		String tag = fragment.getTag() != null ? fragment.getTag() : "Tag-"+ProfessionalPAParameters.getId();
-				
+		
 		getFragmentManager().beginTransaction().add(id, fragment, tag).commit();
 		
 		addFrameLayoutToActivtyView(frameLayout);
@@ -334,6 +385,8 @@ public class NotesLayoutManagerActivity extends Activity
 	protected void onDestroy() 
 	{
 		super.onDestroy();
+		
+		ProfessionalPAParameters.getFragmentCreationManager().removeAllFragments();
 	}
 
 
@@ -479,14 +532,31 @@ public class NotesLayoutManagerActivity extends Activity
 		super.onResume();
 		
 		ProfessionalPAParameters.setLinearLayoutWidth(linearLayouts.get(0).getWidth());
-		
-		System.out.println("onResume -> linearLayouts.get(0).getWidth()="+linearLayouts.get(0).getWidth());
 	}
 
 	private void createNotes() throws ProfessionalPABaseException
 	{
+		System.out.println("createNotes ->");
+		
 		List<ProfessionalPANote> parsedNotes = ProfessionalPANotesReader.readNotes(false);
 
+		List<String> createdImagesPaths = imageCaptureManager.getImagesFilePath();
+		
+		for(int i = 0; i < createdImagesPaths.size(); i++)
+		{
+			String filePath = createdImagesPaths.get(i);
+			
+			ProfessionalPANote imageNote = createProfessionalPANoteFromImage(createdImagesPaths.get(i));
+			
+			long creationTime = imageCaptureManager.imageCreationTime(filePath);
+
+			imageNote.setCreationTime(creationTime);
+			
+			imageNote.setLastEditedTime(creationTime);
+			
+			parsedNotes.add(imageNote);
+		}
+		
 		for (int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++) 
 		{
 			ProfessionalPANote note = parsedNotes.get(i);
@@ -510,7 +580,7 @@ public class NotesLayoutManagerActivity extends Activity
 	{
 	    super.onCreateContextMenu(menu, v, menuInfo);
 	    
-	    System.out.println("onCreateContextMenu -> v="+v.getId());
+	    System.out.println("onCreateContextMenu -> v="+v);
 	    
 	    selectedViewIds.add(v.getId());
 	    
@@ -522,8 +592,6 @@ public class NotesLayoutManagerActivity extends Activity
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-	    
-	    System.out.println("item id:"+item.getItemId()+" info="+info);
 	    
 	    switch (item.getItemId()) 
 	    {
@@ -540,9 +608,11 @@ public class NotesLayoutManagerActivity extends Activity
 	 */
 	private void clearSelectedNotes() 
 	{
-		for(int i = 0; i < selectedViewIds.size(); i++)
+		Iterator<Integer> iterator = selectedViewIds.iterator();
+		
+		while(iterator.hasNext())
 		{
-			int selectedViewId = selectedViewIds.get(i);
+			int selectedViewId = iterator.next();
 			
 			Fragment noteFragment = getFragmentManager().findFragmentById(selectedViewId);
 			
@@ -550,41 +620,36 @@ public class NotesLayoutManagerActivity extends Activity
 			
 			ProfessionalPANote fragmentNote = bundle.getParcelable(ProfessionalPAConstants.NOTE_DATA);
 
-			System.out.println("clearSelectedNotes -> fragmentNote.getCreationTime()="+fragmentNote.getCreationTime());
+			if(!fragmentNote.isImageNote())
+			{
+				try 
+				{
+					ProfessionalPAParameters.getProfessionalPANotesWriter().deleteXmlElement(fragmentNote.getCreationTime());
+				}
+				catch (ProfessionalPABaseException e)
+				{
+					// TODO improve
+				}
+			}
+			else
+			{
+				removeSelectedImage(String.valueOf(fragmentNote.getCreationTime()));
+			}
 			
-			try 
-			{
-				ProfessionalPAParameters.getProfessionalPANotesWriter().deleteXmlElement(fragmentNote.getCreationTime());
-				
-				System.out.println("childFrames size1="+childFrames.size()+" frames ="+childFrames);
-				
-	        	childFrames.remove(selectedViewId);
-	        	
-	        	ProfessionalPAParameters.getFragmentCreationManager().removeFragment(noteFragment);
-	        	
-				System.out.println("childFrames size2="+childFrames.size()+" selectedViewId="+selectedViewId);
+			childFrames.remove(selectedViewId);
+        	
+        	ProfessionalPAParameters.getFragmentCreationManager().removeFragment(noteFragment);
 
-	    		updateActivityView();
-			}
-			catch (ProfessionalPABaseException e)
-			{
-				// TODO improve
-			}
-
-//			for(int j = 0; j < childFrames.size(); j++)
-//			{
-//				FrameLayout layout = childFrames.get(j);
-//				
-//				if(layout != null)
-//				{
-//					if(layout.getId() == selectedViewId)
-//					{
-//						
-//						childFrames.remove(layout);
-//					}
-//				}
-//			}
+    		updateActivityView();
+			
+			
+			iterator.remove();
 		}
+	}
+
+	private void removeSelectedImage(String imageName) 
+	{
+		imageCaptureManager.deleteImage(imageName);
 	}
 
 	class FrameLayoutTouchListener implements OnTouchListener
@@ -592,7 +657,6 @@ public class NotesLayoutManagerActivity extends Activity
 		@Override
 		public boolean onTouch(View v, MotionEvent event) 
 		{
-			System.out.println("onTouch -> id="+v.getId());
 			selectedViewIds.add(v.getId());
 			
 			return true;
@@ -601,21 +665,32 @@ public class NotesLayoutManagerActivity extends Activity
 	}
 }
 
-class ImageCaptureManager
+class ImagePathInformationManager
 {
-	private static final String IMAGE_NAME_START_STRING = "image";
-
-	private String lastCreatedImageName = null;
-	
 	private String imageDirectoryPath = null;
 	
-	private int imageNameCounter = 1;
+	private String mostRecentImageFilePath = null;
 	
-	ImageCaptureManager()
+	ImagePathInformationManager()
 	{
 		createImageDirectory();
 	}
 	
+	public void deleteImage(String imageName) 
+	{
+		File file = new File(imageDirectoryPath+imageName+".jpeg");
+		
+		if(file.exists())
+		{
+			file.delete();
+		}
+	}
+
+	public String getCreatedImagePath() 
+	{
+		return imageDirectoryPath+ProfessionalPATools.createImageNameFromTime()+".jpeg";
+	}
+
 	private void createImageDirectory()
 	{
 		final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/ProfessionalPA/"; 
@@ -630,15 +705,56 @@ class ImageCaptureManager
         imageDirectoryPath = dir;
 	}
 	
+//	TODO improve in case image is added by user with different name. will throw number format exception.
+	public List<String> getImagesFilePath()
+	{
+		List<String> imageFilePaths = new ArrayList<String>();
+		
+		File file = new File(imageDirectoryPath);
+		
+		if(file.isDirectory())
+		{
+			File [] files = file.listFiles();
+			
+			for(int i = 0, size = files != null ? files.length : 0; i < size; i++)
+			{
+				File imageFile = files[i];
+				
+//				int endIndex = path.indexOf(".jpeg");
+//				
+//				String imageName = path.substring(0, endIndex);
+				
+				imageFilePaths.add(imageFile.getAbsolutePath());
+			}
+		}
+		
+		return imageFilePaths;
+	}
+	
+	
+	public long imageCreationTime(String imagePath) throws ProfessionalPABaseException 
+	{
+		int index = imagePath.indexOf(imageDirectoryPath);
+		
+		int endIndex = imagePath.indexOf(".jpeg");
+		
+		String imageFileName = imagePath.substring(index + imageDirectoryPath.length(), endIndex);
+
+		return Long.valueOf(imageFileName);
+	}
+	
 	public File createNextFile()
 	{
-        String file = imageDirectoryPath+createNextFileName();
+        String filePath = imageDirectoryPath + ProfessionalPATools.createImageNameFromTime()+".jpeg";
         
-        File newfile = new File(file);
+        File newfile = new File(filePath);
         
         try 
         {
-            newfile.createNewFile();
+            if(newfile.createNewFile())
+            {
+            	mostRecentImageFilePath = filePath;
+            }
         } 
         catch (IOException e) 
         {
@@ -648,28 +764,8 @@ class ImageCaptureManager
         return newfile;
 	}
 	
-	private String createNextFileName()
+	public String getMostRecentImageFilePath()
 	{
-		lastCreatedImageName = IMAGE_NAME_START_STRING+imageNameCounter+".jpeg";
-		
-		System.out.println("createNextFileName -> lastCreatedImageName="+lastCreatedImageName);
-		
-		imageNameCounter++;
-		
-		return lastCreatedImageName;
-	}
-	
-	private String getLastCreatedImageName()
-	{
-		return lastCreatedImageName;
-	}
-	
-	public String getLastCreatedImagePath()
-	{
-		String imagePath = imageDirectoryPath + getLastCreatedImageName();
-		
-		System.out.println("getLastCreatedImagePath -> lastCreatedImageName="+imagePath);
-
-		return imagePath;
+		return mostRecentImageFilePath;
 	}
 }

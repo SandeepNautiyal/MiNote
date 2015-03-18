@@ -23,6 +23,8 @@ public class FragmentCreationManager
 	
 	public Fragment createFragment(ProfessionalPANote note)
 	{
+		System.out.println("createFragment -> fragments size="+fragments.size()+" fragments="+fragments);
+		
 		for(Fragment fragment : fragments)
 		{
 			Bundle bundle = fragment.getArguments();
@@ -31,8 +33,12 @@ public class FragmentCreationManager
 			
 			if(fragmentNote != null)
 			{
+				System.out.println("createFragment -> fragmentNote");
+
 				int result = comparator.compare(note, fragmentNote);
 				
+				System.out.println("createFragment -> result="+result);
+
 				if(result == 0)
 				{
 					return null;
@@ -47,6 +53,8 @@ public class FragmentCreationManager
     	bundle.putParcelable(ProfessionalPAConstants.NOTE_DATA, note);
 	    
 	    fragment.setArguments(bundle);
+	    
+	    System.out.println("fragment added="+fragment);
 	    
 	    fragments.add(fragment);
 	    
@@ -66,5 +74,10 @@ public class FragmentCreationManager
 	public List<Fragment> getFragments()
 	{
 		return fragments;
+	}
+
+	public void removeAllFragments() 
+	{
+		fragments.clear();
 	}
 }

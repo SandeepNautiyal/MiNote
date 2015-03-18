@@ -34,4 +34,34 @@ public class ProfessionalPATools
  		
  		return creationDate.getTime();
  	}
+    
+    public static String createStringForDate(long creationTimeAndDate) {
+		Date creationTime = new Date(creationTimeAndDate);
+
+		SimpleDateFormat formatter = new SimpleDateFormat(
+				"E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
+
+		String creationDate = formatter.format(creationTime);
+		return creationDate;
+	}
+    
+    public static String createImageNameFromTime()
+    {
+		Date creationTime = new Date(System.currentTimeMillis());
+
+		SimpleDateFormat formatter = new SimpleDateFormat(
+				"yyMMddHHmmss");
+
+		String creationDate = formatter.format(creationTime);
+		return creationDate;
+	}
+    
+    public static long parseDateAndTimeImageNameString(String time) throws ParseException 
+ 	{
+ 		SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmmss");
+
+ 		Date creationDate = formatter.parse(time);
+ 		
+ 		return creationDate.getTime();
+ 	}
 }

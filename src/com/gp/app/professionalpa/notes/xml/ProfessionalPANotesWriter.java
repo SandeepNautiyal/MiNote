@@ -98,12 +98,9 @@ public class ProfessionalPANotesWriter
 
 		noteElement.setAttribute("type", Byte.toString(note.getNoteType()));
 
-		Date creationTime = new Date(note.getCreationTime());
-
-		SimpleDateFormat formatter = new SimpleDateFormat(
-				"E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
-
-		String creationDate = formatter.format(creationTime);
+		long creationTimeAndDate = note.getCreationTime();
+		
+		String creationDate = ProfessionalPATools.createStringForDate(creationTimeAndDate);
 
 		noteElement.setAttribute("creationTime", creationDate);
 
@@ -118,8 +115,7 @@ public class ProfessionalPANotesWriter
 		
 		completeWritingProcess();
     }
- 
- 
+
     private void createNoteItem(Element note, NoteListItem noteListItem) 
     {
         Element noteItem = xmlDocument.createElement("NoteItem");
