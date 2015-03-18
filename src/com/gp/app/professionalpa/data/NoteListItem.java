@@ -126,8 +126,6 @@ public class NoteListItem implements Parcelable
 
 			dest.writeByteArray(imageArray);
 			
-			System.out.println("writeToParcel -> array length="+imageArray.length);
-			
 			dest.writeInt(imageArray.length);
 		}
 		else
@@ -156,8 +154,6 @@ public class NoteListItem implements Parcelable
 				source.readByteArray(imageArray);
 				
 				image = BitmapFactory.decodeByteArray(imageArray, 0, imageArray.length);
-				
-				System.out.println("Creator -> image="+image + "lenth="+imageArrayLength);
 			}
 			
 			boolean [] attributes = new boolean[2];

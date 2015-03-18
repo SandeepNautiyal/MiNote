@@ -454,7 +454,7 @@ public class NotesLayoutManagerActivity extends Activity
 	
 	private void updateActivityView() 
 	{		
-		int index = 0;
+		int index = linearLayouts.size()-1;
 		
 		int linearLayoutIndex = 0;
 		
@@ -480,11 +480,11 @@ public class NotesLayoutManagerActivity extends Activity
 
 			linearLayout.addView(frameLayout, linearLayoutIndex);
 
-			index++;
+			index--;
 			
-			if (index % linearLayouts.size() == 0) 
+			if (index == -1) 
 			{
-				index = 0;
+				index = linearLayouts.size()-1;
 				
 				linearLayoutIndex++;
 			}
