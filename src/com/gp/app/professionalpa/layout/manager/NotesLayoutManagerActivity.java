@@ -2,7 +2,6 @@ package com.gp.app.professionalpa.layout.manager;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -10,13 +9,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,11 +33,9 @@ import android.view.View.OnTouchListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
 import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
@@ -101,7 +100,7 @@ public class NotesLayoutManagerActivity extends Activity
 		
 		ScrollView scrollView  = (ScrollView)getLayoutInflater().inflate(R.layout.activity_notes_layout_manager, null);
 		
-		activityLayout = (LinearLayout)scrollView.findViewById(R.id.notes_layout_activity_manager);
+		activityLayout = (LinearLayout)scrollView.findViewById(R.id.notesLayoutManagerParentLinearLayout);
 		
 		setContentView(scrollView);
 
@@ -118,6 +117,10 @@ public class NotesLayoutManagerActivity extends Activity
 			//TODO improve
 			e.printStackTrace();
 		}
+		
+		ActionBar actionBar = getActionBar();
+		
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7F7CD9")));
 	}
 
 	

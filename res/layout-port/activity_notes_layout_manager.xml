@@ -1,17 +1,19 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/notes_manager_scrollView"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal"
-    android:background="@drawable/personal_assistant"
+    android:id="@+id/notesLayoutManagerScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fffaaa"
+    android:fillViewport="true"
     tools:context="com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity">
 
 <LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/notes_layout_activity_manager"
-    android:orientation="horizontal">
+    android:id="@+id/notesLayoutManagerParentLinearLayout"
+    android:orientation="horizontal"
+    android:background="#000000"
+    android:baselineAligned="false">
     
     <LinearLayout
         android:id="@+id/linearLayout1"
