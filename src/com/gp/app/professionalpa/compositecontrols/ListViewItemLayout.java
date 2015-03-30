@@ -26,7 +26,7 @@ public class ListViewItemLayout extends RelativeLayout
 	
 	private ImageButton importanceImageButton = null;
 	
-	private ImageButton alarmImageButton = null;
+//	private ImageButton alarmImageButton = null;
 	
 	private int stateToSave;
 	
@@ -52,13 +52,13 @@ public class ListViewItemLayout extends RelativeLayout
 		
 		addView(inflater.inflate(R.layout.composite_control_for_list_view, null));
 
-		textView = (EditText) findViewById(R.id.composite_control_text_box);
+		textView = (EditText) findViewById(R.id.compositeControlTextBox);
 		
-		imageView  = (ImageView)findViewById(R.id.composite_control_image_view);
+		imageView  = (ImageView)findViewById(R.id.compositeControlImageView);
 		
-		importanceImageButton = (ImageButton) findViewById(R.id.composite_control_importance_button);
+		importanceImageButton = (ImageButton) findViewById(R.id.compositeControlBulletButton);
 		
-		alarmImageButton = (ImageButton) findViewById(R.id.composite_control_alarm_button);
+//		alarmImageButton = (ImageButton) findViewById(R.id.composite_control_alarm_button);
 	}
 	
 	  // ... variables
@@ -126,8 +126,8 @@ public class ListViewItemLayout extends RelativeLayout
 	public ImageButton getImportanceImageButton() {
 		return importanceImageButton;
 	}
-
-	public ImageButton getAlarmImageButton() {
-		return alarmImageButton;
-	}
+//
+//	public ImageButton getAlarmImageButton() {
+//		return alarmImageButton;
+//	}
 }

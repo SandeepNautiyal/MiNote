@@ -7,7 +7,7 @@
     tools:context="com.gp.app.professionalpa.layout.ListItemLayout" >
     
     <ImageView 
-        android:id="@+id/composite_control_image_view"
+        android:id="@+id/compositeControlImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@null"
@@ -16,29 +16,24 @@
         android:adjustViewBounds="true"
         android:layout_alignParentLeft="true"/>
     
+    <ImageButton
+        android:id="@+id/compositeControlBulletButton"
+        android:layout_width="35dip"
+        android:layout_height="@dimen/composite_control_height"
+        android:layout_marginRight="2dip"
+        android:contentDescription="@string/set_importance"
+        android:src="@drawable/ic_pin_black_bullet_point" /> 
+        
     <EditText
-        android:id="@+id/composite_control_text_box"
+        android:id="@+id/compositeControlTextBox"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/composite_control_height"
         android:background="@null"
         android:hint="@string/add_note"
-        android:inputType="textMultiLine"/>
-        
-    <ImageButton
-        android:id="@+id/composite_control_alarm_button"
-        android:layout_width="35dip"
-        android:layout_height="@dimen/composite_control_height"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:contentDescription="@string/set_alarm" />
-
-    <ImageButton
-        android:id="@+id/composite_control_importance_button"
-        android:layout_width="35dip"
-        android:layout_height="@dimen/composite_control_height"
-        android:layout_alignBottom="@+id/composite_control_alarm_button"
-        android:layout_marginRight="14dp"
-        android:layout_toLeftOf="@+id/composite_control_alarm_button"
-        android:contentDescription="@string/set_importance" />
-    
+        android:layout_marginLeft="2dip"
+        android:layout_toRightOf="@+id/compositeControlBulletButton"
+        android:layout_alignTop="@+id/compositeControlBulletButton"
+        android:inputType="textAutoCorrect|textMultiLine|textAutoComplete|textCapSentences"
+        android:maxLines="7"
+        android:maxLength="200"/>
 </RelativeLayout>

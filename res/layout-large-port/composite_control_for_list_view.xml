@@ -7,7 +7,7 @@
     tools:context="com.gp.app.professionalpa.layout.ListItemLayout" >
     
     <EditText
-        android:id="@+id/composite_control_text_box"
+        android:id="@+id/compositeControlTextBox"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/composite_control_height"
         android:background="@null"
@@ -26,7 +26,7 @@
         android:layout_alignParentLeft="true" />
 
     <ImageButton
-        android:id="@+id/composite_control_importance_button"
+        android:id="@+id/compositeControlBulletButton"
         android:layout_width="35dip"
         android:layout_height="@dimen/composite_control_height"
         android:layout_alignBottom="@+id/composite_control_alarm_button"

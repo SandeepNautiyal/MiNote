@@ -30,18 +30,19 @@ public final class R {
     }
     public static final class drawable {
         public static final int air_india_logo=0x7f020000;
-        public static final int list_view_border=0x7f020001;
-        public static final int personal_assistant=0x7f020002;
-        public static final int professional_pa_action_search=0x7f020003;
-        public static final int professional_pa_action_settings=0x7f020004;
-        public static final int professional_pa_camera=0x7f020005;
-        public static final int professional_pa_discard_note=0x7f020006;
-        public static final int professional_pa_ic_launcher=0x7f020007;
-        public static final int professional_pa_list_view=0x7f020008;
-        public static final int professional_pa_list_view1=0x7f020009;
-        public static final int professional_pa_paragraph_view=0x7f02000a;
-        public static final int professional_pa_paragraph_view1=0x7f02000b;
-        public static final int save_notes=0x7f02000c;
+        public static final int ic_pin_black_bullet_point=0x7f020001;
+        public static final int list_view_border=0x7f020002;
+        public static final int personal_assistant=0x7f020003;
+        public static final int professional_pa_action_search=0x7f020004;
+        public static final int professional_pa_action_settings=0x7f020005;
+        public static final int professional_pa_camera=0x7f020006;
+        public static final int professional_pa_discard_note=0x7f020007;
+        public static final int professional_pa_ic_launcher=0x7f020008;
+        public static final int professional_pa_list_view=0x7f020009;
+        public static final int professional_pa_list_view1=0x7f02000a;
+        public static final int professional_pa_paragraph_view=0x7f02000b;
+        public static final int professional_pa_paragraph_view1=0x7f02000c;
+        public static final int save_notes=0x7f02000d;
     }
     public static final class id {
         public static final int ScrollView01=0x7f08000e;
@@ -57,11 +58,11 @@ public final class R {
         public static final int action_search=0x7f080017;
         public static final int action_settings=0x7f080018;
         public static final int adapter_row_layout=0x7f080013;
-        public static final int composite_control_alarm_button=0x7f08000b;
-        public static final int composite_control_image_view=0x7f080009;
-        public static final int composite_control_importance_button=0x7f08000c;
+        public static final int compositeControlBulletButton=0x7f08000a;
+        public static final int compositeControlImageView=0x7f080009;
+        public static final int compositeControlTextBox=0x7f08000b;
+        public static final int composite_control_alarm_button=0x7f08000c;
         public static final int composite_control_layout=0x7f080008;
-        public static final int composite_control_text_box=0x7f08000a;
         public static final int export_notes=0x7f08001e;
         public static final int import_notes=0x7f08001f;
         public static final int linearLayout1=0x7f080002;
