@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.layout.manager.ImageLocationPathManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
@@ -58,7 +59,7 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 	    
 	    int compressedViewHeight = (int)androidResources.getDimension(R.dimen.composite_control_textview_height_compressed);
 
-	    ImageButton importanceImageButton = (ImageButton) convertView.findViewById(R.id.compositeControlBulletButton);
+	    ImageButton bulletPointImage = (ImageButton) convertView.findViewById(R.id.compositeControlBulletButton);
 //
 //	    ImageButton alarmImageButton = (ImageButton)convertView.findViewById(R.id.composite_control_alarm_button);
 
@@ -66,18 +67,18 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 	    {
 	    	if(noteType == ProfessionalPAConstants.LIST_NOTE)
 	    	{
-	    		LayoutParams importanceButtonParams = importanceImageButton.getLayoutParams();
+	    		LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
 		        importanceButtonParams.height =  compressedViewHeight;
 		        importanceButtonParams.width = (int)androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
-		        importanceImageButton.setLayoutParams(importanceButtonParams);
+		        bulletPointImage.setLayoutParams(importanceButtonParams);
 	    	}
 	    	else if(noteType == ProfessionalPAConstants.PARAGRAPH_NOTE)
 	    	{
-	    		LayoutParams importanceButtonParams = importanceImageButton.getLayoutParams();
+	    		LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
 		        importanceButtonParams.height =  0;
 		        importanceButtonParams.width = 0;
-		        importanceImageButton.setLayoutParams(importanceButtonParams);
-	    		importanceImageButton.setVisibility(View.INVISIBLE);
+		        bulletPointImage.setLayoutParams(importanceButtonParams);
+	    		bulletPointImage.setVisibility(View.INVISIBLE);
 	    	}
 //	        
 //	        LayoutParams alarmButtonParams = alarmImageButton.getLayoutParams();
@@ -93,43 +94,28 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 
 		    if(listItems != null && listItems.size() > 0)
 		    {
-			    textView.setText(listItems.get(position).getTextViewData());
+		    	textView.setText(listItems.get(position).getTextViewData());
 		    }
 		    
 		    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
-		    textView.setActivated(false);
-
+		    textView.setEnabled(false);
+		    
 		    textView.setLayoutParams(params);
 	    }
 	    else
 	    {
-		    LayoutParams importanceButtonParams = importanceImageButton.getLayoutParams();
-	        importanceButtonParams.height =  0;
-	        importanceButtonParams.width = 0;
-	        importanceImageButton.setLayoutParams(importanceButtonParams);
-	        
-	        LayoutParams params = textView.getLayoutParams();
-		    params.height =  0;
-		    params.width = 0;
-		    textView.setLayoutParams(params);
-		    
-//	        LayoutParams alarmButtonParams = alarmImageButton.getLayoutParams();
-//	        alarmButtonParams.height = 0;
-//	        alarmButtonParams.width = 0;
-//		    alarmImageButton.setLayoutParams(alarmButtonParams);
-		    
-	        textView.setVisibility(View.INVISIBLE);
-//	        importanceImageButton.setVisibility(View.INVISIBLE);
-	        textView.setVisibility(View.INVISIBLE);
-//	        alarmImageButton.setVisibility(View.INVISIBLE);
-	        
 	        ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
 
 		    LayoutParams imageViewParams = imageView.getLayoutParams();
 		    imageViewParams.height =  LayoutParams.MATCH_PARENT;
 		    imageViewParams.width = LayoutParams.MATCH_PARENT;
-		    Bitmap image = Bitmap.createScaledBitmap(noteListItem.getImageData(), 300, 300,
+		    
+		    //TODO implement ImageLocationPathManager.getImage()
+		    
+		    Bitmap image = ImageLocationPathManager.getInstance().getImage(noteListItem.getImageName());
+		    
+		    image = Bitmap.createScaledBitmap(image, 300, 300,
 	                true);
 		    
 		    imageView.setOnLongClickListener(new OnLongClickListener() {

@@ -1,11 +1,19 @@
 package com.gp.app.professionalpa.layout.manager;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -59,15 +67,9 @@ public class ListItemCreatorActivity extends Activity
 			setContentView(scrollView);
 		}
 		
-//		RelativeLayout listDataCreator = (RelativeLayout)getApplicationContext().findViewById(R.id.list_item_creator_activity);
-//		
-//		ListViewItemLayout listViewControl = (ListViewItemLayout)findViewById(R.id.composite_control_layout);
-//		
-//		listDataCreator.addView(listViewControl);
-//		
-//		listViewControls.add(listViewControl);
-//		
-//		this.setContentView(listDataCreator);
+        ActionBar actionBar = getActionBar();
+		
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7F7CD9")));
 	}
 
 	@Override
@@ -79,6 +81,37 @@ public class ListItemCreatorActivity extends Activity
 	}
 
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+	    ProfessionalPANote note = null;
+	    
+	    if (requestCode == ProfessionalPAConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
+	    {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+	    	
+	    	ImageLocationPathManager.getInstance().createSaveImage(photo);
+	    	
+	    	Bitmap image = createProfessionalPANoteFromImage(ImageLocationPathManager.getInstance().getMostRecentImageFilePath());
+	        
+	        addNewListItem();
+	        
+	        lastAddedListItem.setImage(image);
+	    }
+	}
+	
+	//TODO Duplicate
+	private Bitmap createProfessionalPANoteFromImage(String imagePath) 
+	{
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		
+		options.inSampleSize = 8;
+		
+		Bitmap image = BitmapFactory.decodeFile(imagePath, options);
+		
+		return image;
+	}
+	
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -87,17 +120,19 @@ public class ListItemCreatorActivity extends Activity
 		if (id == R.id.action_settings) {
 			return true;
 		}
+		else if(id == R.id.action_click_photo)
+		{
+			//TODO duplicate
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); 
+            
+            startActivityForResult(cameraIntent, ProfessionalPAConstants.TAKE_PHOTO_CODE);
+		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public void addNewListItem(View view)
+	private void addNewListItem() 
 	{
-//		LayoutInflater infltor = this.getLayoutInflater();
-//		
-//		ListViewItemLayout itemLayout = (ListViewItemLayout)infltor.inflate(R.layout.compound_control_layout, null);
-//		
-//		RelativeLayout layout = (RelativeLayout)findViewById(R.id.list_item_creator_activity);
-		
 		ListViewItemLayout currentAddedListItem = new ListViewItemLayout(this);
 		
 		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
@@ -119,11 +154,6 @@ public class ListItemCreatorActivity extends Activity
 		addSaveAndAddItemButton();
 		
 		setContentView(scrollView);
-		
-//		fragmentManager.beginTransaction().add(R.id.notes_layout_activity_manager, listViewFragment).commit();
-//		
-//		fragments.put(listViewFragment.getId(), listViewFragment);
-
 	}
 
 	private void addSaveAndAddItemButton() 
@@ -160,7 +190,7 @@ public class ListItemCreatorActivity extends Activity
 			@Override
 			public void onClick(View view)
 			{
-				addNewListItem(view);
+				addNewListItem();
 			}
 		});
 		
@@ -199,7 +229,7 @@ public class ListItemCreatorActivity extends Activity
 		{
 			ListViewItemLayout compoundControl = listItems.get(i);
 			
-            NoteListItem listItem = new NoteListItem(compoundControl.getText(), false);
+            NoteListItem listItem = new NoteListItem(compoundControl.getText());
 			
             item.add(listItem);
 		}

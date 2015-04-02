@@ -10,6 +10,10 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -125,6 +129,29 @@ public class ListViewItemLayout extends RelativeLayout
 	
 	public ImageButton getImportanceImageButton() {
 		return importanceImageButton;
+	}
+	
+	public void setImage(Bitmap image)
+	{
+		ViewGroup.LayoutParams imageViewParams = imageView.getLayoutParams();
+	    imageViewParams.height =  350;
+	    imageViewParams.width = 350;
+	    image = Bitmap.createScaledBitmap(image, 300, 300,
+                true);
+	    
+	    imageView.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) 
+			{
+				System.out.println("long click for image view");
+				
+				return false;
+			}
+		});
+	    
+	    imageView.setImageBitmap(image);
+	    imageView.setLayoutParams(imageViewParams);
 	}
 //
 //	public ImageButton getAlarmImageButton() {

@@ -4,8 +4,7 @@
 <!ATTLIST note isParagraphNote PCDATA #REQUIRED>
 <!ATTLIST note creationTime PCDATA #REQUIRED>
 <!ATTLIST note lastEditedTime PCDATA #REQUIRED>
-<!ELEMENT noteItem (data,isAlarm,isImportant)>
+<!ELEMENT noteItem (data, imageName)>
 <!ELEMENT data (#PCDATA)>
-<!ELEMENT isAlarm (#PCDATA)>
-<!ELEMENT isImportant (#PCDATA)>
+<!ELEMENT imageName (#PCDATA)>
 ]>

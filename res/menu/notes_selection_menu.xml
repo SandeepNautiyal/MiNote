@@ -1,9 +1,9 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.gp.app.professionalpa.NotesLayoutManagerActivity" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/action_discard_notes"
         android:icon="@drawable/professional_pa_discard_note"
         android:title="@string/action_discard_notes"
-        android:showAsAction="always" />
+        android:showAsAction="always" 
+        android:orderInCategory="1"/>
 </menu>
+

@@ -19,6 +19,8 @@ public interface ProfessionalPAConstants
 	String PROFESSIONAL_PA_IMPORT_PATH = PROFESSIONAL_PA_EXPORT_PATH+"//"
 	    +PROFESSIONAL_PA_XML_FILE_NAME;
 
+	public static final byte MIXED_CONTENT_NOTE = 3;
+	
 	public static final byte IMAGE_NOTE = 2;
 
 	public static final byte PARAGRAPH_NOTE = 1;

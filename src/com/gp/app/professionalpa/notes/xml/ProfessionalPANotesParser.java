@@ -34,7 +34,7 @@ public class ProfessionalPANotesParser extends DefaultHandler
 	
 	private boolean note = false;
 	private boolean data = false;
-	private boolean isAlarm = false;
+	private boolean imageName = false;
 	private boolean isImportant;
 	
 	public ProfessionalPANotesParser() throws ProfessionalPABaseException
@@ -94,7 +94,7 @@ public class ProfessionalPANotesParser extends DefaultHandler
  
 		if (qName.equalsIgnoreCase("isAlarm")) 
 		{
-			isAlarm = true;
+			imageName = true;
 		}
 		
 		if (qName.equalsIgnoreCase("isImportant")) 
@@ -117,7 +117,7 @@ public class ProfessionalPANotesParser extends DefaultHandler
  
 		if (qName.equalsIgnoreCase("isAlarm")) 
 		{
-			isAlarm = false;
+			imageName = false;
 		}
 		
 		if (qName.equalsIgnoreCase("isImportant")) 
@@ -147,31 +147,16 @@ public class ProfessionalPANotesParser extends DefaultHandler
  
 	public void characters(char ch[], int start, int length) throws SAXException 
 	{
-		String dataList = null;
-		
-		boolean isAlarmPresent = false;
-		
-		boolean isImportanct = false;
-		
 		if (data) 
 		{
-			dataList = new String(ch, start, length);
-			
-			currentNoteItem.setTextViewData(dataList);
+			currentNoteItem.setTextViewData(new String(ch, start, length));
 		}
  
-		if (isAlarm) 
+		if (imageName) 
 		{
-			isAlarmPresent = Boolean.valueOf(new String(ch, start, length));
+			currentNoteItem.setImageName((new String(ch, start, length)));
 			
-			currentNoteItem.setAlarmActive(isAlarmPresent);
-		}
-		
-		if (isImportant) 
-		{
-			isImportanct = Boolean.valueOf(new String(ch, start, length));
-			
-			currentNoteItem.setImportanceHigh(isImportanct);
+			System.out.println("currentNoteItem image name="+currentNoteItem.getImageName());
 		}
 	}
 	

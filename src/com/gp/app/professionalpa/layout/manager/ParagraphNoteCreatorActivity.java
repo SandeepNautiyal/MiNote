@@ -4,8 +4,11 @@ package com.gp.app.professionalpa.layout.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,12 +26,17 @@ import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 public class ParagraphNoteCreatorActivity extends Activity
 {
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		
         RelativeLayout activityLayout = (RelativeLayout)getLayoutInflater().inflate(R.layout.paragraph_note_creator_activtiy, null);
 		
 		setContentView(activityLayout);
+		
+        ActionBar actionBar = getActionBar();
+		
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7F7CD9")));
 	}
 	
 	@Override

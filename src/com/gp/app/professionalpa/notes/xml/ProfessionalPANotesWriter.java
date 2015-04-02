@@ -133,17 +133,11 @@ public class ProfessionalPANotesWriter
         
         noteItem.appendChild(data);
     	
-        Element isAlarm = xmlDocument.createElement("isAlarm");
+        Element isAlarm = xmlDocument.createElement("imageName");
         
-        isAlarm.appendChild(xmlDocument.createTextNode(noteListItem.isAlarmActive()+""));
+        isAlarm.appendChild(xmlDocument.createTextNode("imageName"));
 
         noteItem.appendChild(isAlarm);
-        
-        Element isImportant = xmlDocument.createElement("isImportant");
-        
-        isImportant.appendChild(xmlDocument.createTextNode(noteListItem.isImportanceHigh()+""));
-
-        noteItem.appendChild(isImportant);
 	}
 
 	private void completeWritingProcess() throws ProfessionalPABaseException
