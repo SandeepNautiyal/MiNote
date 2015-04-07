@@ -25,6 +25,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import android.R.integer;
 import android.os.Environment;
 
 import com.gp.app.professionalpa.data.NoteListItem;
@@ -97,6 +98,8 @@ public class ProfessionalPANotesWriter
 		Element noteElement = xmlDocument.createElement("Note");
 
 		noteElement.setAttribute("type", Byte.toString(note.getNoteType()));
+
+		noteElement.setAttribute("noteId", Integer.toString(note.getNoteId()));
 
 		long creationTimeAndDate = note.getCreationTime();
 		

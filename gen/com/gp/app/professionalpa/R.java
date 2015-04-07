@@ -46,26 +46,26 @@ public final class R {
     }
     public static final class id {
         public static final int ScrollView01=0x7f08000e;
-        public static final int action_add_notes=0x7f08001e;
-        public static final int action_clear_all_notes=0x7f08001b;
-        public static final int action_click_photo=0x7f080016;
-        public static final int action_create_list_view=0x7f08001d;
-        public static final int action_create_paragraph_view=0x7f080018;
-        public static final int action_discard_notes=0x7f080022;
-        public static final int action_display_calender=0x7f080021;
-        public static final int action_exit_professional_pa_application=0x7f08001c;
-        public static final int action_save_paragraph_note=0x7f080023;
-        public static final int action_search=0x7f080019;
-        public static final int action_settings=0x7f08001a;
+        public static final int action_add_notes=0x7f08001f;
+        public static final int action_clear_all_notes=0x7f08001c;
+        public static final int action_click_photo=0x7f080017;
+        public static final int action_create_list_view=0x7f08001e;
+        public static final int action_create_paragraph_view=0x7f080019;
+        public static final int action_discard_notes=0x7f080023;
+        public static final int action_display_calender=0x7f080022;
+        public static final int action_exit_professional_pa_application=0x7f08001d;
+        public static final int action_save_paragraph_note=0x7f080024;
+        public static final int action_search=0x7f08001a;
+        public static final int action_settings=0x7f08001b;
         public static final int adapter_row_layout=0x7f080013;
         public static final int compositeControlBulletButton=0x7f08000a;
         public static final int compositeControlImageView=0x7f080009;
         public static final int compositeControlTextBox=0x7f08000b;
         public static final int composite_control_alarm_button=0x7f08000c;
         public static final int composite_control_layout=0x7f080008;
-        public static final int export_notes=0x7f08001f;
-        public static final int import_notes=0x7f080020;
-        public static final int item_delete=0x7f080015;
+        public static final int export_notes=0x7f080020;
+        public static final int import_notes=0x7f080021;
+        public static final int item_delete=0x7f080016;
         public static final int linearLayout1=0x7f080002;
         public static final int linearLayout2=0x7f080003;
         public static final int linearLayout3=0x7f080005;
@@ -73,6 +73,7 @@ public final class R {
         public static final int linearLayout5=0x7f080007;
         public static final int list_item=0x7f08000d;
         public static final int list_item_creator_activity_layout=0x7f08000f;
+        public static final int noteItemView=0x7f080015;
         public static final int notesLayoutManagerParentLinearLayout=0x7f080001;
         public static final int notesLayoutManagerScrollView=0x7f080000;
         public static final int notes_layout_activity_manager=0x7f080004;
@@ -80,19 +81,21 @@ public final class R {
         public static final int paragraph_note_alarm_button=0x7f080012;
         public static final int paragraph_note_importance_button=0x7f080011;
         public static final int professional_pa_frame_layout=0x7f080014;
-        public static final int save_created_list=0x7f080017;
+        public static final int save_created_list=0x7f080018;
     }
     public static final class layout {
         public static final int activity_notes_layout_manager=0x7f030000;
         public static final int activity_start_professional_pa_application=0x7f030001;
         public static final int composite_control_for_list_view=0x7f030002;
         public static final int compound_control_layout=0x7f030003;
-        public static final int list_item_creator_activity=0x7f030004;
-        public static final int listview_for_list_fragment=0x7f030005;
-        public static final int paragraph_note_creator_activtiy=0x7f030006;
-        public static final int professiona_pa_array_adapter_row_layout=0x7f030007;
-        public static final int professional_pa_frame_layout=0x7f030008;
-        public static final int professional_pa_paragraph_view_layout=0x7f030009;
+        public static final int data_adapter_view=0x7f030004;
+        public static final int list_item_creator_activity=0x7f030005;
+        public static final int listview_for_list_fragment=0x7f030006;
+        public static final int paragraph_note_creator_activtiy=0x7f030007;
+        public static final int professiona_pa_array_adapter_row_layout=0x7f030008;
+        public static final int professional_pa_frame_layout=0x7f030009;
+        public static final int professional_pa_note_view=0x7f03000a;
+        public static final int professional_pa_paragraph_view_layout=0x7f03000b;
     }
     public static final class menu {
         public static final int contextual_menu=0x7f070000;
@@ -122,6 +125,7 @@ public final class R {
         public static final int export_notes=0x7f050014;
         public static final int import_notes=0x7f050015;
         public static final int note_image=0x7f050018;
+        public static final int note_item=0x7f050019;
         public static final int notes_layout_manager_activity_title=0x7f050003;
         public static final int paragraph_note_creator_activity_title=0x7f050013;
         public static final int save=0x7f05000f;

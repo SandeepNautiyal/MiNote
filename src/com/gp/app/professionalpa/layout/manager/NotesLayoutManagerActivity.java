@@ -15,12 +15,9 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.ActionMode;
 import android.view.ContextMenu;
@@ -28,9 +25,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -44,13 +39,11 @@ import com.gp.app.professionalpa.export.ProfessionalPANotesExporter;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
+import com.gp.app.professionalpa.util.ProfessionalPANotesIdGenerator;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
-import com.gp.app.professionalpa.util.ProfessionalPATools;
 
 public class NotesLayoutManagerActivity extends Activity
 {
-	private static final String FRAGMENT_TAGS = "FRAGMENT_TAGS";
-
 	private static final String NUMBER_OF_LINEAR_LAYOUTS = "NUMBER_OF_LINEAR_LAYOUTS";
 
 	private static final int LIST_ACTIVITY_RESULT_CREATED = 1;
@@ -73,15 +66,9 @@ public class NotesLayoutManagerActivity extends Activity
 	
     private byte numberOfLinearLayouts = -1;
     
-    private NotesActionMode actionModelCallback = null;
-    
 	private Map<Integer, FrameLayout> childFrames = new LinkedHashMap<Integer, FrameLayout>();
 	
 	private List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
-	
-	private LinearLayout activityLayout = null;
-	
-	private FrameLayoutTouchListener touchListener = null;
 	
 	private ActionMode actionMode = null;
 	
@@ -92,8 +79,6 @@ public class NotesLayoutManagerActivity extends Activity
 	public NotesLayoutManagerActivity()
 	{
 		super();
-		
-		touchListener = new FrameLayoutTouchListener();
 	}
 	
 	@Override
@@ -104,8 +89,6 @@ public class NotesLayoutManagerActivity extends Activity
 		imageCaptureManager = ImageLocationPathManager.getInstance();
 		
 		ScrollView scrollView  = (ScrollView)getLayoutInflater().inflate(R.layout.activity_notes_layout_manager, null);
-		
-		activityLayout = (LinearLayout)scrollView.findViewById(R.id.notesLayoutManagerParentLinearLayout);
 		
 		setContentView(scrollView);
 
@@ -126,8 +109,6 @@ public class NotesLayoutManagerActivity extends Activity
 		ActionBar actionBar = getActionBar();
 		
 		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7F7CD9")));
-		
-		actionModelCallback = new NotesActionMode();
 	}
 
 	
@@ -313,7 +294,7 @@ public class NotesLayoutManagerActivity extends Activity
 		
 		items.add(new NoteListItem(null, ImageLocationPathManager.getInstance().getImageName(imagePath)));
 		
-		note = new ProfessionalPANote(ProfessionalPAConstants.IMAGE_NOTE, items);
+		note = new ProfessionalPANote(ProfessionalPANotesIdGenerator.generateNoteId(), ProfessionalPAConstants.IMAGE_NOTE, items);
 		
 		long creationTime = Long.valueOf(imageCaptureManager
 				.getImageName(imagePath));
@@ -347,20 +328,7 @@ public class NotesLayoutManagerActivity extends Activity
 	{
 		FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
-		frameLayout.setOnLongClickListener(new View.OnLongClickListener() 
-		{
-		    public boolean onLongClick(View view) 
-		    {
-		        if (actionMode != null)
-		        {
-		            return false;
-		        }
-
-		        actionMode = view.startActionMode(actionModelCallback);
-		        view.setSelected(true);
-		        return true;
-		    }
-		});
+		frameLayout.setClickable(true);
 		
 //		frameLayout.setOnTouchListener(touchListener);
 		
@@ -638,7 +606,6 @@ public class NotesLayoutManagerActivity extends Activity
 
     		updateActivityView();
 			
-			
 			iterator.remove();
 		}
 	}
@@ -647,58 +614,5 @@ public class NotesLayoutManagerActivity extends Activity
 	{
 		imageCaptureManager.deleteImage(imageName);
 	}
-
-	class FrameLayoutTouchListener implements OnTouchListener
-	{
-		@Override
-		public boolean onTouch(View v, MotionEvent event) 
-		{
-			selectedViewIds.add(v.getId());
-			
-			return true;
-		}
-		
-	}
-	
-	/**
-	 * Action Mode for contextual action mode.
-	 * @author dell
-	 *
-	 */
-	private class NotesActionMode implements ActionMode.Callback 
-	{
-	    // Called when the action mode is created; startActionMode() was called
-	    @Override
-	    public boolean onCreateActionMode(ActionMode mode, Menu menu) 
-	    {
-	        MenuInflater inflater = mode.getMenuInflater();
-	    
-	        inflater.inflate(R.menu.contextual_menu, menu);
-	        
-	        return true;
-	    }
-
-	    @Override
-	    public boolean onPrepareActionMode(ActionMode mode, Menu menu)
-	    {
-	        return true; 
-	    }
-
-	    @Override
-	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-	        switch (item.getItemId()) {
-	            case R.id.action_discard_notes:
-	                mode.finish(); // Action picked, so close the CAB
-	                return true;
-	            default:
-	                return false;
-	        }
-	    }
-
-	    @Override
-	    public void onDestroyActionMode(ActionMode mode) {
-	        actionMode = null;
-	    }
-	};
 }
 

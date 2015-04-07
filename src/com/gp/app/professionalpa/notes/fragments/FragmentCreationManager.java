@@ -1,8 +1,8 @@
 package com.gp.app.professionalpa.notes.fragments;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -79,5 +79,41 @@ public class FragmentCreationManager
 	public void removeAllFragments() 
 	{
 		fragments.clear();
+	}
+	
+	public Fragment deleteFragment(ProfessionalPANote note)
+	{
+		Fragment resultFragment = null;
+		
+		Iterator<Fragment> iterator = fragments.iterator();
+		
+		while(iterator.hasNext())
+		{
+			Fragment fragment = iterator.next();
+			
+			Bundle bundle = fragment.getArguments();
+			
+			ProfessionalPANote fragmentNote = bundle.getParcelable(ProfessionalPAConstants.NOTE_DATA);
+			
+			if(fragmentNote != null)
+			{
+				int result = comparator.compare(note, fragmentNote);
+				
+				System.out.println("createFragment -> result="+result);
+
+				if(result == 0)
+				{
+					resultFragment = fragment;
+					
+					iterator.remove();
+					
+					break;
+				}
+			}
+		}
+		
+		System.out.println("deleteFragment -> resultFragment="+resultFragment);
+		
+		return resultFragment;
 	}
 }

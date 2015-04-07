@@ -21,6 +21,7 @@ import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
+import com.gp.app.professionalpa.util.ProfessionalPANotesIdGenerator;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ParagraphNoteCreatorActivity extends Activity
@@ -70,7 +71,7 @@ public class ParagraphNoteCreatorActivity extends Activity
 		
 		item.add(new NoteListItem(paragraphData));
 		
-		ProfessionalPANote note = new ProfessionalPANote(ProfessionalPAConstants.PARAGRAPH_NOTE, item);
+		ProfessionalPANote note = new ProfessionalPANote(ProfessionalPANotesIdGenerator.generateNoteId(), ProfessionalPAConstants.PARAGRAPH_NOTE, item);
 			
         long creationTime = System.currentTimeMillis();
 		

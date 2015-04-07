@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/composite_control_layout"
     android:background="@null"
     tools:context="com.gp.app.professionalpa.layout.ListItemLayout" >
@@ -20,26 +20,19 @@
         android:id="@+id/compositeControlBulletButton"
         android:layout_width="35dip"
         android:layout_height="@dimen/composite_control_height"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="2dip"
         android:contentDescription="@string/set_importance"
         android:src="@drawable/ic_pin_black_bullet_point" /> 
         
-    <EditText
+    <TextView
         android:id="@+id/compositeControlTextBox"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="@dimen/composite_control_height"
-        android:background="@null"
         android:hint="@string/add_note"
-        android:layout_marginLeft="5dip"
+        android:layout_marginLeft="2dip"
         android:layout_toRightOf="@+id/compositeControlBulletButton"
-        android:layout_alignBottom="@+id/compositeControlBulletButton"
-        android:inputType="textMultiLine"/>
-        
-    <!-- <ImageButton
-        android:id="@+id/composite_control_alarm_button"
-        android:layout_width="35dip"
-        android:layout_height="@dimen/composite_control_height"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:contentDescription="@string/set_alarm" /> -->
+        android:layout_alignTop="@+id/compositeControlBulletButton"
+        android:maxLines="7"
+        android:maxLength="200"
+        android:background="@null"/>
 </RelativeLayout>

@@ -26,4 +26,5 @@
     <string name="action_discard_notes">Delete</string>
     <string name="action_click_photo">Click Picture</string>
     <string name="note_image">Image Note</string>
+    <string name="note_item">Note Item</string>
 </resources>

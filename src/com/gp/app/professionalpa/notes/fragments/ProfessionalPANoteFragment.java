@@ -30,7 +30,7 @@ public class ProfessionalPANoteFragment extends ListFragment
 		    	
 		    	values.addAll(note.getNoteItems());
 		    	
-				ListViewItemAdapter adapter = new ListViewItemAdapter(getActivity(), note.getNoteItems(), note.getNoteType());
+				ListViewItemAdapter adapter = new ListViewItemAdapter(getActivity(), note.getNoteItems(), note.getNoteType(), note.getNoteId());
 				
 				setListAdapter(adapter);
 				

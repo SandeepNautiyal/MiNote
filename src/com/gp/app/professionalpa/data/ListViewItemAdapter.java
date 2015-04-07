@@ -8,34 +8,38 @@ import android.graphics.Bitmap;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.layout.manager.ImageLocationPathManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
+import com.gp.app.professionalpa.views.listeners.NoteItemLongClickListener;
 
 public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 {
 
 	private byte noteType = -1;
 	
+	private int noteId = -1;
+	
 	private Context context = null;
 	
 	private List<NoteListItem> listItems = null;
 	
 	
-	public ListViewItemAdapter(Context context, List<NoteListItem> values, byte noteType) {
+	public ListViewItemAdapter(Context context, List<NoteListItem> values, byte noteType, int noteId) {
 		
 		super(context, 0, values);
 		
 		this.context = context;
+		
+		this.noteId = noteId;
 		
 		this.noteType = noteType;
 
@@ -49,11 +53,11 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
 	    if(convertView == null)
-	        convertView = LayoutInflater.from(getContext()).inflate(R.layout.composite_control_for_list_view, parent, false);
+	        convertView = LayoutInflater.from(getContext()).inflate(R.layout.data_adapter_view, parent, false);
 	    
 	    NoteListItem noteListItem = listItems.get(position);
 	    
-	    EditText textView = (EditText) convertView.findViewById(R.id.compositeControlTextBox);
+	    TextView textView = (TextView) convertView.findViewById(R.id.compositeControlTextBox);
 	    
 	    Resources androidResources = ProfessionalPAParameters.getApplicationContext().getResources();
 	    
@@ -99,7 +103,7 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 		    
 		    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
-		    textView.setEnabled(false);
+		    textView.setOnLongClickListener(new NoteItemLongClickListener(noteId));
 		    
 		    textView.setLayoutParams(params);
 	    }
@@ -118,16 +122,16 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 		    image = Bitmap.createScaledBitmap(image, 300, 300,
 	                true);
 		    
-		    imageView.setOnLongClickListener(new OnLongClickListener() {
-				
-				@Override
-				public boolean onLongClick(View v) 
-				{
-					System.out.println("long click for image view");
-					
-					return false;
-				}
-			});
+//		    imageView.setOnLongClickListener(new OnLongClickListener() {
+//				
+//				@Override
+//				public boolean onLongClick(View v) 
+//				{
+//					System.out.println("long click for image view");
+//					
+//					return false;
+//				}
+//			});
 		    
 		    imageView.setImageBitmap(image);
 		    imageView.setLayoutParams(imageViewParams);

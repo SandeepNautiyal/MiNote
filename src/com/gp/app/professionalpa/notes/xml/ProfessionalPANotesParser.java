@@ -69,6 +69,10 @@ public class ProfessionalPANotesParser extends DefaultHandler
 			
 			String lastEditedTime = attributes.getValue("lastEditedTime"); //new Date(attributes.getValue("lastEditedTime")).getTime();
 
+			String noteId = attributes.getValue("noteId");
+			
+			currentNote.setNoteId(Integer.valueOf(noteId));
+			
 			try 
 			{
 				currentNote.setCreationTime(ProfessionalPATools.parseDateAndTimeString(CreationTime));

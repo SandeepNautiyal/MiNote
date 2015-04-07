@@ -32,6 +32,7 @@ import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.interfaces.XMLEntity;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
+import com.gp.app.professionalpa.util.ProfessionalPANotesIdGenerator;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ListItemCreatorActivity extends Activity
@@ -234,7 +235,7 @@ public class ListItemCreatorActivity extends Activity
             item.add(listItem);
 		}
 
-		ProfessionalPANote note = new ProfessionalPANote(ProfessionalPAConstants.LIST_NOTE, item);
+		ProfessionalPANote note = new ProfessionalPANote(ProfessionalPANotesIdGenerator.generateNoteId(), ProfessionalPAConstants.LIST_NOTE, item);
 		
 		long creationTime = System.currentTimeMillis();
 		

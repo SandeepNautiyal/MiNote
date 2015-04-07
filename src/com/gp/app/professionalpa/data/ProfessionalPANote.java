@@ -8,11 +8,15 @@ import android.os.Parcelable;
 
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.interfaces.XMLEntity;
+import com.gp.app.professionalpa.util.ProfessionalPANotesIdGenerator;
+import com.gp.app.professionalpa.util.ProfessionalPATools;
 
 
 public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<ProfessionalPANote>
 {
-	byte state = XMLEntity.INSERT_STATE;
+	private int noteId = -1;
+	
+	private byte state = XMLEntity.INSERT_STATE;
 	
 	private byte noteType = ProfessionalPAConstants.LIST_NOTE;
 	
@@ -23,8 +27,10 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 	private long lastEditedTime = 0L;
 	
 
-	public ProfessionalPANote(byte noteType, List<NoteListItem> values) 
+	public ProfessionalPANote(int noteId, byte noteType, List<NoteListItem> values) 
 	{
+		this.noteId = noteId;
+		
 		this.noteType = noteType;
 		
 		if(values != null)
@@ -71,11 +77,6 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 	{
 		return notes;
 	}
-	
-//	public NoteListItem getMostRecentAddedNoteItem()
-//	{
-//		return notes.getLast();
-//	}
 	
 	public String toString()
 	{
@@ -126,6 +127,18 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 		dest.writeByteArray(new byte[]{noteType, state});
 		
 		dest.writeLongArray(new long[]{creationTime, lastEditedTime});
+		
+		dest.writeInt(noteId);
+	}
+
+	public int getNoteId()
+	{
+		return noteId;
+	}
+
+	public void setNoteId(int noteId) 
+	{
+		this.noteId = noteId;
 	}
 
 	public static final Parcelable.Creator<ProfessionalPANote> CREATOR = new Parcelable.Creator<ProfessionalPANote>() {
@@ -143,13 +156,17 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 
 			source.readLongArray(timeAttributes);
 			
-			ProfessionalPANote note = new ProfessionalPANote(noteState[0], noteItems);
+			int id = source.readInt();
+			
+			ProfessionalPANote note = new ProfessionalPANote(id, noteState[0], noteItems);
 			
 			note.setCreationTime(timeAttributes[0]);
 
 			note.setLastEditedTime(timeAttributes[1]);
 			
 			note.setState(noteState[1]);
+			
+			note.setNoteId(id);
 			
 			return note;
 		}
