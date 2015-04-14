@@ -27,7 +27,7 @@ public class NoteListItem implements Parcelable
 
 	public String getTextViewData() 
 	{
-		return itemText;
+		return itemText == null ? "" : itemText;
 	}
 
 	public void setTextViewData(String textViewData) 
@@ -37,7 +37,9 @@ public class NoteListItem implements Parcelable
 	
 	public String getImageName() 
 	{
-		return imageName;
+		String imageName1 = imageName == null ? "" : imageName;
+		
+		return imageName1;
 	}
 
 	public void setImageName(String imagePath) 
@@ -100,6 +102,8 @@ public class NoteListItem implements Parcelable
 		
 		builder.append("textViewData="+itemText+"\n");
 		
+		builder.append("imageName="+imageName+"\n");
+		
 		return builder.toString();
 	}
 	
@@ -108,6 +112,8 @@ public class NoteListItem implements Parcelable
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("ITEM_TEXT="+itemText);
+		
+		sb.append("IMAGE_NAME="+imageName);
 		
 		return sb.toString();
 	}

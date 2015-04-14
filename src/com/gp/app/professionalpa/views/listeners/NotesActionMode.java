@@ -1,14 +1,37 @@
 package com.gp.app.professionalpa.views.listeners;
 
+import java.util.List;
+
+import android.content.Intent;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.layout.manager.ImageLocationPathManager;
+import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
+import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
+import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NotesActionMode implements ActionMode.Callback 
 {
+	int noteId = -1;
+	
+	byte noteType = -1;
+	
+	List<String> imageNames = null;
+	
+	public NotesActionMode(int noteId, byte noteType, List<String> imageNames)
+	{
+		this.noteId = noteId;
+		
+		this.noteType = noteType;
+		
+		this.imageNames = imageNames;
+	}
     // Called when the action mode is created; startActionMode() was called
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) 
@@ -27,17 +50,27 @@ public class NotesActionMode implements ActionMode.Callback
     }
 
     @Override
-    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_discard_notes:
-                mode.finish(); // Action picked, so close the CAB
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) 
+    {
+        switch (item.getItemId())
+        {
+            case R.id.item_delete:
+            	NotesOperationManager.deleteNote(noteId, imageNames, noteType);
+            	mode.finish();
                 return true;
+            case R.id.action_discard_notes:
+            	NotesOperationManager.startCopyProcess(noteId, imageNames, noteType);
             default:
                 return false;
         }
     }
 
-    @Override
+	private void copyNote() 
+    {
+		
+	}
+	
+	@Override
     public void onDestroyActionMode(ActionMode mode) 
     {
     }

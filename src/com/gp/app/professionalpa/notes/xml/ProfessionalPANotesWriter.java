@@ -4,8 +4,6 @@ package com.gp.app.professionalpa.notes.xml;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -21,11 +19,9 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import android.R.integer;
 import android.os.Environment;
 
 import com.gp.app.professionalpa.data.NoteListItem;
@@ -136,11 +132,11 @@ public class ProfessionalPANotesWriter
         
         noteItem.appendChild(data);
     	
-        Element isAlarm = xmlDocument.createElement("imageName");
+        Element imageName = xmlDocument.createElement("imageName");
         
-        isAlarm.appendChild(xmlDocument.createTextNode("imageName"));
+        imageName.appendChild(xmlDocument.createTextNode(noteListItem.getImageName()));
 
-        noteItem.appendChild(isAlarm);
+        noteItem.appendChild(imageName);
 	}
 
 	private void completeWritingProcess() throws ProfessionalPABaseException
@@ -185,7 +181,8 @@ public class ProfessionalPANotesWriter
 		{
 			Node noteElement = nodeList.item(i);
 			
-			if (noteElement.hasAttributes()) {
+			if (noteElement.hasAttributes())
+			{
                 Attr attr = (Attr) noteElement.getAttributes().getNamedItem("creationTime");
                 if (attr != null) {
                     String attribute= attr.getValue();                      
@@ -212,17 +209,85 @@ public class ProfessionalPANotesWriter
 					}
                 }
             }
-			
-			NamedNodeMap noteAttributes = noteElement.getAttributes();
-			
-			System.out.println("creation time :"+noteAttributes.getNamedItem(Long.toString(creationTime)));
-			
-			System.out.println("\nattributes :"+noteAttributes+" string content:"+noteElement.getTextContent()+
-					"name:"+noteElement.getNodeName()+"type="+noteElement.getNodeType()+"value="+noteElement.getNodeValue());
-			
-			
 		}
-
+    }
 		
+    public void deleteXmlElement(int noteId) throws ProfessionalPABaseException 
+	{
+		Element notesElement = xmlDocument.getDocumentElement();
+			
+		NodeList nodeList = notesElement.getChildNodes();
+			
+		for(int i = 0; i < nodeList.getLength(); i++)
+		{
+			Node noteElement = nodeList.item(i);
+				
+			if (noteElement.hasAttributes()) 
+			{
+	            Attr attr = (Attr) noteElement.getAttributes().getNamedItem("noteId");
+	            if (attr != null) 
+	            {
+	                String attribute= attr.getValue();                      
+	                
+	                int readNoteId = Integer.valueOf(attribute);
+							
+					if(noteId == readNoteId)
+					{
+						notesElement.removeChild(noteElement);
+					
+						completeWritingProcess();
+
+						break;
+					}
+						
+	            }
+	        }
+		}
+	}
+    
+	public ProfessionalPANote.NotePropertyValues getNoteProperties(int noteId) throws ProfessionalPABaseException 
+	{
+    	ProfessionalPANote.NotePropertyValues noteProperties = new ProfessionalPANote.NotePropertyValues();
+    	
+    	Element notesElement = xmlDocument.getDocumentElement();
+			
+		NodeList nodeList = notesElement.getChildNodes();
+			
+		for(int i = 0; i < nodeList.getLength(); i++)
+		{
+			Node noteElement = nodeList.item(i);
+				
+			if (noteElement.hasAttributes()) 
+			{
+	            Attr attr = (Attr) noteElement.getAttributes().getNamedItem("noteId");
+	            
+	            if (attr != null) 
+	            {
+	                String attribute= attr.getValue();                      
+	                
+	                int readNoteId = Integer.valueOf(attribute);
+							
+					if(noteId == readNoteId)
+					{
+			            Attr noteTypeAttribute = (Attr) noteElement.getAttributes().getNamedItem(ProfessionalPANote.NOTE_TYPE);
+			            
+			            noteProperties.addProperties(ProfessionalPANote.NOTE_TYPE, noteTypeAttribute.getValue());
+			            
+			            Attr noteCreationTimeAttribute = (Attr) noteElement.getAttributes().getNamedItem(ProfessionalPANote.NOTE_CREATION_TIME);
+						
+			            noteProperties.addProperties(ProfessionalPANote.NOTE_CREATION_TIME, noteCreationTimeAttribute.getValue());
+
+                        Attr noteLastModifiedTimeAttribute = (Attr) noteElement.getAttributes().getNamedItem(ProfessionalPANote.NOTE_MODIFIED_TIME);
+						
+			            noteProperties.addProperties(ProfessionalPANote.NOTE_MODIFIED_TIME, noteLastModifiedTimeAttribute.getValue());
+
+			            break;
+					}
+						
+	            }
+	        }
+		}
+		
+		return noteProperties;
 	}
 }

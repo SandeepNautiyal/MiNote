@@ -6,6 +6,6 @@
 <!ATTLIST note creationTime PCDATA #REQUIRED>
 <!ATTLIST note lastEditedTime PCDATA #REQUIRED>
 <!ELEMENT noteItem (data, imageName)>
-<!ELEMENT data (#PCDATA)>
-<!ELEMENT imageName (#PCDATA)>
+<!ELEMENT data PCDATA #REQUIRED>
+<!ELEMENT imageName PCDATA #REQUIRED>
 ]>

@@ -106,27 +106,6 @@ public class ImageLocationPathManager
 		return imageFileName;
 	}
 	
-	public File createNextFile()
-	{
-        String filePath = imageDirectoryPath + ProfessionalPATools.createImageNameFromTime()+".jpeg";
-        
-        File newfile = new File(filePath);
-        
-        try 
-        {
-            if(newfile.createNewFile())
-            {
-            	mostRecentImageFilePath = filePath;
-            }
-        } 
-        catch (IOException e) 
-        {
-        	//TODO improve
-        } 
-        
-        return newfile;
-	}
-	
 	public String getMostRecentImageFilePath()
 	{
 		return mostRecentImageFilePath;

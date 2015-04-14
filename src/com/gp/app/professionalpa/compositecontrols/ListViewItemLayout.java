@@ -33,6 +33,8 @@ public class ListViewItemLayout extends RelativeLayout
 //	private ImageButton alarmImageButton = null;
 	
 	private int stateToSave;
+
+	private String imageName;
 	
 	public ListViewItemLayout(Context context) 
 	{
@@ -90,9 +92,6 @@ public class ListViewItemLayout extends RelativeLayout
 			byte[] imageArray = stream.toByteArray();
 
 			bundle.putByteArray("BITMAP_IMAGE", imageArray);
-
-			System.out.println("writeToParcel -> array length="
-					+ imageArray.length);
 	    }
 	    // ... save everything
 	    return bundle;
@@ -139,17 +138,6 @@ public class ListViewItemLayout extends RelativeLayout
 	    image = Bitmap.createScaledBitmap(image, 300, 300,
                 true);
 	    
-	    imageView.setOnLongClickListener(new OnLongClickListener() {
-			
-			@Override
-			public boolean onLongClick(View v) 
-			{
-				System.out.println("long click for image view");
-				
-				return false;
-			}
-		});
-	    
 	    imageView.setImageBitmap(image);
 	    imageView.setLayoutParams(imageViewParams);
 	}
@@ -157,4 +145,14 @@ public class ListViewItemLayout extends RelativeLayout
 //	public ImageButton getAlarmImageButton() {
 //		return alarmImageButton;
 //	}
+
+	public void setImageName(String imageName)
+	{
+		this.imageName = imageName;
+	}
+	
+	public String getImageName()
+	{
+		return imageName == null ? "" : imageName;
+	}
 }

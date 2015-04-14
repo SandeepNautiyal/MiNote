@@ -1,17 +1,20 @@
 package com.gp.app.professionalpa.notes.fragments;
 
-import java.util.ArrayList;
 
 import android.app.ListFragment;
 import android.os.Bundle;
 import com.gp.app.professionalpa.data.ListViewItemAdapter;
-import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 
 public class ProfessionalPANoteFragment extends ListFragment
 {
-	private ArrayList<NoteListItem> values = new ArrayList<NoteListItem>();
+	private int noteId = -1;
+	
+	public ProfessionalPANoteFragment()
+	{
+		super();
+	}
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) 
@@ -26,11 +29,7 @@ public class ProfessionalPANoteFragment extends ListFragment
 			
 		    if(note != null)
 		    {
-		    	values.clear();
-		    	
-		    	values.addAll(note.getNoteItems());
-		    	
-				ListViewItemAdapter adapter = new ListViewItemAdapter(getActivity(), note.getNoteItems(), note.getNoteType(), note.getNoteId());
+				ListViewItemAdapter adapter = new ListViewItemAdapter(getActivity(), note);
 				
 				setListAdapter(adapter);
 				
@@ -43,14 +42,19 @@ public class ProfessionalPANoteFragment extends ListFragment
 		}
 	}
 	
+	public void setNoteFragmentId(int noteId)
+	{
+		this.noteId = noteId;
+	}
+	
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
-
-	public ProfessionalPANoteFragment createFragmentFromFile()
+	
+	public int getNoteFragmentId()
 	{
-		return null;
+		return noteId;
 	}
 }

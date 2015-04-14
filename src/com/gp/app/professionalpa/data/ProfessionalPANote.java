@@ -1,19 +1,35 @@
 package com.gp.app.professionalpa.data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.interfaces.XMLEntity;
-import com.gp.app.professionalpa.util.ProfessionalPANotesIdGenerator;
-import com.gp.app.professionalpa.util.ProfessionalPATools;
 
 
-public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<ProfessionalPANote>
+public class ProfessionalPANote implements XMLEntity, Parcelable
 {
+	//<!DOCTYPE notes [
+//<!ELEMENT notes (note+) #REQUIRED>
+//<!ELEMENT note (noteItem+)>
+//<!ATTLIST note noteId PCDATA #REQUIRED>
+//<!ATTLIST note isParagraphNote PCDATA #REQUIRED>
+//<!ATTLIST note creationTime PCDATA #REQUIRED>
+//<!ATTLIST note lastEditedTime PCDATA #REQUIRED>
+//<!ELEMENT noteItem (data, imageName)>
+//<!ELEMENT data (#PCDATA)>
+//<!ELEMENT imageName (#PCDATA)>
+    public static final String NOTE_ID = "noteId";
+    public static final String	NOTE_CREATION_TIME = "creationTime";
+    public static final String	NOTE_MODIFIED_TIME ="lastEditedTime";
+    public static final String	NOTE_TYPE="isParagraphNote";
+
+	
 	private int noteId = -1;
 	
 	private byte state = XMLEntity.INSERT_STATE;
@@ -26,6 +42,8 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 	
 	private long lastEditedTime = 0L;
 	
+	private List<String> imageNames = new ArrayList<String>();
+	
 
 	public ProfessionalPANote(int noteId, byte noteType, List<NoteListItem> values) 
 	{
@@ -36,6 +54,18 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 		if(values != null)
 		{
 			this.notes = values;
+		}
+		
+		System.out.println("ProfessionalPANote  -> values="+values+" size="+values.size());
+		
+		for(int i = 0, size = values != null ? values.size() : 0; i < size; i++)
+		{
+			NoteListItem noteItem = values.get(i);
+			
+			if(noteItem.getImageName() != null && !noteItem.getImageName().equals(""))
+			{
+				imageNames.add(noteItem.getImageName());
+			}
 		}
 	}
 
@@ -78,17 +108,6 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 		return notes;
 	}
 	
-	public String toString()
-	{
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("isParagraph note:"+noteType);
-		
-		sb.append("Note item :"+notes);
-		
-		return sb.toString();
-	}
-
 	public void setCreationTime(long creationTime)
 	{
 		this.creationTime = creationTime;
@@ -185,34 +204,64 @@ public class ProfessionalPANote implements XMLEntity, Parcelable, Comparable<Pro
 
 	public int hashCode()
 	{
-		return (int)lastEditedTime;
+		return (int)creationTime;
 	}
 	
 	@Override
 	public boolean equals(Object obj)
 	{
-		return this.convertToString().equals(((ProfessionalPANote)obj).convertToString());
+		return this.creationTime == ((ProfessionalPANote)obj).getCreationTime()
+				&& this.lastEditedTime == ((ProfessionalPANote)obj).getLastEditedTime();
 	}
 	
-	@Override
-	public int compareTo(ProfessionalPANote note) 
+	public static class NotePropertyValues 
 	{
-		return this.convertToString().compareTo(((ProfessionalPANote)note).convertToString());
+		private Map<String, String> properties = new HashMap<String, String>();
+		
+		private boolean isValidProperty(String key)
+		{
+			if(key.equals(NOTE_ID) || key.equals(NOTE_CREATION_TIME)
+					|| key.equals(NOTE_MODIFIED_TIME)
+					|| key.equals(NOTE_TYPE))
+			{
+				return true;
+			}
+			
+			return false;
+		}
+		
+		public void addProperties(String property, String propertyValue)
+		{
+			if(isValidProperty(property))
+			{
+				properties.put(property, propertyValue);
+			}
+		}
+		
+		public String getValue(String property)
+		{
+			if(isValidProperty(property))
+			{
+				return properties.get(property);
+			}
+			
+			return null;
+		}
+	}
+
+	public List<String> getImageNames()
+	{
+		return imageNames;
 	}
 	
-	public String convertToString()
+	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("\n creationTime="+creationTime);
+		sb.append("isParagraph note:"+noteType);
 		
-		sb.append("lastEditedTime="+lastEditedTime);
+		sb.append("Note item :"+notes);
 		
-		for(int i = 0; i < notes.size(); i++)
-		{
-			sb.append("\n Note-"+i+"="+notes.get(i).convertToString());
-		}
-		
-	return sb.toString();
+		return sb.toString();
 	}
 }

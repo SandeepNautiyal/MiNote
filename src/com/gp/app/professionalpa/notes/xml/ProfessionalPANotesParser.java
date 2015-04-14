@@ -96,14 +96,9 @@ public class ProfessionalPANotesParser extends DefaultHandler
 			data = true;
 		}
  
-		if (qName.equalsIgnoreCase("isAlarm")) 
+		if (qName.equalsIgnoreCase("imageName")) 
 		{
 			imageName = true;
-		}
-		
-		if (qName.equalsIgnoreCase("isImportant")) 
-		{
-			isImportant = true;
 		}
 	}
 
@@ -119,19 +114,9 @@ public class ProfessionalPANotesParser extends DefaultHandler
 			data = false;
 		}
  
-		if (qName.equalsIgnoreCase("isAlarm")) 
+		if (qName.equalsIgnoreCase("imageName")) 
 		{
 			imageName = false;
-		}
-		
-		if (qName.equalsIgnoreCase("isImportant")) 
-		{
-			isImportant = false;
-		}
-		
-		if (qName.equalsIgnoreCase("isImportant")) 
-		{
-			isImportant = false;
 		}
 		
 		if(qName.equalsIgnoreCase("NoteItem"))
@@ -141,6 +126,8 @@ public class ProfessionalPANotesParser extends DefaultHandler
 		
 		if (qName.equalsIgnoreCase("note"))
 		{
+			System.out.println("endElement -> note added="+currentNote);
+			
 			notes.add(currentNote);
 			
 			currentNote.setState(XMLEntity.READ_STATE);
@@ -153,19 +140,44 @@ public class ProfessionalPANotesParser extends DefaultHandler
 	{
 		if (data) 
 		{
-			currentNoteItem.setTextViewData(new String(ch, start, length));
+			String data = new String(ch, start, length);
+			
+			System.out.println("characters -> data="+data);
+			
+			currentNoteItem.setTextViewData(data);
 		}
  
 		if (imageName) 
 		{
-			currentNoteItem.setImageName((new String(ch, start, length)));
+			String imageName = new String(ch, start, length);
 			
-			System.out.println("currentNoteItem image name="+currentNoteItem.getImageName());
+			System.out.println("characters -> imageName="+imageName);
+
+			currentNoteItem.setImageName(imageName);
 		}
 	}
 	
 	public List<ProfessionalPANote> getNotes()
 	{
 		return notes;
+	}
+
+	public ProfessionalPANote getNote(int noteId) 
+	{
+		ProfessionalPANote result = null;
+		
+		for(int i = 0; i < notes.size(); i++)
+		{
+			ProfessionalPANote note = notes.get(i);
+			
+			if(note.getNoteId() == noteId)
+			{
+				result = note;
+				
+				break;
+			}
+		}
+		
+		return result;
 	}
 }

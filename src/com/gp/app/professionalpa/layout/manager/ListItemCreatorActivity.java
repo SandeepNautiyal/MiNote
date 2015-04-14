@@ -2,6 +2,7 @@ package com.gp.app.professionalpa.layout.manager;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import android.app.ActionBar;
@@ -92,11 +93,17 @@ public class ListItemCreatorActivity extends Activity
 	    	
 	    	ImageLocationPathManager.getInstance().createSaveImage(photo);
 	    	
-	    	Bitmap image = createProfessionalPANoteFromImage(ImageLocationPathManager.getInstance().getMostRecentImageFilePath());
+	    	String imagePath = ImageLocationPathManager.getInstance().getMostRecentImageFilePath();
+	    	
+	    	Bitmap image = createProfessionalPANoteFromImage(imagePath);
+	        
+	    	String imageName = ImageLocationPathManager.getInstance().getImageName(imagePath);
+	    	
+	        lastAddedListItem.setImage(image);
+
+	        lastAddedListItem.setImageName(imageName);
 	        
 	        addNewListItem();
-	        
-	        lastAddedListItem.setImage(image);
 	    }
 	}
 	
@@ -143,15 +150,12 @@ public class ListItemCreatorActivity extends Activity
 		
 		currentAddedListItem.setLayoutParams(layoutParams);
 		
-		Log.e("index", "currentAddedListItem ="+currentAddedListItem+" id :"+currentAddedListItem.getId()+" lastAddedListItem="+lastAddedListItem
-				+" id :"+lastAddedListItem.getId());
-		
 		activityLayout.addView(currentAddedListItem, listItems.size());
-		
-		lastAddedListItem = currentAddedListItem;
 		
 		listItems.add(currentAddedListItem);
 		
+		lastAddedListItem = currentAddedListItem;
+
 		addSaveAndAddItemButton();
 		
 		setContentView(scrollView);
@@ -224,18 +228,33 @@ public class ListItemCreatorActivity extends Activity
 
 	private void saveListOfItems()
 	{
-		List<NoteListItem> item = new ArrayList<NoteListItem>();
+		List<NoteListItem> noteItems = new ArrayList<NoteListItem>();
 		
 		for(int i = 0, size = listItems.size(); i < size; i++)
 		{
 			ListViewItemLayout compoundControl = listItems.get(i);
 			
-            NoteListItem listItem = new NoteListItem(compoundControl.getText());
+			String imageName = compoundControl.getImageName();
 			
-            item.add(listItem);
+			boolean isValidImageName =  imageName != null && imageName.length() > 0 && !imageName.equals("");
+
+			System.out.println("saveListOfItems -> imageName="+imageName+" isValidImageName="+isValidImageName);
+
+			String listItemData = compoundControl.getText();
+			
+			boolean isValidListText =  listItemData != null && listItemData.length() > 0 && !listItemData.equals("");
+
+			System.out.println("saveListOfItems -> listItemData="+listItemData+" isValidListText="+isValidListText);
+
+			if(isValidImageName || isValidListText)
+			{
+	            NoteListItem listItem = new NoteListItem(compoundControl.getText(), compoundControl.getImageName());
+
+	            noteItems.add(listItem);
+			}
 		}
 
-		ProfessionalPANote note = new ProfessionalPANote(ProfessionalPANotesIdGenerator.generateNoteId(), ProfessionalPAConstants.LIST_NOTE, item);
+		ProfessionalPANote note = new ProfessionalPANote(ProfessionalPANotesIdGenerator.generateNoteId(), ProfessionalPAConstants.LIST_NOTE, noteItems);
 		
 		long creationTime = System.currentTimeMillis();
 		
@@ -243,13 +262,9 @@ public class ListItemCreatorActivity extends Activity
 		
 		note.setLastEditedTime(creationTime);
 		
-		List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
-		
-		notes.add(note);
-		
 		try
 		{
-			persistListElement(notes);
+			persistListElement(Arrays.asList(note));
 		} 
 		catch (ProfessionalPABaseException exception) 
 		{

@@ -20,32 +20,27 @@ import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.layout.manager.ImageLocationPathManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 import com.gp.app.professionalpa.views.listeners.NoteItemLongClickListener;
+import com.gp.app.professionalpa.views.listeners.NotesActionMode;
 
 public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 {
-
-	private byte noteType = -1;
-	
-	private int noteId = -1;
+	private ProfessionalPANote note = null;
 	
 	private Context context = null;
 	
 	private List<NoteListItem> listItems = null;
 	
-	
-	public ListViewItemAdapter(Context context, List<NoteListItem> values, byte noteType, int noteId) {
+	public ListViewItemAdapter(Context context, ProfessionalPANote note) {
 		
-		super(context, 0, values);
+		super(context, 0, note.getNoteItems());
 		
 		this.context = context;
 		
-		this.noteId = noteId;
-		
-		this.noteType = noteType;
+		this.note = note;
 
-		if(values != null)
+		if(note.getNoteItems() != null)
 		{
-			listItems = values;
+			listItems = note.getNoteItems();
 		}
 	}
 	
@@ -55,6 +50,8 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 	    if(convertView == null)
 	        convertView = LayoutInflater.from(getContext()).inflate(R.layout.data_adapter_view, parent, false);
 	    
+		System.out.println("getView -> position="+position);
+
 	    NoteListItem noteListItem = listItems.get(position);
 	    
 	    TextView textView = (TextView) convertView.findViewById(R.id.compositeControlTextBox);
@@ -67,76 +64,64 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 //
 //	    ImageButton alarmImageButton = (ImageButton)convertView.findViewById(R.id.composite_control_alarm_button);
 
-	    if(noteType == ProfessionalPAConstants.LIST_NOTE || noteType == ProfessionalPAConstants.PARAGRAPH_NOTE)
-	    {
-	    	if(noteType == ProfessionalPAConstants.LIST_NOTE)
-	    	{
-	    		LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
-		        importanceButtonParams.height =  compressedViewHeight;
-		        importanceButtonParams.width = (int)androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
-		        bulletPointImage.setLayoutParams(importanceButtonParams);
-	    	}
-	    	else if(noteType == ProfessionalPAConstants.PARAGRAPH_NOTE)
-	    	{
-	    		LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
-		        importanceButtonParams.height =  0;
-		        importanceButtonParams.width = 0;
-		        bulletPointImage.setLayoutParams(importanceButtonParams);
-	    		bulletPointImage.setVisibility(View.INVISIBLE);
-	    	}
-//	        
-//	        LayoutParams alarmButtonParams = alarmImageButton.getLayoutParams();
-//	        alarmButtonParams.height = compressedViewHeight;
-//	        alarmButtonParams.width = (int)androidResources.getDimension(R.dimen.composite_control_alarm_button_compressed_width);
-//		    alarmImageButton.setLayoutParams(alarmButtonParams);
-		    
-		    final LayoutParams params = textView.getLayoutParams();
+	    byte noteType = note.getNoteType();
+	    		
+		if (noteType == ProfessionalPAConstants.LIST_NOTE && (noteListItem.getImageName() == null || noteListItem.getImageName().equals("")))
+		{
+			LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
+			importanceButtonParams.height = compressedViewHeight;
+			importanceButtonParams.width = (int) androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
+			bulletPointImage.setLayoutParams(importanceButtonParams);
+		} 
+		else if (noteType == ProfessionalPAConstants.PARAGRAPH_NOTE) 
+		{
+			LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
+			importanceButtonParams.height = 0;
+			importanceButtonParams.width = 0;
+			bulletPointImage.setLayoutParams(importanceButtonParams);
+			bulletPointImage.setVisibility(View.INVISIBLE);
+		}
 
-		    params.height =  LayoutParams.WRAP_CONTENT;
+		if (noteListItem.getTextViewData() != null && !noteListItem.getTextViewData().equals(""))
+		{
+			final LayoutParams params = textView.getLayoutParams();
 
-		    textView.setLayoutParams(params);
+			params.height = LayoutParams.WRAP_CONTENT;
 
-		    if(listItems != null && listItems.size() > 0)
-		    {
-		    	textView.setText(listItems.get(position).getTextViewData());
-		    }
-		    
-		    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+			textView.setLayoutParams(params);
 
-		    textView.setOnLongClickListener(new NoteItemLongClickListener(noteId));
-		    
-		    textView.setLayoutParams(params);
-	    }
-	    else
-	    {
-	        ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
+			textView.setText(noteListItem.getTextViewData());
 
-		    LayoutParams imageViewParams = imageView.getLayoutParams();
-		    imageViewParams.height =  LayoutParams.MATCH_PARENT;
-		    imageViewParams.width = LayoutParams.MATCH_PARENT;
-		    
-		    //TODO implement ImageLocationPathManager.getImage()
-		    
-		    Bitmap image = ImageLocationPathManager.getInstance().getImage(noteListItem.getImageName());
-		    
-		    image = Bitmap.createScaledBitmap(image, 300, 300,
-	                true);
-		    
-//		    imageView.setOnLongClickListener(new OnLongClickListener() {
-//				
-//				@Override
-//				public boolean onLongClick(View v) 
-//				{
-//					System.out.println("long click for image view");
-//					
-//					return false;
-//				}
-//			});
-		    
-		    imageView.setImageBitmap(image);
-		    imageView.setLayoutParams(imageViewParams);
-	    }
+			System.out.println("getView -> text data="+noteListItem.getTextViewData());
+			
+			textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+
+			textView.setOnLongClickListener(new NoteItemLongClickListener(
+					new NotesActionMode(note.getNoteId(), note.getNoteType(),
+							note.getImageNames())));
+
+			textView.setLayoutParams(params);
+		}
+
+		if (noteListItem.getImageName() != null && !noteListItem.getImageName().equals("")) 
+		{
+			ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
+
+			System.out.println("getView -> imageView");
+
+			LayoutParams imageViewParams = imageView.getLayoutParams();
+			imageViewParams.height = LayoutParams.MATCH_PARENT;
+			imageViewParams.width = LayoutParams.MATCH_PARENT;
+
+			Bitmap image = ImageLocationPathManager.getInstance().getImage(
+					noteListItem.getImageName());
+
+			image = Bitmap.createScaledBitmap(image, 300, 300, true);
+			imageView.setImageBitmap(image);
+			imageView.setLayoutParams(imageViewParams);
+		}
 	    
+		System.out.println("getView -> returning");
 
 	    return convertView;
 	}

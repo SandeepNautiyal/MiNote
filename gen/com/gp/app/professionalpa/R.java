@@ -30,31 +30,33 @@ public final class R {
     }
     public static final class drawable {
         public static final int air_india_logo=0x7f020000;
-        public static final int ic_pin_black_bullet_point=0x7f020001;
-        public static final int list_view_border=0x7f020002;
-        public static final int personal_assistant=0x7f020003;
-        public static final int professional_pa_action_search=0x7f020004;
-        public static final int professional_pa_action_settings=0x7f020005;
-        public static final int professional_pa_camera=0x7f020006;
-        public static final int professional_pa_discard_note=0x7f020007;
-        public static final int professional_pa_ic_launcher=0x7f020008;
-        public static final int professional_pa_list_view=0x7f020009;
-        public static final int professional_pa_list_view1=0x7f02000a;
-        public static final int professional_pa_paragraph_view=0x7f02000b;
-        public static final int professional_pa_paragraph_view1=0x7f02000c;
-        public static final int save_notes=0x7f02000d;
+        public static final int ic_action_copy=0x7f020001;
+        public static final int ic_pin_black_bullet_point=0x7f020002;
+        public static final int list_view_border=0x7f020003;
+        public static final int personal_assistant=0x7f020004;
+        public static final int professional_pa_action_search=0x7f020005;
+        public static final int professional_pa_action_settings=0x7f020006;
+        public static final int professional_pa_camera=0x7f020007;
+        public static final int professional_pa_discard_note=0x7f020008;
+        public static final int professional_pa_ic_launcher=0x7f020009;
+        public static final int professional_pa_list_view=0x7f02000a;
+        public static final int professional_pa_list_view1=0x7f02000b;
+        public static final int professional_pa_paragraph_view=0x7f02000c;
+        public static final int professional_pa_paragraph_view1=0x7f02000d;
+        public static final int save_notes=0x7f02000e;
     }
     public static final class id {
         public static final int ScrollView01=0x7f08000e;
         public static final int action_add_notes=0x7f08001f;
         public static final int action_clear_all_notes=0x7f08001c;
         public static final int action_click_photo=0x7f080017;
+        public static final int action_copy_notes=0x7f080024;
         public static final int action_create_list_view=0x7f08001e;
         public static final int action_create_paragraph_view=0x7f080019;
         public static final int action_discard_notes=0x7f080023;
         public static final int action_display_calender=0x7f080022;
         public static final int action_exit_professional_pa_application=0x7f08001d;
-        public static final int action_save_paragraph_note=0x7f080024;
+        public static final int action_save_paragraph_note=0x7f080025;
         public static final int action_search=0x7f08001a;
         public static final int action_settings=0x7f08001b;
         public static final int adapter_row_layout=0x7f080013;
@@ -107,6 +109,7 @@ public final class R {
     }
     public static final class string {
         public static final int action_click_photo=0x7f050017;
+        public static final int action_copy_notes=0x7f05001a;
         public static final int action_create_list_view=0x7f050005;
         public static final int action_discard_notes=0x7f050016;
         public static final int action_search=0x7f050002;

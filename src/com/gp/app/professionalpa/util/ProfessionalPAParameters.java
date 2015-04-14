@@ -1,13 +1,14 @@
 package com.gp.app.professionalpa.util;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesParser;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
-
-import android.content.Context;
-import android.content.SharedPreferences;
 
 public class ProfessionalPAParameters 
 {
@@ -28,6 +29,8 @@ public class ProfessionalPAParameters
 	private static ProfessionalPANotesReader notesReader = null;
 
 	private static FragmentCreationManager fragmentCreationManager;
+	
+	private static NotesLayoutManagerActivity notesLayoutManagerActivity;
 	
     public static void setApplicationContext(Context context)
     {
@@ -65,7 +68,7 @@ public class ProfessionalPAParameters
 	
 	public static int getId()
 	{
-		 return (int)Math.abs(Math.random()*1000000);
+		 return (int)Math.abs(Math.random()*10000);
 	}
 	
 	public static SharedPreferences getSharedPreferences()
@@ -106,5 +109,15 @@ public class ProfessionalPAParameters
 		}
 		
 		return fragmentCreationManager;
+	}
+
+	public static void setNotesActivity(NotesLayoutManagerActivity notesManagerActivity) 
+	{
+		notesLayoutManagerActivity = notesManagerActivity;
+	}
+	
+	public static NotesLayoutManagerActivity getNotesActivity() 
+	{
+		return notesLayoutManagerActivity;
 	}
 }

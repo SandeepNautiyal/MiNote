@@ -1,9 +1,7 @@
 package com.gp.app.professionalpa.layout.manager;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,14 +18,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.ActionMode;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -38,138 +34,141 @@ import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.export.ProfessionalPANotesExporter;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
+import com.gp.app.professionalpa.notes.fragments.NotesManager;
+import com.gp.app.professionalpa.notes.fragments.ProfessionalPANoteFragment;
+import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.util.ProfessionalPANotesIdGenerator;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
-public class NotesLayoutManagerActivity extends Activity
-{
+public class NotesLayoutManagerActivity extends Activity {
 	private static final String NUMBER_OF_LINEAR_LAYOUTS = "NUMBER_OF_LINEAR_LAYOUTS";
 
 	private static final int LIST_ACTIVITY_RESULT_CREATED = 1;
-	
+
 	private static final byte NUMBER_OF_LINEAR_LAYOUT_FOR_SMALL_SCREEN_PORTRAIT = 1;
-	
+
 	private static final byte NUMBER_OF_LINEAR_LAYOUT_FOR_SMALL_SCREEN_LANDSCAPE = 2;
-	
-    private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_NORMAL_SCREEN_PORTRAIT = 2;
-	
+
+	private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_NORMAL_SCREEN_PORTRAIT = 2;
+
 	private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_NORMAL_SCREEN_LANDSCAPE = 3;
-	
-    private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_LARGE_SCREEN_PORTRAIT = 3;
-	
+
+	private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_LARGE_SCREEN_PORTRAIT = 3;
+
 	private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_LARGE_SCREEN_LANDSCAPE = 4;
-	
-    private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_PORTRAIT = 4;
-	
+
+	private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_PORTRAIT = 4;
+
 	private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_LANDSCAPE = 5;
-	
-    private byte numberOfLinearLayouts = -1;
-    
+
+	private byte numberOfLinearLayouts = -1;
+
 	private Map<Integer, FrameLayout> childFrames = new LinkedHashMap<Integer, FrameLayout>();
-	
+
 	private List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
-	
+
 	private ActionMode actionMode = null;
 	
+	private boolean areNotesAlreadyCreated = false;
+
+	private LinearLayoutAndIndexSelector linearLayoutAndIndexSelector = null;
 	private List<Integer> selectedViewIds = new ArrayList<Integer>();
-	
+
 	private ImageLocationPathManager imageCaptureManager = null;
-	
-	public NotesLayoutManagerActivity()
+
+	public NotesLayoutManagerActivity() 
 	{
 		super();
 	}
-	
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) 
+	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
+
 		imageCaptureManager = ImageLocationPathManager.getInstance();
-		
-		ScrollView scrollView  = (ScrollView)getLayoutInflater().inflate(R.layout.activity_notes_layout_manager, null);
-		
+
+		ScrollView scrollView = (ScrollView) getLayoutInflater().inflate(
+				R.layout.activity_notes_layout_manager, null);
+
 		setContentView(scrollView);
 
 		numberOfLinearLayouts = getNumberOfLinearLayouts();
-		
+
+		linearLayoutAndIndexSelector = new LinearLayoutAndIndexSelector(
+				numberOfLinearLayouts);
+
 		fillLinearLayoutList();
-		
+
+		NotesManager.getInstance().deleteAllNotes();
+
 		try 
 		{
+
 			createNotes();
 		} 
 		catch (ProfessionalPABaseException e) 
 		{
 			//TODO improve
-			e.printStackTrace();
 		}
-		
+
 		ActionBar actionBar = getActionBar();
-		
-		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7F7CD9")));
+
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color
+				.parseColor("#7F7CD9")));
+
+		ProfessionalPAParameters.setNotesActivity(this);
 	}
 
-	
 	@Override
 	protected void onSaveInstanceState(Bundle outState) 
 	{
-				
-//		outState.putStringArrayList(FRAGMENT_TAGS, (ArrayList<String>)fragmentTags);
-		
+
+		// outState.putStringArrayList(FRAGMENT_TAGS,
+		// (ArrayList<String>)fragmentTags);
+
 		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, numberOfLinearLayouts);
-		
-	    super.onSaveInstanceState(outState);
-	    
+
+		super.onSaveInstanceState(outState);
+
 	}
-	
+
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) 
 	{
-//		super.onRestoreInstanceState(savedInstanceState);
-//		
-		numberOfLinearLayouts = (byte)savedInstanceState.getByte(NUMBER_OF_LINEAR_LAYOUTS);
-//
-//		fragmentTags.addAll(savedInstanceState.getStringArrayList(FRAGMENT_TAGS));
-//
-//		if(fragmentTags.size() > 0)
-//		{
-			createActivityLayoutInCaseOfConfigurationChange();
-//		}
+		// super.onRestoreInstanceState(savedInstanceState);
+		//
+		numberOfLinearLayouts = (byte) savedInstanceState
+				.getByte(NUMBER_OF_LINEAR_LAYOUTS);
+		//
+		// fragmentTags.addAll(savedInstanceState.getStringArrayList(FRAGMENT_TAGS));
+		//
+		// if(fragmentTags.size() > 0)
+		// {
+		createActivityLayoutInCaseOfConfigurationChange();
+		// }
 	}
 
-
-	private void createActivityLayoutInCaseOfConfigurationChange() 
+	private void createActivityLayoutInCaseOfConfigurationChange()
 	{
-		updateNumberOfLinearLayoutsOnScreenChange(getResources().getConfiguration());
-		
+		updateNumberOfLinearLayoutsOnScreenChange(getResources()
+				.getConfiguration());
+
 		fillLinearLayoutList();
-		
-//		List<Fragment> fragments  = ProfessionalPAParameters.getFragmentCreationManager().getFragments();
-//		
-//		System.out.println("createActivityLayoutInCaseOfConfigurationChange -> fragments size ="+fragments.size()+" fragments="+fragments);
-//		
-//		for(int i = 0; i < fragments.size(); i++)
+
+		//TODO to be removed if everything works fine in case of screen orientation change.
+//		try 
 //		{
-//			Fragment fragment = fragments.get(i);
+//			System.out.println("createActivityLayoutInCaseOfConfigurationChange ->");
 //			
-//			getFragmentManager().beginTransaction().remove(fragment).commit();
-//			
-//			getFragmentManager().executePendingTransactions();
-//			
-//			createActivityLayout(fragment);
+//			createNotes();
+//		} 
+//		catch (ProfessionalPABaseException e) 
+//		{
+//			// TODO improve
+//			e.printStackTrace();
 //		}
-		
-		try 
-		{
-			createNotes();
-		} 
-		catch (ProfessionalPABaseException e) 
-		{
-			//TODO improve
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -178,12 +177,11 @@ public class NotesLayoutManagerActivity extends Activity
 		super.onConfigurationChanged(newConfig);
 	}
 
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
 	{
 		getMenuInflater().inflate(R.menu.notes_layout_manager_menu, menu);
-		
+
 		return true;
 	}
 
@@ -191,111 +189,130 @@ public class NotesLayoutManagerActivity extends Activity
 	public boolean onOptionsItemSelected(MenuItem item) 
 	{
 		int id = item.getItemId();
-		
-		if (id == R.id.action_settings) 
+
+		if (id == R.id.action_settings)
 		{
 			return true;
-		}
-		else if(id == R.id.action_create_list_view)
+		} 
+		else if (id == R.id.action_create_list_view) 
 		{
-			Intent intent = new Intent(getApplicationContext(), ListItemCreatorActivity.class);
-			
+			Intent intent = new Intent(getApplicationContext(),
+					ListItemCreatorActivity.class);
+
+			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
+		} 
+		else if (id == R.id.action_create_paragraph_view)
+		{
+			Intent intent = new Intent(getApplicationContext(),
+					ParagraphNoteCreatorActivity.class);
+
 			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
 		}
-		else if(id == R.id.action_create_paragraph_view)
+		else if (id == R.id.export_notes) 
 		{
-            Intent intent = new Intent(getApplicationContext(), ParagraphNoteCreatorActivity.class);
-			
-			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
-		}
-		else if(id == R.id.export_notes)
-		{
-			try
+			try 
 			{
 				ProfessionalPANotesExporter.export();
 			}
-			catch(ProfessionalPABaseException exception)
+			catch (ProfessionalPABaseException exception) 
 			{
-				//TODO
+				// TODO
 			}
-		}
-		else if(id == R.id.import_notes)
+		} 
+		else if (id == R.id.import_notes) 
 		{
 			List<ProfessionalPANote> notes;
-			
-			try 
+
+			try
 			{
 				notes = ProfessionalPANotesReader.readNotes(true);
-				
-				ProfessionalPAParameters.getProfessionalPANotesWriter().writeNotes(notes);
+
+				ProfessionalPAParameters.getProfessionalPANotesWriter()
+						.writeNotes(notes);
 			} 
 			catch (ProfessionalPABaseException e) 
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		}
-		else if(id == R.id.action_click_photo)
+
+		} 
+		else if (id == R.id.action_click_photo) 
 		{
-            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); 
-            
-            startActivityForResult(cameraIntent, ProfessionalPAConstants.TAKE_PHOTO_CODE);
+			Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+			startActivityForResult(cameraIntent,
+					ProfessionalPAConstants.TAKE_PHOTO_CODE);
 		}
-		
+
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public void updateNumberOfLinearLayoutsOnScreenChange(Configuration newConfig)
+
+	public void updateNumberOfLinearLayoutsOnScreenChange(Configuration newConfig) 
 	{
-	    // Checks the orientation of the screen
-	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) 
-	    {
-	    	 numberOfLinearLayouts = (byte)(numberOfLinearLayouts+1);
-	    } 
-	    else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-	    {
-	    	numberOfLinearLayouts = (byte)(numberOfLinearLayouts-1);
-	    }
+		// Checks the orientation of the screen
+		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) 
+		{
+			numberOfLinearLayouts = (byte) (numberOfLinearLayouts + 1);
+		}
+		else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
+		{
+			numberOfLinearLayouts = (byte) (numberOfLinearLayouts - 1);
+		}
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-	    ProfessionalPANote note = null;
-	    
-	    if (requestCode == ProfessionalPAConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
-	    {
-	    	Bitmap photo = (Bitmap) data.getExtras().get("data");
-	    	
-	    	ImageLocationPathManager.getInstance().createSaveImage(photo);
-	    	
-	        note = createProfessionalPANoteFromImage(imageCaptureManager.getMostRecentImageFilePath());
-	    }
-	    else
-	    {
-	    	if (data != null)
-	    	{
-			    note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
-	    	}
-	    }
-	    
-	    if(note != null)
-	    {
-		    createFragmentForNote(note);
-	    }
+		ProfessionalPANote note = null;
+
+		if (requestCode == ProfessionalPAConstants.TAKE_PHOTO_CODE
+				&& resultCode == RESULT_OK) 
+		{
+			Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+			ImageLocationPathManager.getInstance().createSaveImage(photo);
+
+			note = createProfessionalPANoteFromImage(imageCaptureManager
+					.getMostRecentImageFilePath());
+
+			try 
+			{
+				ProfessionalPAParameters.getProfessionalPANotesWriter()
+						.writeNotes(Arrays.asList(note));
+			} 
+			catch (ProfessionalPABaseException e) 
+			{
+				// e.printStackTrace();
+			}
+		} 
+		else
+		{
+			if (data != null) 
+			{
+				note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
+			}
+		}
+
+		if (note != null)
+		{
+			createFragmentForNote(note);
+		}
 	}
 
-	private ProfessionalPANote createProfessionalPANoteFromImage(String imagePath) 
+	private ProfessionalPANote createProfessionalPANoteFromImage(String imagePath)
 	{
 		ProfessionalPANote note;
-		
+
 		ArrayList<NoteListItem> items = new ArrayList<NoteListItem>();
-		
-		items.add(new NoteListItem(null, ImageLocationPathManager.getInstance().getImageName(imagePath)));
-		
-		note = new ProfessionalPANote(ProfessionalPANotesIdGenerator.generateNoteId(), ProfessionalPAConstants.IMAGE_NOTE, items);
-		
+
+		items.add(new NoteListItem(null, ImageLocationPathManager.getInstance()
+				.getImageName(imagePath)));
+
+		note = new ProfessionalPANote(
+				ProfessionalPANotesIdGenerator.generateNoteId(),
+				ProfessionalPAConstants.IMAGE_NOTE, items);
+
 		long creationTime = Long.valueOf(imageCaptureManager
 				.getImageName(imagePath));
 
@@ -303,30 +320,32 @@ public class NotesLayoutManagerActivity extends Activity
 
 		note.setLastEditedTime(creationTime);
 
+		note.setTypeOfNote(ProfessionalPAConstants.IMAGE_NOTE);
+
 		note.setLastEditedTime(System.currentTimeMillis());
 		return note;
 	}
 
-
 	private void createFragmentForNote(ProfessionalPANote note) 
 	{
-	    if(note != null)
-	    {
-	    	FragmentCreationManager fragmentManager = ProfessionalPAParameters.getFragmentCreationManager();
-	    	
-	    	Fragment fragment = fragmentManager.createFragment(note);
-	    	
-	    	if(fragment != null)
-	    	{
-			    createActivityLayout(fragment);
-	    	}
-	    }
-	}
+		if (note != null)
+		{
+			Fragment fragment = FragmentCreationManager.createFragment(note);
 
+			NotesManager.getInstance().addNote(note.getNoteId(), note);
+
+			System.out.println("createFragmentForNote -> note=" + note);
+
+			if (fragment != null) 
+			{
+				createActivityLayout(fragment);
+			}
+		}
+	}
 
 	private void createActivityLayout(Fragment fragment) 
 	{
-		FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
+        FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
 		frameLayout.setClickable(true);
 		
@@ -335,284 +354,225 @@ public class NotesLayoutManagerActivity extends Activity
 		int id = ProfessionalPAParameters.getId();
 			
 		frameLayout.setId(id);
-		
-		String tag = fragment.getTag() != null ? fragment.getTag() : "Tag-"+ProfessionalPAParameters.getId();
-		
+
+		String tag = fragment.getTag() != null ? fragment.getTag() : "Tag-"
+				.concat(Integer.toString(ProfessionalPAParameters.getId()));
+
 		getFragmentManager().beginTransaction().add(id, fragment, tag).commit();
-		
-		addFrameLayoutToActivtyView(frameLayout);
-		
-		updateActivityView();
+
+		updateActivityView(frameLayout);
 	}
-	
+
 	@Override
-	protected void onDestroy() 
+	protected void onDestroy()
 	{
 		super.onDestroy();
-		
-		ProfessionalPAParameters.getFragmentCreationManager().removeAllFragments();
+
+		NotesManager.getInstance().deleteAllNotes();
 	}
 
-
-	private void addFrameLayoutToActivtyView(FrameLayout frameLayout) 
-	{
-		childFrames.put(frameLayout.getId(), frameLayout);
-	}
-
-	
 	public byte getNumberOfLinearLayouts() {
-		
+
 		byte numberOfLinearLayouts = -1;
-		
-		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) 
-		{
-			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) 
-			{
+
+		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_PORTRAIT;
-			} 
-			else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-			{
+			} else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_LANDSCAPE;
 			}
 
 		}
-		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) 
-		{
-			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) 
-			{
+		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_LARGE_SCREEN_PORTRAIT;
-			} 
-			else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) 
-			{
+			} else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_LARGE_SCREEN_LANDSCAPE;
 			}
-		} 
-		else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL)
-		{
-			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) 
-			{
+		} else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_NORMAL_SCREEN_PORTRAIT;
-			} 
-			else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) 
-			{
+			} else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_NORMAL_SCREEN_LANDSCAPE;
 			}
-		} 
-		else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) 
-		{
-			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) 
-			{
+		} else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_SMALL_SCREEN_PORTRAIT;
-			} 
-			else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) 
-			{
+			} else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_SMALL_SCREEN_LANDSCAPE;
 			}
-		} 
-		else 
-		{
+		} else {
 		}
 
 		return numberOfLinearLayouts;
 	}
-	
-	private void updateActivityView() 
-	{		
-		int index = linearLayouts.size()-1;
-		
-		int linearLayoutIndex = 0;
-		
-		for(int i = 0; i < linearLayouts.size(); i++)
+
+	private void updateActivityView(FrameLayout frameLayout)
+	{
+		int[] indexes = linearLayoutAndIndexSelector.getNextAvailableIndex();
+
+		int linearLayoutIndex = indexes[0];
+
+		int availableIndex = indexes[1];
+
+		LinearLayout linearLayout = linearLayouts.get(linearLayoutIndex);
+
+		LinearLayout parentView = (LinearLayout) frameLayout.getParent();
+
+		if (parentView != null) 
 		{
-			LinearLayout layout = linearLayouts.get(i);
-			
-			layout.removeAllViews();
+			parentView.removeView(frameLayout);
 		}
-		
-		for (Entry<Integer, FrameLayout> entry : childFrames.entrySet()) 
-		{
-			LinearLayout linearLayout = linearLayouts.get(index);
 
-			FrameLayout frameLayout = entry.getValue();
+		linearLayout.addView(frameLayout, availableIndex);
 
-			LinearLayout parentView = (LinearLayout) frameLayout.getParent();
-
-			if (parentView != null) 
-			{
-				parentView.removeView(frameLayout);
-			}
-
-			linearLayout.addView(frameLayout, linearLayoutIndex);
-
-			index--;
-			
-			if (index == -1) 
-			{
-				index = linearLayouts.size()-1;
-				
-				linearLayoutIndex++;
-			}
-		}
-			
-		
+		linearLayoutAndIndexSelector.fillLayout(linearLayoutIndex, ++availableIndex);
 	}
-
 
 	private void fillLinearLayoutList() 
 	{
 		LinearLayout layout = null;
 
-		switch(numberOfLinearLayouts)
-		{
-		    case 5:
-		    	layout = (LinearLayout)findViewById(R.id.linearLayout5);
-		    	linearLayouts.add(layout);
-		    case 4:
-		    	layout = (LinearLayout)findViewById(R.id.linearLayout4);
-		    	linearLayouts.add(layout);
-		    case 3:
-		    	layout = (LinearLayout)findViewById(R.id.linearLayout3);
-		    	linearLayouts.add(layout);
-		    case 2:
-		    	layout = (LinearLayout)findViewById(R.id.linearLayout2);
-		    	linearLayouts.add(layout);
-		    case 1:
-		    	layout = (LinearLayout)findViewById(R.id.linearLayout1);
-		    	linearLayouts.add(layout);
-		    	break;
+		LinearLayoutOnClickListener clickListener = new LinearLayoutOnClickListener();
+
+		switch (numberOfLinearLayouts) {
+		case 5:
+			layout = (LinearLayout) findViewById(R.id.linearLayout5);
+			layout.setOnClickListener(clickListener);
+			linearLayouts.add(layout);
+		case 4:
+			layout = (LinearLayout) findViewById(R.id.linearLayout4);
+			layout.setOnClickListener(clickListener);
+			linearLayouts.add(layout);
+		case 3:
+			layout = (LinearLayout) findViewById(R.id.linearLayout3);
+			layout.setOnClickListener(clickListener);
+			linearLayouts.add(layout);
+		case 2:
+			layout = (LinearLayout) findViewById(R.id.linearLayout2);
+			layout.setOnClickListener(clickListener);
+			linearLayouts.add(layout);
+		case 1:
+			layout = (LinearLayout) findViewById(R.id.linearLayout1);
+			layout.setOnClickListener(clickListener);
+			linearLayouts.add(layout);
+			break;
 		}
-		
+
 	}
-	
+
 	@Override
-	public void onBackPressed() 
-	{
-	    super.onBackPressed();
+	public void onBackPressed() {
+		super.onBackPressed();
 	}
-	
+
 	@Override
-	protected void onResume() 
-	{
+	protected void onResume() {
 		super.onResume();
-		
-		ProfessionalPAParameters.setLinearLayoutWidth(linearLayouts.get(0).getWidth());
+
+		ProfessionalPAParameters.setLinearLayoutWidth(linearLayouts.get(0)
+				.getWidth());
 	}
 
 	private void createNotes() throws ProfessionalPABaseException
 	{
-		System.out.println("createNotes ->");
-		
-		List<ProfessionalPANote> parsedNotes = ProfessionalPANotesReader.readNotes(false);
+		List<ProfessionalPANote> parsedNotes = ProfessionalPANotesReader
+				.readNotes(false);
 
-		List<String> createdImagesPaths = imageCaptureManager.getImagesFilePath();
-		
-		for(int i = 0; i < createdImagesPaths.size(); i++)
-		{
-			String filePath = createdImagesPaths.get(i);
-			
-			ProfessionalPANote imageNote = createProfessionalPANoteFromImage(createdImagesPaths.get(i));
-			
-			long creationTime = Long.valueOf(imageCaptureManager.getImageName(filePath));
+		System.out.println("createNotes -> parsedNotes=" + parsedNotes
+				+ " size=" + parsedNotes.size());
 
-			imageNote.setCreationTime(creationTime);
-			
-			imageNote.setLastEditedTime(creationTime);
-			
-			parsedNotes.add(imageNote);
-		}
-		
-		for (int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++) 
+		for (int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++)
 		{
 			ProfessionalPANote note = parsedNotes.get(i);
 
-			if (note != null) 
+			if (note != null)
 			{
 				createFragmentForNote(note);
 			}
 		}
+		
+		areNotesAlreadyCreated = true;
 	}
 
-
 	@Override
-	protected void onPause() 
-	{
+	protected void onPause() {
 		super.onPause();
 	}
-	
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) 
-	{
-	    super.onCreateContextMenu(menu, v, menuInfo);
-	    
-	    System.out.println("onCreateContextMenu -> v="+v);
-	    
-	    selectedViewIds.add(v.getId());
-	    
-	    MenuInflater inflater = getMenuInflater();
-	    
-	    inflater.inflate(R.menu.notes_selection_menu, menu);
-	}
-	
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-	    
-	    switch (item.getItemId()) 
-	    {
-	        case R.id.action_discard_notes:
-	        	clearSelectedNotes();
-//	            System.out.println("context menu id :"+info.id);
-	        default:
-	            return super.onContextItemSelected(item);
-	    }
-	}
-	
-	/**
-	 * 
-	 */
-	private void clearSelectedNotes() 
-	{
-		Iterator<Integer> iterator = selectedViewIds.iterator();
-		
-		while(iterator.hasNext())
-		{
-			int selectedViewId = iterator.next();
-			
-			Fragment noteFragment = getFragmentManager().findFragmentById(selectedViewId);
-			
-			Bundle bundle = noteFragment.getArguments();
-			
-			ProfessionalPANote fragmentNote = bundle.getParcelable(ProfessionalPAConstants.NOTE_DATA);
 
-			if(!fragmentNote.isImageNote())
-			{
-				try 
-				{
-					ProfessionalPAParameters.getProfessionalPANotesWriter().deleteXmlElement(fragmentNote.getCreationTime());
-				}
-				catch (ProfessionalPABaseException e)
-				{
-					// TODO improve
-				}
-			}
-			else
-			{
-				removeSelectedImage(String.valueOf(fragmentNote.getCreationTime()));
-			}
-			
-			childFrames.remove(selectedViewId);
-        	
-        	ProfessionalPAParameters.getFragmentCreationManager().removeFragment(noteFragment);
+	public void deleteNote(int noteId) {
+		FrameLayout layout = childFrames.get(noteId);
 
-    		updateActivityView();
-			
-			iterator.remove();
+		if (layout != null) {
+			for (int i = 0; i < linearLayouts.size(); i++) {
+				LinearLayout linearLayout = linearLayouts.get(i);
+
+				linearLayout.removeView(layout);
+			}
 		}
 	}
 
-	private void removeSelectedImage(String imageName) 
+	public void addNote(int noteId) {
+		ProfessionalPANote note = NotesManager.getInstance().getNote(noteId);
+
+		if (note != null) {
+			createFragmentForNote(note);
+		}
+	}
+
+	class LinearLayoutOnClickListener implements OnClickListener {
+		@Override
+		public void onClick(View v) {
+			NotesOperationManager.copyNote();
+		}
+
+	}
+
+	public class LinearLayoutAndIndexSelector 
 	{
-		imageCaptureManager.deleteImage(imageName);
+		private int numberOfLinearLayout = -1;
+
+		private int[] nextAvailableIndex = null;
+
+		public LinearLayoutAndIndexSelector(int numberOfLinearLayout) 
+		{
+			this.numberOfLinearLayout = numberOfLinearLayout;
+
+			nextAvailableIndex = new int[numberOfLinearLayout];
+
+			for (int i = 0; i < numberOfLinearLayout; i++) 
+			{
+				nextAvailableIndex[i] = 0;
+			}
+		}
+
+		public void fillLayout(int filledLayoutIndex, int indexesOccupiedInLayout) 
+		{
+			if (filledLayoutIndex < numberOfLinearLayout)
+			{
+				nextAvailableIndex[filledLayoutIndex] = indexesOccupiedInLayout;
+			}
+		}
+
+		public int[] getNextAvailableIndex() 
+		{
+			System.out.println("getNextAvailableIndex -> occupied data="+Arrays.toString(nextAvailableIndex));
+			int availableIndex = nextAvailableIndex[0];
+
+			int availableLinearLayout = 0;
+
+			for (int i = 1; i < numberOfLinearLayout; i++)
+			{
+				if (availableIndex > nextAvailableIndex[i]) 
+				{
+					availableLinearLayout = i;
+
+					availableIndex = nextAvailableIndex[i];
+				}
+			}
+
+			System.out.println("getNextAvailableIndex -> data="+Arrays.toString(new int[] { availableLinearLayout, availableIndex }));
+			return new int[] { availableLinearLayout, availableIndex };
+		}
 	}
 }
-
