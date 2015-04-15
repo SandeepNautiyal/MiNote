@@ -98,8 +98,6 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 
 			viewHolder.text.setText(noteListItem.getTextViewData());
 
-			System.out.println("getView -> text data="+noteListItem.getTextViewData());
-			
 			viewHolder.text.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
 			viewHolder.text.setOnLongClickListener(new NoteItemLongClickListener(
@@ -111,8 +109,6 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 
 		if (noteListItem.getImageName() != null && !noteListItem.getImageName().equals("")) 
 		{
-			System.out.println("getView -> imageView");
-
 			LayoutParams imageViewParams = viewHolder.imageView.getLayoutParams();
 			imageViewParams.height = LayoutParams.MATCH_PARENT;
 			imageViewParams.width = LayoutParams.MATCH_PARENT;
@@ -123,9 +119,9 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 			image = Bitmap.createScaledBitmap(image, 300, 300, true);
 			viewHolder.imageView.setImageBitmap(image);
 			viewHolder.imageView.setLayoutParams(imageViewParams);
+			viewHolder.bulletPointImage.setVisibility(View.INVISIBLE);
+			viewHolder.text.setVisibility(View.INVISIBLE);
 		}
-	    
-		System.out.println("getView -> returning");
 
 	    return convertView;
 	}
