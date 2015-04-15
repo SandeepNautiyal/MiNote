@@ -47,69 +47,73 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
-	    if(convertView == null)
-	        convertView = LayoutInflater.from(getContext()).inflate(R.layout.data_adapter_view, parent, false);
-	    
-		System.out.println("getView -> position="+position);
-
+		//TODO improve 1) introduce convert view reusing 2) if 1st cannot be done remove viewholder.
 	    NoteListItem noteListItem = listItems.get(position);
 	    
-	    TextView textView = (TextView) convertView.findViewById(R.id.compositeControlTextBox);
-	    
+		ViewHolder viewHolder; // view lookup cache stored in tag
+
+		viewHolder = new ViewHolder();
+		
+		convertView = LayoutInflater.from(getContext()).inflate(R.layout.professional_pa_note_view, parent, false);
+		
+		viewHolder.text = (TextView) convertView.findViewById(R.id.compositeControlTextBox);
+		
+		viewHolder.bulletPointImage = (ImageButton) convertView.findViewById(R.id.compositeControlBulletButton);
+		
+		viewHolder.imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
+		
+		convertView.setTag(viewHolder);
+ 
 	    Resources androidResources = ProfessionalPAParameters.getApplicationContext().getResources();
 	    
 	    int compressedViewHeight = (int)androidResources.getDimension(R.dimen.composite_control_textview_height_compressed);
 
-	    ImageButton bulletPointImage = (ImageButton) convertView.findViewById(R.id.compositeControlBulletButton);
-//
 //	    ImageButton alarmImageButton = (ImageButton)convertView.findViewById(R.id.composite_control_alarm_button);
 
 	    byte noteType = note.getNoteType();
 	    		
 		if (noteType == ProfessionalPAConstants.LIST_NOTE && (noteListItem.getImageName() == null || noteListItem.getImageName().equals("")))
 		{
-			LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
+			LayoutParams importanceButtonParams = viewHolder.bulletPointImage.getLayoutParams();
 			importanceButtonParams.height = compressedViewHeight;
 			importanceButtonParams.width = (int) androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
-			bulletPointImage.setLayoutParams(importanceButtonParams);
+			viewHolder.bulletPointImage.setLayoutParams(importanceButtonParams);
 		} 
 		else if (noteType == ProfessionalPAConstants.PARAGRAPH_NOTE) 
 		{
-			LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
+			LayoutParams importanceButtonParams = viewHolder.bulletPointImage.getLayoutParams();
 			importanceButtonParams.height = 0;
 			importanceButtonParams.width = 0;
-			bulletPointImage.setLayoutParams(importanceButtonParams);
-			bulletPointImage.setVisibility(View.INVISIBLE);
+			viewHolder.bulletPointImage.setLayoutParams(importanceButtonParams);
+			viewHolder.bulletPointImage.setVisibility(View.INVISIBLE);
 		}
 
 		if (noteListItem.getTextViewData() != null && !noteListItem.getTextViewData().equals(""))
 		{
-			final LayoutParams params = textView.getLayoutParams();
+			final LayoutParams params = viewHolder.text.getLayoutParams();
 
 			params.height = LayoutParams.WRAP_CONTENT;
 
-			textView.setLayoutParams(params);
+			viewHolder.text.setLayoutParams(params);
 
-			textView.setText(noteListItem.getTextViewData());
+			viewHolder.text.setText(noteListItem.getTextViewData());
 
 			System.out.println("getView -> text data="+noteListItem.getTextViewData());
 			
-			textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+			viewHolder.text.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
-			textView.setOnLongClickListener(new NoteItemLongClickListener(
+			viewHolder.text.setOnLongClickListener(new NoteItemLongClickListener(
 					new NotesActionMode(note.getNoteId(), note.getNoteType(),
 							note.getImageNames())));
 
-			textView.setLayoutParams(params);
+			viewHolder.text.setLayoutParams(params);
 		}
 
 		if (noteListItem.getImageName() != null && !noteListItem.getImageName().equals("")) 
 		{
-			ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
-
 			System.out.println("getView -> imageView");
 
-			LayoutParams imageViewParams = imageView.getLayoutParams();
+			LayoutParams imageViewParams = viewHolder.imageView.getLayoutParams();
 			imageViewParams.height = LayoutParams.MATCH_PARENT;
 			imageViewParams.width = LayoutParams.MATCH_PARENT;
 
@@ -117,12 +121,20 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 					noteListItem.getImageName());
 
 			image = Bitmap.createScaledBitmap(image, 300, 300, true);
-			imageView.setImageBitmap(image);
-			imageView.setLayoutParams(imageViewParams);
+			viewHolder.imageView.setImageBitmap(image);
+			viewHolder.imageView.setLayoutParams(imageViewParams);
 		}
 	    
 		System.out.println("getView -> returning");
 
 	    return convertView;
 	}
+	
+	static class ViewHolder
+	{
+		  TextView text;
+		  ImageButton bulletPointImage;
+		  ImageView imageView;
+		  int position;
+		}
 }
