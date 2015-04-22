@@ -19,6 +19,10 @@ public interface ProfessionalPAConstants
 	String PROFESSIONAL_PA_IMPORT_PATH = PROFESSIONAL_PA_EXPORT_PATH+"//"
 	    +PROFESSIONAL_PA_XML_FILE_NAME;
 
+	int OPEN_NOTE_IN_EDIT_MODE = 10;
+
+	public static final String NOTE_ID = "NOTE_ID";
+
 	public static final byte MIXED_CONTENT_NOTE = 3;
 	
 	public static final byte IMAGE_NOTE = 2;

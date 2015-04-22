@@ -53,7 +53,7 @@ public class ProfessionalPANoteFragment extends ListFragment
 		super.onDestroy();
 	}
 	
-	public int getNoteFragmentId()
+	public int getFragmentNoteId()
 	{
 		return noteId;
 	}

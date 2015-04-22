@@ -1,6 +1,5 @@
 package com.gp.app.professionalpa.layout.manager;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,19 +8,19 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
@@ -31,9 +30,8 @@ import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.interfaces.XMLEntity;
+import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
-import com.gp.app.professionalpa.util.ProfessionalPANotesIdGenerator;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ListItemCreatorActivity extends Activity
@@ -45,9 +43,16 @@ public class ListItemCreatorActivity extends Activity
 	private ScrollView scrollView = null;
 	
 	private RelativeLayout activityLayout = null;
+
+	private boolean isSaveButtonToBeCreated = true;
+
+	private boolean isLastItemToBeAddedInLayout = true;
+	
+	private int modifiedNoteId = -1;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		
 		if(lastAddedListItem == null)
@@ -58,13 +63,30 @@ public class ListItemCreatorActivity extends Activity
 			
 			activityLayout = (RelativeLayout)scrollView.findViewById(R.id.list_item_creator_activity_layout);
 			
-			lastAddedListItem = (ListViewItemLayout)inflater.inflate(R.layout.compound_control_layout, null);
+			lastAddedListItem = new ListViewItemLayout(this);
+
+			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+					RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			
-			listItems.add(lastAddedListItem);
+			lastAddedListItem.setLayoutParams(layoutParams);
 			
-			activityLayout.addView(lastAddedListItem);
+			editNotes();
 			
-			addSaveAndAddItemButton();
+			if(isLastItemToBeAddedInLayout)
+			{
+				listItems.add(lastAddedListItem);
+				
+				activityLayout.addView(lastAddedListItem);
+			}
+			
+			if(isSaveButtonToBeCreated)
+			{
+				addSaveAndAddItemButton();
+			}
+			
+			isLastItemToBeAddedInLayout = true;
+
+			isSaveButtonToBeCreated = true;
 			
 			setContentView(scrollView);
 		}
@@ -72,6 +94,72 @@ public class ListItemCreatorActivity extends Activity
         ActionBar actionBar = getActionBar();
 		
 		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7F7CD9")));
+	}
+
+	private void editNotes()
+	{
+		Intent intent = getIntent();
+		
+		if(intent != null)
+		{
+			Bundle extras = intent.getExtras();
+			
+			if(extras != null)
+			{
+				int noteId = extras.getInt(ProfessionalPAConstants.NOTE_ID);
+				
+				if(noteId != 0)
+				{
+			    	ProfessionalPANote professionalPANote = NotesManager.getInstance().getNote(noteId);
+
+			    	if(professionalPANote != null)
+			    	{
+			    		if(professionalPANote.getNoteType() == ProfessionalPAConstants.IMAGE_NOTE)
+			    		{
+			    			createActivityLayoutForNote(professionalPANote);
+				    		
+				    		isSaveButtonToBeCreated  = false;
+			    		}
+			    		else
+			    		{
+			    			List<NoteListItem> listItems = professionalPANote.getNoteItems();
+			    			
+			    			for(int i = 0; i < listItems.size(); i++)
+			    			{
+			    				NoteListItem item = listItems.get(i);
+			    				
+			    				if(item != null)
+			    				{
+			    					String textViewData = item.getTextViewData();
+			    					
+			    					String imageName = item.getImageName();
+			    					
+			    					if(textViewData != null && !textViewData.equals(""))
+			    					{
+			    						addNewListItem();
+			    						
+			    						lastAddedListItem.setText(textViewData);
+			    					}
+			    					
+			    					if(imageName != null && !imageName.equals(""))
+			    					{
+	                                    addNewListItem();
+			    						
+			    						lastAddedListItem.setImage(imageName, ImageLocationPathManager.getInstance().getImage(imageName, true), true);
+			    					}
+			    				}
+			    			}
+			    			
+			    			updateActivityLayout();
+			    			
+			    			isLastItemToBeAddedInLayout = false;
+
+			    			modifiedNoteId = noteId;
+			    		}
+			    	}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -85,47 +173,51 @@ public class ListItemCreatorActivity extends Activity
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-	    ProfessionalPANote note = null;
-	    
+		System.out.println("onActivityResult -> requestCode="+requestCode+" resultCode="+resultCode);
+		
+
 	    if (requestCode == ProfessionalPAConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
 	    {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
 	    	
-	    	ImageLocationPathManager.getInstance().createSaveImage(photo);
+	    	ImageLocationPathManager.getInstance().createAndSaveImage(photo);
 	    	
 	    	String imagePath = ImageLocationPathManager.getInstance().getMostRecentImageFilePath();
 	    	
-	    	Bitmap image = createProfessionalPANoteFromImage(imagePath);
+	    	Bitmap image = ImageLocationPathManager.getInstance().getImage(imagePath, false);
 	        
 	    	String imageName = ImageLocationPathManager.getInstance().getImageName(imagePath);
 	    	
-	        lastAddedListItem.setImage(image);
-
-	        lastAddedListItem.setImageName(imageName);
+	        lastAddedListItem.setImage(imageName, image, true);
 	        
 	        addNewListItem();
+	        
+			updateActivityLayout();
 	    }
 	}
 	
-	//TODO Duplicate
-	private Bitmap createProfessionalPANoteFromImage(String imagePath) 
+	private void createActivityLayoutForNote(ProfessionalPANote professionalPANote) 
 	{
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		
-		options.inSampleSize = 8;
-		
-		Bitmap image = BitmapFactory.decodeFile(imagePath, options);
-		
-		return image;
+		if(professionalPANote.getNoteType() == ProfessionalPAConstants.IMAGE_NOTE)
+		{
+			NoteListItem item = professionalPANote.getNoteItems().get(0);
+
+			Bitmap bitMap = ImageLocationPathManager.getInstance().getImage(item.getImageName(), true);
+			
+			if(bitMap != null)
+			{
+				lastAddedListItem.setImage(item.getImageName(), bitMap, false);
+			}
+		}
 	}
-	
+
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
+	public boolean onOptionsItemSelected(MenuItem item) 
+	{
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		
+		if (id == R.id.action_settings) 
+		{
 			return true;
 		}
 		else if(id == R.id.action_click_photo)
@@ -144,7 +236,7 @@ public class ListItemCreatorActivity extends Activity
 		ListViewItemLayout currentAddedListItem = new ListViewItemLayout(this);
 		
 		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+				RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		
 		layoutParams.addRule(RelativeLayout.BELOW, lastAddedListItem.getId());
 		
@@ -155,7 +247,9 @@ public class ListItemCreatorActivity extends Activity
 		listItems.add(currentAddedListItem);
 		
 		lastAddedListItem = currentAddedListItem;
+	}
 
+	private void updateActivityLayout() {
 		addSaveAndAddItemButton();
 		
 		setContentView(scrollView);
@@ -196,6 +290,8 @@ public class ListItemCreatorActivity extends Activity
 			public void onClick(View view)
 			{
 				addNewListItem();
+				
+				updateActivityLayout();
 			}
 		});
 		
@@ -254,22 +350,37 @@ public class ListItemCreatorActivity extends Activity
 			}
 		}
 
-		ProfessionalPANote note = new ProfessionalPANote(ProfessionalPANotesIdGenerator.generateNoteId(), ProfessionalPAConstants.LIST_NOTE, noteItems);
+		int noteId = modifiedNoteId == -1 ? NotesManager.getInstance().getNextFreeNoteId() : modifiedNoteId;
+		
+		ProfessionalPANote note = new ProfessionalPANote(noteId, ProfessionalPAConstants.LIST_NOTE, noteItems);
 		
 		long creationTime = System.currentTimeMillis();
 		
 		note.setCreationTime(creationTime);
 		
-		note.setLastEditedTime(creationTime);
+		long lastEditedTime = modifiedNoteId == -1 ? creationTime : System.currentTimeMillis();
+		
+		note.setLastEditedTime(lastEditedTime);
 		
 		try
 		{
+			if(modifiedNoteId != -1)
+			{
+				ProfessionalPAParameters.getProfessionalPANotesWriter().deleteXmlElement(modifiedNoteId);
+				
+				NotesManager.getInstance().deleteNote(modifiedNoteId);
+				
+				ProfessionalPAParameters.getNotesActivity().deleteNote(modifiedNoteId);
+			}
+			
 			persistListElement(Arrays.asList(note));
 		} 
 		catch (ProfessionalPABaseException exception) 
 		{
 			// TODO improve
 		}
+		
+		modifiedNoteId = -1;
 		
 		Intent returnIntent = new Intent();
 

@@ -2,6 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gp.app.professionalpa.ParagraphNoteCreatorActivity" >
 
+    <item android:id="@+id/action_click_photo"
+        android:icon="@drawable/professional_pa_camera"
+        android:title="@string/action_click_photo"
+        android:showAsAction="always" />
+    
     <item android:id="@+id/action_save_paragraph_note"
         android:icon="@drawable/save_notes"
         android:title="@string/save"

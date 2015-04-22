@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -15,15 +14,14 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
-import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -38,10 +36,10 @@ import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.notes.fragments.ProfessionalPANoteFragment;
 import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
-import com.gp.app.professionalpa.util.ProfessionalPANotesIdGenerator;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
-public class NotesLayoutManagerActivity extends Activity {
+public class NotesLayoutManagerActivity extends Activity
+{
 	private static final String NUMBER_OF_LINEAR_LAYOUTS = "NUMBER_OF_LINEAR_LAYOUTS";
 
 	private static final int LIST_ACTIVITY_RESULT_CREATED = 1;
@@ -67,10 +65,6 @@ public class NotesLayoutManagerActivity extends Activity {
 	private Map<Integer, FrameLayout> childFrames = new LinkedHashMap<Integer, FrameLayout>();
 
 	private List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
-
-	private ActionMode actionMode = null;
-	
-	private boolean areNotesAlreadyCreated = false;
 
 	private LinearLayoutAndIndexSelector linearLayoutAndIndexSelector = null;
 	private List<Integer> selectedViewIds = new ArrayList<Integer>();
@@ -105,7 +99,6 @@ public class NotesLayoutManagerActivity extends Activity {
 
 		try 
 		{
-
 			createNotes();
 		} 
 		catch (ProfessionalPABaseException e) 
@@ -266,12 +259,13 @@ public class NotesLayoutManagerActivity extends Activity {
 	{
 		ProfessionalPANote note = null;
 
-		if (requestCode == ProfessionalPAConstants.TAKE_PHOTO_CODE
-				&& resultCode == RESULT_OK) 
+		System.out.println("onActivityResult -> requestCode="+requestCode+" result code="+resultCode+" data="+data);
+		
+		if (requestCode == ProfessionalPAConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
 		{
 			Bitmap photo = (Bitmap) data.getExtras().get("data");
 
-			ImageLocationPathManager.getInstance().createSaveImage(photo);
+			ImageLocationPathManager.getInstance().createAndSaveImage(photo);
 
 			note = createProfessionalPANoteFromImage(imageCaptureManager
 					.getMostRecentImageFilePath());
@@ -288,8 +282,12 @@ public class NotesLayoutManagerActivity extends Activity {
 		} 
 		else
 		{
+			System.out.println("onActivityResult -> data1="+data);
+
 			if (data != null) 
 			{
+				System.out.println("onActivityResult -> data="+data);
+				
 				note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
 			}
 		}
@@ -309,8 +307,7 @@ public class NotesLayoutManagerActivity extends Activity {
 		items.add(new NoteListItem(null, ImageLocationPathManager.getInstance()
 				.getImageName(imagePath)));
 
-		note = new ProfessionalPANote(
-				ProfessionalPANotesIdGenerator.generateNoteId(),
+		note = new ProfessionalPANote(NotesManager.getInstance().getNextFreeNoteId(),
 				ProfessionalPAConstants.IMAGE_NOTE, items);
 
 		long creationTime = Long.valueOf(imageCaptureManager
@@ -333,8 +330,6 @@ public class NotesLayoutManagerActivity extends Activity {
 			Fragment fragment = FragmentCreationManager.createFragment(note);
 
 			NotesManager.getInstance().addNote(note.getNoteId(), note);
-
-			System.out.println("createFragmentForNote -> note=" + note);
 
 			if (fragment != null) 
 			{
@@ -360,6 +355,10 @@ public class NotesLayoutManagerActivity extends Activity {
 
 		getFragmentManager().beginTransaction().add(id, fragment, tag).commit();
 
+		int noteId = ((ProfessionalPANoteFragment)fragment).getFragmentNoteId();
+		
+		childFrames.put(noteId, frameLayout);
+		
 		updateActivityView(frameLayout);
 	}
 
@@ -479,9 +478,6 @@ public class NotesLayoutManagerActivity extends Activity {
 		List<ProfessionalPANote> parsedNotes = ProfessionalPANotesReader
 				.readNotes(false);
 
-		System.out.println("createNotes -> parsedNotes=" + parsedNotes
-				+ " size=" + parsedNotes.size());
-
 		for (int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++)
 		{
 			ProfessionalPANote note = parsedNotes.get(i);
@@ -491,8 +487,6 @@ public class NotesLayoutManagerActivity extends Activity {
 				createFragmentForNote(note);
 			}
 		}
-		
-		areNotesAlreadyCreated = true;
 	}
 
 	@Override
@@ -500,11 +494,14 @@ public class NotesLayoutManagerActivity extends Activity {
 		super.onPause();
 	}
 
-	public void deleteNote(int noteId) {
+	public void deleteNote(int noteId)
+	{
 		FrameLayout layout = childFrames.get(noteId);
 
-		if (layout != null) {
-			for (int i = 0; i < linearLayouts.size(); i++) {
+		if (layout != null) 
+		{
+			for (int i = 0; i < linearLayouts.size(); i++)
+			{
 				LinearLayout linearLayout = linearLayouts.get(i);
 
 				linearLayout.removeView(layout);
@@ -556,7 +553,6 @@ public class NotesLayoutManagerActivity extends Activity {
 
 		public int[] getNextAvailableIndex() 
 		{
-			System.out.println("getNextAvailableIndex -> occupied data="+Arrays.toString(nextAvailableIndex));
 			int availableIndex = nextAvailableIndex[0];
 
 			int availableLinearLayout = 0;
@@ -571,8 +567,18 @@ public class NotesLayoutManagerActivity extends Activity {
 				}
 			}
 
-			System.out.println("getNextAvailableIndex -> data="+Arrays.toString(new int[] { availableLinearLayout, availableIndex }));
 			return new int[] { availableLinearLayout, availableIndex };
 		}
+	}
+
+	public void openNoteInEditMode(int noteId) 
+	{
+		Intent intent = new Intent(getApplicationContext(),
+				ListItemCreatorActivity.class);
+
+		intent.putExtra(ProfessionalPAConstants.NOTE_ID, noteId);
+		
+		startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
+//		startActivity(intent);
 	}
 }

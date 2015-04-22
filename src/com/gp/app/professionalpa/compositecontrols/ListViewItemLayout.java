@@ -122,24 +122,41 @@ public class ListViewItemLayout extends RelativeLayout
 	    super.onRestoreInstanceState(state);
 	  }
 	  
-	public String getText() {
+	public String getText() 
+	{
 		return textView.getText().toString();
+	}
+	
+	public void setText(String text)
+	{
+		textView.setText(text.toCharArray(), 0 , text.toCharArray().length);
 	}
 	
 	public ImageButton getImportanceImageButton() {
 		return importanceImageButton;
 	}
 	
-	public void setImage(Bitmap image)
+	public void setImage(String imageName, Bitmap image, boolean changeSize)
 	{
-		ViewGroup.LayoutParams imageViewParams = imageView.getLayoutParams();
-	    imageViewParams.height =  350;
-	    imageViewParams.width = 350;
-	    image = Bitmap.createScaledBitmap(image, 300, 300,
-                true);
+		if(changeSize)
+		{
+			ViewGroup.LayoutParams imageViewParams = imageView.getLayoutParams();
+		    imageViewParams.height =  350;
+		    imageViewParams.width = 350;
+		    image = Bitmap.createScaledBitmap(image, 300, 300,true);
+		    imageView.setLayoutParams(imageViewParams);
+		}
+		else
+		{
+			ViewGroup.LayoutParams imageViewParams = imageView.getLayoutParams();
+		    imageViewParams.height =  LayoutParams.MATCH_PARENT;
+		    imageViewParams.width = LayoutParams.MATCH_PARENT;
+		    imageView.setLayoutParams(imageViewParams);
+		}
 	    
 	    imageView.setImageBitmap(image);
-	    imageView.setLayoutParams(imageViewParams);
+	    
+	    this.imageName = imageName;
 	}
 //
 //	public ImageButton getAlarmImageButton() {

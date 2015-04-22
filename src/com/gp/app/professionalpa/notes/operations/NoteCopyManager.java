@@ -5,7 +5,6 @@ import java.util.Arrays;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
-import com.gp.app.professionalpa.util.ProfessionalPANotesIdGenerator;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NoteCopyManager 
@@ -33,7 +32,7 @@ public class NoteCopyManager
 			
 			note.setLastEditedTime(System.currentTimeMillis());
 			
-			note.setNoteId(ProfessionalPANotesIdGenerator.generateNoteId());
+			note.setNoteId(NotesManager.getInstance().getNextFreeNoteId());
 			
 			copiedNoteId = note.getNoteId();
 			

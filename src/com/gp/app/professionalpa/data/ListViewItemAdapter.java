@@ -5,6 +5,8 @@ import java.util.List;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.text.style.RelativeSizeSpan;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
@@ -48,11 +52,9 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
 		//TODO improve 1) introduce convert view reusing 2) if 1st cannot be done remove viewholder.
-	    NoteListItem noteListItem = listItems.get(position);
+	    final NoteListItem noteListItem = listItems.get(position);
 	    
-		ViewHolder viewHolder; // view lookup cache stored in tag
-
-		viewHolder = new ViewHolder();
+		final ViewHolder viewHolder = new ViewHolder(); // view lookup cache stored in tag
 		
 		convertView = LayoutInflater.from(getContext()).inflate(R.layout.professional_pa_note_view, parent, false);
 		
@@ -61,6 +63,18 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 		viewHolder.bulletPointImage = (ImageButton) convertView.findViewById(R.id.compositeControlBulletButton);
 		
 		viewHolder.imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
+		
+		DisplayMetrics metrics = new DisplayMetrics();
+		
+        final int noteId = note.getNoteId();
+        
+		viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+            	ProfessionalPAParameters.getNotesActivity().openNoteInEditMode(noteId);
+            }
+        });
 		
 		convertView.setTag(viewHolder);
  
@@ -114,7 +128,7 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 			imageViewParams.width = LayoutParams.MATCH_PARENT;
 
 			Bitmap image = ImageLocationPathManager.getInstance().getImage(
-					noteListItem.getImageName());
+					noteListItem.getImageName(), true);
 
 			image = Bitmap.createScaledBitmap(image, 300, 300, true);
 			viewHolder.imageView.setImageBitmap(image);
@@ -132,5 +146,5 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 		  ImageButton bulletPointImage;
 		  ImageView imageView;
 		  int position;
-		}
+	}
 }

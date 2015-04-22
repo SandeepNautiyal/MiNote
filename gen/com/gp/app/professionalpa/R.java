@@ -79,9 +79,9 @@ public final class R {
         public static final int notesLayoutManagerParentLinearLayout=0x7f080001;
         public static final int notesLayoutManagerScrollView=0x7f080000;
         public static final int notes_layout_activity_manager=0x7f080004;
-        public static final int paragraph_note=0x7f080010;
+        public static final int paragraphNote=0x7f080010;
+        public static final int paragraphNoteImportanceView=0x7f080011;
         public static final int paragraph_note_alarm_button=0x7f080012;
-        public static final int paragraph_note_importance_button=0x7f080011;
         public static final int professional_pa_frame_layout=0x7f080014;
         public static final int save_created_list=0x7f080018;
     }
@@ -104,7 +104,7 @@ public final class R {
         public static final int list_creator_activity_menu_items=0x7f070001;
         public static final int notes_layout_manager_menu=0x7f070002;
         public static final int notes_selection_menu=0x7f070003;
-        public static final int paragraph_notes_creator_activity_menu_items=0x7f070004;
+        public static final int paragraph_notes_activity_menu_items=0x7f070004;
         public static final int start_professional_pa_application=0x7f070005;
     }
     public static final class string {

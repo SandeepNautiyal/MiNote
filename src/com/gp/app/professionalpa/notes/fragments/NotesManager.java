@@ -1,7 +1,7 @@
 package com.gp.app.professionalpa.notes.fragments;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 
@@ -9,7 +9,7 @@ public class NotesManager
 {
 	private static NotesManager notesManager = null;
 	
-	Map<Integer, ProfessionalPANote> notes = new HashMap<Integer, ProfessionalPANote>();
+	Map<Integer, ProfessionalPANote> notes = new TreeMap<Integer, ProfessionalPANote>();
 	
 	private NotesManager()
 	{
@@ -49,5 +49,17 @@ public class NotesManager
 	public void deleteNote(int noteId)
 	{
 		notes.remove(noteId);
+	}
+	
+	public int getNextFreeNoteId() 
+	{
+		int lastOccupiedKey = 0;
+		
+		if(notes.size() > 0)
+		{
+			lastOccupiedKey = ((TreeMap<Integer, ProfessionalPANote>)notes).lastKey();
+		}
+		 
+		return ++lastOccupiedKey;
 	}
 }

@@ -245,12 +245,12 @@ public class ProfessionalPANotesWriter
 		}
 	}
     
-	public ProfessionalPANote.NotePropertyValues getNoteProperties(int noteId) throws ProfessionalPABaseException 
-	{
-    	ProfessionalPANote.NotePropertyValues noteProperties = new ProfessionalPANote.NotePropertyValues();
+    private boolean isNoteAlreadyWritten(int noteId)
+    {
+    	boolean result = false;
     	
     	Element notesElement = xmlDocument.getDocumentElement();
-			
+		
 		NodeList nodeList = notesElement.getChildNodes();
 			
 		for(int i = 0; i < nodeList.getLength(); i++)
@@ -260,7 +260,6 @@ public class ProfessionalPANotesWriter
 			if (noteElement.hasAttributes()) 
 			{
 	            Attr attr = (Attr) noteElement.getAttributes().getNamedItem("noteId");
-	            
 	            if (attr != null) 
 	            {
 	                String attribute= attr.getValue();                      
@@ -269,25 +268,14 @@ public class ProfessionalPANotesWriter
 							
 					if(noteId == readNoteId)
 					{
-			            Attr noteTypeAttribute = (Attr) noteElement.getAttributes().getNamedItem(ProfessionalPANote.NOTE_TYPE);
-			            
-			            noteProperties.addProperties(ProfessionalPANote.NOTE_TYPE, noteTypeAttribute.getValue());
-			            
-			            Attr noteCreationTimeAttribute = (Attr) noteElement.getAttributes().getNamedItem(ProfessionalPANote.NOTE_CREATION_TIME);
+						result = true;
 						
-			            noteProperties.addProperties(ProfessionalPANote.NOTE_CREATION_TIME, noteCreationTimeAttribute.getValue());
-
-                        Attr noteLastModifiedTimeAttribute = (Attr) noteElement.getAttributes().getNamedItem(ProfessionalPANote.NOTE_MODIFIED_TIME);
-						
-			            noteProperties.addProperties(ProfessionalPANote.NOTE_MODIFIED_TIME, noteLastModifiedTimeAttribute.getValue());
-
-			            break;
+						break;
 					}
-						
 	            }
 	        }
 		}
 		
-		return noteProperties;
-	}
+		return result;
+    }
 }

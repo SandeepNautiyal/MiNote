@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
     
     <EditText
-        android:id="@+id/paragraph_note"
+        android:id="@+id/paragraphNote"
         android:layout_width="fill_parent"
         android:layout_height="150dip"
         android:layout_alignParentLeft="true"
@@ -13,11 +13,11 @@
         android:contentDescription="@string/add_note"/>
     
     <ImageButton
-        android:id="@+id/paragraph_note_importance_button"
+        android:id="@+id/paragraphNoteImportanceView"
         android:layout_width="35dip"
         android:layout_height="@dimen/composite_control_height"
         android:layout_marginRight="14dp"
-        android:layout_below="@id/paragraph_note"
+        android:layout_below="@id/paragraphNote"
         android:contentDescription="@string/set_importance" />
     
     <ImageButton
@@ -25,8 +25,8 @@
         android:layout_width="35dip"
         android:layout_height="@dimen/composite_control_height"
         android:contentDescription="@string/set_alarm"
-        android:layout_below="@id/paragraph_note"
-        android:layout_toRightOf="@id/paragraph_note_importance_button"
-        android:layout_alignBottom="@+id/paragraph_note_importance_button"/>
+        android:layout_below="@id/paragraphNote"
+        android:layout_toRightOf="@id/paragraphNoteImportanceView"
+        android:layout_alignBottom="@+id/paragraphNoteImportanceView"/>
 
 </RelativeLayout>
