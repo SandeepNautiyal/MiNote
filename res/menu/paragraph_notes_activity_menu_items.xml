@@ -8,7 +8,7 @@
         android:showAsAction="always" />
     
     <item android:id="@+id/action_save_paragraph_note"
-        android:icon="@drawable/save_notes"
+        android:icon="@drawable/save"
         android:title="@string/save"
         android:showAsAction="always" />
     

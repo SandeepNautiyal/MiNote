@@ -7,8 +7,8 @@
         android:title="@string/action_click_photo"
         android:showAsAction="always" />
     
-    <item android:id="@+id/save_created_list"
-        android:icon="@drawable/save_notes"
+    <item android:id="@+id/saveListNote"
+        android:icon="@drawable/save"
         android:title="@string/save"
         android:showAsAction="always"/>
     

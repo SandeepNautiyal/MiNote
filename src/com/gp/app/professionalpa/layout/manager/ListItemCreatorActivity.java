@@ -81,7 +81,7 @@ public class ListItemCreatorActivity extends Activity
 			
 			if(isSaveButtonToBeCreated)
 			{
-				addSaveAndAddItemButton();
+				addAddItemButton();
 			}
 			
 			isLastItemToBeAddedInLayout = true;
@@ -173,9 +173,6 @@ public class ListItemCreatorActivity extends Activity
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		System.out.println("onActivityResult -> requestCode="+requestCode+" resultCode="+resultCode);
-		
-
 	    if (requestCode == ProfessionalPAConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
 	    {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
@@ -188,11 +185,24 @@ public class ListItemCreatorActivity extends Activity
 	        
 	    	String imageName = ImageLocationPathManager.getInstance().getImageName(imagePath);
 	    	
+	    	boolean isTextPresentInEditText = lastAddedListItem.getText() != null && !lastAddedListItem.getText().equals("");
+	    	
+	    	boolean isImagePresentInImageView = lastAddedListItem.getImageName() != null && !lastAddedListItem.getImageName().equals("");
+	    	
+	    	System.out.println("onActivityResult -> isImagePresentInImageView="+isImagePresentInImageView);
+	    	
+	    	if(isTextPresentInEditText ||  isImagePresentInImageView)
+	    	{
+	    		addNewListItem();
+	    		
+	    		updateActivityLayout();
+	    	}
+	    	
 	        lastAddedListItem.setImage(imageName, image, true);
 	        
-	        addNewListItem();
+//	        addNewListItem();
 	        
-			updateActivityLayout();
+//			updateActivityLayout();
 	    }
 	}
 	
@@ -227,6 +237,10 @@ public class ListItemCreatorActivity extends Activity
             
             startActivityForResult(cameraIntent, ProfessionalPAConstants.TAKE_PHOTO_CODE);
 		}
+		else if(id == R.id.saveListNote)
+		{
+			saveListOfItems();
+		}
 		
 		return super.onOptionsItemSelected(item);
 	}
@@ -249,40 +263,22 @@ public class ListItemCreatorActivity extends Activity
 		lastAddedListItem = currentAddedListItem;
 	}
 
-	private void updateActivityLayout() {
-		addSaveAndAddItemButton();
+	private void updateActivityLayout() 
+	{
+		addAddItemButton();
 		
 		setContentView(scrollView);
 	}
 
-	private void addSaveAndAddItemButton() 
+	private void addAddItemButton() 
 	{
-		Button saveButton = (Button)findViewById(ProfessionalPAConstants.SAVE_BUTTON_ID);
-		
 		Button addNewListItem = (Button)findViewById(ProfessionalPAConstants.ADD_BUTTON_ID);
-		
-		activityLayout.removeView(saveButton);
 		
 		activityLayout.removeView(addNewListItem);
 		
-		saveButton = new Button(this);
-		
-		saveButton.setText("Save");
-		
-		saveButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v)
-			{
-				saveListOfItems();
-			}
-		});
-		
-		saveButton.setId(ProfessionalPAConstants.SAVE_BUTTON_ID);
-
 		addNewListItem = new Button(this);
 		
-		addNewListItem.setText("Add");
+		addNewListItem.setText("+");
 		
 		addNewListItem.setOnClickListener(new OnClickListener() {
 			
@@ -295,31 +291,16 @@ public class ListItemCreatorActivity extends Activity
 			}
 		});
 		
-		saveButton.setId(ProfessionalPAConstants.ADD_BUTTON_ID);
+		addNewListItem.setId(ProfessionalPAConstants.ADD_BUTTON_ID);
 		
 		RelativeLayout.LayoutParams layoutParamsForSaveButton = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		
 		layoutParamsForSaveButton.addRule(RelativeLayout.BELOW, lastAddedListItem.getId());
 		
-		saveButton.setLayoutParams(layoutParamsForSaveButton);
+		addNewListItem.setLayoutParams(layoutParamsForSaveButton);
 		
-		RelativeLayout.LayoutParams layoutParamsForAddListItem = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-		
-//		layoutParamsForAddListItem.addRule(RelativeLayout.BELOW, lastAddedListItem.getId());
-		
-		layoutParamsForAddListItem.addRule(RelativeLayout.RIGHT_OF, saveButton.getId());
-		
-//		layoutParamsForAddListItem.addRule(RelativeLayout.ALIGN_BASELINE, saveButton.getId());
-		
-		layoutParamsForAddListItem.addRule(RelativeLayout.ALIGN_BOTTOM, saveButton.getId());
-		
-		addNewListItem.setLayoutParams(layoutParamsForAddListItem);
-		
-		activityLayout.addView(saveButton, listItems.size());
-		
-		activityLayout.addView(addNewListItem);
+		activityLayout.addView(addNewListItem, listItems.size());
 	}
 
 	private void saveListOfItems()
@@ -333,8 +314,6 @@ public class ListItemCreatorActivity extends Activity
 			String imageName = compoundControl.getImageName();
 			
 			boolean isValidImageName =  imageName != null && imageName.length() > 0 && !imageName.equals("");
-
-			System.out.println("saveListOfItems -> imageName="+imageName+" isValidImageName="+isValidImageName);
 
 			String listItemData = compoundControl.getText();
 			
@@ -394,6 +373,8 @@ public class ListItemCreatorActivity extends Activity
 	@Override
 	public void onBackPressed() 
 	{
+	    saveListOfItems();
+
 	    super.onBackPressed();
 	}
 	
