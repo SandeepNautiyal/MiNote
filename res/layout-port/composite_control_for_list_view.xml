@@ -37,5 +37,5 @@
         android:maxLines="7"
         android:maxLength="200"
         android:isScrollContainer="true"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"/>
 </RelativeLayout>

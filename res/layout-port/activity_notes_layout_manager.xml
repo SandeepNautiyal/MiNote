@@ -2,9 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/notesLayoutManagerScrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#fffaaa"
-    android:fillViewport="true"
     tools:context="com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity">
 
 <LinearLayout 
@@ -12,13 +11,13 @@
     android:layout_height="wrap_content"
     android:id="@+id/notesLayoutManagerParentLinearLayout"
     android:orientation="horizontal"
-    android:background="#ffffff"
+    android:background="#ffaadd"
     android:baselineAligned="false">
     
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="0dip"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
         android:layout_marginRight="1dip"
@@ -28,7 +27,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dip"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
         android:layout_marginLeft="1dip"

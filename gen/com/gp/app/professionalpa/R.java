@@ -43,7 +43,7 @@ public final class R {
         public static final int professional_pa_list_view1=0x7f02000b;
         public static final int professional_pa_paragraph_view=0x7f02000c;
         public static final int professional_pa_paragraph_view1=0x7f02000d;
-        public static final int save_notes=0x7f02000e;
+        public static final int save=0x7f02000e;
     }
     public static final class id {
         public static final int ScrollView01=0x7f08000e;
@@ -83,7 +83,7 @@ public final class R {
         public static final int paragraphNoteImportanceView=0x7f080011;
         public static final int paragraph_note_alarm_button=0x7f080012;
         public static final int professional_pa_frame_layout=0x7f080014;
-        public static final int save_created_list=0x7f080018;
+        public static final int saveListNote=0x7f080018;
     }
     public static final class layout {
         public static final int activity_notes_layout_manager=0x7f030000;
@@ -91,13 +91,14 @@ public final class R {
         public static final int composite_control_for_list_view=0x7f030002;
         public static final int compound_control_layout=0x7f030003;
         public static final int data_adapter_view=0x7f030004;
-        public static final int list_item_creator_activity=0x7f030005;
-        public static final int listview_for_list_fragment=0x7f030006;
-        public static final int paragraph_note_creator_activtiy=0x7f030007;
-        public static final int professiona_pa_array_adapter_row_layout=0x7f030008;
-        public static final int professional_pa_frame_layout=0x7f030009;
-        public static final int professional_pa_note_view=0x7f03000a;
-        public static final int professional_pa_paragraph_view_layout=0x7f03000b;
+        public static final int fragment_list_view=0x7f030005;
+        public static final int list_item_creator_activity=0x7f030006;
+        public static final int listview_for_list_fragment=0x7f030007;
+        public static final int paragraph_note_creator_activtiy=0x7f030008;
+        public static final int professiona_pa_array_adapter_row_layout=0x7f030009;
+        public static final int professional_pa_frame_layout=0x7f03000a;
+        public static final int professional_pa_note_view=0x7f03000b;
+        public static final int professional_pa_paragraph_view_layout=0x7f03000c;
     }
     public static final class menu {
         public static final int contextual_menu=0x7f070000;

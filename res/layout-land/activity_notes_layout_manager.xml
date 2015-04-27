@@ -1,19 +1,12 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/notesLayoutManagerScrollView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fffaaa"
-    android:fillViewport="true"
-    tools:context="com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity">
-
-<LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/notesLayoutManagerParentLinearLayout"
     android:orientation="horizontal"
     android:background="#000000"
-    android:baselineAligned="false">
+    android:baselineAligned="false"
+    tools:context="com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity">
     
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -45,4 +38,3 @@
         android:background="#ffbaf6d1">
     </LinearLayout>
 </LinearLayout>
-</ScrollView>

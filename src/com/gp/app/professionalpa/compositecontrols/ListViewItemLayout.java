@@ -158,15 +158,6 @@ public class ListViewItemLayout extends RelativeLayout
 	    
 	    this.imageName = imageName;
 	}
-//
-//	public ImageButton getAlarmImageButton() {
-//		return alarmImageButton;
-//	}
-
-	public void setImageName(String imageName)
-	{
-		this.imageName = imageName;
-	}
 	
 	public String getImageName()
 	{
