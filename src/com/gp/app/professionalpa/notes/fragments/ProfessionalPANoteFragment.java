@@ -13,6 +13,7 @@ import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.data.ListViewItemAdapter;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ProfessionalPANoteFragment extends ListFragment
 {
@@ -25,6 +26,8 @@ public class ProfessionalPANoteFragment extends ListFragment
 	public ProfessionalPANoteFragment()
 	{
 		super();
+		
+		listView = (ListView)LayoutInflater.from(ProfessionalPAParameters.getApplicationContext()).inflate(R.layout.fragment_list_view, null);   
 	}
 	
 	/**

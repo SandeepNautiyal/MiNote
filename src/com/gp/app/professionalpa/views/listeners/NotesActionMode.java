@@ -55,14 +55,20 @@ public class NotesActionMode implements ActionMode.Callback
         switch (item.getItemId())
         {
             case R.id.item_delete:
-            	NotesOperationManager.deleteNote(noteId, imageNames, noteType);
+            	NotesOperationManager.getInstance().deleteNote(imageNames, noteType);
             	mode.finish();
                 return true;
             case R.id.action_discard_notes:
-            	NotesOperationManager.startCopyProcess(noteId, imageNames, noteType);
+            	NotesOperationManager.getInstance().startCopyProcess(imageNames, noteType);
+            case R.id.pickColor:
+            	NotesOperationManager.getInstance().createColourPicker();
             default:
-                return false;
+                
         }
+        
+        mode.finish();
+        
+        return false;
     }
 
 	private void copyNote() 
@@ -74,4 +80,9 @@ public class NotesActionMode implements ActionMode.Callback
     public void onDestroyActionMode(ActionMode mode) 
     {
     }
+	
+	public int getNoteId()
+	{
+		return noteId;
+	}
 }

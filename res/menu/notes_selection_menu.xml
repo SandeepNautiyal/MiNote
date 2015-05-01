@@ -11,5 +11,10 @@
         android:title="@string/action_copy_notes"
         android:showAsAction="always" 
         android:orderInCategory="1"/>
+    
+    <item android:id="@+id/pickColor"
+        android:icon="@drawable/color_picker_icon"
+        android:title="@string/pickColour"
+        android:showAsAction="always" />
 </menu>
 

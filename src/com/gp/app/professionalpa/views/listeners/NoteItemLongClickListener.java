@@ -1,20 +1,13 @@
 package com.gp.app.professionalpa.views.listeners;
 
-import com.gp.app.professionalpa.data.ProfessionalPANote;
-import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
-import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
-import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
-import com.gp.app.professionalpa.util.ProfessionalPAParameters;
-
-import android.content.Intent;
 import android.view.View;
 import android.view.View.OnLongClickListener;
+
+import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 
 public class NoteItemLongClickListener implements OnLongClickListener
 {
 	NotesActionMode actionModelCallback = null;
-	
-	int noteId  = -1;
 	
     public NoteItemLongClickListener(NotesActionMode actionMode)
     {
@@ -25,6 +18,8 @@ public class NoteItemLongClickListener implements OnLongClickListener
 	public boolean onLongClick(View view) 
 	{
         view.startActionMode(actionModelCallback);
+        
+        NotesOperationManager.getInstance().setSelectedNote(actionModelCallback.getNoteId());
         
         view.setSelected(true);
         

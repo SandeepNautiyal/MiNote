@@ -19,12 +19,14 @@
    </item> -->
 
 <!-- android:top="2dp"  -->
-   <item android:bottom="2dip"> 
+   <item android:bottom="0dip"> 
       <shape 
         android:shape="rectangle">
-            <stroke android:width="2dip" android:color="#FFDDDDDD" />
-            <solid android:color="#00000000" />
-        </shape>
+            <stroke android:width="1.5dip" android:color="#7F7CD9" />
+            <corners android:radius="0dip"/>
+       </shape>
+       <padding android:left="1.5dip" android:top="12.5dip" android:right="1.5dip" android:bottom="12.5dip" />
+      
    </item>
 
 </layer-list>

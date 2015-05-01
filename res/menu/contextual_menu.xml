@@ -8,5 +8,9 @@
         android:title="Delete"
         android:titleCondensed="Delete">
     </item>
- 
+    
+    <item android:id="@+id/pickColor"
+        android:icon="@drawable/color_picker_icon"
+        android:title="@string/pickColour"
+        android:showAsAction="always" />
 </menu>

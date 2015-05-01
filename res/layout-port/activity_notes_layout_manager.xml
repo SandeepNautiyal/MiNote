@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:layout_marginRight="1dip"
+        android:layout_marginRight="0dip"
         android:background="#ffffff">
     </LinearLayout>
     
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:layout_marginLeft="1dip"
+        android:layout_marginLeft="0dip"
         android:background="#ffffff">
     </LinearLayout>
 </LinearLayout>

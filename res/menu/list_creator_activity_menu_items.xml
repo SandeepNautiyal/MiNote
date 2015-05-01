@@ -2,7 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gp.app.professionalpa.ListItemCreatorActivity" >
 
-    <item android:id="@+id/action_click_photo"
+    <item android:id="@+id/pickColor"
+        android:icon="@drawable/color_picker_icon"
+        android:title="@string/pickColour"
+        android:showAsAction="always" />
+    
+    <item android:id="@+id/clickPhoto"
         android:icon="@drawable/professional_pa_camera"
         android:title="@string/action_click_photo"
         android:showAsAction="always" />

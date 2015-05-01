@@ -120,8 +120,13 @@ public class ListViewItemLayout extends RelativeLayout
 	    }
 	    
 	    super.onRestoreInstanceState(state);
-	  }
+	}
 	  
+	public EditText getEditText()
+	{
+		return textView;
+	}
+	
 	public String getText() 
 	{
 		return textView.getText().toString();

@@ -65,6 +65,15 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 		
         final int noteId = note.getNoteId();
         
+        text.setOnClickListener(new View.OnClickListener()
+		{
+            @Override
+            public void onClick(View v)
+            {
+            	ProfessionalPAParameters.getNotesActivity().openNoteInEditMode(noteId);
+            }
+        });
+        
 		imageView.setOnClickListener(new View.OnClickListener()
 		{
             @Override
@@ -74,7 +83,7 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
             }
         });
 		
-	    Resources androidResources = ProfessionalPAParameters.getApplicationContext().getResources();
+	    Resources androidResources = getContext().getResources();
 	    
 	    int compressedViewHeight = (int)androidResources.getDimension(R.dimen.composite_control_textview_height_compressed);
 

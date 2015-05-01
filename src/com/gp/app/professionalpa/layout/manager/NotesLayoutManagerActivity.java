@@ -14,7 +14,6 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -26,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
 import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
@@ -38,7 +38,7 @@ import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
-public class NotesLayoutManagerActivity extends Activity
+public class NotesLayoutManagerActivity extends Activity implements ColourPickerChangeListener
 {
 	private static final String NUMBER_OF_LINEAR_LAYOUTS = "NUMBER_OF_LINEAR_LAYOUTS";
 
@@ -66,10 +66,12 @@ public class NotesLayoutManagerActivity extends Activity
 
 	private List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
 
-	private LinearLayoutAndIndexSelector linearLayoutAndIndexSelector = null;
+//	private LinearLayoutAndIndexSelector linearLayoutAndIndexSelector = null;
 	private List<Integer> selectedViewIds = new ArrayList<Integer>();
 
 	private ImageLocationPathManager imageCaptureManager = null;
+	
+	private int [] indexesOccupied = null;
 
 	public NotesLayoutManagerActivity() 
 	{
@@ -90,8 +92,10 @@ public class NotesLayoutManagerActivity extends Activity
 
 		numberOfLinearLayouts = getNumberOfLinearLayouts();
 
-		linearLayoutAndIndexSelector = new LinearLayoutAndIndexSelector(
-				numberOfLinearLayouts);
+		indexesOccupied = new int[numberOfLinearLayouts];
+		
+//		linearLayoutAndIndexSelector = new LinearLayoutAndIndexSelector(
+//				numberOfLinearLayouts);
 
 		fillLinearLayoutList();
 
@@ -380,7 +384,6 @@ public class NotesLayoutManagerActivity extends Activity
 			} else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_LANDSCAPE;
 			}
-
 		}
 		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {
 			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -408,13 +411,29 @@ public class NotesLayoutManagerActivity extends Activity
 
 	private void updateActivityView(FrameLayout frameLayout)
 	{
-		int[] indexes = linearLayoutAndIndexSelector.getNextAvailableIndex();
+		int availableIndex = 0;
+		
+		for(int i = 0; i < numberOfLinearLayouts; i++)
+		{
+			if(indexesOccupied[i] == 0)
+			{
+				availableIndex = i;
+				
+				System.out.println("available index1 ="+availableIndex);
 
-		int linearLayoutIndex = indexes[0];
+				break;
+			}
+			
+			availableIndex = 0;
+			
+			indexesOccupied = new int[numberOfLinearLayouts];
+		}
+		
+		System.out.println("available index ="+availableIndex);
+		
+		indexesOccupied[availableIndex] = 1;
 
-		int availableIndex = indexes[1];
-
-		LinearLayout linearLayout = linearLayouts.get(linearLayoutIndex);
+		LinearLayout linearLayout = linearLayouts.get(availableIndex);
 
 		LinearLayout parentView = (LinearLayout) frameLayout.getParent();
 
@@ -423,9 +442,11 @@ public class NotesLayoutManagerActivity extends Activity
 			parentView.removeView(frameLayout);
 		}
 
-		linearLayout.addView(frameLayout, availableIndex);
+		linearLayout.addView(frameLayout, 0);
 
-		linearLayoutAndIndexSelector.fillLayout(linearLayoutIndex, ++availableIndex);
+		frameLayout.setBackgroundColor(12342);
+		
+//		linearLayoutAndIndexSelector.fillLayout(linearLayoutIndex, ++availableIndex);
 	}
 
 	private void fillLinearLayoutList() 
@@ -490,7 +511,8 @@ public class NotesLayoutManagerActivity extends Activity
 	}
 
 	@Override
-	protected void onPause() {
+	protected void onPause() 
+	{
 		super.onPause();
 	}
 
@@ -509,7 +531,8 @@ public class NotesLayoutManagerActivity extends Activity
 		}
 	}
 
-	public void addNote(int noteId) {
+	public void addNote(int noteId)
+	{
 		ProfessionalPANote note = NotesManager.getInstance().getNote(noteId);
 
 		if (note != null) {
@@ -519,57 +542,58 @@ public class NotesLayoutManagerActivity extends Activity
 
 	class LinearLayoutOnClickListener implements OnClickListener {
 		@Override
-		public void onClick(View v) {
-			NotesOperationManager.copyNote();
+		public void onClick(View v) 
+		{
+			NotesOperationManager.getInstance().copyNote();
 		}
 
 	}
 
-	public class LinearLayoutAndIndexSelector 
-	{
-		private int numberOfLinearLayout = -1;
-
-		private int[] nextAvailableIndex = null;
-
-		public LinearLayoutAndIndexSelector(int numberOfLinearLayout) 
-		{
-			this.numberOfLinearLayout = numberOfLinearLayout;
-
-			nextAvailableIndex = new int[numberOfLinearLayout];
-
-			for (int i = 0; i < numberOfLinearLayout; i++) 
-			{
-				nextAvailableIndex[i] = 0;
-			}
-		}
-
-		public void fillLayout(int filledLayoutIndex, int indexesOccupiedInLayout) 
-		{
-			if (filledLayoutIndex < numberOfLinearLayout)
-			{
-				nextAvailableIndex[filledLayoutIndex] = indexesOccupiedInLayout;
-			}
-		}
-
-		public int[] getNextAvailableIndex() 
-		{
-			int availableIndex = nextAvailableIndex[0];
-
-			int availableLinearLayout = 0;
-
-			for (int i = 1; i < numberOfLinearLayout; i++)
-			{
-				if (availableIndex > nextAvailableIndex[i]) 
-				{
-					availableLinearLayout = i;
-
-					availableIndex = nextAvailableIndex[i];
-				}
-			}
-
-			return new int[] { availableLinearLayout, availableIndex };
-		}
-	}
+//	public class LinearLayoutAndIndexSelector 
+//	{
+//		private int numberOfLinearLayout = -1;
+//
+//		private int[] nextAvailableIndex = null;
+//
+//		public LinearLayoutAndIndexSelector(int numberOfLinearLayout) 
+//		{
+//			this.numberOfLinearLayout = numberOfLinearLayout;
+//
+//			nextAvailableIndex = new int[numberOfLinearLayout];
+//
+//			for (int i = 0; i < numberOfLinearLayout; i++) 
+//			{
+//				nextAvailableIndex[i] = 0;
+//			}
+//		}
+//
+//		public void fillLayout(int filledLayoutIndex, int indexesOccupiedInLayout) 
+//		{
+//			if (filledLayoutIndex < numberOfLinearLayout)
+//			{
+//				nextAvailableIndex[filledLayoutIndex] = indexesOccupiedInLayout;
+//			}
+//		}
+//
+//		public int[] getNextAvailableIndex() 
+//		{
+//			int availableIndex = nextAvailableIndex[0];
+//
+//			int availableLinearLayout = 0;
+//
+//			for (int i = 1; i < numberOfLinearLayout; i++)
+//			{
+//				if (availableIndex > nextAvailableIndex[i]) 
+//				{
+//					availableLinearLayout = i;
+//
+//					availableIndex = nextAvailableIndex[i];
+//				}
+//			}
+//
+//			return new int[] { availableLinearLayout, availableIndex };
+//		}
+//	}
 
 	public void openNoteInEditMode(int noteId) 
 	{
@@ -580,5 +604,23 @@ public class NotesLayoutManagerActivity extends Activity
 		
 		startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
 //		startActivity(intent);
+	}
+
+	@Override
+	public void changeColour(int colourCode) 
+	{
+		int selectedNoteId = NotesOperationManager.getInstance().getSelectedNoteId();
+		
+		FrameLayout frameLayout = childFrames.get(selectedNoteId);
+
+		if(frameLayout != null)
+		{
+			View view = frameLayout.getChildAt(0);
+			
+			if(view != null)
+			{
+				view.setBackgroundColor(colourCode);
+			}
+		}
 	}
 }
