@@ -29,6 +29,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -194,8 +195,6 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	    	
 	    	boolean isImagePresentInImageView = lastAddedListItem.getImageName() != null && !lastAddedListItem.getImageName().equals("");
 	    	
-	    	System.out.println("onActivityResult -> isImagePresentInImageView="+isImagePresentInImageView);
-	    	
 	    	if(isTextPresentInEditText ||  isImagePresentInImageView)
 	    	{
 	    		addNewListItem();
@@ -256,7 +255,7 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	
 	private void addNewListItem() 
 	{
-		ListViewItemLayout currentAddedListItem = new ListViewItemLayout(this);
+		final ListViewItemLayout currentAddedListItem = new ListViewItemLayout(this);
 		
 		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -268,15 +267,29 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 		
 		currentAddedListItem.setLayoutParams(layoutParams);
 		
-		currentAddedListItem.setOnFocusChangeListener(new OnFocusChangeListener() {
-			
+		ImageButton deleteButton = currentAddedListItem.getImportanceImageButton();
+		
+		if(deleteButton != null)
+		{
+			deleteButton.setOnClickListener(new OnClickListener() 
+			{
+				@Override
+				public void onClick(View v) 
+				{
+					activityLayout.removeView(currentAddedListItem);
+					
+					listItems.remove(currentAddedListItem);
+				}
+			});
+		}
+		currentAddedListItem.getEditText().setOnFocusChangeListener(new OnFocusChangeListener() 
+		{
 			@Override
 			public void onFocusChange(View view, boolean hasFocus)
 			{
+				selectedViewId.clear();
+				
 				selectedViewId.add(view);
-				
-				System.out.println("addNewListItem -> selectedViewId="+selectedViewId); 
-				
 			}
 		});
 		
@@ -448,7 +461,7 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 
 	}
 
-	public void changeSelectedTextColour(int id)
+	public void changeSelectedTextColour(int colour)
 	{
 		EditText selectedView = (EditText)selectedViewId.get(0);
 		
@@ -464,7 +477,7 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			
 			if(selectedText == null || selectedText.equals(""))
 			{
-				setCursorDrawableColor(selectedView, 12345);
+				setCursorDrawableColor(selectedView, colour);
 			}
 			else
 			{
@@ -498,12 +511,18 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	        drawables[0].setColorFilter(color, PorterDuff.Mode.SRC_IN);
 	        drawables[1].setColorFilter(color, PorterDuff.Mode.SRC_IN);
 	        fCursorDrawable.set(editor, drawables);
-	    } catch (final Throwable ignored) {
+	        editText.setTextColor(color);
+	    } 
+	    catch (final Throwable ignored) 
+	    {
+	    	//TODO improve
+	    	ignored.printStackTrace();
 	    }
 	}
 
 	@Override
 	public void changeColour(int colourCode) 
 	{
+		changeSelectedTextColour(colourCode);
 	}
 }
