@@ -111,7 +111,14 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 		{
 			final LayoutParams params = text.getLayoutParams();
 
-			params.height = LayoutParams.WRAP_CONTENT;
+//			if(listItems.size() > 1)
+//			{
+				params.height = LayoutParams.WRAP_CONTENT;
+//			}
+//			else
+//			{
+//				params.height = 100;
+//			}
 
 		    text.setLayoutParams(params);
 
@@ -125,7 +132,7 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 
 			text.setFocusable(false);
 			text.setClickable(true);
-			
+			text.setTextColor(noteListItem.getTextColour());
 			text.setLayoutParams(params);
 		}
 

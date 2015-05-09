@@ -23,9 +23,13 @@ public class ProfessionalPANoteFragment extends ListFragment
 
 	private ListView listView = null;
 	
-	public ProfessionalPANoteFragment()
+	private int noteColor;
+	
+	public ProfessionalPANoteFragment(int noteColor)
 	{
 		super();
+		
+		this.noteColor = noteColor;
 		
 		listView = (ListView)LayoutInflater.from(ProfessionalPAParameters.getApplicationContext()).inflate(R.layout.fragment_list_view, null);   
 	}
@@ -65,6 +69,7 @@ public class ProfessionalPANoteFragment extends ListFragment
 				
 				setListViewHeightBasedOnItems(listView);
 //				setListShown(true);
+				listView.setBackgroundColor(noteColor);
 				
 				adapter.notifyDataSetChanged();
 		    }

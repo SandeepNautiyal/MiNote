@@ -2,6 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gp.app.professionalpa.NotesLayoutManagerActivity" >
 
+    <item android:id="@+id/calendar"
+        android:icon="@drawable/calendar_image"
+        android:title="@string/calendar"
+        android:showAsAction="always" />
+    
     <item android:id="@+id/action_click_photo"
         android:icon="@drawable/professional_pa_camera"
         android:title="@string/action_click_photo"

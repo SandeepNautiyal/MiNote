@@ -29,4 +29,18 @@
     <string name="note_item">Note Item</string>
     <string name="action_copy_notes">Copy Note</string>
     <string name="pickColour">Pick Colour</string>
+    <string name="calendar">Calendar</string>
+    <string name="monday">MON</string>
+    <string name="tuesday">TUE</string>
+    <string name="wednesday">WED</string>
+    <string name="thursday">THU</string>
+    <string name="friday">FRI</string>
+    <string name="saturday">SAT</string>
+    <string name="sunday">SUN</string>
+    <string name="create_event">Create Event</string>
+    <string name="edit_event">Edit Events</string>
+    <string name="copy_event">Copy Event</string>
+    <string name="cancel">Cancel</string>
+    <string name="check_mark">✔</string>
+    <string name="cross_mark">✘</string>
 </resources>

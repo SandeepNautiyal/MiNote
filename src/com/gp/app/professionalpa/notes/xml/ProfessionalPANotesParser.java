@@ -36,6 +36,8 @@ public class ProfessionalPANotesParser extends DefaultHandler
 	private boolean data = false;
 	private boolean imageName = false;
 	private boolean isImportant;
+
+	private boolean textColor;
 	
 	public ProfessionalPANotesParser() throws ProfessionalPABaseException
 	{
@@ -73,11 +75,15 @@ public class ProfessionalPANotesParser extends DefaultHandler
 			
 			currentNote.setNoteId(Integer.valueOf(noteId));
 			
+			String noteColor = attributes.getValue("noteColor");
+
+			currentNote.setNoteColor(Integer.valueOf(noteColor));
+
 			try 
 			{
-				currentNote.setCreationTime(ProfessionalPATools.parseDateAndTimeString(CreationTime));
+				currentNote.setCreationTime(ProfessionalPATools.parseDateAndTimeString(CreationTime, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz"));
 
-				currentNote.setLastEditedTime(ProfessionalPATools.parseDateAndTimeString(lastEditedTime));
+				currentNote.setLastEditedTime(ProfessionalPATools.parseDateAndTimeString(lastEditedTime, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz"));
 			} 
 			catch (ParseException exception)
 			{
@@ -100,6 +106,11 @@ public class ProfessionalPANotesParser extends DefaultHandler
 		{
 			imageName = true;
 		}
+		
+		if (qName.equalsIgnoreCase("textColor")) 
+		{
+			textColor = true;
+		}
 	}
 
 	public void endElement(String uri, String localName, String qName) throws SAXException 
@@ -117,6 +128,11 @@ public class ProfessionalPANotesParser extends DefaultHandler
 		if (qName.equalsIgnoreCase("imageName")) 
 		{
 			imageName = false;
+		}
+		
+		if (qName.equalsIgnoreCase("textColor")) 
+		{
+			textColor = false;
 		}
 		
 		if(qName.equalsIgnoreCase("NoteItem"))
@@ -142,8 +158,6 @@ public class ProfessionalPANotesParser extends DefaultHandler
 		{
 			String data = new String(ch, start, length);
 			
-			System.out.println("characters -> data="+data);
-			
 			currentNoteItem.setTextViewData(data);
 		}
  
@@ -151,9 +165,14 @@ public class ProfessionalPANotesParser extends DefaultHandler
 		{
 			String imageName = new String(ch, start, length);
 			
-			System.out.println("characters -> imageName="+imageName);
-
 			currentNoteItem.setImageName(imageName);
+		}
+		
+		if(textColor)
+		{
+            String textColor = new String(ch, start, length);
+			
+			currentNoteItem.setTextColour(Integer.valueOf(textColor));
 		}
 	}
 	

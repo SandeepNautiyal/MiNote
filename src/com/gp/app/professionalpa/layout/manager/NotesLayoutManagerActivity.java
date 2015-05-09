@@ -8,6 +8,7 @@ import java.util.Map;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -16,15 +17,22 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.CalendarView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.calendar.ui.ProfessionalPACalendarView;
+import com.gp.app.professionalpa.colorpicker.ColourPickerAdapter;
 import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
 import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
@@ -241,6 +249,14 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			startActivityForResult(cameraIntent,
 					ProfessionalPAConstants.TAKE_PHOTO_CODE);
 		}
+		else if(id == R.id.calendar)
+		{
+			Dialog dialog = new Dialog(this);
+	        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+	        dialog.setContentView(new ProfessionalPACalendarView(this));
+	        dialog.setCancelable(true);
+	        dialog.show();
+		}
 
 		return super.onOptionsItemSelected(item);
 	}
@@ -338,14 +354,17 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			if (fragment != null) 
 			{
 				createActivityLayout(fragment);
+				
 			}
 		}
 	}
 
 	private void createActivityLayout(Fragment fragment) 
 	{
-        FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
+        final FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
+		final int noteId = ((ProfessionalPANoteFragment)fragment).getFragmentNoteId();
+
 		frameLayout.setClickable(true);
 		
 //		frameLayout.setOnTouchListener(touchListener);
@@ -359,8 +378,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		getFragmentManager().beginTransaction().add(id, fragment, tag).commit();
 
-		int noteId = ((ProfessionalPANoteFragment)fragment).getFragmentNoteId();
-		
 		childFrames.put(noteId, frameLayout);
 		
 		updateActivityView(frameLayout);
@@ -419,8 +436,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			{
 				availableIndex = i;
 				
-				System.out.println("available index1 ="+availableIndex);
-
 				break;
 			}
 			
@@ -428,8 +443,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			
 			indexesOccupied = new int[numberOfLinearLayouts];
 		}
-		
-		System.out.println("available index ="+availableIndex);
 		
 		indexesOccupied[availableIndex] = 1;
 
@@ -443,10 +456,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		}
 
 		linearLayout.addView(frameLayout, 0);
-
-		frameLayout.setBackgroundColor(12342);
-		
-//		linearLayoutAndIndexSelector.fillLayout(linearLayoutIndex, ++availableIndex);
 	}
 
 	private void fillLinearLayoutList() 
@@ -607,19 +616,44 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	}
 
 	@Override
-	public void changeColour(int colourCode) 
+	public void changeColour(int noteColor) 
 	{
-		int selectedNoteId = NotesOperationManager.getInstance().getSelectedNoteId();
+		final int selectedNoteId = NotesOperationManager.getInstance().getSelectedNoteId();
 		
 		FrameLayout frameLayout = childFrames.get(selectedNoteId);
 
+		setFrameLayoutColour(noteColor, selectedNoteId, frameLayout);
+	}
+
+	private void setFrameLayoutColour(int noteColor, final int selectedNoteId,
+			FrameLayout frameLayout)
+	{
 		if(frameLayout != null)
 		{
 			View view = frameLayout.getChildAt(0);
 			
 			if(view != null)
 			{
-				view.setBackgroundColor(colourCode);
+				view.setBackgroundColor(noteColor);
+				
+				ProfessionalPANote note = NotesManager.getInstance().getNote(selectedNoteId);
+				
+				if(note != null)
+				{
+					try 
+					{
+						System.out.println("setFrameLayoutColour -> noteColor="+noteColor);
+
+						note.setNoteColor(noteColor);
+
+						ProfessionalPAParameters.getProfessionalPANotesWriter().setColorAttribute(selectedNoteId, noteColor);
+					} 
+					catch (ProfessionalPABaseException e) 
+					{
+						// TODO Improve
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}

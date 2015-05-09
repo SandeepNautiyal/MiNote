@@ -10,7 +10,7 @@ public class FragmentCreationManager
 {
 	public static Fragment createFragment(ProfessionalPANote note)
 	{
-		ProfessionalPANoteFragment fragment = new ProfessionalPANoteFragment();
+		ProfessionalPANoteFragment fragment = new ProfessionalPANoteFragment(note.getNoteColor());
 	    
 		fragment.setNoteFragmentId(note.getNoteId());
 		

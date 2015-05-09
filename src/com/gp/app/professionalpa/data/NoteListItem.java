@@ -9,6 +9,8 @@ public class NoteListItem implements Parcelable
 	
 	private String imageName = null;
 
+	private int textColour = 0;
+	
 	public NoteListItem(String textViewData)
 	{
 		this.itemText = textViewData;
@@ -42,6 +44,16 @@ public class NoteListItem implements Parcelable
 		return imageName1;
 	}
 
+	public void setTextColour(int colour)
+	{
+		textColour = colour;
+	}
+	
+	public int getTextColour()
+	{
+		return textColour;
+	}
+	
 	public void setImageName(String imagePath) 
 	{
 		this.imageName = imagePath;
@@ -57,6 +69,8 @@ public class NoteListItem implements Parcelable
 	public void writeToParcel(Parcel dest, int flags) 
 	{
 		dest.writeStringArray(new String[]{itemText, imageName});
+		
+		dest.writeInt(textColour);
 		
 //		if(imagePath != null)
 //		{
@@ -85,7 +99,13 @@ public class NoteListItem implements Parcelable
 			
 			source.readStringArray(itemProperties);
 			
-			return new NoteListItem(itemProperties[0], itemProperties[1]);
+			int colour = source.readInt();
+			
+			NoteListItem noteListItem = new NoteListItem(itemProperties[0], itemProperties[1]);
+			
+			noteListItem.setTextColour(colour);
+			
+			return noteListItem;
 		}
 
 		@Override

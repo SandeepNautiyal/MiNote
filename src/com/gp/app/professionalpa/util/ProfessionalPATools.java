@@ -26,20 +26,19 @@ public class ProfessionalPATools
     	 return Environment.getExternalStorageDirectory() + ProfessionalPAConstants.PROFESSIONAL_PA_EXPORT_PATH;
      }
      
-    public static long parseDateAndTimeString(String time) throws ParseException 
+    public static long parseDateAndTimeString(String time, String format) throws ParseException 
  	{
- 		SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
+ 		SimpleDateFormat formatter = new SimpleDateFormat(format);
 
  		Date creationDate = formatter.parse(time);
  		
  		return creationDate.getTime();
  	}
     
-    public static String createStringForDate(long creationTimeAndDate) {
+    public static String createStringForDate(long creationTimeAndDate, String format) {
 		Date creationTime = new Date(creationTimeAndDate);
 
-		SimpleDateFormat formatter = new SimpleDateFormat(
-				"E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
+		SimpleDateFormat formatter = new SimpleDateFormat(format);
 
 		String creationDate = formatter.format(creationTime);
 		return creationDate;

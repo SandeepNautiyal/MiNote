@@ -5,7 +5,9 @@
 <!ATTLIST note isParagraphNote PCDATA #REQUIRED>
 <!ATTLIST note creationTime PCDATA #REQUIRED>
 <!ATTLIST note lastEditedTime PCDATA #REQUIRED>
+<!ATTLIST note noteColor PCDATA #REQUIRED>
 <!ELEMENT noteItem (data, imageName)>
 <!ELEMENT data PCDATA #REQUIRED>
 <!ELEMENT imageName PCDATA #REQUIRED>
+<!ELEMENT textColor PCDATA #REQUIRED>
 ]>

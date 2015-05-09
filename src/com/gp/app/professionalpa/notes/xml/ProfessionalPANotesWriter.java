@@ -97,13 +97,15 @@ public class ProfessionalPANotesWriter
 
 		noteElement.setAttribute("noteId", Integer.toString(note.getNoteId()));
 
-		long creationTimeAndDate = note.getCreationTime();
-		
-		String creationDate = ProfessionalPATools.createStringForDate(creationTimeAndDate);
+		String creationDate = ProfessionalPATools.createStringForDate(note.getCreationTime(), "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
 
+		String lastEditedTime = ProfessionalPATools.createStringForDate(note.getLastEditedTime(), "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
+		
 		noteElement.setAttribute("creationTime", creationDate);
 
-		noteElement.setAttribute("lastEditedTime", creationDate);
+		noteElement.setAttribute("lastEditedTime", lastEditedTime);
+
+		noteElement.setAttribute("noteColor", Integer.toString(note.getNoteColor()));
 
 		rootElement.appendChild(noteElement);
 
@@ -137,6 +139,12 @@ public class ProfessionalPANotesWriter
         imageName.appendChild(xmlDocument.createTextNode(noteListItem.getImageName()));
 
         noteItem.appendChild(imageName);
+        
+        Element textColor = xmlDocument.createElement("textColor");
+        
+        textColor.appendChild(xmlDocument.createTextNode(String.valueOf(noteListItem.getTextColour())));
+
+        noteItem.appendChild(textColor);
 	}
 
 	private void completeWritingProcess() throws ProfessionalPABaseException
@@ -190,7 +198,7 @@ public class ProfessionalPANotesWriter
                     
                     try 
                     {
-						long readCreationTime = ProfessionalPATools.parseDateAndTimeString(attribute);
+						long readCreationTime = ProfessionalPATools.parseDateAndTimeString(attribute, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
 						
 						if(readCreationTime == creationTime)
 						{
@@ -245,12 +253,10 @@ public class ProfessionalPANotesWriter
 		}
 	}
     
-    private boolean isNoteAlreadyWritten(int noteId)
-    {
-    	boolean result = false;
-    	
-    	Element notesElement = xmlDocument.getDocumentElement();
-		
+    public void setColorAttribute(int noteId, int color) throws ProfessionalPABaseException 
+	{
+		Element notesElement = xmlDocument.getDocumentElement();
+			
 		NodeList nodeList = notesElement.getChildNodes();
 			
 		for(int i = 0; i < nodeList.getLength(); i++)
@@ -260,6 +266,7 @@ public class ProfessionalPANotesWriter
 			if (noteElement.hasAttributes()) 
 			{
 	            Attr attr = (Attr) noteElement.getAttributes().getNamedItem("noteId");
+	            
 	            if (attr != null) 
 	            {
 	                String attribute= attr.getValue();                      
@@ -268,14 +275,17 @@ public class ProfessionalPANotesWriter
 							
 					if(noteId == readNoteId)
 					{
-						result = true;
+						Attr colorAttribute = (Attr) noteElement.getAttributes().getNamedItem("noteColor");
 						
+						colorAttribute.setValue(String.valueOf(color));
+					
+						completeWritingProcess();
+
 						break;
 					}
+						
 	            }
 	        }
 		}
-		
-		return result;
-    }
+	}
 }

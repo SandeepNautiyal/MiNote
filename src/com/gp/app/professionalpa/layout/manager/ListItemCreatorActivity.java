@@ -317,8 +317,8 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 		
 		addNewListItem.setText("+");
 		
-		addNewListItem.setOnClickListener(new OnClickListener() {
-			
+		addNewListItem.setOnClickListener(new OnClickListener() 
+		{
 			@Override
 			public void onClick(View view)
 			{
@@ -360,6 +360,8 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			{
 	            NoteListItem listItem = new NoteListItem(compoundControl.getText(), compoundControl.getImageName());
 
+	            listItem.setTextColour(compoundControl.getEditText().getCurrentTextColor());
+	            
 	            noteItems.add(listItem);
 			}
 		}
@@ -467,35 +469,49 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 		
 		if(selectedView != null)
 		{
-			int startIndex = selectedView.getSelectionStart();
-			
-			int endIndex = selectedView.getSelectionEnd();
-			
-			String selectedViewText = selectedView.getText().toString();
-			
-			String selectedText = selectedViewText.substring(startIndex, endIndex);
-			
-			if(selectedText == null || selectedText.equals(""))
-			{
+//			TODO not needed right now as selection of subtext not allowed for edittext 
+
+//			int startIndex = selectedView.getSelectionStart();
+//			
+//			int endIndex = selectedView.getSelectionEnd();
+//			
+//			String selectedViewText = selectedView.getText().toString();
+//			
+//			String selectedText = selectedViewText.substring(startIndex, endIndex);
+//			
+//			if(selectedText == null || selectedText.equals(""))
+//			{
 				setCursorDrawableColor(selectedView, colour);
-			}
-			else
-			{
-				SpannableStringBuilder sb = new SpannableStringBuilder(selectedViewText);
+				
+				selectedView.setTextColor(colour);
 
-				// Span to set text color to some RGB value
-				ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(255, 0, 0)); 
-
-				// Set the text color for first 4 characters
-				sb.setSpan(fcs, startIndex, endIndex, Spannable.SPAN_INCLUSIVE_INCLUSIVE); 
-
-				selectedView.setText(sb);
-			}
+//			}
+			
+//			TODO not needed right now as selection of subtext not allowed for edittext 
+//			else
+//			{
+//				SpannableStringBuilder sb = new SpannableStringBuilder(selectedViewText);
+//
+//				// Span to set text color to some RGB value
+//				ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(255, 0, 0)); 
+//
+//				// Set the text color for first 4 characters
+//				sb.setSpan(fcs, startIndex, endIndex, Spannable.SPAN_INCLUSIVE_INCLUSIVE); 
+//
+//				selectedView.setText(sb);
+//			}
 		}
 	}
 	
 	private void setCursorDrawableColor(EditText editText, int color) {
 	    try {
+	    	
+	    	//TODO to be checked and improved.
+//	    	TODO Below commented 3 lines will also work but the colour of cursor will not be changed.
+//	    	Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
+//	        f.setAccessible(true);
+//	        f.set(yourEditText, R.drawable.cursor);
+	        
 	        final Field fCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
 	        fCursorDrawableRes.setAccessible(true);
 	        final int mCursorDrawableRes = fCursorDrawableRes.getInt(editText);
@@ -511,7 +527,6 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	        drawables[0].setColorFilter(color, PorterDuff.Mode.SRC_IN);
 	        drawables[1].setColorFilter(color, PorterDuff.Mode.SRC_IN);
 	        fCursorDrawable.set(editor, drawables);
-	        editText.setTextColor(color);
 	    } 
 	    catch (final Throwable ignored) 
 	    {

@@ -43,6 +43,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 	private long lastEditedTime = 0L;
 	
 	private List<String> imageNames = new ArrayList<String>();
+	private int noteColor;
 	
 
 	public ProfessionalPANote(int noteId, byte noteType, List<NoteListItem> values) 
@@ -147,7 +148,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		
 		dest.writeLongArray(new long[]{creationTime, lastEditedTime});
 		
-		dest.writeInt(noteId);
+		dest.writeIntArray(new int[]{noteId, noteColor});
 	}
 
 	public int getNoteId()
@@ -175,9 +176,11 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 
 			source.readLongArray(timeAttributes);
 			
-			int id = source.readInt();
+			int [] noteAttributes = new int[2];
 			
-			ProfessionalPANote note = new ProfessionalPANote(id, noteState[0], noteItems);
+			source.readIntArray(noteAttributes);
+			
+			ProfessionalPANote note = new ProfessionalPANote(noteAttributes[0], noteState[0], noteItems);
 			
 			note.setCreationTime(timeAttributes[0]);
 
@@ -185,7 +188,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 			
 			note.setState(noteState[1]);
 			
-			note.setNoteId(id);
+			note.setNoteColor(noteAttributes[1]);
 			
 			return note;
 		}
@@ -263,5 +266,15 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		sb.append("Note item :"+notes);
 		
 		return sb.toString();
+	}
+
+	public void setNoteColor(int noteColor)
+	{
+		this.noteColor = noteColor;
+	}
+	
+	public int getNoteColor() 
+	{
+		return noteColor;
 	}
 }
