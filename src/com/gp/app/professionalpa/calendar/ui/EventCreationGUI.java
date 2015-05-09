@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TimePicker;
@@ -46,17 +48,21 @@ public class EventCreationGUI
 		locationEditText = createEventLocationEditText(context);
 		base.addView(locationEditText);
 		
+		LinearLayout linearLayout = createLinearLayoutForTimeFields(context);
+		
 		startTimeButton = createStartTimeButton(context);
-		base.addView(startTimeButton);
+		linearLayout.addView(startTimeButton);
 		
 		endTimeButton = createEndTimeButton(context);
-		base.addView(endTimeButton);
+		linearLayout.addView(endTimeButton);
 		
 		notificationImageButton = createNotificationImageButton(context);
-		base.addView(notificationImageButton);
+		linearLayout.addView(notificationImageButton);
 		
 		alarmImageButton = createAlarmImageButton(context);
-		base.addView(alarmImageButton);
+		linearLayout.addView(alarmImageButton);
+
+		base.addView(linearLayout);
 
 		saveButton = createSaveButton(context);
 		saveButton.setOnClickListener(new OnClickListener()
@@ -117,15 +123,32 @@ public class EventCreationGUI
 		return titleEditText;
 	}
 	
+	private LinearLayout createLinearLayoutForTimeFields(Context context) 
+	{
+		//Plus Button
+		LayoutParams linearLayoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, 120);
+		linearLayoutParams.leftMargin = 10;
+		linearLayoutParams.rightMargin = 10;
+		linearLayoutParams.bottomMargin = 10;
+		linearLayoutParams.topMargin = 10;
+		linearLayoutParams.addRule(RelativeLayout.BELOW, 2);
+
+		LinearLayout timeFieldLinearLayout = new LinearLayout(context);
+		timeFieldLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+		timeFieldLinearLayout.setId(10);
+		timeFieldLinearLayout.setBackgroundColor(Color.parseColor("#7F7CD9"));
+		timeFieldLinearLayout.setLayoutParams(linearLayoutParams);
+		return timeFieldLinearLayout;
+	}
+	
 	private Button createStartTimeButton(Context context) 
 	{
 		//Plus Button
-		LayoutParams hourParams = new LayoutParams(150,105);
+		LinearLayout.LayoutParams hourParams = new LinearLayout.LayoutParams(140,100);
 		hourParams.leftMargin = 10;
-		hourParams.rightMargin = 10;
+		hourParams.rightMargin = 30;
 		hourParams.bottomMargin = 10;
 		hourParams.topMargin = 10;
-		hourParams.addRule(RelativeLayout.BELOW, 2);
 
 		final Button startTimeEditText = new Button(context);
 		
@@ -161,14 +184,12 @@ public class EventCreationGUI
 	
 	private Button createEndTimeButton(Context context) 
 	{
-		LayoutParams endTimeEditTextLayoutParams = new LayoutParams(150,105);
-		endTimeEditTextLayoutParams.leftMargin = 10;
+		LinearLayout.LayoutParams endTimeEditTextLayoutParams = new LinearLayout.LayoutParams(140,100);
 		endTimeEditTextLayoutParams.topMargin = 10;
-		endTimeEditTextLayoutParams.rightMargin = 10;
+		endTimeEditTextLayoutParams.rightMargin = 30;
 		endTimeEditTextLayoutParams.bottomMargin = 10;
-		endTimeEditTextLayoutParams.addRule(RelativeLayout.RIGHT_OF, 3);
-		endTimeEditTextLayoutParams.addRule(RelativeLayout.BELOW, 2);
-		endTimeEditTextLayoutParams.addRule(RelativeLayout.ALIGN_BASELINE, 3);
+//		endTimeEditTextLayoutParams.addRule(RelativeLayout.BELOW, 2);
+//		endTimeEditTextLayoutParams.addRule(RelativeLayout.ALIGN_BASELINE, 3);
 		final Button endTimeEditText = new Button(context);
 		
 		endTimeEditText.setOnClickListener(new OnClickListener()
@@ -202,12 +223,10 @@ public class EventCreationGUI
 	
 	private ImageButton createNotificationImageButton(Context context) 
 	{
-		LayoutParams notificationButtonLayoutParams = new LayoutParams(75,75);
-		notificationButtonLayoutParams.leftMargin = 10;
-		notificationButtonLayoutParams.topMargin = 10;
-		notificationButtonLayoutParams.rightMargin = 10;
-		notificationButtonLayoutParams.bottomMargin = 10;
-		notificationButtonLayoutParams.addRule(RelativeLayout.RIGHT_OF, 4);
+		LinearLayout.LayoutParams notificationButtonLayoutParams = new LinearLayout.LayoutParams(70,70);
+		notificationButtonLayoutParams.topMargin = 25;
+		notificationButtonLayoutParams.rightMargin = 30;
+		notificationButtonLayoutParams.bottomMargin = 25;
 		final ImageButton notificationImageButton = new ImageButton(context);
 		notificationImageButton.setOnClickListener(new OnClickListener()
 		{
@@ -227,12 +246,9 @@ public class EventCreationGUI
 	
 	private ImageButton createAlarmImageButton(Context context) 
 	{
-		LayoutParams alarmImageButtonLayoutParams = new LayoutParams(75,75);
-		alarmImageButtonLayoutParams.leftMargin = 10;
-		alarmImageButtonLayoutParams.topMargin = 10;
-		alarmImageButtonLayoutParams.rightMargin = 10;
-		alarmImageButtonLayoutParams.bottomMargin = 10;
-		alarmImageButtonLayoutParams.addRule(RelativeLayout.RIGHT_OF, 5);
+		LinearLayout.LayoutParams alarmImageButtonLayoutParams = new LinearLayout.LayoutParams(70,70);
+		alarmImageButtonLayoutParams.topMargin = 25;
+		alarmImageButtonLayoutParams.bottomMargin = 25;
 		final ImageButton alarmImageButton = new ImageButton(context);
 		alarmImageButton.setOnClickListener(new OnClickListener()
 		{
@@ -256,7 +272,7 @@ public class EventCreationGUI
 		saveEditTextLayoutParams.topMargin = 10;
 		saveEditTextLayoutParams.rightMargin = 10;
 		saveEditTextLayoutParams.bottomMargin = 10;
-		saveEditTextLayoutParams.addRule(RelativeLayout.BELOW, 3);
+		saveEditTextLayoutParams.addRule(RelativeLayout.BELOW, 10);
     	Button saveImageView = new Button(context);
 		String saveString = context.getResources().getString(R.string.check_mark);
 		saveImageView.setText(saveString);
@@ -272,7 +288,7 @@ public class EventCreationGUI
 		cancelEditTextLayoutParams.topMargin = 10;
 		cancelEditTextLayoutParams.rightMargin = 10;
 		cancelEditTextLayoutParams.bottomMargin = 10;
-		cancelEditTextLayoutParams.addRule(RelativeLayout.BELOW, 4);
+		cancelEditTextLayoutParams.addRule(RelativeLayout.BELOW, 10);
 		cancelEditTextLayoutParams.addRule(RelativeLayout.RIGHT_OF, 7);
 		cancelEditTextLayoutParams.addRule(RelativeLayout.ALIGN_BASELINE, 7);
 		Button cancelImageView = new Button(context);
