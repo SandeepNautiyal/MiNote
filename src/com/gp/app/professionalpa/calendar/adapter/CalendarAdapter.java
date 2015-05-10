@@ -117,8 +117,6 @@ public class CalendarAdapter extends BaseAdapter
 		}
 		else
 		{
-			System.out.println("Calendar adapter -> getView -> inside else");
-
 	        v = vi.inflate(R.layout.day_view, null);
 			FrameLayout today = (FrameLayout)v.findViewById(R.id.today_frame);
 			Calendar cal = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());

@@ -74,30 +74,32 @@ public final class R {
     }
     public static final class id {
         public static final int ScrollView01=0x7f09001f;
-        public static final int action_add_notes=0x7f090037;
-        public static final int action_clear_all_notes=0x7f090032;
-        public static final int action_click_photo=0x7f090035;
-        public static final int action_copy_notes=0x7f09003c;
-        public static final int action_create_list_view=0x7f090036;
-        public static final int action_create_paragraph_view=0x7f09002f;
-        public static final int action_discard_notes=0x7f09003b;
-        public static final int action_display_calender=0x7f09003a;
-        public static final int action_exit_professional_pa_application=0x7f090033;
-        public static final int action_save_paragraph_note=0x7f09003d;
-        public static final int action_search=0x7f090030;
-        public static final int action_settings=0x7f090031;
+        public static final int action_add_notes=0x7f09003a;
+        public static final int action_clear_all_notes=0x7f090035;
+        public static final int action_click_photo=0x7f090038;
+        public static final int action_copy_notes=0x7f09003f;
+        public static final int action_create_list_view=0x7f090039;
+        public static final int action_create_paragraph_view=0x7f090032;
+        public static final int action_discard_notes=0x7f09003e;
+        public static final int action_display_calender=0x7f09003d;
+        public static final int action_exit_professional_pa_application=0x7f090036;
+        public static final int action_save_paragraph_note=0x7f090040;
+        public static final int action_search=0x7f090033;
+        public static final int action_settings=0x7f090034;
         public static final int adapter_row_layout=0x7f090024;
-        public static final int calendar=0x7f090034;
-        public static final int clickPhoto=0x7f09002d;
+        public static final int button1=0x7f090029;
+        public static final int calendar=0x7f090037;
+        public static final int clickPhoto=0x7f090030;
         public static final int colourPickerImage=0x7f090008;
         public static final int compositeControlBulletButton=0x7f09000b;
         public static final int compositeControlImageView=0x7f09000a;
         public static final int compositeControlTextBox=0x7f09000c;
         public static final int composite_control_alarm_button=0x7f09000d;
         public static final int composite_control_layout=0x7f090009;
-        public static final int copyEvent=0x7f09002b;
-        public static final int createEvent=0x7f090029;
-        public static final int editEvent=0x7f09002a;
+        public static final int copyEvent=0x7f09002e;
+        public static final int createEvent=0x7f09002c;
+        public static final int datePicker1=0x7f090027;
+        public static final int editEvent=0x7f09002d;
         public static final int eventsDialogCancelButton=0x7f09001e;
         public static final int eventsDialogEditButton=0x7f09001d;
         public static final int eventsModificationDialogEventLocationTextView=0x7f09001a;
@@ -105,16 +107,16 @@ public final class R {
         public static final int eventsModificationDialogRelativeLayout=0x7f090018;
         public static final int eventsModificationFromTimeTextView=0x7f09001b;
         public static final int eventsModificationToTimeTextView=0x7f09001c;
-        public static final int exit=0x7f09002c;
-        public static final int export_notes=0x7f090038;
+        public static final int exit=0x7f09002f;
+        public static final int export_notes=0x7f09003b;
         public static final int imageView1=0x7f090012;
         public static final int imageView2=0x7f090014;
         public static final int imageView3=0x7f090015;
         public static final int imageView4=0x7f090013;
         public static final int imageView5=0x7f090016;
         public static final int imageView6=0x7f090017;
-        public static final int import_notes=0x7f090039;
-        public static final int item_delete=0x7f090027;
+        public static final int import_notes=0x7f09003c;
+        public static final int item_delete=0x7f09002a;
         public static final int linearLayout1=0x7f090002;
         public static final int linearLayout2=0x7f090003;
         public static final int linearLayout3=0x7f090005;
@@ -129,11 +131,12 @@ public final class R {
         public static final int paragraphNote=0x7f090021;
         public static final int paragraphNoteImportanceView=0x7f090022;
         public static final int paragraph_note_alarm_button=0x7f090023;
-        public static final int pickColor=0x7f090028;
+        public static final int pickColor=0x7f09002b;
         public static final int professional_pa_frame_layout=0x7f090025;
         public static final int rl=0x7f090010;
-        public static final int saveListNote=0x7f09002e;
+        public static final int saveListNote=0x7f090031;
         public static final int textView1=0x7f09000f;
+        public static final int timePicker1=0x7f090028;
         public static final int today_frame=0x7f090011;
     }
     public static final class layout {
@@ -154,6 +157,7 @@ public final class R {
         public static final int professional_pa_frame_layout=0x7f03000e;
         public static final int professional_pa_note_view=0x7f03000f;
         public static final int professional_pa_paragraph_view_layout=0x7f030010;
+        public static final int time_picker_and_date_picker_layout=0x7f030011;
     }
     public static final class menu {
         public static final int contextual_menu=0x7f080000;
