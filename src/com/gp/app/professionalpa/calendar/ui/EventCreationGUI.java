@@ -18,6 +18,7 @@ import android.widget.TimePicker;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.calendar.events.EventManager;
+import com.gp.app.professionalpa.notification.service.AlarmRequestCreator;
 
 public class EventCreationGUI 
 {
@@ -33,6 +34,8 @@ public class EventCreationGUI
 	 private String fromTime = null;
 	 private String toDate = null;
 	 private String toTime = null;
+	 private boolean isNotificationActivated = false;
+	 private boolean isAlarmActivated = false;
 
      public void createGuiForEventAddition(Context context, final int day, final int month, final int year)
      {
@@ -214,7 +217,7 @@ public class EventCreationGUI
     private void createRequestForNewEvent() 
     {
 		EventManager.addEvent(titleEditText.getText().toString(), locationEditText.getText().toString(), fromDate, fromTime, toDate, toTime);	
-	}
+    }
 
 	private EditText createEventTitleEditText(Context context) 
 	{
@@ -282,7 +285,7 @@ public class EventCreationGUI
 			@Override
 			public void onClick(View v)
 			{
-				
+				toggleNotificationState();
 			}
 		});
 		
@@ -291,6 +294,20 @@ public class EventCreationGUI
 		notificationImageButton.setId(8);
 		notificationImageButton.setLayoutParams(notificationButtonLayoutParams);
 		return notificationImageButton;
+	}
+	
+	private void toggleNotificationState() 
+	{
+		isNotificationActivated = !isNotificationActivated;
+		
+		if(isNotificationActivated)
+		{
+			notificationImageButton.setBackgroundColor(Color.rgb(255, 0, 0));
+		}
+		else
+		{
+			notificationImageButton.setBackgroundColor(Color.rgb(0, 0, 255));
+		}
 	}
 	
 	private ImageButton createAlarmImageButton(Context context) 
@@ -304,7 +321,7 @@ public class EventCreationGUI
 			@Override
 			public void onClick(View v)
 			{
-				
+				toggleAlarmState();
 			}
 		});
 		alarmImageButton.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_action_add_alarm));
@@ -312,6 +329,20 @@ public class EventCreationGUI
 		alarmImageButton.setId(9);
 		alarmImageButton.setLayoutParams(alarmImageButtonLayoutParams);
 		return alarmImageButton;
+	}
+	
+	private void toggleAlarmState() 
+	{
+        isAlarmActivated = !isAlarmActivated;
+		
+		if(isAlarmActivated)
+		{
+			alarmImageButton.setBackgroundColor(Color.rgb(255, 0, 0));
+		}
+		else
+		{
+			alarmImageButton.setBackgroundColor(Color.rgb(0, 0, 255));
+		}
 	}
 	
 	private Button createSaveButton(Context context) 

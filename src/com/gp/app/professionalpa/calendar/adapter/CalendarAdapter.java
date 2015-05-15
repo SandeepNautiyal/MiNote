@@ -26,6 +26,7 @@ import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.calendar.events.DayEvents;
 import com.gp.app.professionalpa.calendar.ui.EventCreationGUI;
 import com.gp.app.professionalpa.calendar.ui.EventModificationGUI;
+import com.gp.app.professionalpa.notification.ProfessionalPANotificationManager;
 
 public class CalendarAdapter extends BaseAdapter
 {
@@ -224,7 +225,6 @@ public class CalendarAdapter extends BaseAdapter
 							@Override
 							public boolean onMenuItemClick(MenuItem item)
 							{
-								
 							    if(item.getItemId() == R.id.createEvent)
 								{
 							    	eventGuiManager.createGuiForEventAddition(context, day, month, year);

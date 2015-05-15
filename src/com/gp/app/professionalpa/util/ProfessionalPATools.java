@@ -63,4 +63,31 @@ public class ProfessionalPATools
  		
  		return creationDate.getTime();
  	}
+    
+    public static long createTime(String date, String time)
+    {
+        long parsedTime = 0l;
+		
+		String [] timeTokens = null;
+		
+		String [] dateToken = null;
+		
+		try 
+    	{
+			timeTokens = time.split(":");
+				
+			dateToken = date.split("/");
+			
+    		String createdStartTime = dateToken[2]+dateToken[1]+dateToken[0]+timeTokens[0]+timeTokens[1];
+    		
+    		parsedTime = ProfessionalPATools.parseDateAndTimeString(createdStartTime,"yyyyMMddHHmm");
+    	} 
+    	catch (ParseException e) 
+    	{
+    		//TODO improve
+			e.printStackTrace();
+		}
+		
+		return parsedTime;
+    }
 }

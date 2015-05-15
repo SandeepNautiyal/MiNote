@@ -39,5 +39,13 @@
             android:label="@string/title_activity_list_item_creator" 
             android:configChanges="orientation|screenSize">
         </activity>
+        
+        <receiver
+            android:name="com.gp.app.professionalpa.notification.service.NotificationReceiver"
+            android:enabled="true">
+        </receiver>
+        
+        <service android:enabled="true" android:name="com.gp.app.professionalpa.notification.service.NotificationProcessingService"/>
+        
     </application>
 </manifest>

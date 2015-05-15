@@ -46,12 +46,12 @@ public class Event implements BaseColumns
 		
 		this.eventLocation = location;
 		
-		eventId = createTime(true) + createTime(false);
+		eventId = (int)Math.abs((Math.random() * 1000000));
 	}
 	
-	public long getEventId()
+	public int getEventId()
 	{
-		return eventId;
+		return (int)eventId;
 	}
 	
 	public void setEventName(String name)
@@ -108,7 +108,7 @@ public class Event implements BaseColumns
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("\name="+eventName);
+		sb.append("\neventName="+eventName);
 		sb.append("\ndescription="+description);
 		sb.append("\nlocation="+eventLocation);
 		sb.append("\nstart="+startDay);
@@ -116,39 +116,5 @@ public class Event implements BaseColumns
 		sb.append("\neventId="+eventId);
 
 		return sb.toString();
-	}
-
-	private long createTime(boolean isStartDate) 
-	{
-		long parsedTime = 0l;
-		
-		String [] timeTokens = null;
-		
-		String [] dateToken = null;
-		try 
-    	{
-			if(isStartDate)
-			{
-				timeTokens = startTime.split(":");
-				
-				dateToken = startDay.split("/");
-			}
-			else
-			{
-                timeTokens = endTime.split(":");
-				
-				dateToken = endDay.split("/");
-			}
-			
-    		String createdStartTime = dateToken[2]+dateToken[1]+dateToken[0]+timeTokens[0]+timeTokens[1];
-    		
-    		parsedTime = ProfessionalPATools.parseDateAndTimeString(createdStartTime,"yyyyMMddHHmm");
-    	} 
-    	catch (ParseException e) 
-    	{
-			e.printStackTrace();
-		}
-		
-		return parsedTime;
 	}
 }

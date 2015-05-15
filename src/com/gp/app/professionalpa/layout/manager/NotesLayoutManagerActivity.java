@@ -17,22 +17,17 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.CalendarView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.calendar.ui.ProfessionalPACalendarView;
-import com.gp.app.professionalpa.colorpicker.ColourPickerAdapter;
 import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
 import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
@@ -46,6 +41,7 @@ import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
+//TODO create notes for calendar events also
 public class NotesLayoutManagerActivity extends Activity implements ColourPickerChangeListener
 {
 	private static final String NUMBER_OF_LINEAR_LAYOUTS = "NUMBER_OF_LINEAR_LAYOUTS";
@@ -73,9 +69,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	private Map<Integer, FrameLayout> childFrames = new LinkedHashMap<Integer, FrameLayout>();
 
 	private List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
-
-//	private LinearLayoutAndIndexSelector linearLayoutAndIndexSelector = null;
-	private List<Integer> selectedViewIds = new ArrayList<Integer>();
 
 	private ImageLocationPathManager imageCaptureManager = null;
 	

@@ -21,6 +21,14 @@ public interface ProfessionalPAConstants
 
 	int OPEN_NOTE_IN_EDIT_MODE = 10;
 
+	public static final String IS_NOTIFICATION = "IS_NOTIFICATION";
+
+	public static final String EVENT_NAME = "EVENT_NAME";
+
+	public static final String EVENT_MESSAGE = "EVENT_MESSAGE";
+
+	public static final String NOTIFICATION_ID = "NOTIFICATION_ID";
+
 	public static final String NOTE_ID = "NOTE_ID";
 
 	public static final byte MIXED_CONTENT_NOTE = 3;
