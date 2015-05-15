@@ -15,33 +15,15 @@ import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NotificationActionPerformer extends AsyncTask<String, Void, Void>
 {
-	private int notififcationId;
-	
-	private String eventName;
-	
-	private String eventMessage;
-	
-	private boolean isNotification;
-	
-	private Context context;
-
-	public NotificationActionPerformer(int notififcationId, String eventName, String eventMessage, boolean isNotification)
+	public NotificationActionPerformer()
 	{
-		this.notififcationId = notififcationId;
 		
-		this.eventName = eventName;
-		
-		this.eventMessage = eventMessage;
-		
-		this.isNotification = isNotification;
 	}
 	
 	protected Void doInBackground(String... completeLocation) 
 	{
-    	if(isNotification)
-    	{
-    		ProfessionalPANotificationManager.createNotifications(notififcationId, eventName, eventMessage);
-    	}
+    	ProfessionalPANotificationManager.createNotifications();
+    	
         return null;
     }
 	

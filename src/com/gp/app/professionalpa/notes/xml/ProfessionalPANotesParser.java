@@ -18,7 +18,7 @@ import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.XMLEntity;
-import com.gp.app.professionalpa.util.ProfessionalPATools;
+import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class ProfessionalPANotesParser extends DefaultHandler
 {
@@ -81,9 +81,9 @@ public class ProfessionalPANotesParser extends DefaultHandler
 
 			try 
 			{
-				currentNote.setCreationTime(ProfessionalPATools.parseDateAndTimeString(CreationTime, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz"));
+				currentNote.setCreationTime(ProfessionalPAUtil.parseDateAndTimeString(CreationTime, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz"));
 
-				currentNote.setLastEditedTime(ProfessionalPATools.parseDateAndTimeString(lastEditedTime, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz"));
+				currentNote.setLastEditedTime(ProfessionalPAUtil.parseDateAndTimeString(lastEditedTime, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz"));
 			} 
 			catch (ParseException exception)
 			{

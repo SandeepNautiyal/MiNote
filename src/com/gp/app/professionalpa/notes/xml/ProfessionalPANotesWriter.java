@@ -28,7 +28,7 @@ import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionPARuntimeException;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
-import com.gp.app.professionalpa.util.ProfessionalPATools;
+import com.gp.app.professionalpa.util.ProfessionalPAUtil;
  
  
 public class ProfessionalPANotesWriter
@@ -97,9 +97,9 @@ public class ProfessionalPANotesWriter
 
 		noteElement.setAttribute("noteId", Integer.toString(note.getNoteId()));
 
-		String creationDate = ProfessionalPATools.createStringForDate(note.getCreationTime(), "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
+		String creationDate = ProfessionalPAUtil.createStringForDate(note.getCreationTime(), "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
 
-		String lastEditedTime = ProfessionalPATools.createStringForDate(note.getLastEditedTime(), "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
+		String lastEditedTime = ProfessionalPAUtil.createStringForDate(note.getLastEditedTime(), "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
 		
 		noteElement.setAttribute("creationTime", creationDate);
 
@@ -198,7 +198,7 @@ public class ProfessionalPANotesWriter
                     
                     try 
                     {
-						long readCreationTime = ProfessionalPATools.parseDateAndTimeString(attribute, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
+						long readCreationTime = ProfessionalPAUtil.parseDateAndTimeString(attribute, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
 						
 						if(readCreationTime == creationTime)
 						{

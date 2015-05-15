@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
 import com.gp.app.professionalpa.notification.service.AlarmRequestCreator;
-import com.gp.app.professionalpa.util.ProfessionalPATools;
+import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 
 public class EventManager
@@ -30,6 +30,6 @@ public class EventManager
 		
 		CalendarDBManager.getInstance().saveEventToDatabase(event);
 		
-		AlarmRequestCreator.createAlarmRequest(ProfessionalPATools.createTime(startDay, startTime), true, eventTitle, location, event.getEventId());
+		AlarmRequestCreator.createAlarmRequest(ProfessionalPAUtil.createTime(startDay, startTime), true, eventTitle, location, event.getEventId());
 	}
 }

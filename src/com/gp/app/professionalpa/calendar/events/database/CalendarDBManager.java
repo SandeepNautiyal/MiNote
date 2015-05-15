@@ -68,6 +68,8 @@ public class CalendarDBManager extends SQLiteOpenHelper
 	
 	public void saveEventToDatabase(Event event) 
 	{
+    	System.out.println("saveEventToDatabase -> event="+event);
+
 		SQLiteDatabase db = getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
@@ -83,7 +85,7 @@ public class CalendarDBManager extends SQLiteOpenHelper
 				 Event.EVENTS_TABLE_NAME,null,
 				 values);
 		
-    	System.out.println("saveEventToDatabase -> newRowId="+newRowId);
+    	System.out.println("saveEventToDatabase -> newRowId="+newRowId+" starttime="+event.getStartTime()+" startdate="+event.getStartDate());
 	}
 	
 	public List<Event> readEvents(String startDay)
@@ -131,6 +133,61 @@ public class CalendarDBManager extends SQLiteOpenHelper
         	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
         	System.out.println("readEvents -> itemId="+itemId+" column count"+cursor.getColumnCount()+" eventName="+eventName);
         	events.add(new Event(eventName, eventLocation, startDate, startTime, endDate, endTime));
+    	    cursor.moveToNext();
+    	}
+    	
+    	return events;
+	}
+	
+	public List<Event> readEvents(String startDay, String startTime)
+	{
+		List<Event> events = new ArrayList<Event>();
+		
+		SQLiteDatabase db = getReadableDatabase();
+
+    	// Define a projection that specifies which columns from the database
+    	// you will actually use after this query.
+    	String[] projection = {
+    	    Event._ID,
+    	    Event.START_DAY,
+    	    Event.END_DAY,
+    	    Event.START_TIME,
+            Event.END_TIME,
+            Event.EVENT_NAME,
+            Event.LOCATION,
+    	    };
+
+    	// How you want the results sorted in the resulting Cursor
+    	String sortOrder =
+    			Event.START_TIME + " DESC";
+
+    	String where = Event.START_DAY+"=?"+" AND "+Event.START_TIME+"=?";
+    	
+    	System.out.println("readEvents -> startTime="+startTime+"startDay="+startDay);
+    	
+    	Cursor cursor = db.query(
+    			Event.EVENTS_TABLE_NAME,  // The table to query
+    	    projection,                               // The columns to return
+    	    where,                               // The columns for the WHERE clause
+    	    new String []{startDay, startTime},                            // The values for the WHERE clause
+    	    null,                                     // don't group the rows
+    	    null,                                     // don't filter by row groups
+    	    sortOrder                                 // The sort order
+    	    );
+    	
+    	cursor.moveToFirst();
+    	
+    	while (cursor.isAfterLast() == false)
+    	{
+    		long itemId = cursor.getLong(cursor.getColumnIndexOrThrow(Event._ID));
+        	String eventName = cursor.getString(cursor.getColumnIndexOrThrow(Event.EVENT_NAME));
+        	String eventLocation = cursor.getString(cursor.getColumnIndexOrThrow(Event.LOCATION));
+        	String startDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_DAY));
+        	String readStartTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_TIME));
+        	String endDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_DAY));
+        	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
+        	System.out.println("readEvents -> itemId="+itemId+" column count"+cursor.getColumnCount()+" eventName="+eventName);
+        	events.add(new Event(eventName, eventLocation, startDate, readStartTime, endDate, endTime));
     	    cursor.moveToNext();
     	}
     	

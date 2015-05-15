@@ -8,7 +8,7 @@ import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 
 import android.os.Environment;
 
-public class ProfessionalPATools 
+public class ProfessionalPAUtil 
 {
      public static String createInternalXMLFilePath()
      {
@@ -80,7 +80,7 @@ public class ProfessionalPATools
 			
     		String createdStartTime = dateToken[2]+dateToken[1]+dateToken[0]+timeTokens[0]+timeTokens[1];
     		
-    		parsedTime = ProfessionalPATools.parseDateAndTimeString(createdStartTime,"yyyyMMddHHmm");
+    		parsedTime = ProfessionalPAUtil.parseDateAndTimeString(createdStartTime,"yyyyMMddHHmm");
     	} 
     	catch (ParseException e) 
     	{
@@ -90,4 +90,12 @@ public class ProfessionalPATools
 		
 		return parsedTime;
     }
+    
+    public static String pad(int c) 
+	{
+		if (c >= 10)
+		   return String.valueOf(c);
+		else
+		   return "0" + String.valueOf(c);
+	}
 }

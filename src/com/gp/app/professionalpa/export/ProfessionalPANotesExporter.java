@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.util.ProfessionalPATools;
+import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 import android.os.Environment;
 import android.util.Log;
@@ -18,7 +18,7 @@ public class ProfessionalPANotesExporter {
 
 	public static void export() throws ProfessionalPABaseException
 	{
-		File exportDirectory = new File(ProfessionalPATools.createExportedDirectoryPath());
+		File exportDirectory = new File(ProfessionalPAUtil.createExportedDirectoryPath());
 		
 		if(!exportDirectory.exists())
 		{
@@ -27,7 +27,7 @@ public class ProfessionalPANotesExporter {
 		
 		File fileToBeCopied = new File(Environment.getExternalStorageDirectory()+"/notes.xml");
 		
-		File destinationFile = new File(ProfessionalPATools.createExportedFilePath());
+		File destinationFile = new File(ProfessionalPAUtil.createExportedFilePath());
 		
 		try 
 		{

@@ -22,7 +22,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
-import com.gp.app.professionalpa.util.ProfessionalPATools;
+import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class ImageLocationPathManager
 {
@@ -59,7 +59,7 @@ public class ImageLocationPathManager
 
 	public String getCreatedImagePath() 
 	{
-		return imageDirectoryPath+ProfessionalPATools.createImageNameFromTime()+".jpeg";
+		return imageDirectoryPath+ProfessionalPAUtil.createImageNameFromTime()+".jpeg";
 	}
 
 	private void createImageDirectory()
@@ -121,7 +121,7 @@ public class ImageLocationPathManager
 
 	public void createAndSaveImage(Bitmap imageNote)
 	{
-        String filePath = imageDirectoryPath + ProfessionalPATools.createImageNameFromTime()+".jpeg";
+        String filePath = imageDirectoryPath + ProfessionalPAUtil.createImageNameFromTime()+".jpeg";
 
 		OutputStream imagefile = null;
 		

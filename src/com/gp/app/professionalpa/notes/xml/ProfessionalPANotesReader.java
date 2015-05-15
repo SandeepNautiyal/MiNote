@@ -14,7 +14,7 @@ import android.util.Log;
 
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
-import com.gp.app.professionalpa.util.ProfessionalPATools;
+import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class ProfessionalPANotesReader 
 {
@@ -42,8 +42,8 @@ public class ProfessionalPANotesReader
 		
 		List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
 		
-		String filePath =  isImportedFile ? ProfessionalPATools.createExportedFilePath() :
-			ProfessionalPATools.createInternalXMLFilePath();
+		String filePath =  isImportedFile ? ProfessionalPAUtil.createExportedFilePath() :
+			ProfessionalPAUtil.createInternalXMLFilePath();
 		try 
 		{
 			File file = new File(filePath);
