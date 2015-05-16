@@ -15,10 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.calendar.events.EventManager;
-import com.gp.app.professionalpa.notification.service.AlarmRequestCreator;
+import com.gp.app.professionalpa.util.ProfessionalPAParameters;
+import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class EventCreationGUI 
 {
@@ -76,9 +78,10 @@ public class EventCreationGUI
 			@Override
 			public void onClick(View v) 
 			{
-				createRequestForNewEvent();
-				
-				dialog.dismiss();
+				if(createRequestForNewEvent())
+				{
+					dialog.dismiss();
+				}
 			}
 		});
 		
@@ -214,9 +217,29 @@ public class EventCreationGUI
  		return endTimeButton;
  	}
 
-    private void createRequestForNewEvent() 
+    private boolean createRequestForNewEvent() 
     {
-		EventManager.addEvent(titleEditText.getText().toString(), locationEditText.getText().toString(), fromDate, fromTime, toDate, toTime);	
+    	boolean result = false;
+    	
+    	long startTime = ProfessionalPAUtil.createTime(fromDate, fromTime);
+    	
+    	long endTime = ProfessionalPAUtil.createTime(fromDate, fromTime);
+
+    	if(endTime > startTime)
+    	{
+    		EventManager.addEvent(titleEditText.getText().toString(), locationEditText.getText().toString(), fromDate, fromTime, toDate, toTime);	
+    	
+    		result = true;
+    	}
+    	else
+    	{
+    		Toast.makeText(ProfessionalPAParameters.getApplicationContext(), "event start time "+fromDate+" "+fromTime+" should be less event end time"+toDate+" "+toTime, 
+    				Toast.LENGTH_LONG).show();
+    	
+    		result = false;
+    	}
+    	
+    	return result;
     }
 
 	private EditText createEventTitleEditText(Context context) 

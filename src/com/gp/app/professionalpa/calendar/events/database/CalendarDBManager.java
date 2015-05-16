@@ -132,8 +132,10 @@ public class CalendarDBManager extends SQLiteOpenHelper
         	String endDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_DAY));
         	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
         	System.out.println("readEvents -> itemId="+itemId+" column count"+cursor.getColumnCount()+" eventName="+eventName);
-        	events.add(new Event(eventName, eventLocation, startDate, startTime, endDate, endTime));
-    	    cursor.moveToNext();
+        	Event event = new Event(eventName, eventLocation, startDate, startTime, endDate, endTime);
+        	event.setEventId(itemId);
+        	events.add(event);
+        	cursor.moveToNext();
     	}
     	
     	return events;
@@ -187,10 +189,21 @@ public class CalendarDBManager extends SQLiteOpenHelper
         	String endDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_DAY));
         	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
         	System.out.println("readEvents -> itemId="+itemId+" column count"+cursor.getColumnCount()+" eventName="+eventName);
-        	events.add(new Event(eventName, eventLocation, startDate, readStartTime, endDate, endTime));
+        	Event event = new Event(eventName, eventLocation, startDate, readStartTime, endDate, endTime);
+        	event.setEventId(itemId);
+        	events.add(event);
     	    cursor.moveToNext();
     	}
     	
     	return events;
+	}
+	
+	public void deleteEvent(int eventId) 
+	{
+		SQLiteDatabase db = getWritableDatabase();
+
+		int result = db.delete(Event.EVENTS_TABLE_NAME, Event.ID + "=?", new String[]{Integer.toString(eventId)});
+
+		System.out.println("deleteEvent -> eventId="+eventId+" result="+result);
 	}
 }

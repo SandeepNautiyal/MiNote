@@ -117,4 +117,9 @@ public class Event implements BaseColumns
 
 		return sb.toString();
 	}
+
+	public void setEventId(long itemId)
+	{
+		eventId = itemId;
+	}
 }

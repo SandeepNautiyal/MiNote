@@ -1,6 +1,5 @@
 package com.gp.app.professionalpa.calendar.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.gp.app.professionalpa.calendar.adapter.EventListAdapater;
