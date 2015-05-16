@@ -24,12 +24,10 @@ public class EventManager
     	
     }
     
-	public static void addEvent(String eventTitle, String location, String startDay, String startTime, String endDate, String endTime)
+	public static void addEvent(Event event)
 	{
-        Event event = new Event(eventTitle, location, startDay, startTime, endDate, endTime);
-		
 		CalendarDBManager.getInstance().saveEventToDatabase(event);
 		
-		AlarmRequestCreator.createAlarmRequest(ProfessionalPAUtil.createTime(startDay, startTime), true, eventTitle, location, event.getEventId());
+		AlarmRequestCreator.createAlarmRequest(event);
 	}
 }

@@ -16,6 +16,8 @@ public class Event implements BaseColumns
 	private String startTime;
 	private String endDay;
 	private String endTime;
+	private boolean isNotificationActivated;
+	private boolean isAlarmActivated;
 	public static final String EVENT_NAME = "event";
 	public static final String EVENTS_TABLE_NAME = "events";
 	public static final int DEFAULT_EVENT_ICON = 0;
@@ -121,5 +123,15 @@ public class Event implements BaseColumns
 	public void setEventId(long itemId)
 	{
 		eventId = itemId;
+	}
+
+	public void setIsNotification(boolean isNotificationActivated) 
+	{
+		this.isNotificationActivated = isNotificationActivated;
+	}
+
+	public void setIsAlarmActivated(boolean isAlarmActivated) 
+	{
+		this.isAlarmActivated = isAlarmActivated;
 	}
 }

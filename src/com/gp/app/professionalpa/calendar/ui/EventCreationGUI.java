@@ -18,6 +18,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.calendar.events.Event;
 import com.gp.app.professionalpa.calendar.events.EventManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 import com.gp.app.professionalpa.util.ProfessionalPAUtil;
@@ -227,7 +228,13 @@ public class EventCreationGUI
 
     	if(endTime > startTime)
     	{
-    		EventManager.addEvent(titleEditText.getText().toString(), locationEditText.getText().toString(), fromDate, fromTime, toDate, toTime);	
+            Event event = new Event(titleEditText.getText().toString(), locationEditText.getText().toString(), fromDate, fromTime, toDate, toTime);
+
+            event.setIsNotification(isNotificationActivated);
+            
+            event.setIsAlarmActivated(isAlarmActivated);
+            
+    		EventManager.addEvent(event);	
     	
     		result = true;
     	}
