@@ -34,8 +34,6 @@ public class CalendarAdapter extends BaseAdapter
 	private Context context;
 	private Calendar cal;
 	private String[] days;
-	private EventCreationGUI eventGuiManager = null;
-	private EventModificationGUI eventModicationGUI = null;
 	
 	ArrayList<DayEvents> daysEventsList = new ArrayList<DayEvents>();
 	
@@ -44,8 +42,6 @@ public class CalendarAdapter extends BaseAdapter
 		this.cal = cal;
 		this.context = context;
 		cal.set(Calendar.DAY_OF_MONTH, 1);
-		eventGuiManager = new EventCreationGUI();
-		eventModicationGUI = new EventModificationGUI();
 		refreshDays();
 	}
 
@@ -227,11 +223,11 @@ public class CalendarAdapter extends BaseAdapter
 							{
 							    if(item.getItemId() == R.id.createEvent)
 								{
-							    	eventGuiManager.createGuiForEventAddition(context, day, month, year);
+							    	new EventCreationGUI().createGuiForEventAddition(context, day, month, year);
 								}
 								else if(item.getItemId() == R.id.editEvent)
 								{
-									eventModicationGUI.createEventModificationList(context, day, month, year);
+									new EventModificationGUI().createEventModificationList(context, day, month, year);
 								}
 								else if(item.getItemId() == R.id.exit)
 								{

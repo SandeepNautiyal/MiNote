@@ -3,6 +3,7 @@ package com.gp.app.professionalpa.notification;
 import java.util.Calendar;
 import java.util.List;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -65,12 +66,8 @@ public class ProfessionalPANotificationManager
 	    
 	    String currentDate = new StringBuilder().append(date).append("/").append(month).append("/").append(year).toString();
 	    
-	    System.out.println("createNotifications -> currentTime="+currentTime+" date="+currentDate);
-	    
 	    List<Event> events = CalendarDBManager.getInstance().readEvents(currentDate, currentTime);
 	    
-	    System.out.println("createNotifications -> events="+events);
-
 	    for(int i = 0; i < events.size(); i++)
 	    {
 	    	Event event = events.get(i);
@@ -84,16 +81,20 @@ public class ProfessionalPANotificationManager
 		    
 		    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
-		    NotificationCompat.Builder mBuilder =
+		    NotificationCompat.Builder notificationBuilder =
 		    	    new NotificationCompat.Builder(context)
 		    	    .setSmallIcon(R.drawable.ic_action_event)
 		    	    .setContentTitle(event.getEventName())
 		    	    .setContentText(event.getLocation())
 		    	    .setContentIntent(pendingIntent);
 		    
-		    mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+		    notificationBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 		    
-		    notificationManager.notify(event.getEventId(), mBuilder.build());
+		    Notification notification = notificationBuilder.build();
+		    
+		    notification.flags = Notification.FLAG_AUTO_CANCEL;
+		    		
+		    notificationManager.notify(event.getEventId(), notification);
 	    }
 	}
 }

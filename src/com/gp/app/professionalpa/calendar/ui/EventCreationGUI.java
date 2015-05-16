@@ -223,7 +223,7 @@ public class EventCreationGUI
     	
     	long startTime = ProfessionalPAUtil.createTime(fromDate, fromTime);
     	
-    	long endTime = ProfessionalPAUtil.createTime(fromDate, fromTime);
+    	long endTime = ProfessionalPAUtil.createTime(toDate, toTime);
 
     	if(endTime > startTime)
     	{
