@@ -11,9 +11,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 
 import com.gp.app.professionalpa.calendar.events.Event;
+import com.gp.app.professionalpa.calendar.interfaces.DBChangeListener;
+import com.gp.app.professionalpa.calendar.interfaces.DBchangePublisher;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
-public class CalendarDBManager extends SQLiteOpenHelper
+public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePublisher
 {
 	private static final String DATABASE_NAME = "Calendar";
 	private static final int DATABASE_VERSION = 4;
@@ -21,6 +23,8 @@ public class CalendarDBManager extends SQLiteOpenHelper
 	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/events");
 	public static final Uri CONTENT_ID_URI_BASE = Uri.parse("content://" + AUTHORITY + "/events/");
 	private static final UriMatcher uriMatcher;
+	List<DBChangeListener> listsners = new ArrayList<DBChangeListener>();
+	
     private static CalendarDBManager instance;
 	
 	private CalendarDBManager() 
@@ -81,11 +85,11 @@ public class CalendarDBManager extends SQLiteOpenHelper
 		values.put(Event.END_DAY, event.getEndDate());
 		values.put(Event.LOCATION, event.getLocation());
 		
-		long newRowId = db.insert(
+		db.insert(
 				 Event.EVENTS_TABLE_NAME,null,
 				 values);
 		
-    	System.out.println("saveEventToDatabase -> newRowId="+newRowId+" starttime="+event.getStartTime()+" startdate="+event.getStartDate());
+    	notifyAllListeners(event);
 	}
 	
 	public List<Event> readEvents(String startDay)
@@ -124,16 +128,16 @@ public class CalendarDBManager extends SQLiteOpenHelper
     	
     	while (cursor.isAfterLast() == false)
     	{
-    		long itemId = cursor.getLong(cursor.getColumnIndexOrThrow(Event._ID));
+    		int eventId = cursor.getInt(cursor.getColumnIndexOrThrow(Event._ID));
         	String eventName = cursor.getString(cursor.getColumnIndexOrThrow(Event.EVENT_NAME));
         	String eventLocation = cursor.getString(cursor.getColumnIndexOrThrow(Event.LOCATION));
         	String startDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_DAY));
         	String startTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_TIME));
         	String endDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_DAY));
         	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
-        	System.out.println("readEvents -> itemId="+itemId+" column count"+cursor.getColumnCount()+" eventName="+eventName);
+        	System.out.println("readEvents -> itemId="+eventId+" column count"+cursor.getColumnCount()+" eventName="+eventName);
         	Event event = new Event(eventName, eventLocation, startDate, startTime, endDate, endTime);
-        	event.setEventId(itemId);
+        	event.setEventId(eventId);
         	events.add(event);
         	cursor.moveToNext();
     	}
@@ -181,7 +185,7 @@ public class CalendarDBManager extends SQLiteOpenHelper
     	
     	while (cursor.isAfterLast() == false)
     	{
-    		long itemId = cursor.getLong(cursor.getColumnIndexOrThrow(Event._ID));
+    		int itemId = cursor.getInt(cursor.getColumnIndexOrThrow(Event._ID));
         	String eventName = cursor.getString(cursor.getColumnIndexOrThrow(Event.EVENT_NAME));
         	String eventLocation = cursor.getString(cursor.getColumnIndexOrThrow(Event.LOCATION));
         	String startDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_DAY));
@@ -205,5 +209,44 @@ public class CalendarDBManager extends SQLiteOpenHelper
 		int result = db.delete(Event.EVENTS_TABLE_NAME, Event.ID + "=?", new String[]{Integer.toString(eventId)});
 
 		System.out.println("deleteEvent -> eventId="+eventId+" result="+result);
+	}
+
+	public void updateEventInDatabase(Event event)
+	{
+        SQLiteDatabase db = getWritableDatabase();
+		
+		ContentValues values = new ContentValues();
+		values.put(Event.EVENT_NAME, event.getEventName());
+		values.put(Event.START_TIME, event.getStartTime());
+		values.put(Event.END_TIME, event.getEndTime());
+		values.put(Event.START_DAY, event.getStartDate());
+		values.put(Event.END_DAY, event.getEndDate());
+		values.put(Event.LOCATION, event.getLocation());
+		
+    	String where = Event.ID+"=?";
+
+		long newRowId = db.update(Event.EVENTS_TABLE_NAME, values, where, new String[]{String.valueOf(event.getEventId())});
+		
+    	System.out.println("saveEventToDatabase -> newRowId="+newRowId+" starttime="+event.getStartTime()+" startdate="+event.getStartDate());
+    	
+    	notifyAllListeners(event);
+	}
+
+	@Override
+	public void addDataChangeListener(DBChangeListener listener) 
+	{
+		if(listener != null)
+		{
+			listsners.add(listener);
+		}
+	}
+
+	@Override
+	public void notifyAllListeners(Event event)
+	{
+		for(DBChangeListener listener : listsners)
+		{
+			listener.recieveNotification(event);
+		}
 	}
 }

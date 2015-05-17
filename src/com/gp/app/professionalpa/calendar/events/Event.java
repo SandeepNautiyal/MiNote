@@ -11,7 +11,7 @@ public class Event implements BaseColumns
 	private String eventName;
 	private String description;
 	private String eventLocation;
-	private long eventId;
+	private int eventId;
 	private String startDay;
 	private String startTime;
 	private String endDay;
@@ -120,18 +120,40 @@ public class Event implements BaseColumns
 		return sb.toString();
 	}
 
-	public void setEventId(long itemId)
+	public void setEventId(int itemId)
 	{
 		eventId = itemId;
 	}
 
-	public void setIsNotification(boolean isNotificationActivated) 
+//	public void setIsNotification(boolean isNotificationActivated) 
+//	{
+//		this.isNotificationActivated = isNotificationActivated;
+//	}
+
+	@Override
+	public int hashCode() 
 	{
-		this.isNotificationActivated = isNotificationActivated;
+		return eventId;
+	}
+
+	@Override
+	public boolean equals(Object obj) 
+	{
+		return ((Event)obj).getEventId() == this.getEventId();
 	}
 
 	public void setIsAlarmActivated(boolean isAlarmActivated) 
 	{
 		this.isAlarmActivated = isAlarmActivated;
 	}
+	
+	public boolean isAlarmActivated()
+	{
+		return isAlarmActivated;
+	}
+	
+//	public boolean isNotificationActivated()
+//	{
+//		return isNotificationActivated;
+//	}
 }

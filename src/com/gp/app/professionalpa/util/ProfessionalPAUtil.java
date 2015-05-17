@@ -68,6 +68,11 @@ public class ProfessionalPAUtil
     {
         long parsedTime = 0l;
 		
+        if(date == null || time == null)
+        {
+        	return parsedTime;
+        }
+        
 		String [] timeTokens = null;
 		
 		String [] dateToken = null;

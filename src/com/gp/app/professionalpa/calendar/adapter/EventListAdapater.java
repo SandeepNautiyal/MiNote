@@ -3,6 +3,7 @@ package com.gp.app.professionalpa.calendar.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,14 +15,19 @@ import android.widget.TextView;
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.calendar.events.Event;
 import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
+import com.gp.app.professionalpa.calendar.ui.EventCreationGUI;
 
 public class EventListAdapater extends ArrayAdapter<Event>
 {
 	private List<Event> events = null;
 	
+	private Context context = null;
+	
 	public EventListAdapater(Context context, List<Event> events)
 	{
 		super(context, 0, events);
+		
+		this.context  = context;
 		
 		this.events = events;
 	}
@@ -52,6 +58,15 @@ public class EventListAdapater extends ArrayAdapter<Event>
          
         Button cancelButton = (Button) convertView.findViewById(R.id.eventsDialogCancelButton);
 		
+        convertView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) 
+			{
+				createEventEditGUI(event);
+			}
+		});
+        
         cancelButton.setOnClickListener(new OnClickListener() 
         {
 			@Override
@@ -66,5 +81,31 @@ public class EventListAdapater extends ArrayAdapter<Event>
 		});
         
 	    return convertView;
+	}
+
+	private void createEventEditGUI(Event event) 
+	{
+		String date = event.getStartDate();
+		
+		String [] dateAsArray = date.split("/");
+		
+		EventCreationGUI eventCreationGUI = new EventCreationGUI();
+		
+		eventCreationGUI.createGuiForEventAddition(context, Integer.valueOf(dateAsArray[0]), Integer.valueOf(dateAsArray[1]), Integer.valueOf(dateAsArray[2]), EventCreationGUI.CREATE_GUI_IN_EDIT_MODE);
+		
+		eventCreationGUI.setEventId(event.getEventId());
+		
+		eventCreationGUI.setEventName(event.getEventName());
+		
+		eventCreationGUI.setLocation(event.getLocation());
+		
+		eventCreationGUI.setStartTime(event.getStartDate(), event.getStartTime());
+		
+		eventCreationGUI.setEndTime(event.getEndDate(), event.getEndTime());
+		
+		if(event.isAlarmActivated())
+		{
+			eventCreationGUI.activateAlarm();
+		}
 	}
 }

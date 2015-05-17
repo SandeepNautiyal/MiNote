@@ -223,7 +223,7 @@ public class CalendarAdapter extends BaseAdapter
 							{
 							    if(item.getItemId() == R.id.createEvent)
 								{
-							    	new EventCreationGUI().createGuiForEventAddition(context, day, month, year);
+							    	new EventCreationGUI().createGuiForEventAddition(context, day, month, year, EventCreationGUI.CREATE_GUI_IN_CREATE_MODE);
 								}
 								else if(item.getItemId() == R.id.editEvent)
 								{

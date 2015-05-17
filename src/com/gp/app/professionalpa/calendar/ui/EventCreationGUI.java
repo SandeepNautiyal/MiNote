@@ -1,6 +1,8 @@
 package com.gp.app.professionalpa.calendar.ui;
 
 
+import java.util.Calendar;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -25,6 +27,10 @@ import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class EventCreationGUI 
 {
+	 private static final String DEFAULT_END_TIME_TEXT = "To";
+	private static final String DEFAULT_START_TIME_TEXT = "From";
+	public static final byte CREATE_GUI_IN_CREATE_MODE = 0;
+	 public static final byte CREATE_GUI_IN_EDIT_MODE = 1;
 	 private EditText titleEditText = null;
 	 private EditText locationEditText = null;
 	 private Button startTimeButton = null;
@@ -39,9 +45,13 @@ public class EventCreationGUI
 	 private String toTime = null;
 	 private boolean isNotificationActivated = false;
 	 private boolean isAlarmActivated = false;
-
-     public void createGuiForEventAddition(Context context, final int day, final int month, final int year)
+     private byte guiCreationMode = CREATE_GUI_IN_CREATE_MODE;
+	private int editedEventId;
+	 
+     public void createGuiForEventAddition(Context context, final int day, final int month, final int year, byte mode)
      {
+    	guiCreationMode = mode;
+    	 
  		final Dialog dialog = new Dialog(context);
 
     	RelativeLayout base = new RelativeLayout(context);
@@ -65,8 +75,8 @@ public class EventCreationGUI
 		
 		LinearLayout linearLayout2 = createLinearLayoutForNotificationFields(context);
 		
-		notificationImageButton = createNotificationImageButton(context);
-		linearLayout2.addView(notificationImageButton);
+//		notificationImageButton = createNotificationImageButton(context);
+//		linearLayout2.addView(notificationImageButton);
 		
 		alarmImageButton = createAlarmImageButton(context);
 		linearLayout2.addView(alarmImageButton);
@@ -97,7 +107,7 @@ public class EventCreationGUI
 	    dialog.show();
     }
 
-    private LinearLayout createLinearLayoutForTimeFields(Context context) 
+	private LinearLayout createLinearLayoutForTimeFields(Context context) 
  	{
  		//Plus Button
  		LayoutParams linearLayoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, 180);
@@ -124,9 +134,9 @@ public class EventCreationGUI
  		hourParams.bottomMargin = 10;
  		hourParams.topMargin = 10;
 
- 		final Button startTimeEditText = new Button(context);
+ 		final Button startTimeButton = new Button(context);
  		
- 		startTimeEditText.setOnClickListener(new OnClickListener()
+ 		startTimeButton.setOnClickListener(new OnClickListener()
  		{
  			@Override
  			public void onClick(View v)
@@ -161,11 +171,11 @@ public class EventCreationGUI
  			}
  		});
  		
- 		startTimeEditText.setId(3);
- 		startTimeEditText.setLayoutParams(hourParams);
- 		startTimeEditText.setText("From");
+ 		startTimeButton.setId(3);
+ 		startTimeButton.setLayoutParams(hourParams);
+ 		startTimeButton.setText(DEFAULT_START_TIME_TEXT);
  		
- 		return startTimeEditText;
+ 		return startTimeButton;
  	}
      
     private Button createEndTimeButton(final Context context) 
@@ -213,7 +223,7 @@ public class EventCreationGUI
  		});
  		
  		endTimeButton.setId(4);
- 		endTimeButton.setText("To");
+ 		endTimeButton.setText(DEFAULT_END_TIME_TEXT);
  		endTimeButton.setLayoutParams(endTimeButtonLayoutParams);
  		return endTimeButton;
  	}
@@ -226,21 +236,36 @@ public class EventCreationGUI
     	
     	long endTime = ProfessionalPAUtil.createTime(toDate, toTime);
 
-    	if(endTime > startTime)
+    	if(startTime != 0l && endTime != 0l)
     	{
-            Event event = new Event(titleEditText.getText().toString(), locationEditText.getText().toString(), fromDate, fromTime, toDate, toTime);
+    		if(endTime > startTime)
+        	{
+                Event event = new Event(titleEditText.getText().toString(), locationEditText.getText().toString(), fromDate, fromTime, toDate, toTime);
 
-            event.setIsNotification(isNotificationActivated);
-            
-            event.setIsAlarmActivated(isAlarmActivated);
-            
-    		EventManager.addEvent(event);	
-    	
-    		result = true;
+        		if(guiCreationMode == CREATE_GUI_IN_EDIT_MODE)
+        		{
+        			event.setEventId(editedEventId);
+        		}
+
+                event.setIsAlarmActivated(isAlarmActivated);
+                
+                boolean isEventEditMode = guiCreationMode == CREATE_GUI_IN_EDIT_MODE ? true : false;
+        		
+                EventManager.addEvent(event, isEventEditMode);	
+        	
+        		result = true;
+        	}
+        	else
+        	{
+        		Toast.makeText(ProfessionalPAParameters.getApplicationContext(), "event start time "+fromDate+" "+fromTime+" should be less event end time"+toDate+" "+toTime, 
+        				Toast.LENGTH_LONG).show();
+        	
+        		result = false;
+        	}
     	}
     	else
     	{
-    		Toast.makeText(ProfessionalPAParameters.getApplicationContext(), "event start time "+fromDate+" "+fromTime+" should be less event end time"+toDate+" "+toTime, 
+    		Toast.makeText(ProfessionalPAParameters.getApplicationContext(), "Invalid event start or end time",
     				Toast.LENGTH_LONG).show();
     	
     		result = false;
@@ -300,43 +325,6 @@ public class EventCreationGUI
 		else 
 		{
 			endTimeButton.setText(toDate+"  "+toTime);
-		}
-	}
-	
-	private ImageButton createNotificationImageButton(Context context) 
-	{
-		LinearLayout.LayoutParams notificationButtonLayoutParams = new LinearLayout.LayoutParams(70,70);
-		notificationButtonLayoutParams.topMargin = 25;
-		notificationButtonLayoutParams.rightMargin = 30;
-		notificationButtonLayoutParams.bottomMargin = 25;
-		final ImageButton notificationImageButton = new ImageButton(context);
-		notificationImageButton.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				toggleNotificationState();
-			}
-		});
-		
-		notificationImageButton.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_action_event));
-		notificationImageButton.setBackgroundResource(R.drawable.day_selected);
-		notificationImageButton.setId(8);
-		notificationImageButton.setLayoutParams(notificationButtonLayoutParams);
-		return notificationImageButton;
-	}
-	
-	private void toggleNotificationState() 
-	{
-		isNotificationActivated = !isNotificationActivated;
-		
-		if(isNotificationActivated)
-		{
-			notificationImageButton.setBackgroundColor(Color.rgb(255, 0, 0));
-		}
-		else
-		{
-			notificationImageButton.setBackgroundColor(Color.rgb(0, 0, 255));
 		}
 	}
 	
@@ -418,5 +406,55 @@ public class EventCreationGUI
 		   return String.valueOf(c);
 		else
 		   return "0" + String.valueOf(c);
+	}
+	
+	public void setEventName(String title) 
+	{
+		if(title != null)
+		{
+			titleEditText.setText(title);
+		}
+	}
+
+	public void setLocation(String location)
+	{
+		if(location != null)
+		{
+			locationEditText.setText(location);
+		}
+	}
+
+	public void setStartTime(String startDate, String startTime) 
+	{
+		if(startDate != null && startTime != null)
+		{
+			fromDate = startDate;
+			
+			fromTime = startTime;
+			
+			startTimeButton.setText(startDate+" "+startTime);
+		}
+	}
+
+	public void setEndTime(String endDate, String endTime) 
+	{
+		if(endDate != null && endTime != null)
+		{
+			toDate = endDate;
+			
+			toTime = endTime;
+			
+			endTimeButton.setText(endDate+" "+endTime);
+		}
+	}
+
+	public void setEventId(int eventId)
+	{
+		this.editedEventId = eventId;
+	}
+
+	public void activateAlarm() 
+	{
+		alarmImageButton.setBackgroundColor(Color.rgb(255,  0,  0));
 	}
 }

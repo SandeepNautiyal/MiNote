@@ -24,9 +24,16 @@ public class EventManager
     	
     }
     
-	public static void addEvent(Event event)
+	public static void addEvent(Event event, boolean isEventEditMode)
 	{
-		CalendarDBManager.getInstance().saveEventToDatabase(event);
+		if(isEventEditMode)
+		{
+			CalendarDBManager.getInstance().updateEventInDatabase(event);
+		}
+		else
+		{
+			CalendarDBManager.getInstance().saveEventToDatabase(event);
+		}
 		
 		AlarmRequestCreator.createAlarmRequest(event);
 	}
