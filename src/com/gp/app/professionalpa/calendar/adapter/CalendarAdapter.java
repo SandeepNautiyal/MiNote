@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -115,6 +116,10 @@ public class CalendarAdapter extends BaseAdapter
 			
 	        DateInformation date = dateList.get(position);
 			
+	        final int day = date.getDay();
+			final int month = date.getMonth()+1;
+			final int year = date.getYear();
+			
 			String formattedDate = ProfessionalPAUtil.pad(date.getDay())+"/"+ProfessionalPAUtil.pad(date.getMonth()+1)+"/"+ProfessionalPAUtil.pad(date.getYear());
 			
 			System.out.println("date event -> formattedDate="+formattedDate);
@@ -130,6 +135,15 @@ public class CalendarAdapter extends BaseAdapter
 				dayTextView.setText(String.valueOf(numberOfEvents));
 				
 				dayTextView.setVisibility(View.VISIBLE);
+				
+				dayTextView.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) 
+					{
+						new EventModificationGUI().createEventModificationList(context, day, month, year);
+					}
+				});
 			}
 			
 			final TextView dayTextView = (TextView)v.findViewById(R.id.dayTextView2);
@@ -152,9 +166,6 @@ public class CalendarAdapter extends BaseAdapter
 			else
 			{
 				dayTextView.setVisibility(View.VISIBLE);
-				final int day = date.getDay();
-				final int month = date.getMonth()+1;
-				final int year = date.getYear();
 				dayTextView.setText(String.valueOf(day));
 				dayTextView.setOnClickListener(new OnClickListener() 
 				{
