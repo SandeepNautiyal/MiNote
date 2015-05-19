@@ -22,10 +22,11 @@ import android.widget.Toast;
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.calendar.events.Event;
 import com.gp.app.professionalpa.calendar.events.EventManager;
+import com.gp.app.professionalpa.calendar.interfaces.DBChangeListener;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
-public class EventCreationGUI 
+public class EventCreationGUI
 {
 	 private static final String DEFAULT_END_TIME_TEXT = "To";
 	private static final String DEFAULT_START_TIME_TEXT = "From";
@@ -46,7 +47,7 @@ public class EventCreationGUI
 	 private boolean isNotificationActivated = false;
 	 private boolean isAlarmActivated = false;
      private byte guiCreationMode = CREATE_GUI_IN_CREATE_MODE;
-	private int editedEventId;
+	 private int editedEventId;
 	 
      public void createGuiForEventAddition(Context context, final int day, final int month, final int year, byte mode)
      {

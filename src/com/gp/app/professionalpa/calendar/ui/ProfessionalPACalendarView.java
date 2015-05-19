@@ -9,9 +9,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -23,10 +20,13 @@ import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.calendar.adapter.CalendarAdapter;
-import com.gp.app.professionalpa.calendar.events.DayEvents;
+import com.gp.app.professionalpa.calendar.adapter.CalendarAdapter.DateInformation;
+import com.gp.app.professionalpa.calendar.events.Event;
+import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
+import com.gp.app.professionalpa.calendar.interfaces.DBChangeListener;
 
 public class ProfessionalPACalendarView extends RelativeLayout implements OnItemClickListener,
-	OnClickListener{
+	OnClickListener, DBChangeListener{
 	
 	private Context context;
 	private OnDayClickListener dayListener;
@@ -37,19 +37,16 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 	private RelativeLayout base;
 	private ImageView next,prev;
 	
-	public static final int NO_GESTURE = 0;
-	public static final int LEFT_RIGHT_GESTURE = 1;
-	public static final int UP_DOWN_GESTURE = 2;
-	
 	public interface OnDayClickListener
 	{
-		public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, DayEvents day);
+		public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, DateInformation day);
 	}
 
 	public ProfessionalPACalendarView(Context context) 
 	{
 		super(context);
 		this.context = context;
+		CalendarDBManager.getInstance().addDataChangeListener(this);
 		init();
 	}
 	
@@ -143,7 +140,7 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 	{
 		if(dayListener != null)
 		{
-			DayEvents d = (DayEvents) mAdapter.getItem(arg2);
+			DateInformation d = (DateInformation) mAdapter.getItem(arg2);
 			
 			if(d.getDay() != 0)
 			{
@@ -330,5 +327,11 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 	public void setNextMonthButtonImageDrawable(Drawable drawable)
 	{
 		next.setImageDrawable(drawable);
+	}
+
+	@Override
+	public void recieveNotification(Event event)
+	{
+		mAdapter.notifyDataSetChanged();
 	}
 }

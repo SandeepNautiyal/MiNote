@@ -2,31 +2,28 @@ package com.gp.app.professionalpa.calendar.adapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 import android.content.Context;
-import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.calendar.events.DayEvents;
+import com.gp.app.professionalpa.calendar.events.Event;
+import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
 import com.gp.app.professionalpa.calendar.ui.EventCreationGUI;
 import com.gp.app.professionalpa.calendar.ui.EventModificationGUI;
-import com.gp.app.professionalpa.notification.ProfessionalPANotificationManager;
+import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class CalendarAdapter extends BaseAdapter
 {
@@ -35,7 +32,7 @@ public class CalendarAdapter extends BaseAdapter
 	private Calendar cal;
 	private String[] days;
 	
-	ArrayList<DayEvents> daysEventsList = new ArrayList<DayEvents>();
+	ArrayList<DateInformation> dateList = new ArrayList<DateInformation>();
 	
 	public CalendarAdapter(Context context, Calendar cal)
 	{
@@ -54,7 +51,7 @@ public class CalendarAdapter extends BaseAdapter
 	@Override
 	public Object getItem(int position) 
 	{
-		return daysEventsList.get(position);
+		return dateList.get(position);
 	}
 
 	@Override
@@ -92,7 +89,7 @@ public class CalendarAdapter extends BaseAdapter
 		LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		if(position >= 0 && position < 7){
 			v = vi.inflate(R.layout.day_of_week, null);
-			TextView day = (TextView)v.findViewById(R.id.textView1);
+			TextView day = (TextView)v.findViewById(R.id.dayTextView2);
 			
 			if(position == 0){
 				day.setText(R.string.sunday);
@@ -109,134 +106,64 @@ public class CalendarAdapter extends BaseAdapter
 			}else if(position == 6){
 				day.setText(R.string.saturday);
 			}
-		
-			System.out.println("Calendar adapter -> getView -> inside if");
 		}
 		else
 		{
 	        v = vi.inflate(R.layout.day_view, null);
-			FrameLayout today = (FrameLayout)v.findViewById(R.id.today_frame);
-			Calendar cal = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
-			DayEvents dayEvents = daysEventsList.get(position);
 			
-			if(dayEvents.getYear() == cal.get(Calendar.YEAR) && dayEvents.getMonth() == cal.get(Calendar.MONTH) && dayEvents.getDay() == cal.get(Calendar.DAY_OF_MONTH))
+	        Calendar cal = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
+			
+	        DateInformation date = dateList.get(position);
+			
+			String formattedDate = ProfessionalPAUtil.pad(date.getDay())+"/"+ProfessionalPAUtil.pad(date.getMonth()+1)+"/"+ProfessionalPAUtil.pad(date.getYear());
+			
+			System.out.println("date event -> formattedDate="+formattedDate);
+			
+			List<Event> events = CalendarDBManager.getInstance().readEvents(formattedDate);
+			
+			int numberOfEvents = events.size();
+			
+			if(numberOfEvents > 0)
 			{
-				today.setVisibility(View.VISIBLE);
+				TextView dayTextView = (TextView)v.findViewById(R.id.dayTextView1);
+				
+				dayTextView.setText(String.valueOf(numberOfEvents));
+				
+				dayTextView.setVisibility(View.VISIBLE);
+			}
+			
+			final TextView dayTextView = (TextView)v.findViewById(R.id.dayTextView2);
+
+			if(date.getYear() == cal.get(Calendar.YEAR) && date.getMonth() == cal.get(Calendar.MONTH) && date.getDay() == cal.get(Calendar.DAY_OF_MONTH))
+			{
+				dayTextView.setBackgroundResource(R.drawable.today);
+			}
+			
+			dayTextView.setVisibility(View.VISIBLE);
+			
+			RelativeLayout dayRelativeLayout = (RelativeLayout)v.findViewById(R.id.dayRelativeLayout);
+			
+			dayRelativeLayout.setVisibility(View.VISIBLE);
+			
+			if(date.getDay() == 0)
+			{
+				dayRelativeLayout.setVisibility(View.GONE);
 			}
 			else
 			{
-				today.setVisibility(View.GONE);
-			}
-			
-			final TextView dayTV = (TextView)v.findViewById(R.id.textView1);
-			
-			RelativeLayout rl = (RelativeLayout)v.findViewById(R.id.rl);
-			ImageView iv = (ImageView)v.findViewById(R.id.imageView1);
-			ImageView blue = (ImageView)v.findViewById(R.id.imageView2);
-			ImageView purple = (ImageView)v.findViewById(R.id.imageView3);
-			ImageView green = (ImageView)v.findViewById(R.id.imageView4);
-			ImageView orange = (ImageView)v.findViewById(R.id.imageView5);
-			ImageView red = (ImageView)v.findViewById(R.id.imageView6);	
-			
-			blue.setVisibility(View.VISIBLE);
-			purple.setVisibility(View.VISIBLE);
-			green.setVisibility(View.VISIBLE);
-			purple.setVisibility(View.VISIBLE);
-			orange.setVisibility(View.VISIBLE);
-			red.setVisibility(View.VISIBLE);
-			
-			iv.setVisibility(View.VISIBLE);
-			dayTV.setVisibility(View.VISIBLE);
-			rl.setVisibility(View.VISIBLE);
-			
-			final DayEvents eventsInADay = daysEventsList.get(position);
-			
-			final int month = cal.get(Calendar.MONTH)+1;
-			
-			final int year = cal.get(Calendar.YEAR);
-			
-			if(eventsInADay.getNumOfEvents() > 0)
-			{
-//				Set<Integer> colors = eventsInADay.getColors();
-//				
-//				iv.setVisibility(View.INVISIBLE);
-//				blue.setVisibility(View.INVISIBLE);
-//				purple.setVisibility(View.INVISIBLE);
-//				green.setVisibility(View.INVISIBLE);
-//				purple.setVisibility(View.INVISIBLE);
-//				orange.setVisibility(View.INVISIBLE);
-//				red.setVisibility(View.INVISIBLE);
-//				
-//				if(colors.contains(0)){
-//					iv.setVisibility(View.VISIBLE);
-//				}
-//				if(colors.contains(2)){
-//					blue.setVisibility(View.VISIBLE);
-//				}
-//				if(colors.contains(4)){
-//					purple.setVisibility(View.VISIBLE);
-//				}
-//				if(colors.contains(5)){
-//					green.setVisibility(View.VISIBLE);
-//				}
-//				if(colors.contains(3)){
-//					orange.setVisibility(View.VISIBLE);
-//				}
-//				if(colors.contains(1)){
-//					red.setVisibility(View.VISIBLE);
-//				}
-				
-			}else{
-				iv.setVisibility(View.INVISIBLE);
-				blue.setVisibility(View.INVISIBLE);
-				purple.setVisibility(View.INVISIBLE);
-				green.setVisibility(View.INVISIBLE);
-				purple.setVisibility(View.INVISIBLE);
-				orange.setVisibility(View.INVISIBLE);
-				red.setVisibility(View.INVISIBLE);
-			}
-				
-			if(eventsInADay.getDay() == 0)
-			{
-				rl.setVisibility(View.GONE);
-			}
-			else
-			{
-				dayTV.setVisibility(View.VISIBLE);
-				final int day = eventsInADay.getDay();
-				dayTV.setText(String.valueOf(day));
-				dayTV.setOnClickListener(new OnClickListener() 
+				dayTextView.setVisibility(View.VISIBLE);
+				final int day = date.getDay();
+				final int month = date.getMonth()+1;
+				final int year = date.getYear();
+				dayTextView.setText(String.valueOf(day));
+				dayTextView.setOnClickListener(new OnClickListener() 
 				{
 					@Override
 					public void onClick(View v) 
 					{
-						final PopupMenu popupMenu = new PopupMenu(context, dayTV);
+						dayTextView.setBackgroundResource(R.drawable.today);
 						
-                        popupMenu.inflate(R.menu.events_pop_up_menu);
-				        
-				        popupMenu.show();
-				        
-						popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() 
-						{
-							@Override
-							public boolean onMenuItemClick(MenuItem item)
-							{
-							    if(item.getItemId() == R.id.createEvent)
-								{
-							    	new EventCreationGUI().createGuiForEventAddition(context, day, month, year, EventCreationGUI.CREATE_GUI_IN_CREATE_MODE);
-								}
-								else if(item.getItemId() == R.id.editEvent)
-								{
-									new EventModificationGUI().createEventModificationList(context, day, month, year);
-								}
-								else if(item.getItemId() == R.id.exit)
-								{
-									popupMenu.dismiss();
-								}
-									
-								return false;
-							}
-						});
+						createPopUpMenuForDate(dayTextView, month, year, day);
 					}
 				});
 			}
@@ -248,7 +175,7 @@ public class CalendarAdapter extends BaseAdapter
 	public void refreshDays()
     {
     	// clear items
-    	daysEventsList.clear();
+    	dateList.clear();
     	
     	int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH)+GRIDS_OCCUPIED_BY_DAYS_NAMES;
         int firstDay = (int)cal.get(Calendar.DAY_OF_WEEK);
@@ -274,8 +201,8 @@ public class CalendarAdapter extends BaseAdapter
 	        for(j=0; j< firstDay+GRIDS_OCCUPIED_BY_DAYS_NAMES; j++) 
 	        {
 	        	days[j] = "";
-	        	DayEvents d = new DayEvents(0,0,0);
-	        	daysEventsList.add(d);
+	        	DateInformation d = new DateInformation(0,0,0);
+	        	dateList.add(d);
 	        }
         }
 	    else 
@@ -283,37 +210,119 @@ public class CalendarAdapter extends BaseAdapter
 	    	for(j=0;j<7;j++) 
 	    	{
 	        	days[j] = "";
-	        	DayEvents d = new DayEvents(0,0,0);
-	        	daysEventsList.add(d);
+	        	DateInformation d = new DateInformation(0,0,0);
+	        	dateList.add(d);
 	        }
 	    	j=1; // sunday => 1, monday => 7
 	    }
         
-        System.out.println("refresh days -> daysEventsList1 = "+daysEventsList.size());
+        System.out.println("refresh days -> daysEventsList1 = "+dateList.size());
         
-        if(j>0 && daysEventsList.size() > 0 && j != 1)
+        if(j>0 && dateList.size() > 0 && j != 1)
         {
-        	daysEventsList.remove(j-1);
+        	dateList.remove(j-1);
         }
         
      // populate days
         int dayNumber = 1;
         for(int i=j-1;i<days.length;i++) 
         {
-        	DayEvents dayEvents = new DayEvents(dayNumber,year,month);
+        	DateInformation dayEvents = new DateInformation(dayNumber,year,month);
         	
         	Calendar cTemp = Calendar.getInstance();
         	cTemp.set(year, month, dayNumber);
-        	int startDay = Time.getJulianDay(cTemp.getTimeInMillis(), TimeUnit.MILLISECONDS.toSeconds(timeZone.getOffset(cTemp.getTimeInMillis())));
-        	
-        	dayEvents.setStartDay(startDay);
-        	
         	days[i] = ""+dayNumber;
         	dayNumber++;
-        	daysEventsList.add(dayEvents);
+        	dateList.add(dayEvents);
         }
-        
-        System.out.println("refreshDays -> dayList="+daysEventsList);
-        
     }
+	
+	public class DateInformation
+	{
+		private int day;
+		private int year;
+		private int month;
+		
+		public DateInformation(int day, int year, int month)
+		{
+			this.day = day;
+			this.year = year;
+			this.month = month;
+			Calendar cal = Calendar.getInstance();
+			cal.set(year, month-1, day);
+			int end = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+			cal.set(year, month, end);
+		}
+		
+		public int getMonth()
+		{
+			return month;
+		}
+		
+		public int getYear()
+		{
+			return year;
+		}
+		
+		public void setDay(int day)
+		{
+			this.day = day;
+		}
+		
+		public int getDay()
+		{
+			return day;
+		}
+		
+		/**
+		 * 
+		 */
+		public String toString()
+		{
+			StringBuilder sb = new StringBuilder();
+			
+			sb.append("\nday="+day);
+			sb.append("\nmonth="+month);
+			
+			return sb.toString();
+		}
+	}
+	
+	private void createPopUpMenuForDate(final TextView dayTV,
+			final int month, final int year, final int day)
+	{
+		final PopupMenu popupMenu = new PopupMenu(context, dayTV);
+		
+        popupMenu.inflate(R.menu.events_pop_up_menu);
+        
+        popupMenu.show();
+        
+		popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() 
+		{
+			@Override
+			public boolean onMenuItemClick(MenuItem item)
+			{
+			    createDialogForMenuItem(month, year, day, popupMenu, item);
+					
+				return false;
+			}
+		});
+	}
+	
+	private void createDialogForMenuItem(final int month, final int year, final int day, final PopupMenu popupMenu,
+			MenuItem item) 
+	{
+		if(item.getItemId() == R.id.createEvent)
+		{
+	    	new EventCreationGUI().createGuiForEventAddition(context, day, month, year, EventCreationGUI.CREATE_GUI_IN_CREATE_MODE);
+		}
+		else if(item.getItemId() == R.id.editEvent)
+		{
+			new EventModificationGUI().createEventModificationList(context, day, month, year);
+		}
+		else if(item.getItemId() == R.id.exit)
+		{
+			popupMenu.dismiss();
+		}
+	}
 }

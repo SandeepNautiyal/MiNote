@@ -9,6 +9,7 @@ import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class EventManager
 {
+	
     public static List<Event> getEvents(String startDay)
     {
     	return CalendarDBManager.getInstance().readEvents(startDay);
