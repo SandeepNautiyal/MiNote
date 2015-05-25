@@ -1,12 +1,10 @@
-package com.gp.app.professionalpa.data;
+package com.gp.app.professionalpa.notes.fragments;
 
 import java.util.List;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.text.style.RelativeSizeSpan;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,30 +14,26 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.layout.manager.ImageLocationPathManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 import com.gp.app.professionalpa.views.listeners.NoteItemLongClickListener;
 import com.gp.app.professionalpa.views.listeners.NotesActionMode;
 
-public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
+public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
 {
 	private ProfessionalPANote note = null;
 	
-	private Context context = null;
-	
 	private List<NoteListItem> listItems = null;
 	
-	public ListViewItemAdapter(Context context, ProfessionalPANote note) {
+	public NoteFragmentAdapter(Context context, ProfessionalPANote note) {
 		
 		super(context, 0, note.getNoteItems());
-		
-		this.context = context;
 		
 		this.note = note;
 
@@ -55,7 +49,7 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 		//TODO improve 1) introduce convert view reusing 2) if 1st cannot be done remove viewholder.
 	    final NoteListItem noteListItem = listItems.get(position);
 	    
-		convertView = LayoutInflater.from(getContext()).inflate(R.layout.professional_pa_note_view, parent, false);
+		convertView = LayoutInflater.from(getContext()).inflate(R.layout.professional_pa_note_view, null, false);
 		
 		EditText text = (EditText) convertView.findViewById(R.id.compositeControlTextBox);
 		
@@ -93,10 +87,10 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 	    		
 		if (noteType == ProfessionalPAConstants.LIST_NOTE && (noteListItem.getImageName() == null || noteListItem.getImageName().equals("")))
 		{
-			LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
-			importanceButtonParams.height = compressedViewHeight;
-			importanceButtonParams.width = (int) androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
-			bulletPointImage.setLayoutParams(importanceButtonParams);
+			LayoutParams bulletPointImageViewParams = bulletPointImage.getLayoutParams();
+			bulletPointImageViewParams.height = compressedViewHeight;
+			bulletPointImageViewParams.width = (int) androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
+			bulletPointImage.setLayoutParams(bulletPointImageViewParams);
 		} 
 		else if (noteType == ProfessionalPAConstants.PARAGRAPH_NOTE) 
 		{
@@ -109,19 +103,12 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 
 		if (noteListItem.getTextViewData() != null && !noteListItem.getTextViewData().equals(""))
 		{
-			final LayoutParams params = text.getLayoutParams();
+			final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
-//			if(listItems.size() > 1)
-//			{
-				params.height = LayoutParams.WRAP_CONTENT;
-//			}
-//			else
-//			{
-//				params.height = 100;
-//			}
-
+			params.addRule(RelativeLayout.RIGHT_OF, bulletPointImage.getId());
+			
 		    text.setLayoutParams(params);
-
+		    
 			text.setText(noteListItem.getTextViewData());
 
 			text.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
@@ -139,16 +126,26 @@ public class ListViewItemAdapter extends ArrayAdapter<NoteListItem>
 		if (noteListItem.getImageName() != null && !noteListItem.getImageName().equals("")) 
 		{
 			LayoutParams imageViewParams = imageView.getLayoutParams();
-			imageViewParams.height = LayoutParams.MATCH_PARENT;
+			imageViewParams.height = LayoutParams.WRAP_CONTENT;
 			imageViewParams.width = LayoutParams.MATCH_PARENT;
 
 			Bitmap image = ImageLocationPathManager.getInstance().getImage(
 					noteListItem.getImageName(), true);
 
-			image = Bitmap.createScaledBitmap(image, 300, 300, true);
+			image = Bitmap.createScaledBitmap(image, 350, 350, false);
 			imageView.setImageBitmap(image);
 			imageView.setLayoutParams(imageViewParams);
+			
+			LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
+			importanceButtonParams.height = 0;
+			importanceButtonParams.width = 0;
+			bulletPointImage.setLayoutParams(importanceButtonParams);
 			bulletPointImage.setVisibility(View.INVISIBLE);
+			
+			LayoutParams textButtonParams = text.getLayoutParams();
+			textButtonParams.height = 0;
+			textButtonParams.width = 0;
+			text.setLayoutParams(textButtonParams);
 			text.setVisibility(View.INVISIBLE);
 		}
 
