@@ -52,14 +52,25 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
     public void onUpgrade(SQLiteDatabase db, int oldVersion, 
                           int newVersion) 
     {
-        db.execSQL("DROP TABLE IF EXISTS events");
+        db.execSQL("DROP TABLE IF EXISTS "+Event.EVENTS_TABLE_NAME);
+        
         onCreate(db);
     }
     
+//    public void dropEventTable()
+//    {
+//		SQLiteDatabase db = getWritableDatabase();
+//
+//        db.execSQL("DROP TABLE IF EXISTS "+Event.EVENTS_TABLE_NAME);
+//    }
+    
 	private void createTables(SQLiteDatabase db){
 		db.execSQL("CREATE TABLE " + Event.EVENTS_TABLE_NAME + "(" + Event.ID + " integer primary key autoincrement, " +
-				Event.EVENT_NAME + " TEXT, " + Event.LOCATION + " TEXT, "
-				+ Event.START_TIME + " INTEGER, "+ Event.END_TIME + " INTEGER, " + Event.START_DAY + " INTEGER, " + Event.END_DAY + " INTEGER, " + Event.COLOR +" INTEGER);");
+				Event.EVENT_NAME + " TEXT, " + Event.LOCATION + " TEXT, " + Event.START_DAY + " INTEGER, "
+				+ Event.START_TIME + " INTEGER, " + Event.END_DAY + " INTEGER, " + Event.END_TIME + " INTEGER, "
+				+ Event.IS_ALARM +" INTEGER);");
+		
+		System.out.println("Create table executed");
 	}
 
 	static 
@@ -72,8 +83,6 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
 	
 	public void saveEventToDatabase(Event event) 
 	{
-    	System.out.println("saveEventToDatabase -> event="+event);
-
 		SQLiteDatabase db = getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
@@ -84,6 +93,7 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
 		values.put(Event.START_DAY, event.getStartDate());
 		values.put(Event.END_DAY, event.getEndDate());
 		values.put(Event.LOCATION, event.getLocation());
+		values.put(Event.IS_ALARM, event.isAlarmActivated() ? 1 : 0);
 		
 		db.insert(
 				 Event.EVENTS_TABLE_NAME,null,
@@ -101,13 +111,14 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
     	// Define a projection that specifies which columns from the database
     	// you will actually use after this query.
     	String[] projection = {
-    	    Event._ID,
+    	    Event.ID,
     	    Event.START_DAY,
     	    Event.END_DAY,
     	    Event.START_TIME,
             Event.END_TIME,
             Event.EVENT_NAME,
             Event.LOCATION,
+            Event.IS_ALARM,
     	    };
 
     	// How you want the results sorted in the resulting Cursor
@@ -128,16 +139,18 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
     	
     	while (cursor.isAfterLast() == false)
     	{
-    		int eventId = cursor.getInt(cursor.getColumnIndexOrThrow(Event._ID));
+    		int eventId = cursor.getInt(cursor.getColumnIndexOrThrow(Event.ID));
         	String eventName = cursor.getString(cursor.getColumnIndexOrThrow(Event.EVENT_NAME));
         	String eventLocation = cursor.getString(cursor.getColumnIndexOrThrow(Event.LOCATION));
         	String startDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_DAY));
         	String startTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_TIME));
         	String endDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_DAY));
         	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
-        	System.out.println("readEvents -> itemId="+eventId+" column count"+cursor.getColumnCount()+" eventName="+eventName);
+    		int alarmAttribte = cursor.getInt(cursor.getColumnIndexOrThrow(Event.IS_ALARM));
+    		boolean isAlarm = alarmAttribte == 1 ? true : false;
         	Event event = new Event(eventName, eventLocation, startDate, startTime, endDate, endTime);
         	event.setEventId(eventId);
+        	event.setIsAlarmActivated(isAlarm);
         	events.add(event);
         	cursor.moveToNext();
     	}
@@ -154,13 +167,14 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
     	// Define a projection that specifies which columns from the database
     	// you will actually use after this query.
     	String[] projection = {
-    	    Event._ID,
+    	    Event.ID,
     	    Event.START_DAY,
     	    Event.END_DAY,
     	    Event.START_TIME,
             Event.END_TIME,
             Event.EVENT_NAME,
             Event.LOCATION,
+            Event.IS_ALARM,
     	    };
 
     	// How you want the results sorted in the resulting Cursor
@@ -185,16 +199,19 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
     	
     	while (cursor.isAfterLast() == false)
     	{
-    		int itemId = cursor.getInt(cursor.getColumnIndexOrThrow(Event._ID));
+    		int itemId = cursor.getInt(cursor.getColumnIndexOrThrow(Event.ID));
         	String eventName = cursor.getString(cursor.getColumnIndexOrThrow(Event.EVENT_NAME));
         	String eventLocation = cursor.getString(cursor.getColumnIndexOrThrow(Event.LOCATION));
         	String startDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_DAY));
         	String readStartTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_TIME));
         	String endDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_DAY));
         	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
-        	System.out.println("readEvents -> itemId="+itemId+" column count"+cursor.getColumnCount()+" eventName="+eventName);
+        	int alarmAttribte = cursor.getInt(cursor.getColumnIndexOrThrow(Event.IS_ALARM));
+    		boolean isAlarm = alarmAttribte == 1 ? true : false;
+    		
         	Event event = new Event(eventName, eventLocation, startDate, readStartTime, endDate, endTime);
         	event.setEventId(itemId);
+        	event.setIsAlarmActivated(isAlarm);
         	events.add(event);
     	    cursor.moveToNext();
     	}
@@ -202,16 +219,16 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
     	return events;
 	}
 	
-	public void deleteEvent(int eventId) 
+	public int deleteEvent(int eventId) 
 	{
 		SQLiteDatabase db = getWritableDatabase();
 
 		int result = db.delete(Event.EVENTS_TABLE_NAME, Event.ID + "=?", new String[]{Integer.toString(eventId)});
-
-		System.out.println("deleteEvent -> eventId="+eventId+" result="+result);
+	
+		return result;
 	}
 
-	public void updateEventInDatabase(Event event)
+	public long updateEventInDatabase(Event event)
 	{
         SQLiteDatabase db = getWritableDatabase();
 		
@@ -222,14 +239,15 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
 		values.put(Event.START_DAY, event.getStartDate());
 		values.put(Event.END_DAY, event.getEndDate());
 		values.put(Event.LOCATION, event.getLocation());
+		values.put(Event.IS_ALARM, event.isAlarmActivated() ? 1 : 0);
 		
     	String where = Event.ID+"=?";
 
 		long newRowId = db.update(Event.EVENTS_TABLE_NAME, values, where, new String[]{String.valueOf(event.getEventId())});
-		
-    	System.out.println("saveEventToDatabase -> newRowId="+newRowId+" starttime="+event.getStartTime()+" startdate="+event.getStartDate());
     	
     	notifyAllListeners(event);
+    	
+    	return newRowId;
 	}
 
 	@Override
@@ -248,5 +266,64 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
 		{
 			listener.recieveNotification(event);
 		}
+	}
+
+	public List<Event> readAllEventsAfter(String currentDate, String currentTime) 
+	{
+        List<Event> events = new ArrayList<Event>();
+		
+		SQLiteDatabase db = getReadableDatabase();
+
+    	// Define a projection that specifies which columns from the database
+    	// you will actually use after this query.
+    	String[] projection = {
+    	    Event.ID,
+    	    Event.START_DAY,
+    	    Event.END_DAY,
+    	    Event.START_TIME,
+            Event.END_TIME,
+            Event.EVENT_NAME,
+            Event.LOCATION,
+            Event.IS_ALARM,
+    	    };
+
+    	// How you want the results sorted in the resulting Cursor
+    	String sortOrder =
+    			Event.START_TIME + " DESC";
+
+    	String where = Event.START_DAY+">=?"+" AND "+Event.START_TIME+">=?";
+    	
+    	Cursor cursor = db.query(
+    			Event.EVENTS_TABLE_NAME,  // The table to query
+    	    projection,                               // The columns to return
+    	    where,                               // The columns for the WHERE clause
+    	    new String []{currentDate, currentTime},                            // The values for the WHERE clause
+    	    null,                                     // don't group the rows
+    	    null,                                     // don't filter by row groups
+    	    sortOrder                                 // The sort order
+    	    );
+    	
+    	cursor.moveToFirst();
+    	
+    	while (cursor.isAfterLast() == false)
+    	{
+    		int itemId = cursor.getInt(cursor.getColumnIndexOrThrow(Event.ID));
+        	String eventName = cursor.getString(cursor.getColumnIndexOrThrow(Event.EVENT_NAME));
+        	String eventLocation = cursor.getString(cursor.getColumnIndexOrThrow(Event.LOCATION));
+        	String startDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_DAY));
+        	String readStartTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_TIME));
+        	String endDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_DAY));
+        	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
+        	int alarmAttribte = cursor.getInt(cursor.getColumnIndexOrThrow(Event.IS_ALARM));
+    		boolean isAlarm = alarmAttribte == 1 ? true : false;
+    		
+        	Event event = new Event(eventName, eventLocation, startDate, readStartTime, endDate, endTime);
+        	event.setEventId(itemId);
+        	event.setIsAlarmActivated(isAlarm);
+        	events.add(event);
+    	    cursor.moveToNext();
+    	}
+    	
+    	return events;
 	}
 }

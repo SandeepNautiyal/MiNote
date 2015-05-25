@@ -16,7 +16,6 @@ public class Event implements BaseColumns
 	private String startTime;
 	private String endDay;
 	private String endTime;
-	private boolean isNotificationActivated;
 	private boolean isAlarmActivated;
 	public static final String EVENT_NAME = "event";
 	public static final String EVENTS_TABLE_NAME = "events";
@@ -29,10 +28,11 @@ public class Event implements BaseColumns
 	public static final String LOCATION = "location";
 	public static final String START_TIME = "start";
 	public static final String END_TIME = "end";
-	public static final String ID = "_id";
+	public static final String ID = "event_id";
 	public static final String START_DAY = "start_day";
 	public static final String END_DAY = "end_day";
 	public static final String COLOR = "color";
+	public static final String IS_ALARM = "is_alarm";
 
 	public Event(String eventName, String location, String startDay, String startTime, String endDate, String endTime)
 	{

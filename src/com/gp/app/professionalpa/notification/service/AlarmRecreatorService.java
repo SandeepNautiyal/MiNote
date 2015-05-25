@@ -1,14 +1,12 @@
 package com.gp.app.professionalpa.notification.service;
 
-import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.util.ProfessionalPAParameters;
-import com.gp.app.professionalpa.util.ProfessionalPAUtil;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-public class NotificationProcessingService extends Service 
+import com.gp.app.professionalpa.util.ProfessionalPAParameters;
+
+public class AlarmRecreatorService extends Service 
 {
 	@Override
 	public void onCreate() 
@@ -31,7 +29,7 @@ public class NotificationProcessingService extends Service
     	{
     		ProfessionalPAParameters.setApplicationContext(getApplicationContext());
     		
-            new NotificationActionPerformer().execute(false);
+            new NotificationActionPerformer().execute(true);
 
             intent.addCategory(NotificationReceiver.CATEGORY);
     	}

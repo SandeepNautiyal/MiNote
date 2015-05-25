@@ -38,13 +38,11 @@ public class EventCreationGUI
 	 private Button endTimeButton = null;
 	 private Button saveButton = null;
 	 private Button cancelButton = null;
-	 private ImageButton notificationImageButton = null;
 	 private ImageButton alarmImageButton = null;
 	 private String fromDate = null;
 	 private String fromTime = null;
 	 private String toDate = null;
 	 private String toTime = null;
-	 private boolean isNotificationActivated = false;
 	 private boolean isAlarmActivated = false;
      private byte guiCreationMode = CREATE_GUI_IN_CREATE_MODE;
 	 private int editedEventId;
@@ -239,7 +237,7 @@ public class EventCreationGUI
 
     	if(startTime != 0l && endTime != 0l)
     	{
-    		if(endTime > startTime)
+    		if(endTime >= startTime)
         	{
                 Event event = new Event(titleEditText.getText().toString(), locationEditText.getText().toString(), fromDate, fromTime, toDate, toTime);
 
