@@ -137,4 +137,19 @@ public class NoteListItem implements Parcelable
 		
 		return sb.toString();
 	}
+	
+	public int getLength()
+	{
+		int textFactor = 0;
+		
+		if(itemText != null)
+		{
+			//TODO constant 22 has to be changed according to device size. Ver important- has to be changed.
+			textFactor = itemText.length() > 22 ? Math.abs((int)Math.ceil(itemText.length()/22.0)) : 1;
+		}
+		
+		int length =  textFactor + (imageName == null || imageName.trim().length() == 0  ? 0 : 10);
+
+		return length;
+	}
 }

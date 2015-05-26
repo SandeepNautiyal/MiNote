@@ -10,7 +10,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.data.ListViewItemAdapter;
+import com.gp.app.professionalpa.notes.fragments.NoteFragmentAdapter;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
@@ -19,7 +19,7 @@ public class ProfessionalPANoteFragment extends ListFragment
 {
 	private int noteId = -1;
 	
-	private ListViewItemAdapter adapter;
+	private NoteFragmentAdapter adapter;
 
 	private ListView listView = null;
 	
@@ -31,7 +31,6 @@ public class ProfessionalPANoteFragment extends ListFragment
 		
 		this.noteColor = noteColor;
 		
-		listView = (ListView)LayoutInflater.from(ProfessionalPAParameters.getApplicationContext()).inflate(R.layout.fragment_list_view, null);   
 	}
 	
 	/**
@@ -41,7 +40,7 @@ public class ProfessionalPANoteFragment extends ListFragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	        Bundle savedInstanceState) {
 	    
-		listView = (ListView)inflater.inflate(R.layout.fragment_list_view, null);   
+		listView = (ListView)inflater.inflate(R.layout.listview_for_list_fragment, null);   
 		
 	    return listView;       
 	}
@@ -59,7 +58,7 @@ public class ProfessionalPANoteFragment extends ListFragment
 			
 		    if(note != null)
 		    {
-				adapter = new ListViewItemAdapter(getActivity(), note);
+				adapter = new NoteFragmentAdapter(getActivity(), note);
 				
 				listView.setAdapter(adapter);
 				
@@ -67,7 +66,7 @@ public class ProfessionalPANoteFragment extends ListFragment
 				
 				listView.setDividerHeight(0);			
 				
-				setListViewHeightBasedOnItems(listView);
+				setListViewHeightBasedOnItems();
 //				setListShown(true);
 				listView.setBackgroundColor(noteColor);
 				
@@ -103,15 +102,14 @@ public class ProfessionalPANoteFragment extends ListFragment
 	 * @param listView to be resized
 	 * @return true if the listView is successfully resized, false otherwise
 	 */
-	public static boolean setListViewHeightBasedOnItems(ListView listView) {
-
+	public void setListViewHeightBasedOnItems() 
+	{
 	    ListAdapter listAdapter = listView.getAdapter();
 	    
 	    if (listAdapter != null) {
 
 	        int numberOfItems = listAdapter.getCount();
 
-	        // Get total height of all items.
 	        int totalItemsHeight = 0;
 	        
 	        for (int itemPos = 0; itemPos < numberOfItems; itemPos++) 
@@ -129,12 +127,11 @@ public class ProfessionalPANoteFragment extends ListFragment
 	        params.height = totalItemsHeight + totalDividersHeight;
 	        listView.setLayoutParams(params);
 	        listView.requestLayout();
-
-	        return true;
-
-	    } else {
-	        return false;
 	    }
-
+	}
+	
+	public int getFragmentLength()
+	{
+		return NotesManager.getInstance().getNote(noteId).getLength();
 	}
 }

@@ -142,8 +142,6 @@ public class ProfessionalPANotesParser extends DefaultHandler
 		
 		if (qName.equalsIgnoreCase("note"))
 		{
-			System.out.println("endElement -> note added="+currentNote);
-			
 			notes.add(currentNote);
 			
 			currentNote.setState(XMLEntity.READ_STATE);

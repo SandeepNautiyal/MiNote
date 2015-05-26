@@ -44,8 +44,6 @@ public class ProfessionalPAParameters
 
 	public static void setLinearLayoutWidth(int width) 
 	{
-		System.out.println("setLinearLayoutWidth -> width="+width);
-		
 		linearLayoutWidth = width;
 	}
 	

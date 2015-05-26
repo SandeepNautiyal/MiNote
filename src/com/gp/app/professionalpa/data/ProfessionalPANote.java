@@ -14,37 +14,26 @@ import com.gp.app.professionalpa.interfaces.XMLEntity;
 
 public class ProfessionalPANote implements XMLEntity, Parcelable
 {
-	//<!DOCTYPE notes [
-//<!ELEMENT notes (note+) #REQUIRED>
-//<!ELEMENT note (noteItem+)>
-//<!ATTLIST note noteId PCDATA #REQUIRED>
-//<!ATTLIST note isParagraphNote PCDATA #REQUIRED>
-//<!ATTLIST note creationTime PCDATA #REQUIRED>
-//<!ATTLIST note lastEditedTime PCDATA #REQUIRED>
-//<!ELEMENT noteItem (data, imageName)>
-//<!ELEMENT data (#PCDATA)>
-//<!ELEMENT imageName (#PCDATA)>
     public static final String NOTE_ID = "noteId";
     public static final String	NOTE_CREATION_TIME = "creationTime";
     public static final String	NOTE_MODIFIED_TIME ="lastEditedTime";
     public static final String	NOTE_TYPE="isParagraphNote";
 
-	
 	private int noteId = -1;
 	
 	private byte state = XMLEntity.INSERT_STATE;
 	
 	private byte noteType = ProfessionalPAConstants.LIST_NOTE;
 	
-	private List<NoteListItem> notes = new ArrayList<NoteListItem>();
+	private List<NoteListItem> noteItems = new ArrayList<NoteListItem>();
 	
 	private long creationTime = 0L;
 	
 	private long lastEditedTime = 0L;
 	
 	private List<String> imageNames = new ArrayList<String>();
-	private int noteColor;
 	
+	private int noteColor;
 
 	public ProfessionalPANote(int noteId, byte noteType, List<NoteListItem> values) 
 	{
@@ -54,10 +43,8 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		
 		if(values != null)
 		{
-			this.notes = values;
+			this.noteItems = values;
 		}
-		
-		System.out.println("ProfessionalPANote  -> values="+values+" size="+values.size());
 		
 		for(int i = 0, size = values != null ? values.size() : 0; i < size; i++)
 		{
@@ -101,12 +88,12 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 
 	public void addNoteItem(NoteListItem item)
 	{
-		notes.add(item);
+		noteItems.add(item);
 	}
 	
 	public List<NoteListItem> getNoteItems()
 	{
-		return notes;
+		return noteItems;
 	}
 	
 	public void setCreationTime(long creationTime)
@@ -142,7 +129,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 	@Override
 	public void writeToParcel(Parcel dest, int flags) 
 	{
-		dest.writeTypedList(notes);
+		dest.writeTypedList(noteItems);
 
 		dest.writeByteArray(new byte[]{noteType, state});
 		
@@ -263,7 +250,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		
 		sb.append("isParagraph note:"+noteType);
 		
-		sb.append("Note item :"+notes);
+		sb.append("Note item :"+noteItems);
 		
 		return sb.toString();
 	}
@@ -276,5 +263,19 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 	public int getNoteColor() 
 	{
 		return noteColor;
+	}
+	
+	public int getLength()
+	{
+		int length = 0;
+		
+		for(int i = 0; i < noteItems.size(); i++)
+		{
+			NoteListItem item = noteItems.get(0);
+			
+			length = length + item.getLength();
+		}
+		
+		return length;
 	}
 }

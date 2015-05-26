@@ -2,6 +2,7 @@ package com.gp.app.professionalpa.layout.manager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,16 +66,14 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_LANDSCAPE = 5;
 
-	private byte numberOfLinearLayouts = -1;
-
+	private SparseIntArray linearLayoutOccupancy = new SparseIntArray(2);
+	
 	private Map<Integer, FrameLayout> childFrames = new LinkedHashMap<Integer, FrameLayout>();
 
 	private List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
 
 	private ImageLocationPathManager imageCaptureManager = null;
 	
-	private int [] indexesOccupied = null;
-
 	public NotesLayoutManagerActivity() 
 	{
 		super();
@@ -91,9 +91,10 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		setContentView(scrollView);
 
-		numberOfLinearLayouts = getNumberOfLinearLayouts();
+		int numberOfLinearLayouts = getNumberOfLinearLayouts();
+		
+		reInitializeLinearLayoutOccupancy(numberOfLinearLayouts);
 
-		indexesOccupied = new int[numberOfLinearLayouts];
 		
 //		linearLayoutAndIndexSelector = new LinearLayoutAndIndexSelector(
 //				numberOfLinearLayouts);
@@ -119,6 +120,14 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		ProfessionalPAParameters.setNotesActivity(this);
 	}
 
+	private void reInitializeLinearLayoutOccupancy(int numberOfLinearLayouts) 
+	{
+		for(int i = 0; i < numberOfLinearLayouts; i++)
+		{
+			linearLayoutOccupancy.append(i, 0);
+		}
+	}
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) 
 	{
@@ -126,7 +135,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		// outState.putStringArrayList(FRAGMENT_TAGS,
 		// (ArrayList<String>)fragmentTags);
 
-		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, numberOfLinearLayouts);
+		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, (byte)linearLayoutOccupancy.size());
 
 		super.onSaveInstanceState(outState);
 
@@ -137,8 +146,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		// super.onRestoreInstanceState(savedInstanceState);
 		//
-		numberOfLinearLayouts = (byte) savedInstanceState
+		int numberOfLinearLayouts = (byte) savedInstanceState
 				.getByte(NUMBER_OF_LINEAR_LAYOUTS);
+		
+		reInitializeLinearLayoutOccupancy(numberOfLinearLayouts);
+		
 		//
 		// fragmentTags.addAll(savedInstanceState.getStringArrayList(FRAGMENT_TAGS));
 		//
@@ -256,14 +268,13 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	public void updateNumberOfLinearLayoutsOnScreenChange(Configuration newConfig) 
 	{
-		// Checks the orientation of the screen
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) 
 		{
-			numberOfLinearLayouts = (byte) (numberOfLinearLayouts + 1);
+			reInitializeLinearLayoutOccupancy(linearLayoutOccupancy.size() + 1);
 		}
 		else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
 		{
-			numberOfLinearLayouts = (byte) (numberOfLinearLayouts - 1);
+			reInitializeLinearLayoutOccupancy(linearLayoutOccupancy.size() - 1);
 		}
 	}
 
@@ -272,8 +283,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		ProfessionalPANote note = null;
 
-		System.out.println("onActivityResult -> requestCode="+requestCode+" result code="+resultCode+" data="+data);
-		
 		if (requestCode == ProfessionalPAConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
 		{
 			Bitmap photo = (Bitmap) data.getExtras().get("data");
@@ -358,6 +367,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		
 		final int noteId = ((ProfessionalPANoteFragment)fragment).getFragmentNoteId();
 
+		int fragmentLength = ((ProfessionalPANoteFragment)fragment).getFragmentLength();
+		
 		frameLayout.setClickable(true);
 		
 //		frameLayout.setOnTouchListener(touchListener);
@@ -373,7 +384,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		childFrames.put(noteId, frameLayout);
 		
-		updateActivityView(frameLayout);
+		updateActivityView(frameLayout, fragmentLength);
 	}
 
 	@Override
@@ -419,27 +430,17 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		return numberOfLinearLayouts;
 	}
 
-	private void updateActivityView(FrameLayout frameLayout)
+	private void updateActivityView(FrameLayout frameLayout, int fragmentLength)
 	{
-		int availableIndex = 0;
+		int minimumOccupiedIndex = getMinimumOccupiedLayoutIndex();
 		
-		for(int i = 0; i < numberOfLinearLayouts; i++)
-		{
-			if(indexesOccupied[i] == 0)
-			{
-				availableIndex = i;
-				
-				break;
-			}
-			
-			availableIndex = 0;
-			
-			indexesOccupied = new int[numberOfLinearLayouts];
-		}
+		int occupancy = linearLayoutOccupancy.get(minimumOccupiedIndex);
 		
-		indexesOccupied[availableIndex] = 1;
-
-		LinearLayout linearLayout = linearLayouts.get(availableIndex);
+		occupancy = occupancy + fragmentLength;
+		
+		linearLayoutOccupancy.put(minimumOccupiedIndex, occupancy);
+		
+		LinearLayout linearLayout = linearLayouts.get(minimumOccupiedIndex);
 
 		LinearLayout parentView = (LinearLayout) frameLayout.getParent();
 
@@ -457,7 +458,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		LinearLayoutOnClickListener clickListener = new LinearLayoutOnClickListener();
 
-		switch (numberOfLinearLayouts) {
+		switch (linearLayoutOccupancy.size()) 
+		{
 		case 5:
 			layout = (LinearLayout) findViewById(R.id.linearLayout5);
 			layout.setOnClickListener(clickListener);
@@ -489,11 +491,9 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	}
 
 	@Override
-	protected void onResume() {
+	protected void onResume() 
+	{
 		super.onResume();
-
-		ProfessionalPAParameters.setLinearLayoutWidth(linearLayouts.get(0)
-				.getWidth());
 	}
 
 	private void createNotes() throws ProfessionalPABaseException
@@ -551,52 +551,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	}
 
-//	public class LinearLayoutAndIndexSelector 
-//	{
-//		private int numberOfLinearLayout = -1;
-//
-//		private int[] nextAvailableIndex = null;
-//
-//		public LinearLayoutAndIndexSelector(int numberOfLinearLayout) 
-//		{
-//			this.numberOfLinearLayout = numberOfLinearLayout;
-//
-//			nextAvailableIndex = new int[numberOfLinearLayout];
-//
-//			for (int i = 0; i < numberOfLinearLayout; i++) 
-//			{
-//				nextAvailableIndex[i] = 0;
-//			}
-//		}
-//
-//		public void fillLayout(int filledLayoutIndex, int indexesOccupiedInLayout) 
-//		{
-//			if (filledLayoutIndex < numberOfLinearLayout)
-//			{
-//				nextAvailableIndex[filledLayoutIndex] = indexesOccupiedInLayout;
-//			}
-//		}
-//
-//		public int[] getNextAvailableIndex() 
-//		{
-//			int availableIndex = nextAvailableIndex[0];
-//
-//			int availableLinearLayout = 0;
-//
-//			for (int i = 1; i < numberOfLinearLayout; i++)
-//			{
-//				if (availableIndex > nextAvailableIndex[i]) 
-//				{
-//					availableLinearLayout = i;
-//
-//					availableIndex = nextAvailableIndex[i];
-//				}
-//			}
-//
-//			return new int[] { availableLinearLayout, availableIndex };
-//		}
-//	}
-
 	public void openNoteInEditMode(int noteId) 
 	{
 		Intent intent = new Intent(getApplicationContext(),
@@ -649,5 +603,29 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 				}
 			}
 		}
+	}
+	
+	private int getMinimumOccupiedLayoutIndex() 
+	{
+		int minimumOccupiedLayoutIndex = 0;
+		
+		int minimumOccupancy = linearLayoutOccupancy.get(0);
+
+		for(int linearLayoutIndex = 1; linearLayoutIndex < linearLayoutOccupancy.size(); linearLayoutIndex++)
+		{
+			int layoutOccupancy = linearLayoutOccupancy.get(linearLayoutIndex);
+			
+			if (layoutOccupancy < minimumOccupancy)
+			{
+				minimumOccupancy = layoutOccupancy;
+				
+				minimumOccupiedLayoutIndex = linearLayoutIndex;
+			}
+		}
+		
+		System.out.println("getMinimumOccupiedLayoutIndex -> minimumOccupiedLayoutIndex="+minimumOccupiedLayoutIndex
+				+"minimumOccupancy="+minimumOccupancy);
+		
+		return minimumOccupiedLayoutIndex;
 	}
 }
