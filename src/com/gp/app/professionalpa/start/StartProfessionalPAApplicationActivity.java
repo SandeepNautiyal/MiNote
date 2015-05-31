@@ -9,12 +9,14 @@ import android.view.MenuItem;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
+import com.gp.app.professionalpa.notes.backup.NotesBackupManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class StartProfessionalPAApplicationActivity extends Activity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		
 		Intent startLayoutManager = new Intent(this, NotesLayoutManagerActivity.class);
@@ -23,6 +25,8 @@ public class StartProfessionalPAApplicationActivity extends Activity {
 		
 		ProfessionalPAParameters.setApplicationContext(getApplicationContext());
 		
+		NotesBackupManager.setInitialBackupTime();
+
         DisplayMetrics metrics = new DisplayMetrics();
 	    
 	    getWindowManager().getDefaultDisplay().getMetrics(metrics);

@@ -14,10 +14,12 @@ import com.gp.app.professionalpa.interfaces.XMLEntity;
 
 public class ProfessionalPANote implements XMLEntity, Parcelable
 {
+    public static final String NOTE_TABLE_NAME = "Note";
     public static final String NOTE_ID = "noteId";
     public static final String	NOTE_CREATION_TIME = "creationTime";
     public static final String	NOTE_MODIFIED_TIME ="lastEditedTime";
     public static final String	NOTE_TYPE="isParagraphNote";
+    public static final String	NOTE_COLOR = "noteColor";
 
 	private int noteId = -1;
 	
@@ -59,6 +61,20 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 
 	public ProfessionalPANote()
 	{
+	}
+
+	public ProfessionalPANote(int noteId, byte noteType, byte noteColor,
+			long creationTime, long lastEditedTime) 
+	{
+        this.noteId = noteId;
+		
+		this.noteType = noteType;
+		
+		this.noteColor = noteColor;
+		
+		this.creationTime = creationTime;
+		
+		this.lastEditedTime = lastEditedTime;
 	}
 
 	public byte getNoteType()
@@ -277,5 +293,13 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		}
 		
 		return length;
+	}
+
+	public void setNoteItems(List<NoteListItem> noteItems) 
+	{
+		if(noteItems != null && noteItems.size() > 0)
+		{
+			this.noteItems = noteItems;
+		}
 	}
 }

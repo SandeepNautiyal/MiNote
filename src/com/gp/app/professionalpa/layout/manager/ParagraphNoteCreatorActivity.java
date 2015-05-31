@@ -26,8 +26,8 @@ import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
-import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ParagraphNoteCreatorActivity extends Activity
@@ -142,10 +142,6 @@ public class ParagraphNoteCreatorActivity extends Activity
 	
 	private void persistListElement(List<ProfessionalPANote> notes) throws ProfessionalPABaseException
 	{
-//		dummyMethod();
-		
-		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
-		
-		fragmentWriter.writeNotes(notes);
+		NotesDBManager.getInstance().saveNotes(notes);
 	}
 }

@@ -42,8 +42,6 @@ public class ProfessionalPANotificationManager
 	    	
 	    	if(event.isAlarmActivated())
 	    	{
-	    		System.out.println("createNotifications -> alarm");
-	    		
 	    		Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 		    	MediaPlayer mp = MediaPlayer.create(context, alert);
 		    	mp.setVolume(100, 100);
@@ -124,7 +122,7 @@ public class ProfessionalPANotificationManager
 	    	
 	    	if(event != null)
 	    	{
-	    		AlarmRequestCreator.createAlarmRequest(event);
+	    		AlarmRequestCreator.createAlarmRequest(event.getStartDate(), event.getStartTime());
 	    	}
 	    }
 	}

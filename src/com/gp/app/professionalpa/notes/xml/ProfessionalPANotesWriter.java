@@ -33,12 +33,23 @@ import com.gp.app.professionalpa.util.ProfessionalPAUtil;
  
 public class ProfessionalPANotesWriter
 {
-    private Document xmlDocument = null;
+    private static ProfessionalPANotesWriter notesWriter;
+
+	private Document xmlDocument = null;
     
     private Element rootElement = null;
     
+    public static ProfessionalPANotesWriter getInstance()
+    {
+    	if(notesWriter == null)
+    	{
+    		notesWriter = new ProfessionalPANotesWriter();
+    	}
+    	
+    	return notesWriter;
+    }
     //TODO exception handling in this method can be improved.
-	public ProfessionalPANotesWriter()
+	private ProfessionalPANotesWriter()
 	{
 		SAXParserFactory.newInstance();
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

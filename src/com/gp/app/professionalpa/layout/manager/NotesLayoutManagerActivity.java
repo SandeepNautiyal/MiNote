@@ -36,11 +36,11 @@ import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.export.ProfessionalPANotesExporter;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.notes.fragments.ProfessionalPANoteFragment;
 import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
-import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 //TODO create notes for calendar events also
@@ -233,18 +233,19 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			List<ProfessionalPANote> notes;
 
-			try
-			{
-				notes = ProfessionalPANotesReader.readNotes(true);
-
-				ProfessionalPAParameters.getProfessionalPANotesWriter()
-						.writeNotes(notes);
-			} 
-			catch (ProfessionalPABaseException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try
+//			{
+//				//TODO improve import functionality hampered
+////				notes = NotesDBManager.getInstance().readNotes(true);
+////
+////				ProfessionalPAParameters.getProfessionalPANotesWriter()
+////						.writeNotes(notes);
+//			} 
+//			catch (ProfessionalPABaseException e) 
+//			{
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 
 		} 
 		else if (id == R.id.action_click_photo) 
@@ -292,24 +293,12 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			note = createProfessionalPANoteFromImage(imageCaptureManager
 					.getMostRecentImageFilePath());
 
-			try 
-			{
-				ProfessionalPAParameters.getProfessionalPANotesWriter()
-						.writeNotes(Arrays.asList(note));
-			} 
-			catch (ProfessionalPABaseException e) 
-			{
-				// e.printStackTrace();
-			}
+			NotesDBManager.getInstance().saveNotes(Arrays.asList(note));
 		} 
 		else
 		{
-			System.out.println("onActivityResult -> data1="+data);
-
 			if (data != null) 
 			{
-				System.out.println("onActivityResult -> data="+data);
-				
 				note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
 			}
 		}
@@ -498,9 +487,10 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private void createNotes() throws ProfessionalPABaseException
 	{
-		List<ProfessionalPANote> parsedNotes = ProfessionalPANotesReader
-				.readNotes(false);
+		List<ProfessionalPANote> parsedNotes = NotesDBManager.getInstance().readNotes();
 
+		System.out.println("createNotes -> parsedNotes="+parsedNotes);
+		
 		for (int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++)
 		{
 			ProfessionalPANote note = parsedNotes.get(i);
@@ -587,19 +577,9 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 				
 				if(note != null)
 				{
-					try 
-					{
-						System.out.println("setFrameLayoutColour -> noteColor="+noteColor);
+					note.setNoteColor(noteColor);
 
-						note.setNoteColor(noteColor);
-
-						ProfessionalPAParameters.getProfessionalPANotesWriter().setColorAttribute(selectedNoteId, noteColor);
-					} 
-					catch (ProfessionalPABaseException e) 
-					{
-						// TODO Improve
-						e.printStackTrace();
-					}
+					NotesDBManager.getInstance().setNoteColorAttribute(selectedNoteId, noteColor);
 				}
 			}
 		}

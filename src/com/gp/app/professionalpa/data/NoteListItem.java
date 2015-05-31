@@ -5,6 +5,12 @@ import android.os.Parcelable;
 
 public class NoteListItem implements Parcelable 
 {
+	public static final String NOTE_ID = "noteId";
+	public static final String DATA = "data";
+    public static final String	IMAGE_NAME = "imageName";
+    public static final String	TEXT_COLOR ="textColor";
+    public static final String NOTE_ITEM_TABLE_NAME = "NoteItem";
+
 	private String itemText = null;
 	
 	private String imageName = null;

@@ -36,6 +36,6 @@ public class EventManager
 			CalendarDBManager.getInstance().saveEventToDatabase(event);
 		}
 		
-		AlarmRequestCreator.createAlarmRequest(event);
+		AlarmRequestCreator.createAlarmRequest(event.getStartDate(), event.getStartTime());
 	}
 }

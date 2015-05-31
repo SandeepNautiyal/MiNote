@@ -103,4 +103,15 @@ public class ProfessionalPAUtil
 		else
 		   return "0" + String.valueOf(c);
 	}
+
+	public static long getDayStartTime(long lastModifiedTime) 
+	{
+		String date = createStringForDate(lastModifiedTime, "dd/MM/yyyy");
+		
+		long time = createTime(date, "00:00");
+		
+		System.out.println("getDayStartTime -> time="+time+" date="+date);
+		
+		return time;
+	}
 }

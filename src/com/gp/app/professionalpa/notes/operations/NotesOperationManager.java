@@ -14,6 +14,7 @@ import com.gp.app.professionalpa.colorpicker.ColourProperties;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.layout.manager.ImageLocationPathManager;
+import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
@@ -29,26 +30,19 @@ public class NotesOperationManager
 	
     public void deleteNote(List<String> imagesName, byte noteType)
     {
-    	try 
-        {
-	        NotesManager.getInstance().deleteNote(selectedNoteId);
+    	NotesManager.getInstance().deleteNote(selectedNoteId);
 
-        	ProfessionalPAParameters.getProfessionalPANotesWriter().deleteXmlElement(selectedNoteId);
+        NotesDBManager.getInstance().deleteNote(selectedNoteId);
 	        
-			ProfessionalPAParameters.getNotesActivity().deleteNote(selectedNoteId);
+		ProfessionalPAParameters.getNotesActivity().deleteNote(selectedNoteId);
 
-	        if(noteType == ProfessionalPAConstants.IMAGE_NOTE || noteType == ProfessionalPAConstants.IMAGE_NOTE)
-	        {
-	        	for(int i = 0; i < imagesName.size(); i++)
-	        	{
-		        	ImageLocationPathManager.getInstance().deleteImage(imagesName.get(i));
-	        	}
-	        }
-		} 
-        catch (ProfessionalPABaseException e) 
-        {
-        	//TODO improve
-		}
+	    if(noteType == ProfessionalPAConstants.IMAGE_NOTE || noteType == ProfessionalPAConstants.IMAGE_NOTE)
+	    {
+	     	for(int i = 0; i < imagesName.size(); i++)
+	       	{
+		       	ImageLocationPathManager.getInstance().deleteImage(imagesName.get(i));
+	       	}
+	    }
     }
 
 	public void startCopyProcess(List<String> imageNames, byte noteType) 

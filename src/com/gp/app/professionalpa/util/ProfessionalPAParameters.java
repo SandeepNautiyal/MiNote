@@ -3,12 +3,8 @@ package com.gp.app.professionalpa.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
-import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesParser;
-import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
-import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
 
 public class ProfessionalPAParameters 
 {
@@ -22,11 +18,11 @@ public class ProfessionalPAParameters
 	
 	private static SharedPreferences professionalPASharedPrefs = null;
 	
-	private static ProfessionalPANotesWriter notesWriter = null;
-	
-	private static ProfessionalPANotesParser notesParser = null;
-	
-	private static ProfessionalPANotesReader notesReader = null;
+//	private static ProfessionalPANotesWriter notesWriter = null;
+//	
+//	private static ProfessionalPANotesParser notesParser = null;
+//	
+//	private static ProfessionalPANotesReader notesReader = null;
 
 	private static FragmentCreationManager fragmentCreationManager;
 	
@@ -79,25 +75,25 @@ public class ProfessionalPAParameters
 		return professionalPASharedPrefs;
 	}
 	
-	public static ProfessionalPANotesParser getProfessionalPANotesParser() throws ProfessionalPABaseException
-	{
-		if(notesParser == null)
-		{
-			notesParser = new ProfessionalPANotesParser();
-		}
-		
-		return notesParser;
-	}
-	
-	public static ProfessionalPANotesWriter getProfessionalPANotesWriter()
-	{
-		if(notesWriter == null)
-		{
-			notesWriter = new ProfessionalPANotesWriter();
-		}
-		
-		return notesWriter;
-	}
+//	public static ProfessionalPANotesParser getProfessionalPANotesParser() throws ProfessionalPABaseException
+//	{
+//		if(notesParser == null)
+//		{
+//			notesParser = new ProfessionalPANotesParser();
+//		}
+//		
+//		return notesParser;
+//	}
+//	
+//	public static ProfessionalPANotesWriter getProfessionalPANotesWriter()
+//	{
+//		if(notesWriter == null)
+//		{
+//			notesWriter = new ProfessionalPANotesWriter();
+//		}
+//		
+//		return notesWriter;
+//	}
 
 	public static FragmentCreationManager getFragmentCreationManager() 
 	{

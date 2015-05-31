@@ -1,8 +1,6 @@
 package com.gp.app.professionalpa.notification.service;
 
-import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
-import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 import android.app.Service;
 import android.content.Intent;

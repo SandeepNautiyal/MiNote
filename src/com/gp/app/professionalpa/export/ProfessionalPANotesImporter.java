@@ -10,8 +10,6 @@ import java.util.List;
 
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
-import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesReader;
-import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ProfessionalPANotesImporter 

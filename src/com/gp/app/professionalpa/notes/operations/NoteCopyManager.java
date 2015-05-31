@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
@@ -36,16 +37,9 @@ public class NoteCopyManager
 			
 			copiedNoteId = note.getNoteId();
 			
-			try
-			{
-				ProfessionalPAParameters.getProfessionalPANotesWriter().writeNotes(Arrays.asList(note));
+			NotesDBManager.getInstance().saveNotes(Arrays.asList(note));
 				
-				NotesManager.getInstance().addNote(copiedNoteId, note);
-			}
-			catch (ProfessionalPABaseException e) 
-			{
-				//TODO improve
-			}
+			NotesManager.getInstance().addNote(copiedNoteId, note);
 			
 			ProfessionalPAParameters.getNotesActivity().addNote(copiedNoteId);
 		}

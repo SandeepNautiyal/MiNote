@@ -3,6 +3,7 @@ package com.gp.app.professionalpa.notification.service;
 
 import android.os.AsyncTask;
 
+import com.gp.app.professionalpa.notes.backup.NotesBackupManager;
 import com.gp.app.professionalpa.notification.ProfessionalPANotificationManager;
 
 public class NotificationActionPerformer extends AsyncTask<Boolean, Void, Void>
@@ -24,6 +25,8 @@ public class NotificationActionPerformer extends AsyncTask<Boolean, Void, Void>
 		{
 			ProfessionalPANotificationManager.createNotifications();
 		}
+		
+		NotesBackupManager.startBackupProcess();
     	
         return null;
     }

@@ -16,9 +16,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,8 +40,8 @@ import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
-import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ListItemCreatorActivity extends Activity implements ColourPickerChangeListener
@@ -382,8 +379,6 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 		{
 			if(modifiedNoteId != -1)
 			{
-				ProfessionalPAParameters.getProfessionalPANotesWriter().deleteXmlElement(modifiedNoteId);
-				
 				NotesManager.getInstance().deleteNote(modifiedNoteId);
 				
 				ProfessionalPAParameters.getNotesActivity().deleteNote(modifiedNoteId);
@@ -417,9 +412,7 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	
 	private void persistListElement(List<ProfessionalPANote> notes) throws ProfessionalPABaseException
 	{
-		ProfessionalPANotesWriter fragmentWriter = ProfessionalPAParameters.getProfessionalPANotesWriter();
-		
-		fragmentWriter.writeNotes(notes);
+		NotesDBManager.getInstance().saveNotes(notes);
 	}
 	
 	private void createColourPicker()
