@@ -34,7 +34,7 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
     };
     
     private static final String[] PROJECTION_FOR_NOTE_ITEM =  
-		{
+	{
 		NoteListItem.TEXT_COLOR,
 		NoteListItem.IMAGE_NAME,
 		NoteListItem.DATA,
@@ -187,8 +187,9 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
     	while (cursor.isAfterLast() == false)
     	{
     		int readNoteId = (int)cursor.getInt(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_ID));
-        	byte noteType = (byte)cursor.getInt(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_TYPE));
-        	byte noteColor = (byte)cursor.getInt(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_COLOR));
+        	System.out.println("readNotes -> readNoteId="+readNoteId);
+    		byte noteType = (byte)cursor.getInt(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_TYPE));
+        	int noteColor = (int)cursor.getInt(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_COLOR));
         	long creationTime = cursor.getLong(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_CREATION_TIME));
         	long lastEditedTime = cursor.getLong(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_MODIFIED_TIME));
         	ProfessionalPANote note = new ProfessionalPANote(readNoteId, noteType, noteColor, creationTime, lastEditedTime);
@@ -198,8 +199,6 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
         	cursor.moveToNext();
     	}
     	
-		System.out.println("readNotes <- notes="+notes);
-
     	return notes;
 	}
 
@@ -223,8 +222,6 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
     	    null,                                     // don't filter by row groups
     	    sortOrder                                 // The sort order
     	    );
-    	
-    	System.out.println("readNoteItems -> cursor ="+cursor.getCount());
     	
     	cursor.moveToFirst();
     	
@@ -293,13 +290,21 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
 
 	public void setNoteColorAttribute(int noteId, int noteColor)
 	{
-        SQLiteDatabase db = getWritableDatabase();
-		
-		ContentValues values = new ContentValues();
-		values.put(ProfessionalPANote.NOTE_COLOR, noteColor);
-		
-    	String where = ProfessionalPANote.NOTE_ID+"=?";
+		 SQLiteDatabase db = getWritableDatabase();
+			
+			ContentValues values = new ContentValues();
+			values.put(ProfessionalPANote.NOTE_COLOR, noteColor);
+			
+	    	String where = ProfessionalPANote.NOTE_ID+"="+noteId;
 
-		int numberOfEffectedRows = db.update(ProfessionalPANote.NOTE_TABLE_NAME, values, where, new String[]{Integer.toString(noteId)});
+			int numberOfEffectedRows = db.update(ProfessionalPANote.NOTE_TABLE_NAME, values, where, null);
+		
+		System.out.println("read notes for color attribute="+readNotes()+" numberOfEffectedRows="+numberOfEffectedRows+" noteId="+noteId);
+	}
+
+	public void deleteAllNotes() 
+	{
+        SQLiteDatabase db = getWritableDatabase();
+
 	}
 }

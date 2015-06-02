@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.professionalpa.notes.backup.NotesBackupManager;
+import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class StartProfessionalPAApplicationActivity extends Activity {
@@ -25,6 +26,8 @@ public class StartProfessionalPAApplicationActivity extends Activity {
 		
 		ProfessionalPAParameters.setApplicationContext(getApplicationContext());
 		
+   	    NotesDBManager.getInstance().deleteAllNotes();
+
 		NotesBackupManager.setInitialBackupTime();
 
         DisplayMetrics metrics = new DisplayMetrics();

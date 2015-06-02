@@ -1,10 +1,12 @@
 package com.gp.app.professionalpa.notes.fragments;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,9 +51,9 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
 		//TODO improve 1) introduce convert view reusing 2) if 1st cannot be done remove viewholder.
 	    final NoteListItem noteListItem = listItems.get(position);
 	    
-		convertView = LayoutInflater.from(getContext()).inflate(R.layout.professional_pa_note_view, null, false);
+		convertView = LayoutInflater.from(getContext()).inflate(R.layout.composite_control_for_list_view, null, false);
 		
-		EditText text = (EditText) convertView.findViewById(R.id.compositeControlTextBox);
+		EditText editText = (EditText) convertView.findViewById(R.id.compositeControlTextBox);
 		
 		ImageButton bulletPointImage = (ImageButton) convertView.findViewById(R.id.compositeControlBulletButton);
 		
@@ -59,7 +61,7 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
 		
         final int noteId = note.getNoteId();
         
-        text.setOnClickListener(new View.OnClickListener()
+        editText.setOnClickListener(new View.OnClickListener()
 		{
             @Override
             public void onClick(View v)
@@ -107,20 +109,36 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
 
 			params.addRule(RelativeLayout.RIGHT_OF, bulletPointImage.getId());
 			
-		    text.setLayoutParams(params);
+		    editText.setLayoutParams(params);
 		    
-			text.setText(noteListItem.getTextViewData());
+			editText.setText(noteListItem.getTextViewData());
+			
+			System.out.println("noteListItem ="+editText.getText());
+			
+			editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
-			text.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+			List<String> imageNames = new ArrayList<String>();
+			
+			List<NoteListItem> noteItems = note.getNoteItems();
+			
+			for(int i = 0; i < noteItems.size(); i++)
+			{
+				NoteListItem item = noteItems.get(i);
+				
+				if(item.getImageName() != null && !item.getImageName().equals(""))
+				{
+					imageNames.add(item.getImageName());
+				}
+			}
+			
+			editText.setOnLongClickListener(new NoteItemLongClickListener(
+					new NotesActionMode(note.getNoteId(), note.getNoteType(), imageNames)));
 
-			text.setOnLongClickListener(new NoteItemLongClickListener(
-					new NotesActionMode(note.getNoteId(), note.getNoteType(),
-							note.getImageNames())));
-
-			text.setFocusable(false);
-			text.setClickable(true);
-			text.setTextColor(noteListItem.getTextColour());
-			text.setLayoutParams(params);
+			editText.setFocusable(false);
+			editText.setClickable(true);
+			System.out.println("getView -> noteListItem.getTextColour()="+noteListItem.getTextColour());
+			
+			editText.setTextColor(noteListItem.getTextColour());
 		}
 
 		if (noteListItem.getImageName() != null && !noteListItem.getImageName().equals("")) 
@@ -142,11 +160,11 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
 			bulletPointImage.setLayoutParams(importanceButtonParams);
 			bulletPointImage.setVisibility(View.INVISIBLE);
 			
-			LayoutParams textButtonParams = text.getLayoutParams();
+			LayoutParams textButtonParams = editText.getLayoutParams();
 			textButtonParams.height = 0;
 			textButtonParams.width = 0;
-			text.setLayoutParams(textButtonParams);
-			text.setVisibility(View.INVISIBLE);
+			editText.setLayoutParams(textButtonParams);
+			editText.setVisibility(View.INVISIBLE);
 		}
 
 	    return convertView;

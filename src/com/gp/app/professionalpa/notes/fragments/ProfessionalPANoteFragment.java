@@ -13,7 +13,6 @@ import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.notes.fragments.NoteFragmentAdapter;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class ProfessionalPANoteFragment extends ListFragment
 {
@@ -30,7 +29,6 @@ public class ProfessionalPANoteFragment extends ListFragment
 		super();
 		
 		this.noteColor = noteColor;
-		
 	}
 	
 	/**
@@ -38,8 +36,8 @@ public class ProfessionalPANoteFragment extends ListFragment
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	        Bundle savedInstanceState) {
-	    
+	        Bundle savedInstanceState) 
+	{
 		listView = (ListView)inflater.inflate(R.layout.listview_for_list_fragment, null);   
 		
 	    return listView;       

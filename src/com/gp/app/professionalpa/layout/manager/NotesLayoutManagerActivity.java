@@ -2,7 +2,6 @@ package com.gp.app.professionalpa.layout.manager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +48,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	private static final String NUMBER_OF_LINEAR_LAYOUTS = "NUMBER_OF_LINEAR_LAYOUTS";
 
 	private static final int LIST_ACTIVITY_RESULT_CREATED = 1;
+	
+	private static final int PARAGRAPH_ACTIVITY_RESULT_CREATED = 2;
 
 	private static final byte NUMBER_OF_LINEAR_LAYOUT_FOR_SMALL_SCREEN_PORTRAIT = 1;
 
@@ -300,6 +301,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			if (data != null) 
 			{
 				note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
+				
+				System.out.println("onActivityResult -> note="+note);
 			}
 		}
 
@@ -338,6 +341,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		if (note != null)
 		{
+			System.out.println("createFragmentForNote -> note ="+note);
+			
 			Fragment fragment = FragmentCreationManager.createFragment(note);
 
 			NotesManager.getInstance().addNote(note.getNoteId(), note);
@@ -345,7 +350,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			if (fragment != null) 
 			{
 				createActivityLayout(fragment);
-				
 			}
 		}
 	}
@@ -354,10 +358,14 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
         final FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
-		final int noteId = ((ProfessionalPANoteFragment)fragment).getFragmentNoteId();
+		int noteId = ((ProfessionalPANoteFragment)fragment).getFragmentNoteId();
 
+		System.out.println("createActivityLayout -> noteId="+noteId);
+		
 		int fragmentLength = ((ProfessionalPANoteFragment)fragment).getFragmentLength();
 		
+		System.out.println("createActivityLayout -> fragmentLength="+fragmentLength);
+
 		frameLayout.setClickable(true);
 		
 //		frameLayout.setOnTouchListener(touchListener);
@@ -373,6 +381,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		childFrames.put(noteId, frameLayout);
 		
+		System.out.println("createActivityLayout -> frameLayout="+frameLayout+" fragmentLength="+fragmentLength);
 		updateActivityView(frameLayout, fragmentLength);
 	}
 
@@ -423,6 +432,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		int minimumOccupiedIndex = getMinimumOccupiedLayoutIndex();
 		
+		System.out.println("updateActivityView -> minimumOccupiedIndex="+minimumOccupiedIndex);
+
 		int occupancy = linearLayoutOccupancy.get(minimumOccupiedIndex);
 		
 		occupancy = occupancy + fragmentLength;
@@ -437,6 +448,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			parentView.removeView(frameLayout);
 		}
+
+		System.out.println("updateActivityView -> frameLayout="+frameLayout);
 
 		linearLayout.addView(frameLayout, 0);
 	}
@@ -489,8 +502,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		List<ProfessionalPANote> parsedNotes = NotesDBManager.getInstance().readNotes();
 
-		System.out.println("createNotes -> parsedNotes="+parsedNotes);
-		
 		for (int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++)
 		{
 			ProfessionalPANote note = parsedNotes.get(i);
@@ -543,12 +554,27 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	public void openNoteInEditMode(int noteId) 
 	{
-		Intent intent = new Intent(getApplicationContext(),
-				ListItemCreatorActivity.class);
-
-		intent.putExtra(ProfessionalPAConstants.NOTE_ID, noteId);
+		ProfessionalPANote note = NotesManager.getInstance().getNote(noteId);
 		
-		startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
+		if(note.isListNote())
+		{
+			Intent intent = new Intent(getApplicationContext(),
+					ListItemCreatorActivity.class);
+
+			intent.putExtra(ProfessionalPAConstants.NOTE_ID, noteId);
+			
+			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
+		}
+		else
+		{
+			Intent intent = new Intent(getApplicationContext(),
+					ParagraphNoteCreatorActivity.class);
+
+			intent.putExtra(ProfessionalPAConstants.NOTE_ID, noteId);
+			
+			startActivityForResult(intent, PARAGRAPH_ACTIVITY_RESULT_CREATED);
+		}
+		
 //		startActivity(intent);
 	}
 

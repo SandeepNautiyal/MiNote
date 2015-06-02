@@ -88,7 +88,6 @@ public class ColourPickerAdapter extends ArrayAdapter<ColourProperties>
 				parentDialog.dismiss();
 			}
 		});
-//		imageItem.setText(properties.getColourName());
 	}
 
 	static class RecordHolder 

@@ -23,14 +23,15 @@ import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.calendar.events.Event;
 import com.gp.app.professionalpa.calendar.events.EventManager;
 import com.gp.app.professionalpa.calendar.interfaces.DBChangeListener;
+import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class EventCreationGUI
 {
 	 private static final String DEFAULT_END_TIME_TEXT = "To";
-	private static final String DEFAULT_START_TIME_TEXT = "From";
-	public static final byte CREATE_GUI_IN_CREATE_MODE = 0;
+	 private static final String DEFAULT_START_TIME_TEXT = "From";
+	 public static final byte CREATE_GUI_IN_CREATE_MODE = 0;
 	 public static final byte CREATE_GUI_IN_EDIT_MODE = 1;
 	 private EditText titleEditText = null;
 	 private EditText locationEditText = null;

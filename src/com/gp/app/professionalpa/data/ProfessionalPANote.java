@@ -33,8 +33,6 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 	
 	private long lastEditedTime = 0L;
 	
-	private List<String> imageNames = new ArrayList<String>();
-	
 	private int noteColor;
 
 	public ProfessionalPANote(int noteId, byte noteType, List<NoteListItem> values) 
@@ -47,23 +45,13 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		{
 			this.noteItems = values;
 		}
-		
-		for(int i = 0, size = values != null ? values.size() : 0; i < size; i++)
-		{
-			NoteListItem noteItem = values.get(i);
-			
-			if(noteItem.getImageName() != null && !noteItem.getImageName().equals(""))
-			{
-				imageNames.add(noteItem.getImageName());
-			}
-		}
 	}
 
 	public ProfessionalPANote()
 	{
 	}
 
-	public ProfessionalPANote(int noteId, byte noteType, byte noteColor,
+	public ProfessionalPANote(int noteId, byte noteType, int noteColor,
 			long creationTime, long lastEditedTime) 
 	{
         this.noteId = noteId;
@@ -254,11 +242,6 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 			return null;
 		}
 	}
-
-	public List<String> getImageNames()
-	{
-		return imageNames;
-	}
 	
 	public String toString()
 	{
@@ -266,6 +249,8 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		
 		sb.append("isParagraph note:"+noteType);
 		
+		sb.append("note color:"+noteColor);
+
 		sb.append("Note item :"+noteItems);
 		
 		return sb.toString();

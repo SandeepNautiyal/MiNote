@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-    <com.gp.app.professionalpa.compositecontrols.ListViewItemLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/noteItemView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/note_item">
-    </com.gp.app.professionalpa.compositecontrols.ListViewItemLayout>
