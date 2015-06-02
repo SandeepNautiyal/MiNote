@@ -38,6 +38,7 @@ public class ProfessionalPANoteFragment extends ListFragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	        Bundle savedInstanceState) 
 	{
+	    
 		listView = (ListView)inflater.inflate(R.layout.listview_for_list_fragment, null);   
 		
 	    return listView;       
@@ -122,9 +123,14 @@ public class ProfessionalPANoteFragment extends ListFragment
 
 	        // Set list height.
 	        ViewGroup.LayoutParams params = listView.getLayoutParams();
-	        params.height = totalItemsHeight + totalDividersHeight;
-	        listView.setLayoutParams(params);
-	        listView.requestLayout();
+	        
+	        //TODO to be checked for NPE, it which case NPE can occur.
+	        if(params != null)
+	        {
+	        	params.height = totalItemsHeight + totalDividersHeight;
+		        listView.setLayoutParams(params);
+		        listView.requestLayout();
+	        }
 	    }
 	}
 	

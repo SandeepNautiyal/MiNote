@@ -1,12 +1,17 @@
 package com.gp.app.professionalpa.util;
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class ProfessionalPAUtil 
 {
@@ -113,5 +118,38 @@ public class ProfessionalPAUtil
 		System.out.println("getDayStartTime -> time="+time+" date="+date);
 		
 		return time;
+	}
+	
+	public static void setCursorColor(EditText editText, int color) 
+	{
+	    try {
+	    	
+	    	//TODO to be checked and improved.
+//	    	TODO Below commented 3 lines will also work but the colour of cursor will not be changed.
+//	    	Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
+//	        f.setAccessible(true);
+//	        f.set(yourEditText, R.drawable.cursor);
+	        
+	        final Field fCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
+	        fCursorDrawableRes.setAccessible(true);
+	        final int mCursorDrawableRes = fCursorDrawableRes.getInt(editText);
+	        final Field fEditor = TextView.class.getDeclaredField("mEditor");
+	        fEditor.setAccessible(true);
+	        final Object editor = fEditor.get(editText);
+	        final Class<?> clazz = editor.getClass();
+	        final Field fCursorDrawable = clazz.getDeclaredField("mCursorDrawable");
+	        fCursorDrawable.setAccessible(true);
+	        final Drawable[] drawables = new Drawable[2];
+	        drawables[0] = editText.getContext().getResources().getDrawable(mCursorDrawableRes);
+	        drawables[1] = editText.getContext().getResources().getDrawable(mCursorDrawableRes);
+	        drawables[0].setColorFilter(color, PorterDuff.Mode.SRC_IN);
+	        drawables[1].setColorFilter(color, PorterDuff.Mode.SRC_IN);
+	        fCursorDrawable.set(editor, drawables);
+	    } 
+	    catch (final Throwable ignored) 
+	    {
+	    	//TODO improve
+	    	ignored.printStackTrace();
+	    }
 	}
 }

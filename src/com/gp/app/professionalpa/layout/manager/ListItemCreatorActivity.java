@@ -32,6 +32,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.colorpicker.ColorPickerCreator;
 import com.gp.app.professionalpa.colorpicker.ColourPickerAdapter;
 import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
 import com.gp.app.professionalpa.colorpicker.ColourProperties;
@@ -43,6 +44,7 @@ import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
+import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class ListItemCreatorActivity extends Activity implements ColourPickerChangeListener
 {
@@ -244,7 +246,7 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 		}
 		else if(id == R.id.pickColor)
 		{
-			createColourPicker();
+			new ColorPickerCreator(this, this).createColourPicker();
 		}
 		
 		return super.onOptionsItemSelected(item);
@@ -382,6 +384,8 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 				NotesManager.getInstance().deleteNote(modifiedNoteId);
 				
 				ProfessionalPAParameters.getNotesActivity().deleteNote(modifiedNoteId);
+				
+				NotesDBManager.getInstance().deleteNote(modifiedNoteId);
 			}
 			
 			persistListElement(Arrays.asList(note));
@@ -415,80 +419,6 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 		NotesDBManager.getInstance().saveNotes(notes);
 	}
 	
-	private void createColourPicker()
-	{
-		ArrayList<ColourProperties> gridArray = new ArrayList<ColourProperties>();
-		
-		gridArray.add(ColourProperties.RED);
-		
-		gridArray.add(ColourProperties.GREEN);
-	    
-		gridArray.add(ColourProperties.BLUE);
-	    
-		gridArray.add(ColourProperties.YELLOW);
-	    
-		gridArray.add(ColourProperties.GRAY);
-	    
-		gridArray.add(ColourProperties.WHITE);
-	    
-		gridArray.add(ColourProperties.CYAN);
-	    
-		gridArray.add(ColourProperties.MAGENTA);
-	    
-		gridArray.add(ColourProperties.DARK_GRAY);
-	    
-		gridArray.add(ColourProperties.PINK);
-		
-		GridView gridView = new GridView(this); 
-		
-		gridView.setBackgroundColor(Color.parseColor("#7F7CD9"));
-		
-		gridView.setNumColumns(5);
-		
-		Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        
-		gridView.setAdapter(new ColourPickerAdapter(this, gridArray, dialog));
-		
-        dialog.setContentView(gridView);
-        dialog.setCancelable(true);
-        dialog.show();
-
-	}
-
-	private void setCursorDrawableColor(EditText editText, int color) 
-	{
-	    try {
-	    	
-	    	//TODO to be checked and improved.
-//	    	TODO Below commented 3 lines will also work but the colour of cursor will not be changed.
-//	    	Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
-//	        f.setAccessible(true);
-//	        f.set(yourEditText, R.drawable.cursor);
-	        
-	        final Field fCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
-	        fCursorDrawableRes.setAccessible(true);
-	        final int mCursorDrawableRes = fCursorDrawableRes.getInt(editText);
-	        final Field fEditor = TextView.class.getDeclaredField("mEditor");
-	        fEditor.setAccessible(true);
-	        final Object editor = fEditor.get(editText);
-	        final Class<?> clazz = editor.getClass();
-	        final Field fCursorDrawable = clazz.getDeclaredField("mCursorDrawable");
-	        fCursorDrawable.setAccessible(true);
-	        final Drawable[] drawables = new Drawable[2];
-	        drawables[0] = editText.getContext().getResources().getDrawable(mCursorDrawableRes);
-	        drawables[1] = editText.getContext().getResources().getDrawable(mCursorDrawableRes);
-	        drawables[0].setColorFilter(color, PorterDuff.Mode.SRC_IN);
-	        drawables[1].setColorFilter(color, PorterDuff.Mode.SRC_IN);
-	        fCursorDrawable.set(editor, drawables);
-	    } 
-	    catch (final Throwable ignored) 
-	    {
-	    	//TODO improve
-	    	ignored.printStackTrace();
-	    }
-	}
-
 	@Override
 	public void changeColour(int colourCode) 
 	{
@@ -496,37 +426,9 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 		
 		if(selectedView != null)
 		{
-//			TODO not needed right now as selection of subtext not allowed for edittext 
-
-//			int startIndex = selectedView.getSelectionStart();
-//			
-//			int endIndex = selectedView.getSelectionEnd();
-//			
-//			String selectedViewText = selectedView.getText().toString();
-//			
-//			String selectedText = selectedViewText.substring(startIndex, endIndex);
-//			
-//			if(selectedText == null || selectedText.equals(""))
-//			{
-				setCursorDrawableColor(selectedView, colourCode);
+			ProfessionalPAUtil.setCursorColor(selectedView, colourCode);
 				
-				selectedView.setTextColor(colourCode);
-
-//			}
-			
-//			TODO not needed right now as selection of subtext not allowed for edittext 
-//			else
-//			{
-//				SpannableStringBuilder sb = new SpannableStringBuilder(selectedViewText);
-//
-//				// Span to set text color to some RGB value
-//				ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(255, 0, 0)); 
-//
-//				// Set the text color for first 4 characters
-//				sb.setSpan(fcs, startIndex, endIndex, Spannable.SPAN_INCLUSIVE_INCLUSIVE); 
-//
-//				selectedView.setText(sb);
-//			}
+			selectedView.setTextColor(colourCode);
 		}
 	}
 }
