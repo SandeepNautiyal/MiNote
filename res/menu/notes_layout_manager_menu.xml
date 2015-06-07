@@ -5,27 +5,28 @@
     <item android:id="@+id/action_click_photo"
         android:icon="@drawable/professional_pa_camera"
         android:title="@string/action_click_photo"
-        android:showAsAction="always" />
+        android:showAsAction="collapseActionView|ifRoom" />
     
     <item android:id="@+id/calendar"
         android:icon="@drawable/calendar_image"
         android:title="@string/calendar"
-        android:showAsAction="always" />
+        android:showAsAction="collapseActionView|ifRoom" />
      
     <item android:id="@+id/action_create_list_view"
         android:icon="@drawable/professional_pa_list_view1"
         android:title="@string/action_create_list_view"
-        android:showAsAction="always" />
+        android:showAsAction="collapseActionView|ifRoom" />
     
     <item android:id="@+id/action_create_paragraph_view"
         android:icon="@drawable/professional_pa_paragraph_view1"
         android:title="@string/action_create_list_view"
-        android:showAsAction="always" />
+        android:showAsAction="collapseActionView|ifRoom" />
     
-    <item android:id="@+id/action_search"
+    <item android:id="@+id/actionSearch"
         android:icon="@drawable/professional_pa_action_search"
         android:title="@string/action_search"
-        android:showAsAction="always" />
+        android:showAsAction="collapseActionView|ifRoom"
+        android:actionViewClass="android.widget.SearchView"/>
     
     <item
         android:id="@+id/action_settings"

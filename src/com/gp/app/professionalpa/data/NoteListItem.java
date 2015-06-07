@@ -10,6 +10,7 @@ public class NoteListItem implements Parcelable
     public static final String	IMAGE_NAME = "imageName";
     public static final String	TEXT_COLOR ="textColor";
     public static final String NOTE_ITEM_TABLE_NAME = "NoteItem";
+	public static final String NOTE_ITEM_VIRTUAL_TABLE = "VirtualNoteItems";
 
 	private String itemText = null;
 	

@@ -1,46 +1,27 @@
 package com.gp.app.professionalpa.notes.database;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import android.content.ContentValues;
-import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
 
-import com.gp.app.professionalpa.calendar.events.Event;
-import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
-import com.gp.app.professionalpa.calendar.interfaces.DBChangeListener;
 import com.gp.app.professionalpa.data.NoteListItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
-import com.gp.app.professionalpa.views.listeners.NoteItemLongClickListener;
 
-public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADBConstants
+public class NotesDBManager extends SQLiteOpenHelper
 {
-	private static final UriMatcher uriMatcher;
-	
     private static NotesDBManager instance;
 	
-    private static final String[] PROJECTION_FOR_NOTE = 
-		{
-        ProfessionalPANote.NOTE_ID,
-        ProfessionalPANote.NOTE_TYPE,
-        ProfessionalPANote.NOTE_COLOR,
-        ProfessionalPANote.NOTE_CREATION_TIME,
-        ProfessionalPANote.NOTE_MODIFIED_TIME,
-    };
-    
-    private static final String[] PROJECTION_FOR_NOTE_ITEM =  
-	{
-		NoteListItem.TEXT_COLOR,
-		NoteListItem.IMAGE_NAME,
-		NoteListItem.DATA,
-    };
-
-    
 	private NotesDBManager() 
     {
         super(ProfessionalPAParameters.getApplicationContext(), ProfessionalPADBConstants.DATABASE_NAME, null, ProfessionalPADBConstants.DATABASE_VERSION);
@@ -68,6 +49,8 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
     {
         db.execSQL("DROP TABLE IF EXISTS "+ProfessionalPANote.NOTE_TABLE_NAME);
         
+        db.execSQL("DROP TABLE IF EXISTS "+NoteListItem.NOTE_ITEM_TABLE_NAME);
+
         onCreate(db);
     }
     
@@ -82,18 +65,6 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
 				" FOREIGN KEY ("+NoteListItem.NOTE_ID+") REFERENCES "+ProfessionalPANote.NOTE_TABLE_NAME+" ("+ProfessionalPANote.NOTE_ID+"));");
 	}
 
-	static 
-	{
-		uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-		uriMatcher.addURI(ProfessionalPADBConstants.AUTHORITY, ProfessionalPANote.NOTE_TABLE_NAME, 1);
-		uriMatcher.addURI(ProfessionalPADBConstants.AUTHORITY, ProfessionalPANote.NOTE_TABLE_NAME + "/#", 2);
-		uriMatcher.addURI(ProfessionalPADBConstants.AUTHORITY, ProfessionalPANote.NOTE_TABLE_NAME + "/#/#", 3);
-	
-		uriMatcher.addURI(ProfessionalPADBConstants.AUTHORITY, NoteListItem.NOTE_ITEM_TABLE_NAME, 1);
-		uriMatcher.addURI(ProfessionalPADBConstants.AUTHORITY, NoteListItem.NOTE_ITEM_TABLE_NAME + "/#", 2);
-		uriMatcher.addURI(ProfessionalPADBConstants.AUTHORITY, NoteListItem.NOTE_ITEM_TABLE_NAME + "/#/#", 3);
-	}
-	
 	public void saveNotes(List<ProfessionalPANote> notes) 
 	{
 	    for(int i = 0; i < notes.size(); i++)
@@ -133,6 +104,14 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
 			db.insert(
 					 NoteListItem.NOTE_ITEM_TABLE_NAME,null,
 					 noteItemValues);
+			
+			ContentValues virtualValues = new ContentValues();
+			noteItemValues.put(NoteListItem.NOTE_ID, note.getNoteId());
+			noteItemValues.put(NoteListItem.DATA, item.getTextViewData());
+			
+			db.insert(
+					 NoteListItem.NOTE_ITEM_VIRTUAL_TABLE,null,
+					 virtualValues);
 		}
 	}
 	
@@ -171,6 +150,15 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
 
         	String [] whereArguments = new String []{noteId};
         	
+        	final String[] PROJECTION_FOR_NOTE = 
+        		{
+                ProfessionalPANote.NOTE_ID,
+                ProfessionalPANote.NOTE_TYPE,
+                ProfessionalPANote.NOTE_COLOR,
+                ProfessionalPANote.NOTE_CREATION_TIME,
+                ProfessionalPANote.NOTE_MODIFIED_TIME,
+            };
+        	
         	cursor = db.query(
         		ProfessionalPANote.NOTE_TABLE_NAME,  // The table to query
         		PROJECTION_FOR_NOTE,                               // The columns to return
@@ -187,7 +175,6 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
     	while (cursor.isAfterLast() == false)
     	{
     		int readNoteId = (int)cursor.getInt(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_ID));
-        	System.out.println("readNotes -> readNoteId="+readNoteId);
     		byte noteType = (byte)cursor.getInt(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_TYPE));
         	int noteColor = (int)cursor.getInt(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_COLOR));
         	long creationTime = cursor.getLong(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_CREATION_TIME));
@@ -213,6 +200,13 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
 
     	String where = NoteListItem.NOTE_ID+"=?";
 
+    	final String[] PROJECTION_FOR_NOTE_ITEM =  {
+    			
+    			NoteListItem.TEXT_COLOR,
+    			NoteListItem.IMAGE_NAME,
+    			NoteListItem.DATA,
+    	};
+    	
     	Cursor cursor = db.query(
     		NoteListItem.NOTE_ITEM_TABLE_NAME,  // The table to query
     	    PROJECTION_FOR_NOTE_ITEM,                               // The columns to return
@@ -236,6 +230,30 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
         	item.setTextColour(noteColor);
             noteItems.add(item);
         	cursor.moveToNext();
+    	}
+    	
+    	return noteItems;
+	}
+	
+	private Map<String, Integer> readNoteItems() 
+	{
+        Map<String, Integer> noteItems = new HashMap<String, Integer>();
+		
+		SQLiteDatabase db = getReadableDatabase();
+
+    	Cursor cursor = db.rawQuery("select * from "+NoteListItem.NOTE_ITEM_TABLE_NAME, null);
+    	
+    	cursor.moveToFirst();
+    	
+    	while (cursor.isAfterLast() == false)
+    	{
+    		int noteId =  cursor.getInt(cursor.getColumnIndexOrThrow(NoteListItem.NOTE_ID));
+        	
+    		String itemData = cursor.getString(cursor.getColumnIndexOrThrow(NoteListItem.DATA));
+    		
+    		noteItems.put(itemData, noteId);
+    		
+    		cursor.moveToNext();
     	}
     	
     	return noteItems;
@@ -298,13 +316,68 @@ public class NotesDBManager extends SQLiteOpenHelper implements ProfessionalPADB
 	    	String where = ProfessionalPANote.NOTE_ID+"="+noteId;
 
 			int numberOfEffectedRows = db.update(ProfessionalPANote.NOTE_TABLE_NAME, values, where, null);
-		
-		System.out.println("read notes for color attribute="+readNotes()+" numberOfEffectedRows="+numberOfEffectedRows+" noteId="+noteId);
 	}
 
 	public void deleteAllNotes() 
 	{
         SQLiteDatabase db = getWritableDatabase();
+        
+//        db.execSQL("DELETE '*' from "+NoteListItem.NOTE_ITEM_TABLE_NAME);
+//
+//        db.execSQL("DELETE '*' from "+ProfessionalPANote.NOTE_TABLE_NAME);
+	}
+	
+	public List<Integer> getSearchNoteIds(String searchString)
+	{
+        List<Integer> noteIds = new ArrayList<Integer>();
+		
+		SQLiteDatabase db = getReadableDatabase();
 
+    	Cursor cursor = db.rawQuery("SELECT "+NoteListItem.NOTE_ID+" FROM "
+                + NoteListItem.NOTE_ITEM_TABLE_NAME + " where " + NoteListItem.DATA + " like '%" + searchString
+                + "%'", null);
+    	
+    	cursor.moveToFirst();
+    	
+    	while (cursor.isAfterLast() == false)
+    	{
+        	int noteId = cursor.getInt(cursor.getColumnIndexOrThrow(NoteListItem.NOTE_ID));
+        	
+        	noteIds.add(noteId);
+        	
+        	cursor.moveToNext();
+    	}
+    	
+    	return noteIds;
+	}
+	
+	public class NotesSearchManager
+	{
+		Map<String, Integer> notesData = null;
+		
+		public NotesSearchManager()
+		{
+			notesData = readNoteItems();
+		}
+		
+		public Set<Integer> getMatchingNoteIds(String query)
+		{
+			Set<Integer> noteIds = new HashSet<Integer>();
+
+			System.out.println("getMatchingNoteIds -> notesData="+notesData);
+			
+			for (Entry<String, Integer> entry : notesData.entrySet())
+			{
+				//TODO support localization
+				if (entry.getKey().toUpperCase(Locale.US).contains(query.toUpperCase(Locale.US))) 
+				{
+					noteIds.add(entry.getValue());
+				}
+			}
+
+			System.out.println("getMatchingNoteIds <- noteIds=" + noteIds);
+
+			return noteIds;
+		}
 	}
 }

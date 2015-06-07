@@ -24,6 +24,11 @@ public class ProfessionalPANoteFragment extends ListFragment
 	
 	private int noteColor;
 	
+	public ProfessionalPANoteFragment()
+	{
+		super();
+	}
+	
 	public ProfessionalPANoteFragment(int noteColor)
 	{
 		super();

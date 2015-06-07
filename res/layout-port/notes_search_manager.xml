@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notesLayoutManagerScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fffaaa"
+    tools:context="com.gp.app.professionalpa.layout.manager.NotesSearchManager">
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/notesLayoutManagerParentLinearLayout"
+    android:orientation="horizontal"
+    android:background="#ffaadd"
+    android:baselineAligned="false">
+    
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:background="#ffffff">
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:background="#ffffff">
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>

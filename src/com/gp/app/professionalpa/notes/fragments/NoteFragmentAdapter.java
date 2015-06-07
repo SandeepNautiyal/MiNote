@@ -6,7 +6,6 @@ import java.util.List;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,8 +111,6 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
 		    editText.setLayoutParams(params);
 		    
 			editText.setText(noteListItem.getTextViewData());
-			
-			System.out.println("noteListItem ="+editText.getText());
 			
 			editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 

@@ -5,11 +5,14 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -18,16 +21,20 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.SparseIntArray;
+import android.view.FrameStats;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
 import com.gp.app.professionalpa.calendar.ui.ProfessionalPACalendarView;
 import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
 import com.gp.app.professionalpa.data.NoteListItem;
@@ -43,7 +50,7 @@ import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 //TODO create notes for calendar events also
-public class NotesLayoutManagerActivity extends Activity implements ColourPickerChangeListener
+public class NotesLayoutManagerActivity extends Activity implements ColourPickerChangeListener, OnQueryTextListener 
 {
 	private static final String NUMBER_OF_LINEAR_LAYOUTS = "NUMBER_OF_LINEAR_LAYOUTS";
 
@@ -75,9 +82,13 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private ImageLocationPathManager imageCaptureManager = null;
 	
+	private NotesDBManager.NotesSearchManager notesSearchManager = null;
+	
 	public NotesLayoutManagerActivity() 
 	{
 		super();
+		
+		imageCaptureManager = ImageLocationPathManager.getInstance();
 	}
 
 	@Override
@@ -85,13 +96,13 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		super.onCreate(savedInstanceState);
 
-		imageCaptureManager = ImageLocationPathManager.getInstance();
-
 		ScrollView scrollView = (ScrollView) getLayoutInflater().inflate(
 				R.layout.activity_notes_layout_manager, null);
 
 		setContentView(scrollView);
 
+		System.out.println("onCreate() called");
+		
 		int numberOfLinearLayouts = getNumberOfLinearLayouts();
 		
 		reInitializeLinearLayoutOccupancy(numberOfLinearLayouts);
@@ -119,6 +130,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 				.parseColor("#7F7CD9")));
 
 		ProfessionalPAParameters.setNotesActivity(this);
+		
+		handleIntent(getIntent());
 	}
 
 	private void reInitializeLinearLayoutOccupancy(int numberOfLinearLayouts) 
@@ -193,6 +206,18 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		getMenuInflater().inflate(R.menu.notes_layout_manager_menu, menu);
 
+		// Associate searchable configuration with the SearchView
+	    SearchManager searchManager =
+	           (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+	    
+	    SearchView searchView =
+	            (SearchView) menu.findItem(R.id.actionSearch).getActionView();
+
+	    searchView.setSearchableInfo(
+	            searchManager.getSearchableInfo(getComponentName()));
+	    
+	    searchView.setOnQueryTextListener(this);
+	    
 		return true;
 	}
 
@@ -234,21 +259,25 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			List<ProfessionalPANote> notes;
 
-//			try
-//			{
-//				//TODO improve import functionality hampered
-////				notes = NotesDBManager.getInstance().readNotes(true);
-////
-////				ProfessionalPAParameters.getProfessionalPANotesWriter()
-////						.writeNotes(notes);
-//			} 
-//			catch (ProfessionalPABaseException e) 
-//			{
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-
+////			try
+////			{
+////				//TODO improve import functionality hampered
+//////				notes = NotesDBManager.getInstance().readNotes(true);
+//////
+//////				ProfessionalPAParameters.getProfessionalPANotesWriter()
+//////						.writeNotes(notes);
+////			} 
+////			catch (ProfessionalPABaseException e) 
+////			{
+////				// TODO Auto-generated catch block
+////				e.printStackTrace();
+////			}
+//
 		} 
+		else if(id == R.id.actionSearch)
+		{
+			notesSearchManager =  NotesDBManager.getInstance().new  NotesSearchManager();
+		}
 		else if (id == R.id.action_click_photo) 
 		{
 			Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -301,8 +330,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			if (data != null) 
 			{
 				note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
-				
-				System.out.println("onActivityResult -> note="+note);
 			}
 		}
 
@@ -633,5 +660,80 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 				+"minimumOccupancy="+minimumOccupancy);
 		
 		return minimumOccupiedLayoutIndex;
+	}
+	
+	public void filterNotes(Set<Integer> noteIds) 
+	{
+		Set<Integer> childFrameIds = childFrames.keySet();
+		
+		if(childFrameIds != null)
+		{
+			for(int id : childFrameIds)
+			{
+				boolean isGone = false;
+				
+				if(!noteIds.contains(id))
+				{
+					isGone = true;
+				}
+				
+				FrameLayout frameLayout = childFrames.get(id);
+				
+				if(frameLayout != null)
+				{
+					if(isGone)
+					{
+						frameLayout.setVisibility(View.GONE);
+					}
+					else
+					{
+						frameLayout.setVisibility(View.VISIBLE);
+					}
+				}
+				
+			}
+		}
+	}
+	
+	@Override
+    protected void onNewIntent(Intent intent) 
+	{
+    	System.out.println("onNewIntent ->");
+
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) 
+    {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) 
+        {
+        	System.out.println("handleIntent -> intent.getAction()="+intent.getAction());
+        	
+        	getActionBar().setDisplayShowHomeEnabled(false);
+        	
+            getActionBar().setDisplayShowTitleEnabled(false);
+            
+            String query = intent.getStringExtra(SearchManager.QUERY);
+        }
+    }
+    
+    @Override
+	public boolean onQueryTextChange(String query) 
+	{
+		System.out.println("onQueryTextChange -> query="+query);
+		
+		Set<Integer> noteIds = notesSearchManager.getMatchingNoteIds(query);
+		
+		System.out.println("onQueryTextChange -> noteIds="+noteIds);
+
+		filterNotes(noteIds);
+		
+		return false;
+	}
+
+	@Override
+	public boolean onQueryTextSubmit(String query) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
