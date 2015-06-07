@@ -74,7 +74,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_LANDSCAPE = 5;
 
-	private SparseIntArray linearLayoutOccupancy = new SparseIntArray(2);
+	private SparseIntArray linearLayoutOccupancy = new SparseIntArray();
 	
 	private Map<Integer, FrameLayout> childFrames = new LinkedHashMap<Integer, FrameLayout>();
 
@@ -101,28 +101,15 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		setContentView(scrollView);
 
-		System.out.println("onCreate() called");
-		
 		int numberOfLinearLayouts = getNumberOfLinearLayouts();
 		
 		reInitializeLinearLayoutOccupancy(numberOfLinearLayouts);
-
-		
-//		linearLayoutAndIndexSelector = new LinearLayoutAndIndexSelector(
-//				numberOfLinearLayouts);
 
 		fillLinearLayoutList();
 
 		NotesManager.getInstance().deleteAllNotes();
 
-		try 
-		{
-			createNotes();
-		} 
-		catch (ProfessionalPABaseException e) 
-		{
-			//TODO improve
-		}
+	    createNotes();
 
 		ActionBar actionBar = getActionBar();
 
@@ -145,54 +132,25 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	@Override
 	protected void onSaveInstanceState(Bundle outState) 
 	{
-
-		// outState.putStringArrayList(FRAGMENT_TAGS,
-		// (ArrayList<String>)fragmentTags);
-
 		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, (byte)linearLayoutOccupancy.size());
 
+		System.out.println("onSaveInstanceState -> linearLayoutOccupancy.size()="+linearLayoutOccupancy.size());
+		
 		super.onSaveInstanceState(outState);
-
 	}
 
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) 
 	{
-		// super.onRestoreInstanceState(savedInstanceState);
-		//
+		linearLayoutOccupancy.clear();
+		
 		int numberOfLinearLayouts = (byte) savedInstanceState
 				.getByte(NUMBER_OF_LINEAR_LAYOUTS);
 		
-		reInitializeLinearLayoutOccupancy(numberOfLinearLayouts);
-		
-		//
-		// fragmentTags.addAll(savedInstanceState.getStringArrayList(FRAGMENT_TAGS));
-		//
-		// if(fragmentTags.size() > 0)
-		// {
-		createActivityLayoutInCaseOfConfigurationChange();
-		// }
-	}
-
-	private void createActivityLayoutInCaseOfConfigurationChange()
-	{
 		updateNumberOfLinearLayoutsOnScreenChange(getResources()
-				.getConfiguration());
+				.getConfiguration(), numberOfLinearLayouts);
 
 		fillLinearLayoutList();
-
-		//TODO to be removed if everything works fine in case of screen orientation change.
-//		try 
-//		{
-//			System.out.println("createActivityLayoutInCaseOfConfigurationChange ->");
-//			
-//			createNotes();
-//		} 
-//		catch (ProfessionalPABaseException e) 
-//		{
-//			// TODO improve
-//			e.printStackTrace();
-//		}
 	}
 
 	@Override
@@ -297,16 +255,20 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void updateNumberOfLinearLayoutsOnScreenChange(Configuration newConfig) 
+	private void updateNumberOfLinearLayoutsOnScreenChange(Configuration newConfig, int numberOfLinearLayouts) 
 	{
+		int noOfLinearLayout = numberOfLinearLayouts;
+		
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) 
 		{
-			reInitializeLinearLayoutOccupancy(linearLayoutOccupancy.size() + 1);
+			noOfLinearLayout = numberOfLinearLayouts + 1;
 		}
 		else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
 		{
-			reInitializeLinearLayoutOccupancy(linearLayoutOccupancy.size() - 1);
+			noOfLinearLayout = numberOfLinearLayouts - 1;
 		}
+		
+		reInitializeLinearLayoutOccupancy(noOfLinearLayout);
 	}
 
 	@Override
@@ -368,8 +330,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		if (note != null)
 		{
-			System.out.println("createFragmentForNote -> note ="+note);
-			
 			Fragment fragment = FragmentCreationManager.createFragment(note);
 
 			NotesManager.getInstance().addNote(note.getNoteId(), note);
@@ -387,15 +347,9 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		
 		int noteId = ((ProfessionalPANoteFragment)fragment).getFragmentNoteId();
 
-		System.out.println("createActivityLayout -> noteId="+noteId);
-		
 		int fragmentLength = ((ProfessionalPANoteFragment)fragment).getFragmentLength();
-		
-		System.out.println("createActivityLayout -> fragmentLength="+fragmentLength);
 
 		frameLayout.setClickable(true);
-		
-//		frameLayout.setOnTouchListener(touchListener);
 		
 		int id = ProfessionalPAParameters.getId();
 			
@@ -408,7 +362,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		childFrames.put(noteId, frameLayout);
 		
-		System.out.println("createActivityLayout -> frameLayout="+frameLayout+" fragmentLength="+fragmentLength);
 		updateActivityView(frameLayout, fragmentLength);
 	}
 
@@ -459,8 +412,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		int minimumOccupiedIndex = getMinimumOccupiedLayoutIndex();
 		
-		System.out.println("updateActivityView -> minimumOccupiedIndex="+minimumOccupiedIndex);
-
 		int occupancy = linearLayoutOccupancy.get(minimumOccupiedIndex);
 		
 		occupancy = occupancy + fragmentLength;
@@ -476,8 +427,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			parentView.removeView(frameLayout);
 		}
 
-		System.out.println("updateActivityView -> frameLayout="+frameLayout);
-
 		linearLayout.addView(frameLayout, 0);
 	}
 
@@ -487,28 +436,30 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		LinearLayoutOnClickListener clickListener = new LinearLayoutOnClickListener();
 
+		linearLayouts.clear();
+		
 		switch (linearLayoutOccupancy.size()) 
 		{
-		case 5:
-			layout = (LinearLayout) findViewById(R.id.linearLayout5);
-			layout.setOnClickListener(clickListener);
-			linearLayouts.add(layout);
-		case 4:
-			layout = (LinearLayout) findViewById(R.id.linearLayout4);
-			layout.setOnClickListener(clickListener);
-			linearLayouts.add(layout);
-		case 3:
-			layout = (LinearLayout) findViewById(R.id.linearLayout3);
-			layout.setOnClickListener(clickListener);
-			linearLayouts.add(layout);
-		case 2:
-			layout = (LinearLayout) findViewById(R.id.linearLayout2);
-			layout.setOnClickListener(clickListener);
-			linearLayouts.add(layout);
-		case 1:
-			layout = (LinearLayout) findViewById(R.id.linearLayout1);
-			layout.setOnClickListener(clickListener);
-			linearLayouts.add(layout);
+		    case 5:
+			    layout = (LinearLayout) findViewById(R.id.linearLayout5);
+			    layout.setOnClickListener(clickListener);
+			    linearLayouts.add(layout);
+		    case 4:
+			    layout = (LinearLayout) findViewById(R.id.linearLayout4);
+			    layout.setOnClickListener(clickListener);
+			    linearLayouts.add(layout);
+		    case 3:
+			    layout = (LinearLayout) findViewById(R.id.linearLayout3);
+			    layout.setOnClickListener(clickListener);
+			    linearLayouts.add(layout);
+		    case 2:
+			    layout = (LinearLayout) findViewById(R.id.linearLayout2);
+			    layout.setOnClickListener(clickListener);
+			    linearLayouts.add(layout);
+		    case 1:
+			    layout = (LinearLayout) findViewById(R.id.linearLayout1);
+			    layout.setOnClickListener(clickListener);
+			    linearLayouts.add(layout);
 			break;
 		}
 
@@ -525,7 +476,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		super.onResume();
 	}
 
-	private void createNotes() throws ProfessionalPABaseException
+	private void createNotes()
 	{
 		List<ProfessionalPANote> parsedNotes = NotesDBManager.getInstance().readNotes();
 

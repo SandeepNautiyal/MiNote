@@ -133,8 +133,6 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
 
 			editText.setFocusable(false);
 			editText.setClickable(true);
-			System.out.println("getView -> noteListItem.getTextColour()="+noteListItem.getTextColour());
-			
 			editText.setTextColor(noteListItem.getTextColour());
 		}
 

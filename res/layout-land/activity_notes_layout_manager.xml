@@ -1,40 +1,44 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notesLayoutManagerScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fffaaa"
+    tools:context="com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity">
+
+<LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/notesLayoutManagerParentLinearLayout"
     android:orientation="horizontal"
-    android:background="#000000"
-    android:baselineAligned="false"
-    tools:context="com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity">
+    android:background="#ffaadd"
+    android:baselineAligned="false">
     
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="0dip"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:layout_marginRight="2dip"
-        android:background="#ffb5d6e1">
+        android:background="#ffffff">
     </LinearLayout>
     
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dip"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:layout_marginRight="2dip"
-        android:background="#f1b5a6e2">
+        android:background="#ffffff">
     </LinearLayout>
     
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="0dip"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:layout_marginRight="0dip"
-        android:background="#ffbaf6d1">
+        android:background="#ffffff">
     </LinearLayout>
 </LinearLayout>
+</ScrollView>
