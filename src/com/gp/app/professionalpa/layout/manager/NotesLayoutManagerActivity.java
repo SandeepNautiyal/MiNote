@@ -385,8 +385,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		NotesManager.getInstance().deleteAllNotes();
 	}
 
-	public byte getNumberOfLinearLayouts() {
-
+	public byte getNumberOfLinearLayouts()
+    {
 		byte numberOfLinearLayouts = -1;
 
 		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
@@ -478,7 +478,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	}
 
 	@Override
-	public void onBackPressed() {
+	public void onBackPressed()
+    {
 		super.onBackPressed();
 	}
 
