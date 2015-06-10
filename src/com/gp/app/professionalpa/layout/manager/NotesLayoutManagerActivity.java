@@ -21,20 +21,19 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.SparseIntArray;
-import android.view.FrameStats;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
 import com.gp.app.professionalpa.calendar.ui.ProfessionalPACalendarView;
 import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
 import com.gp.app.professionalpa.data.NoteListItem;
@@ -84,6 +83,20 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	
 	private NotesDBManager.NotesSearchManager notesSearchManager = null;
 	
+	private RelativeLayout scrollView = null;
+	
+	private FrameLayout noteCreatorFrameLayout = null;
+	
+	private FrameLayout listNoteFrameLayout = null;
+	
+	private FrameLayout paragraphNoteFrameLayout = null;
+	
+	private FrameLayout imageNoteFrameLayout = null;
+	
+	private FrameLayout calendarFrameLayout = null;
+	
+	private boolean areNoteButtonCreated = false;
+	
 	public NotesLayoutManagerActivity() 
 	{
 		super();
@@ -96,7 +109,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		super.onCreate(savedInstanceState);
 
-		ScrollView scrollView = (ScrollView) getLayoutInflater().inflate(
+		scrollView = (RelativeLayout) getLayoutInflater().inflate(
 				R.layout.activity_notes_layout_manager, null);
 
 		setContentView(scrollView);
@@ -134,8 +147,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, (byte)linearLayoutOccupancy.size());
 
-		System.out.println("onSaveInstanceState -> linearLayoutOccupancy.size()="+linearLayoutOccupancy.size());
-		
 		super.onSaveInstanceState(outState);
 	}
 
@@ -188,20 +199,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			return true;
 		} 
-		else if (id == R.id.action_create_list_view) 
-		{
-			Intent intent = new Intent(getApplicationContext(),
-					ListItemCreatorActivity.class);
-
-			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
-		} 
-		else if (id == R.id.action_create_paragraph_view)
-		{
-			Intent intent = new Intent(getApplicationContext(),
-					ParagraphNoteCreatorActivity.class);
-
-			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
-		}
 		else if (id == R.id.export_notes) 
 		{
 			try 
@@ -236,23 +233,38 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			notesSearchManager =  NotesDBManager.getInstance().new  NotesSearchManager();
 		}
-		else if (id == R.id.action_click_photo) 
-		{
-			Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-			startActivityForResult(cameraIntent,
-					ProfessionalPAConstants.TAKE_PHOTO_CODE);
-		}
-		else if(id == R.id.calendar)
-		{
-			Dialog dialog = new Dialog(this);
-	        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-	        dialog.setContentView(new ProfessionalPACalendarView(this));
-	        dialog.setCancelable(true);
-	        dialog.show();
-		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void createCalendarView()
+	{
+		Dialog dialog = new Dialog(this);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog.setContentView(new ProfessionalPACalendarView(this));
+		dialog.setCancelable(true);
+		dialog.show();
+	}
+
+	private void createImageNote() {
+		Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+		startActivityForResult(cameraIntent,
+				ProfessionalPAConstants.TAKE_PHOTO_CODE);
+	}
+
+	private void createParagraphNote() {
+		Intent intent = new Intent(getApplicationContext(),
+				ParagraphNoteCreatorActivity.class);
+
+		startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
+	}
+
+	private void createListNote() {
+		Intent intent = new Intent(getApplicationContext(),
+				ListItemCreatorActivity.class);
+
+		startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
 	}
 
 	private void updateNumberOfLinearLayoutsOnScreenChange(Configuration newConfig, int numberOfLinearLayouts) 
@@ -474,6 +486,218 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	protected void onResume() 
 	{
 		super.onResume();
+		
+		noteCreatorFrameLayout = (FrameLayout)findViewById(R.id.notesLayoutManagerFrameLayout);
+		
+		noteCreatorFrameLayout.setBackgroundResource(R.drawable.day_selected);
+		
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
+		
+		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, scrollView.getId());
+		
+		params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, scrollView.getId());
+		
+		params.setMargins(10, 0, 40, 80);
+		
+		noteCreatorFrameLayout.setLayoutParams(params);
+		
+		ImageView button = new ImageView(this);
+		
+		button.setImageDrawable(getResources().getDrawable(R.drawable.color_picker_icon));
+		
+		button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) 
+			{
+				createNoteTypeButtons();
+			}
+		});
+		
+		noteCreatorFrameLayout.addView(button);
+	}
+
+	private void createNoteTypeButtons()
+	{
+		createListNoteFrameLayout();
+		
+		createParagraphNoteFrameLayout();
+		
+		createImageNoteFragment();
+		
+		createCalendarFrameLayout();
+		
+		areNoteButtonCreated = !areNoteButtonCreated;
+	}
+	
+	private void createListNoteFrameLayout() 
+	{
+		if(listNoteFrameLayout == null)
+		{
+			listNoteFrameLayout = (FrameLayout)findViewById(R.id.listNoteFrameLayout);
+			
+			listNoteFrameLayout.setBackgroundResource(R.drawable.day_selected);
+			
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
+			
+			params.addRule(RelativeLayout.ABOVE, R.id.notesLayoutManagerFrameLayout);
+			
+			params.addRule(RelativeLayout.ALIGN_LEFT, R.id.notesLayoutManagerFrameLayout);
+			
+			params.setMargins(10, 0, 40, 30);
+			
+			listNoteFrameLayout.setLayoutParams(params);
+			
+			ImageView button = new ImageView(this);
+			
+			button.setImageDrawable(getResources().getDrawable(R.drawable.professional_pa_list_view1));
+			
+			button.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) 
+				{
+					createListNote();
+				}
+			});
+			
+			listNoteFrameLayout.addView(button);
+		}
+		else
+		{
+			setFrameLayoutVisibilityState(listNoteFrameLayout);
+		}
+	}
+
+	private void createParagraphNoteFrameLayout() 
+	{
+		if(paragraphNoteFrameLayout == null)
+		{
+			paragraphNoteFrameLayout = (FrameLayout)findViewById(R.id.paragraphNoteFrameLayout);
+			
+			paragraphNoteFrameLayout.setBackgroundResource(R.drawable.day_selected);
+			
+//	        paragraphNoteFrameLayout.setBackgroundColor(Color.TRANSPARENT);
+			
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
+			
+			params.addRule(RelativeLayout.ABOVE, R.id.listNoteFrameLayout);
+			
+			params.addRule(RelativeLayout.ALIGN_LEFT, R.id.listNoteFrameLayout);
+			
+			params.setMargins(10, 0, 40, 30);
+			
+			paragraphNoteFrameLayout.setLayoutParams(params);
+			
+			ImageView button = new ImageView(this);
+			
+			button.setImageDrawable(getResources().getDrawable(R.drawable.professional_pa_paragraph_view1));
+			
+			button.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) 
+				{
+					createParagraphNote();
+				}
+			});
+			
+			paragraphNoteFrameLayout.addView(button);
+		}
+		else
+		{
+			setFrameLayoutVisibilityState(paragraphNoteFrameLayout);
+		}
+	}
+	
+	private void createImageNoteFragment() 
+	{
+		if(imageNoteFrameLayout == null)
+		{
+			imageNoteFrameLayout = (FrameLayout)findViewById(R.id.imageNoteFrameLayout);
+			
+			imageNoteFrameLayout.setBackgroundResource(R.drawable.day_selected);
+			
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
+			
+			params.addRule(RelativeLayout.ABOVE, R.id.paragraphNoteFrameLayout);
+			
+			params.addRule(RelativeLayout.ALIGN_LEFT, R.id.paragraphNoteFrameLayout);
+			
+			params.setMargins(10, 0, 40, 30);
+			
+			imageNoteFrameLayout.setLayoutParams(params);
+			
+			ImageView button = new ImageView(this);
+			
+			button.setImageDrawable(getResources().getDrawable(R.drawable.professional_pa_camera));
+			
+			button.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) 
+				{
+					createImageNote();
+				}
+			});
+			
+			imageNoteFrameLayout.addView(button);
+		}
+		else
+		{
+			setFrameLayoutVisibilityState(imageNoteFrameLayout);
+		}
+	}
+	
+	private void createCalendarFrameLayout() 
+	{
+		if(calendarFrameLayout == null)
+		{
+			calendarFrameLayout = (FrameLayout)findViewById(R.id.calendarFrameLayout);
+			
+			calendarFrameLayout.setBackgroundResource(R.drawable.day_selected);
+			
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
+			
+			params.addRule(RelativeLayout.ABOVE, R.id.imageNoteFrameLayout);
+			
+			params.addRule(RelativeLayout.ALIGN_LEFT, R.id.imageNoteFrameLayout);
+			
+			params.setMargins(10, 0, 40, 30);
+			
+			calendarFrameLayout.setLayoutParams(params);
+			
+			ImageView button = new ImageView(this);
+			
+			button.setImageDrawable(getResources().getDrawable(R.drawable.calendar_image));
+			
+			button.setOnClickListener(new OnClickListener()
+			{
+				@Override
+				public void onClick(View v) 
+				{
+					createCalendarView();
+				}
+			});
+			
+			calendarFrameLayout.addView(button);
+		}
+		else
+		{
+			setFrameLayoutVisibilityState(calendarFrameLayout);
+		}
+	}
+	
+	private void setFrameLayoutVisibilityState(FrameLayout frameLayout) 
+	{
+		if(areNoteButtonCreated)
+		{
+			frameLayout.setVisibility(View.GONE);
+		}
+		else
+		{
+			frameLayout.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void createNotes()
