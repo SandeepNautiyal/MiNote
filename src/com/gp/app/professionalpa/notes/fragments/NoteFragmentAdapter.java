@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.NoteItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.layout.manager.ImageLocationPathManager;
@@ -27,11 +27,11 @@ import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 import com.gp.app.professionalpa.views.listeners.NoteItemLongClickListener;
 import com.gp.app.professionalpa.views.listeners.NotesActionMode;
 
-public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
+public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 {
 	private ProfessionalPANote note = null;
 	
-	private List<NoteListItem> listItems = null;
+	private List<NoteItem> listItems = null;
 	
 	public NoteFragmentAdapter(Context context, ProfessionalPANote note) {
 		
@@ -49,7 +49,7 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
 		//TODO improve 1) introduce convert view reusing 2) if 1st cannot be done remove viewholder.
-	    final NoteListItem noteListItem = listItems.get(position);
+	    final NoteItem noteListItem = listItems.get(position);
 	    
 		convertView = LayoutInflater.from(getContext()).inflate(R.layout.composite_control_for_list_view, null, false);
 		
@@ -103,7 +103,7 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
 			bulletPointImage.setVisibility(View.INVISIBLE);
 		}
 
-		if (noteListItem.getTextViewData() != null && !noteListItem.getTextViewData().equals(""))
+		if (noteListItem.getText() != null && !noteListItem.getText().equals(""))
 		{
 			final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
@@ -111,17 +111,17 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
 			
 		    editText.setLayoutParams(params);
 		    
-			editText.setText(noteListItem.getTextViewData());
+			editText.setText(noteListItem.getText());
 			
 			editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
 			List<String> imageNames = new ArrayList<String>();
 			
-			List<NoteListItem> noteItems = note.getNoteItems();
+			List<NoteItem> noteItems = note.getNoteItems();
 			
 			for(int i = 0; i < noteItems.size(); i++)
 			{
-				NoteListItem item = noteItems.get(i);
+				NoteItem item = noteItems.get(i);
 				
 				if(item.getImageName() != null && !item.getImageName().equals(""))
 				{

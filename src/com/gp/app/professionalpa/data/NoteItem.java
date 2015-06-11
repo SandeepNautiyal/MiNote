@@ -3,7 +3,7 @@ package com.gp.app.professionalpa.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class NoteListItem implements Parcelable 
+public class NoteItem implements Parcelable 
 {
 	public static final String NOTE_ID = "noteId";
 	public static final String DATA = "data";
@@ -18,23 +18,23 @@ public class NoteListItem implements Parcelable
 
 	private int textColour = 0;
 	
-	public NoteListItem(String textViewData)
+	public NoteItem(String textViewData)
 	{
 		this.itemText = textViewData;
 	}
 	
-	public NoteListItem(String textViewData, String imageName) 
+	public NoteItem(String textViewData, String imageName) 
 	{
 		this(textViewData);
 		
 		this.imageName = imageName;
 	}
 	
-	public NoteListItem() 
+	public NoteItem() 
 	{
 	}
 
-	public String getTextViewData() 
+	public String getText() 
 	{
 		return itemText == null ? "" : itemText;
 	}
@@ -97,10 +97,10 @@ public class NoteListItem implements Parcelable
 //		}
 	}
 
-	public static final Parcelable.Creator<NoteListItem> CREATOR = new Parcelable.Creator<NoteListItem>() 
+	public static final Parcelable.Creator<NoteItem> CREATOR = new Parcelable.Creator<NoteItem>() 
 	{
 		@Override
-		public NoteListItem createFromParcel(Parcel source) {
+		public NoteItem createFromParcel(Parcel source) {
 			
 			String [] itemProperties = new String[2];
 			
@@ -108,7 +108,7 @@ public class NoteListItem implements Parcelable
 			
 			int colour = source.readInt();
 			
-			NoteListItem noteListItem = new NoteListItem(itemProperties[0], itemProperties[1]);
+			NoteItem noteListItem = new NoteItem(itemProperties[0], itemProperties[1]);
 			
 			noteListItem.setTextColour(colour);
 			
@@ -116,9 +116,9 @@ public class NoteListItem implements Parcelable
 		}
 
 		@Override
-		public NoteListItem[] newArray(int size) 
+		public NoteItem[] newArray(int size) 
 		{
-			return new NoteListItem[size];
+			return new NoteItem[size];
 		}
 	};
 	

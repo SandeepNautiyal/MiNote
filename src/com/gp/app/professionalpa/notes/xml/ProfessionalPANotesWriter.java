@@ -24,7 +24,7 @@ import org.w3c.dom.NodeList;
 
 import android.os.Environment;
 
-import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.NoteItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionPARuntimeException;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
@@ -128,7 +128,7 @@ public class ProfessionalPANotesWriter
 		completeWritingProcess();
     }
 
-    private void createNoteItem(Element note, NoteListItem noteListItem) 
+    private void createNoteItem(Element note, NoteItem noteListItem) 
     {
         Element noteItem = xmlDocument.createElement("NoteItem");
         
@@ -137,11 +137,11 @@ public class ProfessionalPANotesWriter
         createNoteListItem(noteItem, noteListItem);
     }
     
-    private void createNoteListItem(Element noteItem, NoteListItem noteListItem) 
+    private void createNoteListItem(Element noteItem, NoteItem noteListItem) 
     {
         Element data = xmlDocument.createElement("data");
     	
-        data.appendChild(xmlDocument.createTextNode(noteListItem.getTextViewData()));
+        data.appendChild(xmlDocument.createTextNode(noteListItem.getText()));
         
         noteItem.appendChild(data);
     	

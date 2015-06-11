@@ -14,7 +14,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.NoteItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
@@ -49,7 +49,7 @@ public class NotesDBManager extends SQLiteOpenHelper
     {
         db.execSQL("DROP TABLE IF EXISTS "+ProfessionalPANote.NOTE_TABLE_NAME);
         
-        db.execSQL("DROP TABLE IF EXISTS "+NoteListItem.NOTE_ITEM_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+NoteItem.NOTE_ITEM_TABLE_NAME);
 
         onCreate(db);
     }
@@ -60,9 +60,9 @@ public class NotesDBManager extends SQLiteOpenHelper
 				ProfessionalPANote.NOTE_TYPE + " INTEGER, " + ProfessionalPANote.NOTE_COLOR + " INTEGER, " + ProfessionalPANote.NOTE_CREATION_TIME + " INTEGER, "
 				+ ProfessionalPANote.NOTE_MODIFIED_TIME + " INTEGER);");
 		
-		db.execSQL("CREATE TABLE " + NoteListItem.NOTE_ITEM_TABLE_NAME + "(" + NoteListItem.NOTE_ID +  " INTEGER, " +
-				NoteListItem.DATA + " TEXT, " + NoteListItem.IMAGE_NAME + " TEXT, " + NoteListItem.TEXT_COLOR + " INTEGER, "+
-				" FOREIGN KEY ("+NoteListItem.NOTE_ID+") REFERENCES "+ProfessionalPANote.NOTE_TABLE_NAME+" ("+ProfessionalPANote.NOTE_ID+"));");
+		db.execSQL("CREATE TABLE " + NoteItem.NOTE_ITEM_TABLE_NAME + "(" + NoteItem.NOTE_ID +  " INTEGER, " +
+				NoteItem.DATA + " TEXT, " + NoteItem.IMAGE_NAME + " TEXT, " + NoteItem.TEXT_COLOR + " INTEGER, "+
+				" FOREIGN KEY ("+NoteItem.NOTE_ID+") REFERENCES "+ProfessionalPANote.NOTE_TABLE_NAME+" ("+ProfessionalPANote.NOTE_ID+"));");
 	}
 
 	public void saveNotes(List<ProfessionalPANote> notes) 
@@ -75,7 +75,7 @@ public class NotesDBManager extends SQLiteOpenHelper
 	    }
 	}
 	
-	public void saveNote(ProfessionalPANote note) 
+	private void saveNote(ProfessionalPANote note) 
 	{
 		SQLiteDatabase db = getWritableDatabase();
 		
@@ -90,27 +90,27 @@ public class NotesDBManager extends SQLiteOpenHelper
 				 ProfessionalPANote.NOTE_TABLE_NAME, null,
 				 noteValues);
 		
-		List<NoteListItem> noteItems = note.getNoteItems();
+		List<NoteItem> noteItems = note.getNoteItems();
 		
 		for(int i = 0; i < noteItems.size(); i++)
 		{
-			NoteListItem item = noteItems.get(i);
+			NoteItem item = noteItems.get(i);
 			ContentValues noteItemValues = new ContentValues();
-			noteItemValues.put(NoteListItem.NOTE_ID, note.getNoteId());
-			noteItemValues.put(NoteListItem.TEXT_COLOR, item.getTextColour());
-			noteItemValues.put(NoteListItem.IMAGE_NAME, item.getImageName());
-			noteItemValues.put(NoteListItem.DATA, item.getTextViewData());
+			noteItemValues.put(NoteItem.NOTE_ID, note.getNoteId());
+			noteItemValues.put(NoteItem.TEXT_COLOR, item.getTextColour());
+			noteItemValues.put(NoteItem.IMAGE_NAME, item.getImageName());
+			noteItemValues.put(NoteItem.DATA, item.getText());
 			
 			db.insert(
-					 NoteListItem.NOTE_ITEM_TABLE_NAME,null,
+					 NoteItem.NOTE_ITEM_TABLE_NAME,null,
 					 noteItemValues);
 			
 			ContentValues virtualValues = new ContentValues();
-			noteItemValues.put(NoteListItem.NOTE_ID, note.getNoteId());
-			noteItemValues.put(NoteListItem.DATA, item.getTextViewData());
+			noteItemValues.put(NoteItem.NOTE_ID, note.getNoteId());
+			noteItemValues.put(NoteItem.DATA, item.getText());
 			
 			db.insert(
-					 NoteListItem.NOTE_ITEM_VIRTUAL_TABLE,null,
+					 NoteItem.NOTE_ITEM_VIRTUAL_TABLE,null,
 					 virtualValues);
 		}
 	}
@@ -146,7 +146,7 @@ public class NotesDBManager extends SQLiteOpenHelper
     	}
     	else
     	{
-    		String where = NoteListItem.NOTE_ID+"=?";
+    		String where = NoteItem.NOTE_ID+"=?";
 
         	String [] whereArguments = new String []{noteId};
         	
@@ -181,7 +181,7 @@ public class NotesDBManager extends SQLiteOpenHelper
         	long lastEditedTime = cursor.getLong(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_MODIFIED_TIME));
         	ProfessionalPANote note = new ProfessionalPANote(readNoteId, noteType, noteColor, creationTime, lastEditedTime);
     	    notes.add(note);
-        	List<NoteListItem> noteItems = readNoteItems(readNoteId);
+        	List<NoteItem> noteItems = readNoteItems(readNoteId);
         	note.setNoteItems(noteItems);
         	cursor.moveToNext();
     	}
@@ -189,26 +189,26 @@ public class NotesDBManager extends SQLiteOpenHelper
     	return notes;
 	}
 
-	private List<NoteListItem> readNoteItems(int noteId) 
+	private List<NoteItem> readNoteItems(int noteId) 
 	{
-        List<NoteListItem> noteItems = new ArrayList<NoteListItem>();
+        List<NoteItem> noteItems = new ArrayList<NoteItem>();
 		
 		SQLiteDatabase db = getReadableDatabase();
 
     	String sortOrder =
-    			NoteListItem.NOTE_ID + " DESC";
+    			NoteItem.NOTE_ID + " DESC";
 
-    	String where = NoteListItem.NOTE_ID+"=?";
+    	String where = NoteItem.NOTE_ID+"=?";
 
     	final String[] PROJECTION_FOR_NOTE_ITEM =  {
     			
-    			NoteListItem.TEXT_COLOR,
-    			NoteListItem.IMAGE_NAME,
-    			NoteListItem.DATA,
+    			NoteItem.TEXT_COLOR,
+    			NoteItem.IMAGE_NAME,
+    			NoteItem.DATA,
     	};
     	
     	Cursor cursor = db.query(
-    		NoteListItem.NOTE_ITEM_TABLE_NAME,  // The table to query
+    		NoteItem.NOTE_ITEM_TABLE_NAME,  // The table to query
     	    PROJECTION_FOR_NOTE_ITEM,                               // The columns to return
     	    where,                                // The columns for the WHERE clause
     	    new String []{Integer.toString(noteId)},                            // The values for the WHERE clause
@@ -219,14 +219,14 @@ public class NotesDBManager extends SQLiteOpenHelper
     	
     	cursor.moveToFirst();
     	
-    	NoteListItem item = null;
+    	NoteItem item = null;
     	
     	while (cursor.isAfterLast() == false)
     	{
-        	int noteColor = cursor.getInt(cursor.getColumnIndexOrThrow(NoteListItem.TEXT_COLOR));
-        	String imageName = cursor.getString(cursor.getColumnIndexOrThrow(NoteListItem.IMAGE_NAME));
-        	String itemData = cursor.getString(cursor.getColumnIndexOrThrow(NoteListItem.DATA));
-        	item = new NoteListItem(itemData, imageName);
+        	int noteColor = cursor.getInt(cursor.getColumnIndexOrThrow(NoteItem.TEXT_COLOR));
+        	String imageName = cursor.getString(cursor.getColumnIndexOrThrow(NoteItem.IMAGE_NAME));
+        	String itemData = cursor.getString(cursor.getColumnIndexOrThrow(NoteItem.DATA));
+        	item = new NoteItem(itemData, imageName);
         	item.setTextColour(noteColor);
             noteItems.add(item);
         	cursor.moveToNext();
@@ -241,15 +241,15 @@ public class NotesDBManager extends SQLiteOpenHelper
 		
 		SQLiteDatabase db = getReadableDatabase();
 
-    	Cursor cursor = db.rawQuery("select * from "+NoteListItem.NOTE_ITEM_TABLE_NAME, null);
+    	Cursor cursor = db.rawQuery("select * from "+NoteItem.NOTE_ITEM_TABLE_NAME, null);
     	
     	cursor.moveToFirst();
     	
     	while (cursor.isAfterLast() == false)
     	{
-    		int noteId =  cursor.getInt(cursor.getColumnIndexOrThrow(NoteListItem.NOTE_ID));
+    		int noteId =  cursor.getInt(cursor.getColumnIndexOrThrow(NoteItem.NOTE_ID));
         	
-    		String itemData = cursor.getString(cursor.getColumnIndexOrThrow(NoteListItem.DATA));
+    		String itemData = cursor.getString(cursor.getColumnIndexOrThrow(NoteItem.DATA));
     		
     		noteItems.put(itemData, noteId);
     		
@@ -267,7 +267,7 @@ public class NotesDBManager extends SQLiteOpenHelper
 	
 		if(result > 0)
 		{
-			db.delete(NoteListItem.NOTE_ITEM_TABLE_NAME, NoteListItem.NOTE_ID + "=?", new String[]{Integer.toString(noteId)});
+			db.delete(NoteItem.NOTE_ITEM_TABLE_NAME, NoteItem.NOTE_ID + "=?", new String[]{Integer.toString(noteId)});
 		}
 	}
 
@@ -287,21 +287,21 @@ public class NotesDBManager extends SQLiteOpenHelper
     	
 		if(numberOfEffectedRows > 0)
 		{
-			List<NoteListItem> items = note.getNoteItems();
+			List<NoteItem> items = note.getNoteItems();
 			
-	        db.delete(NoteListItem.NOTE_ITEM_TABLE_NAME, NoteListItem.NOTE_ID + "=?", new String[]{Integer.toString(note.getNoteId())});
+	        db.delete(NoteItem.NOTE_ITEM_TABLE_NAME, NoteItem.NOTE_ID + "=?", new String[]{Integer.toString(note.getNoteId())});
 	        
 			for(int i = 0; i < items.size(); i++)
 			{
-				NoteListItem item = items.get(i);
+				NoteItem item = items.get(i);
 				ContentValues noteItemValues = new ContentValues();
-				noteItemValues.put(NoteListItem.NOTE_ID, note.getNoteId());
-				noteItemValues.put(NoteListItem.TEXT_COLOR, item.getTextColour());
-				noteItemValues.put(NoteListItem.IMAGE_NAME, item.getImageName());
-				noteItemValues.put(NoteListItem.DATA, item.getTextViewData());
+				noteItemValues.put(NoteItem.NOTE_ID, note.getNoteId());
+				noteItemValues.put(NoteItem.TEXT_COLOR, item.getTextColour());
+				noteItemValues.put(NoteItem.IMAGE_NAME, item.getImageName());
+				noteItemValues.put(NoteItem.DATA, item.getText());
 				
 				db.insert(
-						 NoteListItem.NOTE_ITEM_TABLE_NAME, null, noteItemValues);
+						 NoteItem.NOTE_ITEM_TABLE_NAME, null, noteItemValues);
 			}
 		}
 	}
@@ -333,15 +333,15 @@ public class NotesDBManager extends SQLiteOpenHelper
 		
 		SQLiteDatabase db = getReadableDatabase();
 
-    	Cursor cursor = db.rawQuery("SELECT "+NoteListItem.NOTE_ID+" FROM "
-                + NoteListItem.NOTE_ITEM_TABLE_NAME + " where " + NoteListItem.DATA + " like '%" + searchString
+    	Cursor cursor = db.rawQuery("SELECT "+NoteItem.NOTE_ID+" FROM "
+                + NoteItem.NOTE_ITEM_TABLE_NAME + " where " + NoteItem.DATA + " like '%" + searchString
                 + "%'", null);
     	
     	cursor.moveToFirst();
     	
     	while (cursor.isAfterLast() == false)
     	{
-        	int noteId = cursor.getInt(cursor.getColumnIndexOrThrow(NoteListItem.NOTE_ID));
+        	int noteId = cursor.getInt(cursor.getColumnIndexOrThrow(NoteItem.NOTE_ID));
         	
         	noteIds.add(noteId);
         	

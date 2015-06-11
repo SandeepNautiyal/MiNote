@@ -1,41 +1,28 @@
 package com.gp.app.professionalpa.layout.manager;
 
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.colorpicker.ColorPickerCreator;
-import com.gp.app.professionalpa.colorpicker.ColourPickerAdapter;
 import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
-import com.gp.app.professionalpa.colorpicker.ColourProperties;
-import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.NoteItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
-import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
@@ -44,7 +31,7 @@ import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class ParagraphNoteCreatorActivity extends Activity implements ColourPickerChangeListener
 {
-	private NoteListItem listItem = null;
+	private NoteItem listItem = null;
 	
 	private int modifiedNoteId = -1;
 	
@@ -73,7 +60,7 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 			    	
 			    	EditText editText = (EditText)activityLayout.findViewById(R.id.paragraphNote);
 			    	
-			    	editText.setText(professionalPANote.getNoteItems().get(0).getTextViewData());
+			    	editText.setText(professionalPANote.getNoteItems().get(0).getText());
 			    	
                     ImageView imageView = (ImageView)activityLayout.findViewById(R.id.paragraphNoteImportanceView);
 			    	
@@ -82,7 +69,7 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 			}
 		}
 
-		listItem = new NoteListItem();
+		listItem = new NoteItem();
 		
 		setContentView(activityLayout);
 		
@@ -156,8 +143,6 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 	
 	private void saveParagraph()
 	{
-		ProfessionalPANote note = null;
-		
 		if(modifiedNoteId != -1)
 		{
 			NotesManager.getInstance().deleteNote(modifiedNoteId);
@@ -165,31 +150,38 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 			ProfessionalPAParameters.getNotesActivity().deleteNote(modifiedNoteId);
 			
 			NotesDBManager.getInstance().deleteNote(modifiedNoteId);
-			
-			note = new ProfessionalPANote(modifiedNoteId, ProfessionalPAConstants.PARAGRAPH_NOTE, Arrays.asList(listItem));
 		}
-		else
+
+		String imageName = listItem.getImageName();
+		
+		boolean isValidImageName =  imageName != null && imageName.length() > 0 && !imageName.trim().equals("");
+
+		String listItemData = listItem.getText();
+		
+		boolean isValidListText =  listItemData != null && listItemData.length() > 0 && !listItemData.trim().equals("");
+
+		ProfessionalPANote note = null;
+
+		if(isValidImageName || isValidListText)
 		{
-			note = new ProfessionalPANote(NotesManager.getInstance().getNextFreeNoteId(), ProfessionalPAConstants.PARAGRAPH_NOTE, Arrays.asList(listItem));
-		}
+			int noteId = modifiedNoteId != -1 ? modifiedNoteId : NotesManager.getInstance().getNextFreeNoteId();
 			
-        long creationTime = System.currentTimeMillis();
-		
-		note.setCreationTime(creationTime);
-		
-		note.setLastEditedTime(creationTime);
-		
-        List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
-		
-		notes.add(note);
+			note = new ProfessionalPANote(noteId, ProfessionalPAConstants.PARAGRAPH_NOTE, Arrays.asList(listItem));
+
+	        long creationTime = System.currentTimeMillis();
+			
+			note.setCreationTime(creationTime);
+			
+			note.setLastEditedTime(creationTime);
+			
+			persistListElement(Arrays.asList(note));
+		}
 		
 		Intent returnIntent = new Intent();
 		
 		returnIntent.putExtra(ProfessionalPAConstants.NOTE_DATA, note);
 		
 		setResult(RESULT_OK,returnIntent);
-		
-		persistListElement(notes);
 		
 		finish();
 	}

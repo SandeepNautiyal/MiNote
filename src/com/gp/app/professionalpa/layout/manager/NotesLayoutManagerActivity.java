@@ -36,7 +36,7 @@ import android.widget.SearchView.OnQueryTextListener;
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.calendar.ui.ProfessionalPACalendarView;
 import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
-import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.NoteItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.export.ProfessionalPANotesExporter;
@@ -317,9 +317,9 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		ProfessionalPANote note;
 
-		ArrayList<NoteListItem> items = new ArrayList<NoteListItem>();
+		ArrayList<NoteItem> items = new ArrayList<NoteItem>();
 
-		items.add(new NoteListItem(null, ImageLocationPathManager.getInstance()
+		items.add(new NoteItem(null, ImageLocationPathManager.getInstance()
 				.getImageName(imagePath)));
 
 		note = new ProfessionalPANote(NotesManager.getInstance().getNextFreeNoteId(),

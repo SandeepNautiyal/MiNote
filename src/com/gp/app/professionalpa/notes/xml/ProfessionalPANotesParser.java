@@ -14,7 +14,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.gp.app.professionalpa.data.NoteListItem;
+import com.gp.app.professionalpa.data.NoteItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.XMLEntity;
@@ -26,7 +26,7 @@ public class ProfessionalPANotesParser extends DefaultHandler
 	
 	private ProfessionalPANote currentNote = null;
 	
-	private NoteListItem currentNoteItem = null;
+	private NoteItem currentNoteItem = null;
 	
 	private SAXParserFactory factory = null;
 	
@@ -95,7 +95,7 @@ public class ProfessionalPANotesParser extends DefaultHandler
  
 		if(qName.equalsIgnoreCase("NoteItem"))
 		{
-			currentNoteItem = new NoteListItem();
+			currentNoteItem = new NoteItem();
 		}
 		if (qName.equalsIgnoreCase("data")) 
 		{
