@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.data.NoteListItem;
@@ -52,7 +53,7 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteListItem>
 	    
 		convertView = LayoutInflater.from(getContext()).inflate(R.layout.composite_control_for_list_view, null, false);
 		
-		EditText editText = (EditText) convertView.findViewById(R.id.compositeControlTextBox);
+		TextView editText = (TextView) convertView.findViewById(R.id.compositeControlTextBox);
 		
 		ImageButton bulletPointImage = (ImageButton) convertView.findViewById(R.id.compositeControlBulletButton);
 		
