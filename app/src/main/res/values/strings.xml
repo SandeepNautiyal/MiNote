@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ProfessionalPA</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="notes_layout_manager_activity_title">Notes</string>
+    <string name="add_note">Add Note</string>
+    <string name="action_create_list_view">List View</string>
+    <string name="clear_all_notes">Clear All Notes</string>
+    <string name="display_calender">Calender</string>
+    <string name="exit">Exit</string>
+    <string name="application_title">Professional PA</string>
+    <string name="change_importance">Change Importance</string>
+    <string name="application_alarm">Alarm</string>
+    <string name="add_list_item">Add more items</string>
+    <string name="title_activity_list_item_creator">Create List</string>
+    <string name="add_more_items">Add more items</string>
+    <string name="save">Save</string>
+    <string name="add">Add</string>
+    <string name="set_importance">Set Importance</string>
+    <string name="set_alarm">Set Alarm</string>
+    <string name="paragraph_note_creator_activity_title">Create Note</string>
+    <string name="export_notes">Export Notes</string>
+    <string name="import_notes">Import Notes</string>
+    <string name="action_discard_notes">Delete</string>
+    <string name="action_click_photo">Click Picture</string>
+    <string name="note_image">Image Note</string>
+    <string name="note_item">Note Item</string>
+    <string name="action_copy_notes">Copy Note</string>
+    <string name="pickColour">Pick Colour</string>
+    <string name="calendar">Calendar</string>
+    <string name="monday">MON</string>
+    <string name="tuesday">TUE</string>
+    <string name="wednesday">WED</string>
+    <string name="thursday">THU</string>
+    <string name="friday">FRI</string>
+    <string name="saturday">SAT</string>
+    <string name="sunday">SUN</string>
+    <string name="create_event">Create Event</string>
+    <string name="edit_event">Edit Events</string>
+    <string name="copy_event">Copy Event</string>
+    <string name="cancel">Cancel</string>
+    <string name="check_mark">✔</string>
+    <string name="cross_mark">✘</string>
+    <string name="search_hint">Search Note</string>
+    <string name="note_search_manager_title">Search</string>
+</resources>

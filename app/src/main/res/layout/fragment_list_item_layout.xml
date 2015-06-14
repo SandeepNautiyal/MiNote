@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/composite_control_layout"
+    android:background="@null">
+    
+    <ImageView 
+        android:id="@+id/fragmentItemImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:contentDescription="@string/note_image"
+        android:scaleType="fitStart"
+        android:adjustViewBounds="true"/>
+    
+    <EditText
+        android:id="@+id/fragmentItemEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="@string/add_note"
+        android:layout_marginLeft="2dip"
+        android:ems="10"
+        android:inputType="textAutoCorrect|textMultiLine|textAutoComplete|textCapSentences"
+        android:maxLines="15"
+        android:maxLength="400"/>
+</LinearLayout>

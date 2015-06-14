@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+     
+    <item
+        android:id="@+id/item_delete"
+        android:icon="@drawable/professional_pa_discard_note"
+        android:showAsAction="always"
+        android:title="Delete"
+        android:titleCondensed="Delete">
+    </item>
+    
+    <item android:id="@+id/pickColor"
+        android:icon="@drawable/color_picker_icon"
+        android:title="@string/pickColour"
+        android:showAsAction="always" />
+</menu>

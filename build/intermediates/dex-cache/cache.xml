@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="E:\New Eclipse Workspace\ProfessionalPA\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="E:\New Eclipse Workspace\ProfessionalPA\app\build\intermediates\pre-dexed\debug\classes-385a73b301271f8807486d28e8e0e1ffe075b81a.jar" />
+    </item>
+    <item
+        jar="C:\Users\dell\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="E:\New Eclipse Workspace\ProfessionalPA\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-6fa8b539f0410dc10e47ed292cb5402e0448bbfd.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\ProfessionalPA\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="E:\New Eclipse Workspace\ProfessionalPA\app\build\intermediates\pre-dexed\debug\classes-631052994f4be6360dfa5fa1658d62791d360cd7.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\ProfessionalPA\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="E:\New Eclipse Workspace\ProfessionalPA\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-c77e077331dd72963d69f206dea890425bef46d8.jar" />
+    </item>
+
+</items>

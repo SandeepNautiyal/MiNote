@@ -1,0 +1,18 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="composite_control_height">35dip</dimen>
+    <dimen name="composite_control_textview_width">190dip</dimen>
+    <dimen name="composite_control_textview_height_compressed">20dip</dimen>
+    <dimen name="composite_control_textview_compressed_width">95dip</dimen>
+    <dimen name="composite_control_importance_button_compressed_width">18dip</dimen>
+    <dimen name="composite_control_alarm_button_compressed_width">18dip</dimen>
+    <dimen name="list_element_width">132dip</dimen>
+    <dimen name="first_day_margin">10dp</dimen>
+    <dimen name="day_margin">24dp</dimen>
+    <dimen name="text_height_width">20dp</dimen>
+    <dimen name="min_cell_height">65dp</dimen>
+    <dimen name="min_cell_width">50dp</dimen>
+    
+</resources>

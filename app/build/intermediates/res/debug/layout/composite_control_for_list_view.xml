@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/composite_control_layout"
+    android:background="@null"
+    tools:context="com.gp.app.professionalpa.layout.ListItemLayout" >
+    
+    <ImageView 
+        android:id="@+id/compositeControlImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:contentDescription="@string/note_image"
+        android:scaleType="fitStart"
+        android:adjustViewBounds="true"
+        android:layout_alignParentLeft="true"/>
+    
+    <ImageButton
+        android:id="@+id/compositeControlBulletButton"
+        android:layout_width="35dip"
+        android:layout_height="@dimen/composite_control_height"
+        android:layout_marginRight="2dip"
+        android:contentDescription="@string/set_importance"
+        android:src="@drawable/ic_pin_black_bullet_point" /> 
+        
+    <EditText
+        android:id="@+id/compositeControlTextBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="@string/add_note"
+        android:layout_marginLeft="2dip"
+        android:ems="10"
+        android:layout_toRightOf="@+id/compositeControlBulletButton"
+        android:layout_alignTop="@+id/compositeControlBulletButton"
+        android:inputType="textAutoCorrect|textMultiLine|textAutoComplete|textCapSentences"
+        android:maxLines="15"
+        android:maxLength="400"/>
+</RelativeLayout>
+<!-- From: file:/E:/New%20Eclipse%20Workspace/ProfessionalPA/app/src/main/res/layout/composite_control_for_list_view.xml -->

@@ -1,0 +1,371 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Risky Project Location:
+-----------------------
+The tools *should* handle project locations in any directory. However,
+due to bugs, placing projects in directories containing spaces in the
+path, or characters like ", ' and &, have had issues. We're working to
+eliminate these bugs, but to save yourself headaches you may want to
+move your project to a location where this is not a problem.
+E:\New Eclipse Workspace\ProfessionalPA
+      -       -                        
+
+Manifest Merging:
+-----------------
+Your project uses libraries that provide manifests, and your Eclipse
+project did not explicitly turn on manifest merging. In Android Gradle
+projects, manifests are always merged (meaning that contents from your
+libraries' manifests will be merged into the app manifest. If you had
+manually copied contents from library manifests into your app manifest
+you may need to remove these for the app to build correctly.
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .idea\
+* .idea\.name
+* .idea\compiler.xml
+* .idea\copyright\
+* .idea\copyright\profiles_settings.xml
+* .idea\encodings.xml
+* .idea\misc.xml
+* .idea\modules.xml
+* .idea\scopes\
+* .idea\scopes\scope_settings.xml
+* .idea\vcs.xml
+* .idea\workspace.xml
+* app\
+* app\build.gradle
+* app\src\
+* app\src\main\
+* app\src\main\AndroidManifest.xml
+* app\src\main\assets\
+* app\src\main\assets\Copy of notes.xml
+* app\src\main\assets\notes.dtd
+* app\src\main\java\
+* app\src\main\java\com\
+* app\src\main\java\com\gp\
+* app\src\main\java\com\gp\app\
+* app\src\main\java\com\gp\app\professionalpa\
+* app\src\main\java\com\gp\app\professionalpa\activity\
+* app\src\main\java\com\gp\app\professionalpa\activity\state\
+* app\src\main\java\com\gp\app\professionalpa\activity\state\ActivityStateMonitor.java
+* app\src\main\java\com\gp\app\professionalpa\alarm\
+* app\src\main\java\com\gp\app\professionalpa\alarm\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\
+* app\src\main\java\com\gp\app\professionalpa\calendar\adapter\
+* app\src\main\java\com\gp\app\professionalpa\calendar\adapter\CalendarAdapter.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\adapter\EventListAdapater.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\adapter\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\events\
+* app\src\main\java\com\gp\app\professionalpa\calendar\events\Event.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\events\EventManager.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\events\database\
+* app\src\main\java\com\gp\app\professionalpa\calendar\events\database\CalendarDBManager.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\events\database\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\events\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\interfaces\
+* app\src\main\java\com\gp\app\professionalpa\calendar\interfaces\DBChangeListener.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\interfaces\DBchangePublisher.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\ui\
+* app\src\main\java\com\gp\app\professionalpa\calendar\ui\EventCreationGUI.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\ui\EventModificationGUI.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\ui\ProfessionalPACalendarView.java
+* app\src\main\java\com\gp\app\professionalpa\calendar\ui\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\colorpicker\
+* app\src\main\java\com\gp\app\professionalpa\colorpicker\ColorPickerCreator.java
+* app\src\main\java\com\gp\app\professionalpa\colorpicker\ColorPickerSelectionManager.java
+* app\src\main\java\com\gp\app\professionalpa\colorpicker\ColourPickerAdapter.java
+* app\src\main\java\com\gp\app\professionalpa\colorpicker\ColourPickerChangeListener.java
+* app\src\main\java\com\gp\app\professionalpa\colorpicker\ColourProperties.java
+* app\src\main\java\com\gp\app\professionalpa\colorpicker\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\compositecontrols\
+* app\src\main\java\com\gp\app\professionalpa\compositecontrols\ListViewItemLayout.java
+* app\src\main\java\com\gp\app\professionalpa\compositecontrols\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\data\
+* app\src\main\java\com\gp\app\professionalpa\data\NoteItem.java
+* app\src\main\java\com\gp\app\professionalpa\data\ProfessionalPANote.java
+* app\src\main\java\com\gp\app\professionalpa\data\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\exceptions\
+* app\src\main\java\com\gp\app\professionalpa\exceptions\ProfessionPARuntimeException.java
+* app\src\main\java\com\gp\app\professionalpa\exceptions\ProfessionalPABaseException.java
+* app\src\main\java\com\gp\app\professionalpa\exceptions\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\export\
+* app\src\main\java\com\gp\app\professionalpa\export\ProfessionalPANotesExporter.java
+* app\src\main\java\com\gp\app\professionalpa\export\ProfessionalPANotesImporter.java
+* app\src\main\java\com\gp\app\professionalpa\export\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\interfaces\
+* app\src\main\java\com\gp\app\professionalpa\interfaces\ProfessionalPAConstants.java
+* app\src\main\java\com\gp\app\professionalpa\interfaces\XMLEntity.java
+* app\src\main\java\com\gp\app\professionalpa\interfaces\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\layout\
+* app\src\main\java\com\gp\app\professionalpa\layout\manager\
+* app\src\main\java\com\gp\app\professionalpa\layout\manager\ImageLocationPathManager.java
+* app\src\main\java\com\gp\app\professionalpa\layout\manager\ListItemCreatorActivity.java
+* app\src\main\java\com\gp\app\professionalpa\layout\manager\NotesLayoutManagerActivity.java
+* app\src\main\java\com\gp\app\professionalpa\layout\manager\ParagraphNoteCreatorActivity.java
+* app\src\main\java\com\gp\app\professionalpa\notes\
+* app\src\main\java\com\gp\app\professionalpa\notes\backup\
+* app\src\main\java\com\gp\app\professionalpa\notes\backup\NotesBackupManager.java
+* app\src\main\java\com\gp\app\professionalpa\notes\backup\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\notes\database\
+* app\src\main\java\com\gp\app\professionalpa\notes\database\NotesDBManager.java
+* app\src\main\java\com\gp\app\professionalpa\notes\database\ProfessionalPADBConstants.java
+* app\src\main\java\com\gp\app\professionalpa\notes\database\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\notes\fragments\
+* app\src\main\java\com\gp\app\professionalpa\notes\fragments\FragmentCreationManager.java
+* app\src\main\java\com\gp\app\professionalpa\notes\fragments\NoteFragmentAdapter.java
+* app\src\main\java\com\gp\app\professionalpa\notes\fragments\NotesManager.java
+* app\src\main\java\com\gp\app\professionalpa\notes\fragments\ProfessionalPANoteFragment.java
+* app\src\main\java\com\gp\app\professionalpa\notes\fragments\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\notes\operations\
+* app\src\main\java\com\gp\app\professionalpa\notes\operations\NoteCopyManager.java
+* app\src\main\java\com\gp\app\professionalpa\notes\operations\NotesOperationManager.java
+* app\src\main\java\com\gp\app\professionalpa\notes\operations\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\notes\xml\
+* app\src\main\java\com\gp\app\professionalpa\notes\xml\ProfessionalPANotesParser.java
+* app\src\main\java\com\gp\app\professionalpa\notes\xml\ProfessionalPANotesReader.java
+* app\src\main\java\com\gp\app\professionalpa\notes\xml\ProfessionalPANotesWriter.java
+* app\src\main\java\com\gp\app\professionalpa\notes\xml\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\notification\
+* app\src\main\java\com\gp\app\professionalpa\notification\ProfessionalPANotificationManager.java
+* app\src\main\java\com\gp\app\professionalpa\notification\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\notification\service\
+* app\src\main\java\com\gp\app\professionalpa\notification\service\AlarmRecreatorService.java
+* app\src\main\java\com\gp\app\professionalpa\notification\service\AlarmRequestCreator.java
+* app\src\main\java\com\gp\app\professionalpa\notification\service\NotificationActionPerformer.java
+* app\src\main\java\com\gp\app\professionalpa\notification\service\NotificationProcessingService.java
+* app\src\main\java\com\gp\app\professionalpa\notification\service\NotificationReceiver.java
+* app\src\main\java\com\gp\app\professionalpa\notification\service\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\start\
+* app\src\main\java\com\gp\app\professionalpa\start\StartProfessionalPAApplicationActivity.java
+* app\src\main\java\com\gp\app\professionalpa\util\
+* app\src\main\java\com\gp\app\professionalpa\util\ProfessionalPAParameters.java
+* app\src\main\java\com\gp\app\professionalpa\util\ProfessionalPAUtil.java
+* app\src\main\java\com\gp\app\professionalpa\util\package-info.java
+* app\src\main\java\com\gp\app\professionalpa\views\
+* app\src\main\java\com\gp\app\professionalpa\views\listeners\
+* app\src\main\java\com\gp\app\professionalpa\views\listeners\NoteItemLongClickListener.java
+* app\src\main\java\com\gp\app\professionalpa\views\listeners\NotesActionMode.java
+* app\src\main\java\com\gp\app\professionalpa\views\listeners\package-info.java
+* app\src\main\res\
+* app\src\main\res\color\
+* app\src\main\res\color\date_number_text_color.xml
+* app\src\main\res\drawable-hdpi\
+* app\src\main\res\drawable-hdpi\air_india_logo.png
+* app\src\main\res\drawable-hdpi\blue.png
+* app\src\main\res\drawable-hdpi\calendar_image.png
+* app\src\main\res\drawable-hdpi\color_picker_icon.png
+* app\src\main\res\drawable-hdpi\day_bg.9.png
+* app\src\main\res\drawable-hdpi\green.png
+* app\src\main\res\drawable-hdpi\ic_action_add_alarm.png
+* app\src\main\res\drawable-hdpi\ic_action_copy.png
+* app\src\main\res\drawable-hdpi\ic_action_event.png
+* app\src\main\res\drawable-hdpi\ic_launcher.png
+* app\src\main\res\drawable-hdpi\ic_pin_black_bullet_point.png
+* app\src\main\res\drawable-hdpi\navigation_next_item.png
+* app\src\main\res\drawable-hdpi\navigation_previous_item.png
+* app\src\main\res\drawable-hdpi\orange.png
+* app\src\main\res\drawable-hdpi\personal_assistant.jpg
+* app\src\main\res\drawable-hdpi\professional_pa_action_search.png
+* app\src\main\res\drawable-hdpi\professional_pa_action_settings.png
+* app\src\main\res\drawable-hdpi\professional_pa_camera.png
+* app\src\main\res\drawable-hdpi\professional_pa_discard_note.png
+* app\src\main\res\drawable-hdpi\professional_pa_ic_launcher.png
+* app\src\main\res\drawable-hdpi\professional_pa_list_view.png
+* app\src\main\res\drawable-hdpi\professional_pa_list_view1.png
+* app\src\main\res\drawable-hdpi\professional_pa_paragraph_view.png
+* app\src\main\res\drawable-hdpi\professional_pa_paragraph_view1.png
+* app\src\main\res\drawable-hdpi\purple.png
+* app\src\main\res\drawable-hdpi\quickcontact_badge_overlay_normal_light.9.png
+* app\src\main\res\drawable-hdpi\red.png
+* app\src\main\res\drawable-hdpi\save.png
+* app\src\main\res\drawable-mdpi\
+* app\src\main\res\drawable-mdpi\calendar_image.png
+* app\src\main\res\drawable-mdpi\color_picker_icon.png
+* app\src\main\res\drawable-mdpi\ic_action_add_alarm.png
+* app\src\main\res\drawable-mdpi\ic_action_copy.png
+* app\src\main\res\drawable-mdpi\ic_action_event.png
+* app\src\main\res\drawable-mdpi\ic_launcher.png
+* app\src\main\res\drawable-mdpi\ic_pin_black_bullet_point.png
+* app\src\main\res\drawable-mdpi\professional_pa_action_search.png
+* app\src\main\res\drawable-mdpi\professional_pa_action_settings.png
+* app\src\main\res\drawable-mdpi\professional_pa_camera.png
+* app\src\main\res\drawable-mdpi\professional_pa_discard_note.png
+* app\src\main\res\drawable-mdpi\professional_pa_ic_launcher.png
+* app\src\main\res\drawable-mdpi\professional_pa_list_view.png
+* app\src\main\res\drawable-mdpi\professional_pa_list_view1.png
+* app\src\main\res\drawable-mdpi\professional_pa_paragraph_view.png
+* app\src\main\res\drawable-mdpi\professional_pa_paragraph_view1.png
+* app\src\main\res\drawable-mdpi\save.png
+* app\src\main\res\drawable-xhdpi\
+* app\src\main\res\drawable-xhdpi\calendar_image.png
+* app\src\main\res\drawable-xhdpi\color_picker_icon.png
+* app\src\main\res\drawable-xhdpi\day_bg.9.png
+* app\src\main\res\drawable-xhdpi\ic_action_add_alarm.png
+* app\src\main\res\drawable-xhdpi\ic_action_copy.png
+* app\src\main\res\drawable-xhdpi\ic_action_event.png
+* app\src\main\res\drawable-xhdpi\ic_launcher.png
+* app\src\main\res\drawable-xhdpi\ic_pin_black_bullet_point.png
+* app\src\main\res\drawable-xhdpi\navigation_next_item.png
+* app\src\main\res\drawable-xhdpi\navigation_previous_item.png
+* app\src\main\res\drawable-xhdpi\professional_pa_action_search.png
+* app\src\main\res\drawable-xhdpi\professional_pa_action_settings.png
+* app\src\main\res\drawable-xhdpi\professional_pa_camera.png
+* app\src\main\res\drawable-xhdpi\professional_pa_discard_note.png
+* app\src\main\res\drawable-xhdpi\professional_pa_ic_launcher.png
+* app\src\main\res\drawable-xhdpi\professional_pa_list_view.png
+* app\src\main\res\drawable-xhdpi\professional_pa_list_view1.png
+* app\src\main\res\drawable-xhdpi\professional_pa_paragraph_view.png
+* app\src\main\res\drawable-xhdpi\professional_pa_paragraph_view1.png
+* app\src\main\res\drawable-xhdpi\save.png
+* app\src\main\res\drawable-xxhdpi\
+* app\src\main\res\drawable-xxhdpi\calendar_image.png
+* app\src\main\res\drawable-xxhdpi\color_picker_icon.png
+* app\src\main\res\drawable-xxhdpi\ic_action_add_alarm.png
+* app\src\main\res\drawable-xxhdpi\ic_action_copy.png
+* app\src\main\res\drawable-xxhdpi\ic_action_event.png
+* app\src\main\res\drawable-xxhdpi\ic_pin_black_bullet_point.png
+* app\src\main\res\drawable-xxhdpi\professional_pa_action_search.png
+* app\src\main\res\drawable-xxhdpi\professional_pa_action_settings.png
+* app\src\main\res\drawable-xxhdpi\professional_pa_camera.png
+* app\src\main\res\drawable-xxhdpi\professional_pa_discard_note.png
+* app\src\main\res\drawable-xxhdpi\professional_pa_ic_launcher.png
+* app\src\main\res\drawable-xxhdpi\professional_pa_list_view.png
+* app\src\main\res\drawable-xxhdpi\professional_pa_list_view1.png
+* app\src\main\res\drawable-xxhdpi\professional_pa_paragraph_view.png
+* app\src\main\res\drawable-xxhdpi\professional_pa_paragraph_view1.png
+* app\src\main\res\drawable-xxhdpi\save.png
+* app\src\main\res\drawable-xxxhdpi\
+* app\src\main\res\drawable-xxxhdpi\calendar_image.png
+* app\src\main\res\drawable-xxxhdpi\color_picker_icon.png
+* app\src\main\res\drawable-xxxhdpi\ic_action_add_alarm.png
+* app\src\main\res\drawable-xxxhdpi\ic_action_event.png
+* app\src\main\res\drawable-xxxhdpi\ic_pin_black_bullet_point.png
+* app\src\main\res\drawable-xxxhdpi\professional_pa_list_view1.png
+* app\src\main\res\drawable-xxxhdpi\professional_pa_paragraph_view.png
+* app\src\main\res\drawable-xxxhdpi\professional_pa_paragraph_view1.png
+* app\src\main\res\drawable\
+* app\src\main\res\drawable\date_number_background.xml
+* app\src\main\res\drawable\day_selected.xml
+* app\src\main\res\drawable\layout_border.xml
+* app\src\main\res\drawable\list_view_border.xml
+* app\src\main\res\drawable\normal_day.xml
+* app\src\main\res\drawable\today.xml
+* app\src\main\res\layout-land\
+* app\src\main\res\layout-land\activity_notes_layout_manager.xml
+* app\src\main\res\layout-large-land\
+* app\src\main\res\layout-large-land\activity_notes_layout_manager.xml
+* app\src\main\res\layout-large-port\
+* app\src\main\res\layout-large-port\activity_notes_layout_manager.xml
+* app\src\main\res\layout-port\
+* app\src\main\res\layout-port\activity_notes_layout_manager.xml
+* app\src\main\res\layout-small-land\
+* app\src\main\res\layout-small-land\activity_notes_layout_manager.xml
+* app\src\main\res\layout-small-port\
+* app\src\main\res\layout-small-port\activity_notes_layout_manager.xml
+* app\src\main\res\layout-xlarge-land\
+* app\src\main\res\layout-xlarge-land\activity_notes_layout_manager.xml
+* app\src\main\res\layout-xlarge-port\
+* app\src\main\res\layout-xlarge-port\activity_notes_layout_manager.xml
+* app\src\main\res\layout\
+* app\src\main\res\layout\activity_main.xml
+* app\src\main\res\layout\activity_start_professional_pa_application.xml
+* app\src\main\res\layout\colour_picker_adapter_view.xml
+* app\src\main\res\layout\composite_control_for_list_view.xml
+* app\src\main\res\layout\day_of_week.xml
+* app\src\main\res\layout\day_view.xml
+* app\src\main\res\layout\events_modification_dialog_layout.xml
+* app\src\main\res\layout\fragment_list_item_layout.xml
+* app\src\main\res\layout\list_item_creator_activity.xml
+* app\src\main\res\layout\listview_for_list_fragment.xml
+* app\src\main\res\layout\note_fragment_adapter_layout.xml
+* app\src\main\res\layout\notes_search_manager.xml
+* app\src\main\res\layout\paragraph_note_creator_activtiy.xml
+* app\src\main\res\layout\professional_pa_frame_layout.xml
+* app\src\main\res\layout\time_picker_and_date_picker_layout.xml
+* app\src\main\res\menu\
+* app\src\main\res\menu\contextual_menu.xml
+* app\src\main\res\menu\events_pop_up_menu.xml
+* app\src\main\res\menu\list_creator_activity_menu_items.xml
+* app\src\main\res\menu\notes_layout_manager_menu.xml
+* app\src\main\res\menu\notes_selection_menu.xml
+* app\src\main\res\menu\paragraph_notes_activity_menu_items.xml
+* app\src\main\res\menu\start_professional_pa_application.xml
+* app\src\main\res\values-v11\
+* app\src\main\res\values-v11\styles.xml
+* app\src\main\res\values-v14\
+* app\src\main\res\values-v14\styles.xml
+* app\src\main\res\values-w820dp\
+* app\src\main\res\values-w820dp\dimens.xml
+* app\src\main\res\values\
+* app\src\main\res\values\dimens.xml
+* app\src\main\res\values\strings.xml
+* app\src\main\res\values\styles.xml
+* app\src\main\res\xml\
+* app\src\main\res\xml\searchable.xml
+* build.gradle
+* gradle\
+* gradle\wrapper\
+* gradle\wrapper\gradle-wrapper.jar
+* gradle\wrapper\gradle-wrapper.properties
+* gradlew
+* gradlew.bat
+* ic_launcher-web.png
+* proguard-project.txt
+* settings.gradle
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:21.0.3
+android-support-v7-appcompat.jar => com.android.support:appcompat-v7:21.0.3
+
+Replaced Libraries with Dependencies:
+-------------------------------------
+The importer recognized the following library projects as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the source files in your project were of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the library replacement in the import wizard and try
+again:
+
+android-support-v7-appcompat => [com.android.support:appcompat-v7:21.0.3]
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app\src\main\AndroidManifest.xml
+* assets\ => app\src\main\assets\
+* res\ => app\src\main\res\
+* src\ => app\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gp.app.professionalpa"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    
+    <uses-sdk 
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/professional_pa_ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo.Light">
+        <activity
+            android:name=".start.StartProfessionalPAApplicationActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".layout.manager.NotesLayoutManagerActivity"
+            android:label="@string/notes_layout_manager_activity_title"
+            android:launchMode="singleTop">
+            
+            <intent-filter>
+               <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable"/>
+            
+            
+        </activity>
+        <activity
+            android:name="com.gp.app.professionalpa.layout.manager.ParagraphNoteCreatorActivity"
+            android:label="@string/paragraph_note_creator_activity_title"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.gp.app.professionalpa.layout.manager.ListItemCreatorActivity"
+            android:label="@string/title_activity_list_item_creator" 
+            android:screenOrientation="portrait">
+        </activity>
+        
+        <receiver
+            android:name="com.gp.app.professionalpa.notification.service.NotificationReceiver"
+            android:enabled="true" 
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <service android:enabled="true" android:name="com.gp.app.professionalpa.notification.service.NotificationProcessingService"/>
+        <service android:enabled="true" android:name="com.gp.app.professionalpa.notification.service.AlarmRecreatorService"/>
+    </application>
+</manifest>

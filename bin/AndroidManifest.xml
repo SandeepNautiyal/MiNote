@@ -50,12 +50,7 @@
             android:label="@string/title_activity_list_item_creator" 
             android:screenOrientation="portrait">
         </activity>
-        
-        <receiver
-            android:name="com.gp.app.professionalpa.notification.service.NotificationReceiver"
-            android:enabled="true">
-        </receiver>
-        
+
         <receiver
             android:name="com.gp.app.professionalpa.notification.service.NotificationReceiver"
             android:enabled="true" 

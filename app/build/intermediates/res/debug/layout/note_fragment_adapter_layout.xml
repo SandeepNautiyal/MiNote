@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/noteFragmentAdapterLayout"
+    android:background="@drawable/list_view_border">
+    
+    <ImageView 
+        android:id="@+id/noteFragmentAdapterImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:contentDescription="@string/note_image"
+        android:scaleType="fitStart"
+        android:adjustViewBounds="true"
+        android:visibility="invisible"/>
+    
+    <EditText
+        android:id="@+id/noteFragmentAdapterTextBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:layout_marginLeft="1dip"
+        android:ems="10"
+        android:gravity="start"
+        android:inputType="textAutoCorrect|textMultiLine|textAutoComplete|textCapSentences"/>
+</LinearLayout>
+<!-- From: file:/E:/New%20Eclipse%20Workspace/ProfessionalPA/app/src/main/res/layout/note_fragment_adapter_layout.xml -->

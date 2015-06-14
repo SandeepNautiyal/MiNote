@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/eventsModificationDialogRelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/eventsModificationDialogEventNameTextView"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="#00ffaa" />
+
+    <TextView
+        android:id="@+id/eventsModificationDialogEventLocationTextView"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="#00ffbb"
+        android:layout_below="@+id/eventsModificationDialogEventNameTextView" />
+
+    <TextView
+        android:id="@+id/eventsModificationFromTimeTextView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/eventsModificationDialogEventNameTextView"
+        android:layout_alignTop="@+id/eventsModificationDialogEventNameTextView"
+        android:layout_toRightOf="@+id/eventsModificationDialogEventNameTextView"
+        android:background="#00ffcc" />
+
+    <TextView
+        android:id="@+id/eventsModificationToTimeTextView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/eventsModificationDialogEventLocationTextView"
+        android:layout_below="@+id/eventsModificationFromTimeTextView"
+        android:layout_toRightOf="@+id/eventsModificationDialogEventLocationTextView"
+        android:background="#00ffdd" />
+
+    <Button
+        android:id="@+id/eventsDialogEditButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_toRightOf="@+id/eventsModificationFromTimeTextView"
+        android:layout_centerInParent="true"
+        android:text= "@string/check_mark"
+        android:layout_margin="10dp"
+        android:background="@drawable/day_selected"/>
+    
+    <Button
+        android:id="@+id/eventsDialogCancelButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:text= "@string/cross_mark"
+        android:layout_margin="10dp"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/eventsDialogEditButton"
+        android:background="@drawable/day_selected" />
+
+</RelativeLayout>
