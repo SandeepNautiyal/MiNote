@@ -95,6 +95,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	
 	private FrameLayout calendarFrameLayout = null;
 	
+	private FrameLayout eventFrameLayout = null;
+
 	private boolean areNoteButtonCreated = false;
 	
 	public NotesLayoutManagerActivity() 
@@ -528,6 +530,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		
 		createCalendarFrameLayout();
 		
+		createEventFrameLayout();
+		
 		areNoteButtonCreated = !areNoteButtonCreated;
 	}
 	
@@ -567,6 +571,45 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		else
 		{
 			setFrameLayoutVisibilityState(listNoteFrameLayout);
+		}
+	}
+	
+	private void createEventFrameLayout() 
+	{
+		if(eventFrameLayout == null)
+		{
+			eventFrameLayout = (FrameLayout)findViewById(R.id.eventFrameLayout);
+			
+			eventFrameLayout.setBackgroundResource(R.drawable.day_selected);
+			
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
+			
+			params.addRule(RelativeLayout.ABOVE, R.id.calendarFrameLayout);
+			
+			params.addRule(RelativeLayout.ALIGN_LEFT, R.id.notesLayoutManagerFrameLayout);
+			
+			params.setMargins(10, 0, 40, 30);
+			
+			eventFrameLayout.setLayoutParams(params);
+			
+			ImageView button = new ImageView(this);
+			
+			button.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_event));
+			
+			button.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) 
+				{
+					createListNote();
+				}
+			});
+			
+			eventFrameLayout.addView(button);
+		}
+		else
+		{
+			setFrameLayoutVisibilityState(eventFrameLayout);
 		}
 	}
 
