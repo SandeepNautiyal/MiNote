@@ -1008,8 +1008,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 			if(view != null)
 			{
-				System.out.println("setNoteSelected -> noteId="+noteId+" view="+view);
-				
 				view.setBackgroundResource(R.drawable.blue);
 			}
 		}
