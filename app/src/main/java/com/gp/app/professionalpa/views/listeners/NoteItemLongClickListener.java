@@ -1,5 +1,6 @@
 package com.gp.app.professionalpa.views.listeners;
 
+import android.graphics.Color;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 
@@ -17,9 +18,14 @@ public class NoteItemLongClickListener implements OnLongClickListener
 	@Override
 	public boolean onLongClick(View view) 
 	{
-        view.startActionMode(actionModelCallback);
+		NotesOperationManager notesOperationManager = NotesOperationManager.getInstance(); 
+		
+		if(!notesOperationManager.isNoteSelected())
+		{
+	        view.startActionMode(actionModelCallback);
+		}
         
-        NotesOperationManager.getInstance().setSelectedNote(actionModelCallback.getNoteId());
+		notesOperationManager.addSelectedNote(actionModelCallback.getNoteId());
         
         view.setSelected(true);
         

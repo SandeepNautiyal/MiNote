@@ -94,4 +94,11 @@
     android:background="@drawable/layout_border">
 </FrameLayout>
 
+<FrameLayout
+    android:id="@+id/eventFrameLayout"
+    android:layout_width="0dip"
+    android:layout_height="0dip"
+    android:background="@drawable/layout_border">
+</FrameLayout>
+
 </RelativeLayout>

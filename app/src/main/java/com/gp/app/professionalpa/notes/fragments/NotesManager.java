@@ -1,5 +1,6 @@
 package com.gp.app.professionalpa.notes.fragments;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -46,9 +47,12 @@ public class NotesManager
 		notes.clear();
 	}
 
-	public void deleteNote(int noteId)
+	public void deleteNotes(List<Integer> noteIds)
 	{
-		notes.remove(noteId);
+		for(int i = 0; i < noteIds.size(); i++)
+		{
+			notes.remove(noteIds.get(i));
+		}
 	}
 	
 	public int getNextFreeNoteId() 

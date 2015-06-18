@@ -259,15 +259,20 @@ public class NotesDBManager extends SQLiteOpenHelper
     	return noteItems;
 	}
 
-	public void deleteNote(int noteId) 
+	public void deleteNotes(List<Integer> noteIds) 
 	{
 		SQLiteDatabase db = getWritableDatabase();
 
-		int result = db.delete(ProfessionalPANote.NOTE_TABLE_NAME, ProfessionalPANote.NOTE_ID + "=?", new String[]{Integer.toString(noteId)});
-	
-		if(result > 0)
+		for(int i = 0; i < noteIds.size(); i++)
 		{
-			db.delete(NoteItem.NOTE_ITEM_TABLE_NAME, NoteItem.NOTE_ID + "=?", new String[]{Integer.toString(noteId)});
+			int noteId = noteIds.get(i);
+			
+			int result = db.delete(ProfessionalPANote.NOTE_TABLE_NAME, ProfessionalPANote.NOTE_ID + "=?", new String[]{Integer.toString(noteId)});
+			
+			if(result > 0)
+			{
+				db.delete(NoteItem.NOTE_ITEM_TABLE_NAME, NoteItem.NOTE_ID + "=?", new String[]{Integer.toString(noteId)});
+			}
 		}
 	}
 

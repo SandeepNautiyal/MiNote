@@ -130,7 +130,7 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 			}
 			
 			editText.setOnLongClickListener(new NoteItemLongClickListener(
-					new NotesActionMode(note.getNoteId(), note.getNoteType(), imageNames)));
+					new NotesActionMode(note.getNoteId())));
 
 			editText.setFocusable(false);
 			editText.setClickable(true);
