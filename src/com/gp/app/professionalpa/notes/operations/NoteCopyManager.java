@@ -1,22 +1,23 @@
 package com.gp.app.professionalpa.notes.operations;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import com.gp.app.professionalpa.data.ProfessionalPANote;
-import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NoteCopyManager 
 {
-	private int originalId = -1;
+	private List<Integer> originalId = new ArrayList<Integer>();
 	
 	private int copiedNoteId = -1;
 	
 	private boolean isCopyInProgress = false;
 	
-    public NoteCopyManager(int noteId)
+    public NoteCopyManager(List<Integer> noteId)
     {
     	this.originalId = noteId;
     	
@@ -27,7 +28,7 @@ public class NoteCopyManager
 	{
 		if(isCopyInProgress)
 		{
-			ProfessionalPANote note = NotesManager.getInstance().getNote(originalId);
+			ProfessionalPANote note = NotesManager.getInstance().getNote(originalId.get(0));
 			
 			note.setCreationTime(System.currentTimeMillis());
 			

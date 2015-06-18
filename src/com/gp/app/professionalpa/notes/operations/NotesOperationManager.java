@@ -1,6 +1,7 @@
 package com.gp.app.professionalpa.notes.operations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
@@ -11,9 +12,12 @@ import android.widget.GridView;
 
 import com.gp.app.professionalpa.colorpicker.ColourPickerAdapter;
 import com.gp.app.professionalpa.colorpicker.ColourProperties;
+import com.gp.app.professionalpa.data.NoteItem;
+import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.layout.manager.ImageLocationPathManager;
+import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
@@ -26,28 +30,39 @@ public class NotesOperationManager
 	
 	private static NotesOperationManager manager = null;
 
-	private int selectedNoteId;
+	private List<Integer> selectedNoteIds = new ArrayList<Integer>();
 	
-    public void deleteNote(List<String> imagesName, byte noteType)
+    public void deleteSelectedNotes()
     {
-    	NotesManager.getInstance().deleteNote(selectedNoteId);
+    	NotesManager.getInstance().deleteNotes(selectedNoteIds);
 
-        NotesDBManager.getInstance().deleteNote(selectedNoteId);
+        NotesDBManager.getInstance().deleteNotes(selectedNoteIds);
 	        
-		ProfessionalPAParameters.getNotesActivity().deleteNote(selectedNoteId);
+		ProfessionalPAParameters.getNotesActivity().deleteNotes(selectedNoteIds);
 
-	    if(noteType == ProfessionalPAConstants.IMAGE_NOTE || noteType == ProfessionalPAConstants.IMAGE_NOTE)
-	    {
-	     	for(int i = 0; i < imagesName.size(); i++)
-	       	{
-		       	ImageLocationPathManager.getInstance().deleteImage(imagesName.get(i));
-	       	}
-	    }
+		for(int i = 0; i < selectedNoteIds.size(); i++)
+		{
+			ProfessionalPANote note = NotesManager.getInstance().getNote(selectedNoteIds.get(i));
+			
+			if(note != null)
+			{
+				List<NoteItem> items = note.getNoteItems();
+				
+				for(int j = 0, size = items.size(); j < size; j++)
+				{
+					NoteItem item = note.getNoteItems().get(i);
+					
+					ImageLocationPathManager.getInstance().deleteImage(item.getImageName());
+				}
+			}
+		}
+		
+		selectedNoteIds.clear();
     }
 
-	public void startCopyProcess(List<String> imageNames, byte noteType) 
+	public void startCopyProcess() 
 	{
-		notesCopyManager = new NoteCopyManager(selectedNoteId);
+		notesCopyManager = new NoteCopyManager(selectedNoteIds);
 		
 		isCopyInProgress = true;
 	}
@@ -114,16 +129,25 @@ public class NotesOperationManager
 		return manager;
 	}
 
-	public void setSelectedNote(int noteId) 
+	public void addSelectedNote(int noteId) 
 	{
-		System.out.println("setSelectedNote -> noteId="+noteId);
+		selectedNoteIds.add(noteId);
 		
-		selectedNoteId = noteId;
+		ProfessionalPAParameters.getNotesActivity().setNoteSelected(noteId);
 	}
 	
-	public int getSelectedNoteId()
+	public boolean isNoteSelected()
 	{
-		return selectedNoteId;
+		return selectedNoteIds.size() > 0;
 	}
-    
+	
+	public List<Integer> getSelectedNoteIds()
+	{
+		return selectedNoteIds;
+	}
+	
+	public void clearSelectedNotes()
+	{
+		 selectedNoteIds.clear();
+	}
 }

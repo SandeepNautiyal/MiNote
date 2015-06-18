@@ -20,17 +20,9 @@ public class NotesActionMode implements ActionMode.Callback
 {
 	int noteId = -1;
 	
-	byte noteType = -1;
-	
-	List<String> imageNames = null;
-	
-	public NotesActionMode(int noteId, byte noteType, List<String> imageNames)
+	public NotesActionMode(int noteId)
 	{
 		this.noteId = noteId;
-		
-		this.noteType = noteType;
-		
-		this.imageNames = imageNames;
 	}
     // Called when the action mode is created; startActionMode() was called
     @Override
@@ -55,11 +47,11 @@ public class NotesActionMode implements ActionMode.Callback
         switch (item.getItemId())
         {
             case R.id.item_delete:
-            	NotesOperationManager.getInstance().deleteNote(imageNames, noteType);
+            	NotesOperationManager.getInstance().deleteSelectedNotes();
             	mode.finish();
                 return true;
             case R.id.action_discard_notes:
-            	NotesOperationManager.getInstance().startCopyProcess(imageNames, noteType);
+            	NotesOperationManager.getInstance().startCopyProcess();
             case R.id.pickColor:
             	NotesOperationManager.getInstance().createColourPicker();
             default:
@@ -79,6 +71,7 @@ public class NotesActionMode implements ActionMode.Callback
 	@Override
     public void onDestroyActionMode(ActionMode mode) 
     {
+		
     }
 	
 	public int getNoteId()

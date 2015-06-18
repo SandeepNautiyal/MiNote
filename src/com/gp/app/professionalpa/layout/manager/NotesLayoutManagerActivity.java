@@ -21,6 +21,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.SparseIntArray;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -131,6 +132,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		actionBar.setBackgroundDrawable(new ColorDrawable(Color
 				.parseColor("#7F7CD9")));
 
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		
 		ProfessionalPAParameters.setNotesActivity(this);
 		
 		handleIntent(getIntent());
@@ -195,48 +198,51 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) 
 	{
-		int id = item.getItemId();
+		switch(item.getItemId())
+		{
+		    case R.id.action_settings :
+			    return true;
+			    
+		    case R.id.export_notes :
+			
+			    try 
+			    {
+				    ProfessionalPANotesExporter.export();
+			    } 
+			    catch (ProfessionalPABaseException e)
+			    {
+				// TODO Auto-generated catch block
+				    e.printStackTrace();
+			    }
+				
+			    return true;
+	
+		    case R.id.import_notes : 
+				
+		    	List<ProfessionalPANote> notes;
 
-		if (id == R.id.action_settings)
-		{
-			return true;
-		} 
-		else if (id == R.id.export_notes) 
-		{
-			try 
-			{
-				ProfessionalPANotesExporter.export();
-			}
-			catch (ProfessionalPABaseException exception) 
-			{
-				// TODO
-			}
-		} 
-		else if (id == R.id.import_notes) 
-		{
-			List<ProfessionalPANote> notes;
+////				try
+////				{
+////					//TODO improve import functionality hampered
+//////					notes = NotesDBManager.getInstance().readNotes(true);
+	//////
+//////					ProfessionalPAParameters.getProfessionalPANotesWriter()
+//////							.writeNotes(notes);
+////				} 
+////				catch (ProfessionalPABaseException e) 
+////				{
+////					// TODO Auto-generated catch block
+////					e.printStackTrace();
+////				}
+	//
+		    	return true;
+			case R.id.actionSearch :
+				notesSearchManager =  NotesDBManager.getInstance().new  NotesSearchManager();
+				return true;
 
-////			try
-////			{
-////				//TODO improve import functionality hampered
-//////				notes = NotesDBManager.getInstance().readNotes(true);
-//////
-//////				ProfessionalPAParameters.getProfessionalPANotesWriter()
-//////						.writeNotes(notes);
-////			} 
-////			catch (ProfessionalPABaseException e) 
-////			{
-////				// TODO Auto-generated catch block
-////				e.printStackTrace();
-////			}
-//
-		} 
-		else if(id == R.id.actionSearch)
-		{
-			notesSearchManager =  NotesDBManager.getInstance().new  NotesSearchManager();
-		}
-
-		return super.onOptionsItemSelected(item);
+			default:
+				return super.onOptionsItemSelected(item);
+	    }
 	}
 
 	private void createCalendarView()
@@ -385,6 +391,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		super.onDestroy();
 
 		NotesManager.getInstance().deleteAllNotes();
+		
+		NotesOperationManager.getInstance().clearSelectedNotes();
 	}
 
 	public byte getNumberOfLinearLayouts()
@@ -484,7 +492,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
     {
 		super.onBackPressed();
 	}
-
+	
 	@Override
 	protected void onResume() 
 	{
@@ -765,17 +773,22 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		super.onPause();
 	}
 
-	public void deleteNote(int noteId)
+	public void deleteNotes(List<Integer> noteIds)
 	{
-		FrameLayout layout = childFrames.get(noteId);
-
-		if (layout != null) 
+		for(int k = 0; k < noteIds.size(); k++)
 		{
-			for (int i = 0; i < linearLayouts.size(); i++)
-			{
-				LinearLayout linearLayout = linearLayouts.get(i);
+			int noteId = noteIds.get(k);
+			
+			FrameLayout layout = childFrames.get(noteId);
 
-				linearLayout.removeView(layout);
+			if (layout != null) 
+			{
+				for (int i = 0; i < linearLayouts.size(); i++)
+				{
+					LinearLayout linearLayout = linearLayouts.get(i);
+
+					linearLayout.removeView(layout);
+				}
 			}
 		}
 	}
@@ -827,16 +840,22 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	@Override
 	public void changeColour(int noteColor) 
 	{
-		final int selectedNoteId = NotesOperationManager.getInstance().getSelectedNoteId();
+		System.out.println("changeColour -> noteColor="+noteColor);
 		
-		FrameLayout frameLayout = childFrames.get(selectedNoteId);
-
-		setFrameLayoutColour(noteColor, selectedNoteId, frameLayout);
+		List<Integer> selectedNoteIds = NotesOperationManager.getInstance().getSelectedNoteIds();
+		
+		for(int i = 0; i < selectedNoteIds.size(); i++)
+		{
+			int selectedNoteId = selectedNoteIds.get(i);
+			
+			setNoteListViewColour(noteColor, selectedNoteId);
+		}
 	}
 
-	private void setFrameLayoutColour(int noteColor, final int selectedNoteId,
-			FrameLayout frameLayout)
+	private void setNoteListViewColour(int noteColor, final int selectedNoteId)
 	{
+		FrameLayout frameLayout = childFrames.get(selectedNoteId);
+
 		if(frameLayout != null)
 		{
 			View view = frameLayout.getChildAt(0);
@@ -852,6 +871,33 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 					note.setNoteColor(noteColor);
 
 					NotesDBManager.getInstance().setNoteColorAttribute(selectedNoteId, noteColor);
+				}
+			}
+		}
+	}
+	
+	public void resetNoteListViewColour()
+	{
+		List<Integer> selectedNoteIds = NotesOperationManager.getInstance().getSelectedNoteIds();
+		
+		for(int i = 0, size = selectedNoteIds.size(); i < size; i++)
+		{
+			int selectedNoteId = selectedNoteIds.get(i);
+			
+			FrameLayout frameLayout = childFrames.get(selectedNoteId);
+
+			if(frameLayout != null)
+			{
+				View view = frameLayout.getChildAt(0);
+				
+				if(view != null)
+				{
+					ProfessionalPANote note = NotesManager.getInstance().getNote(selectedNoteId);
+
+					if(note != null)
+					{
+						view.setBackgroundColor(note.getNoteColor());
+					}
 				}
 			}
 		}
@@ -939,20 +985,49 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
     @Override
 	public boolean onQueryTextChange(String query) 
 	{
-		System.out.println("onQueryTextChange -> query="+query);
-		
 		Set<Integer> noteIds = notesSearchManager.getMatchingNoteIds(query);
 		
-		System.out.println("onQueryTextChange -> noteIds="+noteIds);
-
 		filterNotes(noteIds);
 		
 		return false;
 	}
 
 	@Override
-	public boolean onQueryTextSubmit(String query) {
-		// TODO Auto-generated method stub
+	public boolean onQueryTextSubmit(String query)
+	{
 		return false;
+	}
+
+	public void setNoteSelected(int noteId) 
+	{
+		FrameLayout frameLayout = childFrames.get(noteId);
+		
+		if(frameLayout != null)
+		{
+			View view = frameLayout.getChildAt(0);
+
+			if(view != null)
+			{
+				System.out.println("setNoteSelected -> noteId="+noteId+" view="+view);
+				
+				view.setBackgroundResource(R.drawable.blue);
+			}
+		}
+	}
+	
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event)
+	{
+	    if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) 
+	    {
+	        if(NotesOperationManager.getInstance().isNoteSelected())
+	        {
+	        	resetNoteListViewColour();
+		    		
+		    	NotesOperationManager.getInstance().clearSelectedNotes();
+	        }
+	    }
+	    
+	    return super.dispatchKeyEvent(event);
 	}
 }

@@ -376,11 +376,11 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			{
 				if(modifiedNoteId != -1)
 				{
-					NotesManager.getInstance().deleteNote(modifiedNoteId);
+					NotesManager.getInstance().deleteNotes(Arrays.asList(modifiedNoteId));
 					
-					ProfessionalPAParameters.getNotesActivity().deleteNote(modifiedNoteId);
+					ProfessionalPAParameters.getNotesActivity().deleteNotes(Arrays.asList(modifiedNoteId));
 					
-					NotesDBManager.getInstance().deleteNote(modifiedNoteId);
+					NotesDBManager.getInstance().deleteNotes(Arrays.asList(modifiedNoteId));
 				}
 				
 				persistListElement(Arrays.asList(note));
