@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -22,34 +21,28 @@ import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.data.NoteItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.layout.manager.ImageLocationPathManager;
+import com.gp.app.professionalpa.notes.images.ImageLocationPathManager;
+import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 import com.gp.app.professionalpa.views.listeners.NoteItemLongClickListener;
-import com.gp.app.professionalpa.views.listeners.NotesActionMode;
+import com.gp.app.professionalpa.views.listeners.NotesActionModeCallback;
 
 public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 {
 	private ProfessionalPANote note = null;
-	
-	private List<NoteItem> listItems = null;
 	
 	public NoteFragmentAdapter(Context context, ProfessionalPANote note) {
 		
 		super(context, 0, note.getNoteItems());
 		
 		this.note = note;
-
-		if(note.getNoteItems() != null)
-		{
-			listItems = note.getNoteItems();
-		}
 	}
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
 		//TODO improve 1) introduce convert view reusing 2) if 1st cannot be done remove viewholder.
-	    final NoteItem noteListItem = listItems.get(position);
+	    final NoteItem noteListItem = note.getNoteItems().get(position);
 	    
 		convertView = LayoutInflater.from(getContext()).inflate(R.layout.composite_control_for_list_view, null, false);
 		
@@ -61,12 +54,14 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 		
         final int noteId = note.getNoteId();
         
+        editText.setOnLongClickListener(new NoteItemLongClickListener(noteId));
+        
         editText.setOnClickListener(new View.OnClickListener()
 		{
             @Override
             public void onClick(View v)
             {
-            	ProfessionalPAParameters.getNotesActivity().openNoteInEditMode(noteId);
+            	NotesOperationManager.getInstance().deSelectNote(noteId);
             }
         });
         
@@ -75,7 +70,7 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
             @Override
             public void onClick(View v)
             {
-            	ProfessionalPAParameters.getNotesActivity().openNoteInEditMode(noteId);
+            	NotesOperationManager.getInstance().deSelectNote(noteId);
             }
         });
 		
@@ -129,9 +124,6 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 				}
 			}
 			
-			editText.setOnLongClickListener(new NoteItemLongClickListener(
-					new NotesActionMode(note.getNoteId())));
-
 			editText.setFocusable(false);
 			editText.setClickable(true);
 			editText.setTextColor(noteListItem.getTextColour());

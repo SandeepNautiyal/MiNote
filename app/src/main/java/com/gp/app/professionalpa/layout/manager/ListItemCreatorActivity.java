@@ -34,6 +34,7 @@ import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
+import com.gp.app.professionalpa.notes.images.ImageLocationPathManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 

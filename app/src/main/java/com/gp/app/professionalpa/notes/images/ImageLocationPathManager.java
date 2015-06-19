@@ -1,4 +1,4 @@
-package com.gp.app.professionalpa.layout.manager;
+package com.gp.app.professionalpa.notes.images;
 
 import java.io.File;
 import java.io.FileNotFoundException;

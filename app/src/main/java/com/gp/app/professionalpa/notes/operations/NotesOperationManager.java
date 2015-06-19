@@ -7,6 +7,8 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
+import android.view.ActionMode;
+import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
 
@@ -16,11 +18,12 @@ import com.gp.app.professionalpa.data.NoteItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.layout.manager.ImageLocationPathManager;
 import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
+import com.gp.app.professionalpa.notes.images.ImageLocationPathManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
+import com.gp.app.professionalpa.views.listeners.NotesActionModeCallback;
 
 public class NotesOperationManager 
 {
@@ -31,7 +34,7 @@ public class NotesOperationManager
 	private static NotesOperationManager manager = null;
 
 	private List<Integer> selectedNoteIds = new ArrayList<Integer>();
-	
+
     public void deleteSelectedNotes()
     {
     	NotesManager.getInstance().deleteNotes(selectedNoteIds);
@@ -149,5 +152,25 @@ public class NotesOperationManager
 	public void clearSelectedNotes()
 	{
 		 selectedNoteIds.clear();
+	}
+
+	public void editSelectedNote() 
+	{
+		ProfessionalPAParameters.getNotesActivity().openNoteInEditMode(selectedNoteIds.get(0));
+	}
+
+	public void deSelectNote(int noteId) 
+	{   
+		if(selectedNoteIds.contains(noteId))
+		{
+			selectedNoteIds.remove((Integer)noteId);
+
+			ProfessionalPAParameters.getNotesActivity().deSelectNote(noteId);
+		}
+	}
+
+	public void selectNote(int noteId) 
+	{
+		addSelectedNote(noteId);
 	}
 }

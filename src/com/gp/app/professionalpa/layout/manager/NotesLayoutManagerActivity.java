@@ -21,6 +21,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.SparseIntArray;
+import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,8 +47,10 @@ import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.notes.fragments.ProfessionalPANoteFragment;
+import com.gp.app.professionalpa.notes.images.ImageLocationPathManager;
 import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
+import com.gp.app.professionalpa.views.listeners.NotesActionModeCallback;
 
 //TODO create notes for calendar events also
 public class NotesLayoutManagerActivity extends Activity implements ColourPickerChangeListener, OnQueryTextListener 
@@ -99,6 +102,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	private FrameLayout eventFrameLayout = null;
 
 	private boolean areNoteButtonCreated = false;
+
+	private ActionMode currenActionMode = null;
 	
 	public NotesLayoutManagerActivity() 
 	{
@@ -884,20 +889,24 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			int selectedNoteId = selectedNoteIds.get(i);
 			
-			FrameLayout frameLayout = childFrames.get(selectedNoteId);
+			resetNoteColor(selectedNoteId);
+		}
+	}
 
-			if(frameLayout != null)
+	private void resetNoteColor(int selectedNoteId) {
+		FrameLayout frameLayout = childFrames.get(selectedNoteId);
+
+		if(frameLayout != null)
+		{
+			View view = frameLayout.getChildAt(0);
+			
+			if(view != null)
 			{
-				View view = frameLayout.getChildAt(0);
-				
-				if(view != null)
-				{
-					ProfessionalPANote note = NotesManager.getInstance().getNote(selectedNoteId);
+				ProfessionalPANote note = NotesManager.getInstance().getNote(selectedNoteId);
 
-					if(note != null)
-					{
-						view.setBackgroundColor(note.getNoteColor());
-					}
+				if(note != null)
+				{
+					view.setBackgroundColor(note.getNoteColor());
 				}
 			}
 		}
@@ -1004,6 +1013,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		
 		if(frameLayout != null)
 		{
+			currenActionMode = startActionMode(new NotesActionModeCallback());
+
 			View view = frameLayout.getChildAt(0);
 
 			if(view != null)
@@ -1027,5 +1038,26 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	    }
 	    
 	    return super.dispatchKeyEvent(event);
+	}
+
+	public void deSelectNote(int noteId)
+	{
+		resetNoteColor(noteId);
+		
+		if(NotesOperationManager.getInstance().getSelectedNoteIds().size() == 0)
+		{
+			currenActionMode.finish();
+		}
+		else if(NotesOperationManager.getInstance().getSelectedNoteIds().size() == 1)
+		{
+			Menu menu = currenActionMode.getMenu();
+			
+			MenuItem item = menu.findItem(R.id.itemEdit);
+			
+			if(item != null)
+			{
+				item.setVisible(true);
+			}
+		}
 	}
 }
