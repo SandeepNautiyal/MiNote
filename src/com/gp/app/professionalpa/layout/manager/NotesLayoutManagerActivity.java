@@ -845,8 +845,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	@Override
 	public void changeColour(int noteColor) 
 	{
-		System.out.println("changeColour -> noteColor="+noteColor);
-		
 		List<Integer> selectedNoteIds = NotesOperationManager.getInstance().getSelectedNoteIds();
 		
 		for(int i = 0; i < selectedNoteIds.size(); i++)
@@ -855,6 +853,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			
 			setNoteListViewColour(noteColor, selectedNoteId);
 		}
+		
+		NotesOperationManager.getInstance().clearSelectedNotes();
 	}
 
 	private void setNoteListViewColour(int noteColor, final int selectedNoteId)
