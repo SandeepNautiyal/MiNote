@@ -855,6 +855,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			
 			setNoteListViewColour(noteColor, selectedNoteId);
 		}
+		
+		NotesOperationManager.getInstance().clearSelectedNotes();
 	}
 
 	private void setNoteListViewColour(int noteColor, final int selectedNoteId)
