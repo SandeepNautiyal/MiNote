@@ -5,18 +5,20 @@ import android.os.Parcelable;
 
 public class NoteItem implements Parcelable 
 {
-	public static final String NOTE_ID = "noteId";
+	public static final String NOTE_ID = "note_id";
 	public static final String DATA = "data";
-    public static final String	IMAGE_NAME = "imageName";
-    public static final String	TEXT_COLOR ="textColor";
-    public static final String NOTE_ITEM_TABLE_NAME = "NoteItem";
-	public static final String NOTE_ITEM_VIRTUAL_TABLE = "VirtualNoteItems";
+    public static final String	IMAGE_NAME = "image_name";
+    public static final String	TEXT_COLOR ="text_color";
+    public static final String NOTE_ITEM_TABLE_NAME = "note_item";
+	public static final String IS_TITLE = "is_title";
 
 	private String itemText = null;
 	
 	private String imageName = null;
 
 	private int textColour = 0;
+	
+	private boolean isNoteTitle = false;
 	
 	public NoteItem(String textViewData)
 	{
@@ -79,22 +81,9 @@ public class NoteItem implements Parcelable
 		
 		dest.writeInt(textColour);
 		
-//		if(imagePath != null)
-//		{
-//			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//			
-//			imagePath.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-//			
-//			byte[] imageArray = stream.toByteArray();
-//
-//			dest.writeByteArray(imageArray);
-//			
-//			dest.writeInt(imageArray.length);
-//		}
-//		else
-//		{
-//			dest.writeInt(0);
-//		}
+		byte isTitle = (byte)(isTitle() ? 1 : 0);
+		
+		dest.writeByte(isTitle);
 	}
 
 	public static final Parcelable.Creator<NoteItem> CREATOR = new Parcelable.Creator<NoteItem>() 
@@ -108,9 +97,13 @@ public class NoteItem implements Parcelable
 			
 			int colour = source.readInt();
 			
+			boolean isTitle = source.readByte() == 0 ? false : true;
+			
 			NoteItem noteListItem = new NoteItem(itemProperties[0], itemProperties[1]);
 			
 			noteListItem.setTextColour(colour);
+			
+			noteListItem.setIsTitle(isTitle);
 			
 			return noteListItem;
 		}
@@ -134,17 +127,6 @@ public class NoteItem implements Parcelable
 		return builder.toString();
 	}
 	
-	public String convertToString()
-	{
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("ITEM_TEXT="+itemText);
-		
-		sb.append("IMAGE_NAME="+imageName);
-		
-		return sb.toString();
-	}
-	
 	public int getLength()
 	{
 		int textFactor = 0;
@@ -158,5 +140,15 @@ public class NoteItem implements Parcelable
 		int length =  textFactor + (imageName == null || imageName.trim().length() == 0  ? 0 : 10);
 
 		return length;
+	}
+
+	public void setIsTitle(boolean isTitle) 
+	{
+		this.isNoteTitle = isTitle;
+	}
+
+	public boolean isTitle() 
+	{
+		return isNoteTitle;
 	}
 }

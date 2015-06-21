@@ -53,7 +53,6 @@ public class NotesActionModeCallback implements ActionMode.Callback
             case R.id.pickColor:
             	NotesOperationManager.getInstance().createColourPicker();
             default:
-                
         }
         
         mode.finish();

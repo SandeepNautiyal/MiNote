@@ -6,7 +6,10 @@ import java.util.List;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +26,7 @@ import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.images.ImageLocationPathManager;
 import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
-import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 import com.gp.app.professionalpa.views.listeners.NoteItemLongClickListener;
-import com.gp.app.professionalpa.views.listeners.NotesActionModeCallback;
 
 public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 {
@@ -81,13 +82,25 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 //	    ImageButton alarmImageButton = (ImageButton)convertView.findViewById(R.id.composite_control_alarm_button);
 
 	    byte noteType = note.getNoteType();
-	    		
+	    	
+	    if(noteType == ProfessionalPAConstants.LIST_NOTE || noteType == ProfessionalPAConstants.PARAGRAPH_NOTE)
+	    {
+	    	
+	    }
+	    
 		if (noteType == ProfessionalPAConstants.LIST_NOTE && (noteListItem.getImageName() == null || noteListItem.getImageName().equals("")))
 		{
-			LayoutParams bulletPointImageViewParams = bulletPointImage.getLayoutParams();
-			bulletPointImageViewParams.height = compressedViewHeight;
-			bulletPointImageViewParams.width = (int) androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
-			bulletPointImage.setLayoutParams(bulletPointImageViewParams);
+			if(noteListItem.isTitle())
+			{
+				bulletPointImage.setVisibility(View.GONE);
+			}
+			else
+			{
+				LayoutParams bulletPointImageViewParams = bulletPointImage.getLayoutParams();
+				bulletPointImageViewParams.height = compressedViewHeight;
+				bulletPointImageViewParams.width = (int) androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
+				bulletPointImage.setLayoutParams(bulletPointImageViewParams);
+			}
 		} 
 		else if (noteType == ProfessionalPAConstants.PARAGRAPH_NOTE) 
 		{
@@ -95,7 +108,7 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 			importanceButtonParams.height = 0;
 			importanceButtonParams.width = 0;
 			bulletPointImage.setLayoutParams(importanceButtonParams);
-			bulletPointImage.setVisibility(View.INVISIBLE);
+			bulletPointImage.setVisibility(View.GONE);
 		}
 
 		if (noteListItem.getText() != null && !noteListItem.getText().equals(""))
@@ -104,10 +117,26 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 
 			params.addRule(RelativeLayout.RIGHT_OF, bulletPointImage.getId());
 			
+			System.out.println("getView -> is Title="+noteListItem.isTitle());
+			
+			if(noteListItem.isTitle())
+			{
+				editText.setGravity(Gravity.CENTER);
+				
+				editText.setTypeface(null, Typeface.BOLD);
+				
+				editText.setBackgroundResource(R.drawable.note_title_border);
+				
+				editText.setBackgroundColor(Color.rgb(120, 100, 255));
+			}
+			
 		    editText.setLayoutParams(params);
 		    
 			editText.setText(noteListItem.getText());
 			
+			System.out.println("getView -> noteListItem.getText()="+noteListItem.getText()+" colour="+
+					noteListItem.getTextColour());
+
 			editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
 			List<String> imageNames = new ArrayList<String>();
