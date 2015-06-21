@@ -317,6 +317,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			if (data != null) 
 			{
 				note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
+				
+				System.out.println("onActivityResult -> note="+note);
 			}
 		}
 
@@ -845,8 +847,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	@Override
 	public void changeColour(int noteColor) 
 	{
-		System.out.println("changeColour -> noteColor="+noteColor);
-		
 		List<Integer> selectedNoteIds = NotesOperationManager.getInstance().getSelectedNoteIds();
 		
 		for(int i = 0; i < selectedNoteIds.size(); i++)

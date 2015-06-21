@@ -62,6 +62,7 @@ public class NotesDBManager extends SQLiteOpenHelper
 		
 		db.execSQL("CREATE TABLE " + NoteItem.NOTE_ITEM_TABLE_NAME + "(" + NoteItem.NOTE_ID +  " INTEGER, " +
 				NoteItem.DATA + " TEXT, " + NoteItem.IMAGE_NAME + " TEXT, " + NoteItem.TEXT_COLOR + " INTEGER, "+
+				NoteItem.IS_TITLE + " TEXT, "+
 				" FOREIGN KEY ("+NoteItem.NOTE_ID+") REFERENCES "+ProfessionalPANote.NOTE_TABLE_NAME+" ("+ProfessionalPANote.NOTE_ID+"));");
 	}
 
@@ -100,18 +101,11 @@ public class NotesDBManager extends SQLiteOpenHelper
 			noteItemValues.put(NoteItem.TEXT_COLOR, item.getTextColour());
 			noteItemValues.put(NoteItem.IMAGE_NAME, item.getImageName());
 			noteItemValues.put(NoteItem.DATA, item.getText());
+			noteItemValues.put(NoteItem.IS_TITLE, Boolean.toString(item.isTitle()));
 			
 			db.insert(
 					 NoteItem.NOTE_ITEM_TABLE_NAME,null,
 					 noteItemValues);
-			
-			ContentValues virtualValues = new ContentValues();
-			noteItemValues.put(NoteItem.NOTE_ID, note.getNoteId());
-			noteItemValues.put(NoteItem.DATA, item.getText());
-			
-			db.insert(
-					 NoteItem.NOTE_ITEM_VIRTUAL_TABLE,null,
-					 virtualValues);
 		}
 	}
 	
@@ -205,6 +199,7 @@ public class NotesDBManager extends SQLiteOpenHelper
     			NoteItem.TEXT_COLOR,
     			NoteItem.IMAGE_NAME,
     			NoteItem.DATA,
+    			NoteItem.IS_TITLE,
     	};
     	
     	Cursor cursor = db.query(
@@ -226,8 +221,10 @@ public class NotesDBManager extends SQLiteOpenHelper
         	int noteColor = cursor.getInt(cursor.getColumnIndexOrThrow(NoteItem.TEXT_COLOR));
         	String imageName = cursor.getString(cursor.getColumnIndexOrThrow(NoteItem.IMAGE_NAME));
         	String itemData = cursor.getString(cursor.getColumnIndexOrThrow(NoteItem.DATA));
+        	String isTitle = cursor.getString(cursor.getColumnIndexOrThrow(NoteItem.IS_TITLE));
         	item = new NoteItem(itemData, imageName);
         	item.setTextColour(noteColor);
+        	item.setIsTitle(Boolean.valueOf(isTitle));
             noteItems.add(item);
         	cursor.moveToNext();
     	}
@@ -304,9 +301,9 @@ public class NotesDBManager extends SQLiteOpenHelper
 				noteItemValues.put(NoteItem.TEXT_COLOR, item.getTextColour());
 				noteItemValues.put(NoteItem.IMAGE_NAME, item.getImageName());
 				noteItemValues.put(NoteItem.DATA, item.getText());
-				
-				db.insert(
-						 NoteItem.NOTE_ITEM_TABLE_NAME, null, noteItemValues);
+				noteItemValues.put(NoteItem.IS_TITLE, Boolean.toString(item.isTitle()));
+
+				db.insert(NoteItem.NOTE_ITEM_TABLE_NAME, null, noteItemValues);
 			}
 		}
 	}

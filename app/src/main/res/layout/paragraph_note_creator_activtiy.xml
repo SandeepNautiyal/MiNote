@@ -4,12 +4,20 @@
     android:layout_height="match_parent" >
     
     <EditText
+        android:id="@+id/paragraphTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentTop="true"
+        android:hint="Note Title"
+        android:inputType="text|textMultiLine"
+        android:contentDescription="@string/add_note"/>
+    
+    <EditText
         android:id="@+id/paragraphNote"
         android:layout_width="fill_parent"
         android:layout_height="150dip"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:inputType="textMultiLine"
+        android:layout_below="@+id/paragraphTitle"
+        android:inputType="text|textMultiLine"
         android:contentDescription="@string/add_note"/>
     
     <ImageView

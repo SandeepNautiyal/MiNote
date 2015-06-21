@@ -18,7 +18,7 @@ import com.gp.app.professionalpa.R;
 
 public class ColourPickerAdapter extends ArrayAdapter<ColourProperties> 
 {
-	private final Context parentActivityContext; 
+	private final Context noteActivityContext; 
 	
 	private int layoutResourceId; 
 	
@@ -32,7 +32,7 @@ public class ColourPickerAdapter extends ArrayAdapter<ColourProperties>
 		
 		layoutResourceId = R.layout.colour_picker_adapter_view;
 		
-		this.parentActivityContext = context; 
+		this.noteActivityContext = context; 
 		
 		this.parentDialog = parentDialog;
 		
@@ -48,7 +48,7 @@ public class ColourPickerAdapter extends ArrayAdapter<ColourProperties>
 		
 		if (row == null) 
 		{ 
-			LayoutInflater inflater = ((Activity) parentActivityContext).getLayoutInflater(); 
+			LayoutInflater inflater = ((Activity) noteActivityContext).getLayoutInflater(); 
 			
 			row = inflater.inflate(layoutResourceId, parent, false); 
 			
@@ -83,7 +83,7 @@ public class ColourPickerAdapter extends ArrayAdapter<ColourProperties>
 			{
 				System.out.println("onClick -> view="+view);
 				
-				((ColourPickerChangeListener)parentActivityContext).changeColour(view.getId());
+				((ColourPickerChangeListener)noteActivityContext).changeColour(view.getId());
 				
 				parentDialog.dismiss();
 			}

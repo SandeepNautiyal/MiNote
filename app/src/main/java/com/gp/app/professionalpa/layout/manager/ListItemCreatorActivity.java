@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.ScrollView;
 
 import com.gp.app.professionalpa.R;
@@ -55,6 +56,8 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	private int modifiedNoteId = -1;
 	
 	private List<View> selectedViewId = new ArrayList<View>(1);
+
+	private EditText editText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -68,6 +71,8 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			scrollView = (ScrollView)inflater.inflate(R.layout.list_item_creator_activity, null);
 			
 			activityLayout = (RelativeLayout)scrollView.findViewById(R.id.list_item_creator_activity_layout);
+			
+			editText = (EditText)activityLayout.findViewById(R.id.noteTitle);
 			
 			editNotes();
 			
@@ -255,6 +260,10 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 		{
 			layoutParams.addRule(RelativeLayout.BELOW, lastAddedListItem.getId());
 		}
+		else
+		{
+			layoutParams.addRule(RelativeLayout.BELOW, R.id.noteTitle);
+		}
 		
 		currentAddedListItem.setLayoutParams(layoutParams);
 		
@@ -335,6 +344,19 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	{
 		List<NoteItem> noteItems = new ArrayList<NoteItem>();
 		
+		String title = editText.getText().toString();
+		
+		if(title != null && !title.equals(""))
+		{
+			NoteItem item = new NoteItem(title);
+			
+			item.setTextColour(editText.getCurrentTextColor());
+
+			noteItems.add(item);
+			
+			item.setIsTitle(true);
+		}
+		
 		for(int i = 0, size = listItems.size(); i < size; i++)
 		{
 			ListViewItemLayout compoundControl = listItems.get(i);
@@ -373,8 +395,6 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			
 			note.setLastEditedTime(lastEditedTime);
 			
-			try
-			{
 				if(modifiedNoteId != -1)
 				{
 					NotesManager.getInstance().deleteNotes(Arrays.asList(modifiedNoteId));
@@ -385,11 +405,6 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 				}
 				
 				persistListElement(Arrays.asList(note));
-			} 
-			catch (ProfessionalPABaseException exception) 
-			{
-				// TODO improve
-			}
 			
 			modifiedNoteId = -1;
 		}
@@ -411,7 +426,7 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	    super.onBackPressed();
 	}
 	
-	private void persistListElement(List<ProfessionalPANote> notes) throws ProfessionalPABaseException
+	private void persistListElement(List<ProfessionalPANote> notes)
 	{
 		NotesDBManager.getInstance().saveNotes(notes);
 	}

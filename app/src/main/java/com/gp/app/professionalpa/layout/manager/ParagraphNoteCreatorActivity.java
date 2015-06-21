@@ -153,6 +153,21 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 			NotesDBManager.getInstance().deleteNotes(Arrays.asList(modifiedNoteId));
 		}
 
+		EditText titleEditText = (EditText)findViewById(R.id.paragraphTitle);
+		
+		String title = titleEditText.getText().toString();
+		
+		NoteItem titleItem = null;
+		
+		if(title != null && !title.trim().equals(""))
+		{
+			titleItem = new NoteItem(title);
+			
+			titleItem.setIsTitle(true);
+			
+			titleItem.setTextColour(titleEditText.getCurrentTextColor());
+		}
+		
 		String imageName = listItem.getImageName();
 		
 		boolean isValidImageName =  imageName != null && imageName.length() > 0 && !imageName.trim().equals("");
@@ -167,7 +182,9 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 		{
 			int noteId = modifiedNoteId != -1 ? modifiedNoteId : NotesManager.getInstance().getNextFreeNoteId();
 			
-			note = new ProfessionalPANote(noteId, ProfessionalPAConstants.PARAGRAPH_NOTE, Arrays.asList(listItem));
+			 List<NoteItem> items = titleItem != null ? Arrays.asList(titleItem, listItem) : Arrays.asList(listItem);
+		    
+			note = new ProfessionalPANote(noteId, ProfessionalPAConstants.PARAGRAPH_NOTE, items);
 
 	        long creationTime = System.currentTimeMillis();
 			

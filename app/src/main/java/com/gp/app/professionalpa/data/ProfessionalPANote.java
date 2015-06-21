@@ -70,16 +70,6 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		return noteType;
 	}
 	
-	public boolean isParagraphNote() 
-	{
-		return noteType == ProfessionalPAConstants.PARAGRAPH_NOTE;
-	}
-	
-	public boolean isImageNote() 
-	{
-		return noteType == ProfessionalPAConstants.IMAGE_NOTE;
-	}
-	
 	public boolean isListNote() 
 	{
 		return noteType == ProfessionalPAConstants.LIST_NOTE;
