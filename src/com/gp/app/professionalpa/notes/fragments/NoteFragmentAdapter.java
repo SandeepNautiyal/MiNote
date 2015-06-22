@@ -57,6 +57,8 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
         
         editText.setOnLongClickListener(new NoteItemLongClickListener(noteId));
         
+        imageView.setOnLongClickListener(new NoteItemLongClickListener(noteId));
+        
         editText.setOnClickListener(new View.OnClickListener()
 		{
             @Override
@@ -83,11 +85,6 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 
 	    byte noteType = note.getNoteType();
 	    	
-	    if(noteType == ProfessionalPAConstants.LIST_NOTE || noteType == ProfessionalPAConstants.PARAGRAPH_NOTE)
-	    {
-	    	
-	    }
-	    
 		if (noteType == ProfessionalPAConstants.LIST_NOTE && (noteListItem.getImageName() == null || noteListItem.getImageName().equals("")))
 		{
 			if(noteListItem.isTitle())
@@ -117,8 +114,6 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 
 			params.addRule(RelativeLayout.RIGHT_OF, bulletPointImage.getId());
 			
-			System.out.println("getView -> is Title="+noteListItem.isTitle());
-			
 			if(noteListItem.isTitle())
 			{
 				editText.setGravity(Gravity.CENTER);
@@ -134,9 +129,6 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 		    
 			editText.setText(noteListItem.getText());
 			
-			System.out.println("getView -> noteListItem.getText()="+noteListItem.getText()+" colour="+
-					noteListItem.getTextColour());
-
 			editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
 			List<String> imageNames = new ArrayList<String>();
