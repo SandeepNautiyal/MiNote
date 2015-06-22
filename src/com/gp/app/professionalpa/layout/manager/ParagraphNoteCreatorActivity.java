@@ -1,6 +1,7 @@
 package com.gp.app.professionalpa.layout.manager;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -35,6 +38,12 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 	private NoteItem listItem = null;
 	
 	private int modifiedNoteId = -1;
+
+	private EditText titleEditText = null;
+	
+	private EditText paragraphEditText = null;
+	
+	private List<View> selectedViews = new ArrayList<View>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -43,6 +52,30 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 		
 		RelativeLayout activityLayout = (RelativeLayout)getLayoutInflater().inflate(R.layout.paragraph_note_creator_activtiy, null);
 
+		setContentView(activityLayout);
+
+		titleEditText = (EditText)activityLayout.findViewById(R.id.paragraphTitle);
+
+		paragraphEditText = (EditText)activityLayout.findViewById(R.id.paragraphNote);
+
+		paragraphEditText.setOnFocusChangeListener(new OnFocusChangeListener() 
+		{
+			@Override
+			public void onFocusChange(View view, boolean hasFocus)
+			{
+				resetSelectedView(view);
+			}
+		});
+		
+		titleEditText.setOnFocusChangeListener(new OnFocusChangeListener() 
+		{
+			@Override
+			public void onFocusChange(View view, boolean hasFocus)
+			{
+				resetSelectedView(view);
+			}
+		});
+		
         Intent intent = getIntent();
 		
 		if(intent != null)
@@ -59,20 +92,34 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 				{
 			    	ProfessionalPANote professionalPANote = NotesManager.getInstance().getNote(noteId);
 			    	
-			    	EditText editText = (EditText)activityLayout.findViewById(R.id.paragraphNote);
+			    	List<NoteItem> items = professionalPANote.getNoteItems();
 			    	
-			    	editText.setText(professionalPANote.getNoteItems().get(0).getText());
-			    	
-                    ImageView imageView = (ImageView)activityLayout.findViewById(R.id.paragraphNoteImportanceView);
-			    	
-                    imageView.setImageBitmap(ImageLocationPathManager.getInstance().getImage(professionalPANote.getNoteItems().get(0).getImageName(), true));
+			    	for(int i = 0; i < items.size(); i++)
+			    	{
+			    		NoteItem item = items.get(i);
+			    		
+			    		if(item.isTitle())
+			    		{
+			    			titleEditText.setText(items.get(0).getText());
+					    	
+					    	titleEditText.setText(items.get(0).getTextColour());
+			    		}
+			    		else
+			    		{
+			    			EditText editText = (EditText)activityLayout.findViewById(R.id.paragraphNote);
+					    	
+					    	editText.setText(professionalPANote.getNoteItems().get(0).getText());
+					    	
+		                    ImageView imageView = (ImageView)activityLayout.findViewById(R.id.paragraphNoteImportanceView);
+					    	
+		                    imageView.setImageBitmap(ImageLocationPathManager.getInstance().getImage(professionalPANote.getNoteItems().get(0).getImageName(), true));
+			    		}
+			    	}
 				}
 			}
 		}
 
 		listItem = new NoteItem();
-		
-		setContentView(activityLayout);
 		
         ActionBar actionBar = getActionBar();
 		
@@ -94,8 +141,6 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 		
 		if (id == R.id.action_save_paragraph_note) 
 		{
-			EditText paragraphEditText = (EditText)findViewById(R.id.paragraphNote);
-			
 			String paragraphData = paragraphEditText.getText().toString();
 			 
 			listItem.setTextViewData(paragraphData);
@@ -153,8 +198,6 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 			NotesDBManager.getInstance().deleteNotes(Arrays.asList(modifiedNoteId));
 		}
 
-		EditText titleEditText = (EditText)findViewById(R.id.paragraphTitle);
-		
 		String title = titleEditText.getText().toString();
 		
 		NoteItem titleItem = null;
@@ -213,10 +256,20 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 	@Override
 	public void changeColour(int colourCode) 
 	{
-		EditText selectedView = (EditText)findViewById(R.id.paragraphNote);
-
-		ProfessionalPAUtil.setCursorColor(selectedView, colourCode);
+        EditText selectedView1 = (EditText)selectedViews.get(0);
 		
-		selectedView.setTextColor(colourCode);
+		if(selectedViews != null)
+		{
+			ProfessionalPAUtil.setCursorColor(selectedView1, colourCode);
+				
+			selectedView1.setTextColor(colourCode);
+		}
+	}
+	
+	private void resetSelectedView(View view) 
+	{
+		selectedViews.clear();
+		
+		selectedViews.add(view);
 	}
 }

@@ -55,9 +55,9 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	
 	private int modifiedNoteId = -1;
 	
-	private List<View> selectedViewId = new ArrayList<View>(1);
+	private List<View> selectedViews = new ArrayList<View>(1);
 
-	private EditText editText;
+	private EditText titleEditText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -72,7 +72,18 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			
 			activityLayout = (RelativeLayout)scrollView.findViewById(R.id.list_item_creator_activity_layout);
 			
-			editText = (EditText)activityLayout.findViewById(R.id.noteTitle);
+			titleEditText = (EditText)activityLayout.findViewById(R.id.noteTitle);
+			
+			titleEditText.setOnFocusChangeListener(new OnFocusChangeListener() 
+			{
+				@Override
+				public void onFocusChange(View view, boolean hasFocus)
+				{
+					selectedViews.clear();
+					
+					selectedViews.add(view);
+				}
+			});
 			
 			editNotes();
 			
@@ -132,22 +143,31 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			    				
 			    				if(item != null)
 			    				{
-			    					String textViewData = item.getText();
-			    					
-			    					String imageName = item.getImageName();
-			    					
-			    					if(textViewData != null && !textViewData.equals(""))
+			    					if(item.isTitle())
 			    					{
-			    						addNewListItem();
-			    						
-			    						lastAddedListItem.setText(textViewData);
+			    						titleEditText.setText(item.getText());
 			    					}
-			    					
-			    					if(imageName != null && !imageName.equals(""))
+			    					else
 			    					{
-	                                    addNewListItem();
-			    						
-			    						lastAddedListItem.setImage(imageName, ImageLocationPathManager.getInstance().getImage(imageName, true), true);
+			    						String textViewData = item.getText();
+				    					
+				    					String imageName = item.getImageName();
+				    					
+				    					if(textViewData != null && !textViewData.equals(""))
+				    					{
+				    						addNewListItem();
+				    						
+				    						lastAddedListItem.setText(textViewData);
+				    						
+				    						lastAddedListItem.setTextColour(item.getTextColour());
+				    					}
+				    					
+				    					if(imageName != null && !imageName.equals(""))
+				    					{
+		                                    addNewListItem();
+				    						
+				    						lastAddedListItem.setImage(imageName, ImageLocationPathManager.getInstance().getImage(imageName, true), true);
+				    					}
 			    					}
 			    				}
 			    			}
@@ -282,14 +302,15 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 				}
 			});
 		}
+		
 		currentAddedListItem.getEditText().setOnFocusChangeListener(new OnFocusChangeListener() 
 		{
 			@Override
 			public void onFocusChange(View view, boolean hasFocus)
 			{
-				selectedViewId.clear();
+				selectedViews.clear();
 				
-				selectedViewId.add(view);
+				selectedViews.add(view);
 			}
 		});
 		
@@ -344,13 +365,13 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	{
 		List<NoteItem> noteItems = new ArrayList<NoteItem>();
 		
-		String title = editText.getText().toString();
+		String title = titleEditText.getText().toString();
 		
 		if(title != null && !title.equals(""))
 		{
 			NoteItem item = new NoteItem(title);
 			
-			item.setTextColour(editText.getCurrentTextColor());
+			item.setTextColour(titleEditText.getCurrentTextColor());
 
 			noteItems.add(item);
 			
@@ -434,7 +455,7 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	@Override
 	public void changeColour(int colourCode) 
 	{
-        EditText selectedView = (EditText)selectedViewId.get(0);
+        EditText selectedView = (EditText)selectedViews.get(0);
 		
 		if(selectedView != null)
 		{

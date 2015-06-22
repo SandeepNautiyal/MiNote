@@ -168,4 +168,9 @@ public class ListViewItemLayout extends RelativeLayout
 	{
 		return imageName == null ? "" : imageName;
 	}
+
+	public void setTextColour(int textColour) 
+	{
+		textView.setTextColor(textColour);
+	}
 }
