@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,9 +34,13 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 {
 	private ProfessionalPANote note = null;
 	
-	public NoteFragmentAdapter(Context context, ProfessionalPANote note) {
-		
+	private Context context;
+    
+	public NoteFragmentAdapter(Context context, ProfessionalPANote note) 
+	{
 		super(context, 0, note.getNoteItems());
+		
+		this.context = context;
 		
 		this.note = note;
 	}
@@ -51,7 +57,7 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 		
 		ImageButton bulletPointImage = (ImageButton) convertView.findViewById(R.id.compositeControlBulletButton);
 		
-		ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
+		final ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
 		
         final int noteId = note.getNoteId();
         
@@ -73,15 +79,26 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
             @Override
             public void onClick(View v)
             {
-            	NotesOperationManager.getInstance().deSelectNote(noteId);
+            	if(NotesOperationManager.getInstance().getSelectedNoteIds().contains((Integer)noteId))
+            	{
+                	NotesOperationManager.getInstance().deSelectNote(noteId);
+            	}
+            	else
+            	{
+            		Intent intent = new Intent();
+            		intent.setAction(Intent.ACTION_VIEW);
+            		String imagePath = ImageLocationPathManager.getInstance().getImagePath(noteListItem.getImageName());
+            		intent.setDataAndType(Uri.parse("file://"+imagePath), "image/*");
+            		context.startActivity(intent);
+            	}
             }
+
+			
         });
 		
 	    Resources androidResources = getContext().getResources();
 	    
 	    int compressedViewHeight = (int)androidResources.getDimension(R.dimen.composite_control_textview_height_compressed);
-
-//	    ImageButton alarmImageButton = (ImageButton)convertView.findViewById(R.id.composite_control_alarm_button);
 
 	    byte noteType = note.getNoteType();
 	    	
@@ -178,4 +195,5 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 
 	    return convertView;
 	}
+	
 }

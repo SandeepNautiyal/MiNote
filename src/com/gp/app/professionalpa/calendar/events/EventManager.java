@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
 import com.gp.app.professionalpa.notification.service.AlarmRequestCreator;
-import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 
 public class EventManager

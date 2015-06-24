@@ -7,7 +7,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;

@@ -1,6 +1,5 @@
 package com.gp.app.professionalpa.colorpicker;
 
-import com.gp.app.professionalpa.colorpicker.ColourProperties;
 
 public class ColorPickerSelectionManager 
 {

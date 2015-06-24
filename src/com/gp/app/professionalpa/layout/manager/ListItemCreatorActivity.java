@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.ScrollView;
 
 import com.gp.app.professionalpa.R;
@@ -31,7 +30,6 @@ import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
 import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
 import com.gp.app.professionalpa.data.NoteItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
-import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;

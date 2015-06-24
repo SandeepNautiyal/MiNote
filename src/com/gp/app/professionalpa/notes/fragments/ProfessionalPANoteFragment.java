@@ -10,7 +10,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.notes.fragments.NoteFragmentAdapter;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 

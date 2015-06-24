@@ -1,9 +1,5 @@
 package com.gp.app.professionalpa.calendar.events;
 
-import java.text.ParseException;
-
-import com.gp.app.professionalpa.util.ProfessionalPAUtil;
-
 import android.provider.BaseColumns;
 
 public class Event implements BaseColumns

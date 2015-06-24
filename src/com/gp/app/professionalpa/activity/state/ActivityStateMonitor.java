@@ -1,11 +1,11 @@
 package com.gp.app.professionalpa.activity.state;
 
-import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
-
 import android.app.Activity;
 import android.app.Application;
 import android.app.Application.ActivityLifecycleCallbacks;
 import android.os.Bundle;
+
+import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
 
 /**
  * TODO to be removed if not needed.

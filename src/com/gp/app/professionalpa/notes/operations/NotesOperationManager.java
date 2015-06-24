@@ -1,14 +1,11 @@
 package com.gp.app.professionalpa.notes.operations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
-import android.view.ActionMode;
-import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
 
@@ -16,14 +13,10 @@ import com.gp.app.professionalpa.colorpicker.ColourPickerAdapter;
 import com.gp.app.professionalpa.colorpicker.ColourProperties;
 import com.gp.app.professionalpa.data.NoteItem;
 import com.gp.app.professionalpa.data.ProfessionalPANote;
-import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
-import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.notes.images.ImageLocationPathManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
-import com.gp.app.professionalpa.views.listeners.NotesActionModeCallback;
 
 public class NotesOperationManager 
 {

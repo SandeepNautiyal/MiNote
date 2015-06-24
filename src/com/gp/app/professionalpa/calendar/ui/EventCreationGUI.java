@@ -1,8 +1,6 @@
 package com.gp.app.professionalpa.calendar.ui;
 
 
-import java.util.Calendar;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -22,8 +20,6 @@ import android.widget.Toast;
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.calendar.events.Event;
 import com.gp.app.professionalpa.calendar.events.EventManager;
-import com.gp.app.professionalpa.calendar.interfaces.DBChangeListener;
-import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 

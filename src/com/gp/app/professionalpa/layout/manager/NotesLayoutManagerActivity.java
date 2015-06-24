@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import android.animation.Animator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
@@ -104,6 +105,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	private boolean areNoteButtonCreated = false;
 
 	private ActionMode currenActionMode = null;
+	
+    private Animator mCurrentAnimator = null;
 	
 	public NotesLayoutManagerActivity() 
 	{
@@ -317,8 +320,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			if (data != null) 
 			{
 				note = data.getParcelableExtra(ProfessionalPAConstants.NOTE_DATA);
-				
-				System.out.println("onActivityResult -> note="+note);
 			}
 		}
 

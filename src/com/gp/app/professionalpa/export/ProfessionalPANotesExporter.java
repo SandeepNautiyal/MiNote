@@ -7,12 +7,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
-import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.util.ProfessionalPAUtil;
-
 import android.os.Environment;
-import android.util.Log;
+
+import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class ProfessionalPANotesExporter {
 

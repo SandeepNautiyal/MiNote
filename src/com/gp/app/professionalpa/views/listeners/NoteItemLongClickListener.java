@@ -1,6 +1,5 @@
 package com.gp.app.professionalpa.views.listeners;
 
-import android.view.ActionMode;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 
