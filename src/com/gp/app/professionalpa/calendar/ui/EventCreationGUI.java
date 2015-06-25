@@ -18,8 +18,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.calendar.events.Event;
 import com.gp.app.professionalpa.calendar.events.EventManager;
+import com.gp.app.professionalpa.data.Event;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 

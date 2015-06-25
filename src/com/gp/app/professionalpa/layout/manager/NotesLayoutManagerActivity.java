@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import android.animation.Animator;
@@ -37,17 +38,20 @@ import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
 import com.gp.app.professionalpa.calendar.ui.ProfessionalPACalendarView;
 import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
+import com.gp.app.professionalpa.data.Event;
+import com.gp.app.professionalpa.data.Note;
 import com.gp.app.professionalpa.data.NoteItem;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.export.ProfessionalPANotesExporter;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.FragmentCreationManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
-import com.gp.app.professionalpa.notes.fragments.ProfessionalPANoteFragment;
+import com.gp.app.professionalpa.notes.fragments.TextNoteFragment;
 import com.gp.app.professionalpa.notes.images.ImageLocationPathManager;
 import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
@@ -78,6 +82,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private static final short NUMBER_OF_LINEAR_LAYOUT_FOR_EXTRA_LARGE_SCREEN_LANDSCAPE = 5;
 
+	private static final String APPLIED_FILTER = "currentAppliedFilter";
+
 	private SparseIntArray linearLayoutOccupancy = new SparseIntArray();
 	
 	private Map<Integer, FrameLayout> childFrames = new LinkedHashMap<Integer, FrameLayout>();
@@ -106,7 +112,13 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private ActionMode currenActionMode = null;
 	
-    private Animator mCurrentAnimator = null;
+	private byte EVENT_FILTER = 2;
+	
+	private byte NOTE_FILTER = 1;
+	
+	private byte DEFAULT_FILTER = 0;
+	
+	private byte currentAppliedFilter = 0;
 	
 	public NotesLayoutManagerActivity() 
 	{
@@ -160,6 +172,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, (byte)linearLayoutOccupancy.size());
 
+		outState.putByte(APPLIED_FILTER, currentAppliedFilter);
+		
 		super.onSaveInstanceState(outState);
 	}
 
@@ -168,13 +182,18 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		linearLayoutOccupancy.clear();
 		
-		int numberOfLinearLayouts = (byte) savedInstanceState
+		int numberOfLinearLayouts =  savedInstanceState
 				.getByte(NUMBER_OF_LINEAR_LAYOUTS);
 		
 		updateNumberOfLinearLayoutsOnScreenChange(getResources()
 				.getConfiguration(), numberOfLinearLayouts);
 
+		currentAppliedFilter =  savedInstanceState
+				.getByte(APPLIED_FILTER);
+		
 		fillLinearLayoutList();
+		
+	    applyFilter(currentAppliedFilter);
 	}
 
 	@Override
@@ -211,6 +230,15 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		    case R.id.action_settings :
 			    return true;
 			    
+		    case R.id.defaultFilter :
+		    	applyFilter(DEFAULT_FILTER);
+		    	return true;
+		    case R.id.note :
+		    	applyFilter(NOTE_FILTER);
+		    	return true;
+		    case R.id.event :
+		    	applyFilter(EVENT_FILTER);
+		    	return true;
 		    case R.id.export_notes :
 			
 			    try 
@@ -227,7 +255,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	
 		    case R.id.import_notes : 
 				
-		    	List<ProfessionalPANote> notes;
+		    	List<TextNote> notes;
 
 ////				try
 ////				{
@@ -251,6 +279,53 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			default:
 				return super.onOptionsItemSelected(item);
 	    }
+	}
+
+	private void applyFilter(byte filterType) 
+	{
+		currentAppliedFilter = filterType;
+		
+		for(Entry<Integer, FrameLayout> entry : childFrames.entrySet())
+		{
+			int noteId = entry.getKey();
+			
+			FrameLayout frameLayout = entry.getValue();
+			
+			Note note = NotesManager.getInstance().getNote(noteId);
+			
+			if(note != null)
+			{
+				if(filterType == 0)
+				{
+					frameLayout.setVisibility(View.VISIBLE);
+				}
+				
+				if(filterType == 1 )
+			    {
+					if(note.getType() == Note.LIST_NOTE || note.getType() == Note.PARAGRAPH_NOTE
+				        || note.getType() == Note.IMAGE_NOTE)
+					{
+					    frameLayout.setVisibility(View.VISIBLE);
+					}
+				    else
+				    {
+						frameLayout.setVisibility(View.GONE);
+				    }
+			    }
+				
+				if(filterType == 2) 
+				{
+					if(note.getType() == Note.EVENT_NOTE)
+					{
+						frameLayout.setVisibility(View.VISIBLE);
+					}
+					else
+					{
+						frameLayout.setVisibility(View.GONE);
+					}
+				}
+			}
+		}
 	}
 
 	private void createCalendarView()
@@ -302,7 +377,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		ProfessionalPANote note = null;
+		TextNote note = null;
 
 		if (requestCode == ProfessionalPAConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
 		{
@@ -329,17 +404,17 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		}
 	}
 
-	private ProfessionalPANote createProfessionalPANoteFromImage(String imagePath)
+	private TextNote createProfessionalPANoteFromImage(String imagePath)
 	{
-		ProfessionalPANote note;
+		TextNote note;
 
 		ArrayList<NoteItem> items = new ArrayList<NoteItem>();
 
 		items.add(new NoteItem(null, ImageLocationPathManager.getInstance()
 				.getImageName(imagePath)));
 
-		note = new ProfessionalPANote(NotesManager.getInstance().getNextFreeNoteId(),
-				ProfessionalPAConstants.IMAGE_NOTE, items);
+		note = new TextNote(NotesManager.getInstance().getNextFreeNoteId(),
+				Note.IMAGE_NOTE, items);
 
 		long creationTime = Long.valueOf(imageCaptureManager
 				.getImageName(imagePath));
@@ -348,34 +423,34 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		note.setLastEditedTime(creationTime);
 
-		note.setTypeOfNote(ProfessionalPAConstants.IMAGE_NOTE);
+		note.setTypeOfNote(Note.IMAGE_NOTE);
 
 		note.setLastEditedTime(System.currentTimeMillis());
 		return note;
 	}
 
-	private void createFragmentForNote(ProfessionalPANote note) 
+	public void createFragmentForNote(Note note) 
 	{
 		if (note != null)
 		{
 			Fragment fragment = FragmentCreationManager.createFragment(note);
 
-			NotesManager.getInstance().addNote(note.getNoteId(), note);
+			NotesManager.getInstance().addNote(note.getId(), note);
 
 			if (fragment != null) 
 			{
-				createActivityLayout(fragment);
+				boolean isTextNote = note.getType() != Note.EVENT_NOTE;
+				
+				createActivityLayout(fragment, note.getId(), isTextNote);
 			}
 		}
 	}
 
-	private void createActivityLayout(Fragment fragment) 
+	private void createActivityLayout(Fragment fragment, int noteId, boolean isTextNote) 
 	{
         final FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
-		int noteId = ((ProfessionalPANoteFragment)fragment).getFragmentNoteId();
-
-		int fragmentLength = ((ProfessionalPANoteFragment)fragment).getFragmentLength();
+		int fragmentLength = isTextNote ? ((TextNoteFragment)fragment).getFragmentLength() : 3;
 
 		frameLayout.setClickable(true);
 		
@@ -692,8 +767,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			
 			button.setImageDrawable(getResources().getDrawable(R.drawable.professional_pa_camera));
 			
-			button.setOnClickListener(new OnClickListener() {
-				
+			button.setOnClickListener(new OnClickListener() 
+			{
 				@Override
 				public void onClick(View v) 
 				{
@@ -762,11 +837,23 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private void createNotes()
 	{
-		List<ProfessionalPANote> parsedNotes = NotesDBManager.getInstance().readNotes();
+		List<TextNote> parsedNotes = NotesDBManager.getInstance().readNotes();
 
 		for (int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++)
 		{
-			ProfessionalPANote note = parsedNotes.get(i);
+			TextNote note = parsedNotes.get(i);
+
+			if (note != null)
+			{
+				createFragmentForNote(note);
+			}
+		}
+		
+		List<Event> events = CalendarDBManager.getInstance().readAllEvents();
+		
+		for(int i = 0, size = events.size(); i < size; i++)
+		{
+			Event note = events.get(i);
 
 			if (note != null)
 			{
@@ -801,15 +888,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		}
 	}
 
-	public void addNote(int noteId)
-	{
-		ProfessionalPANote note = NotesManager.getInstance().getNote(noteId);
-
-		if (note != null) {
-			createFragmentForNote(note);
-		}
-	}
-
 	class LinearLayoutOnClickListener implements OnClickListener {
 		@Override
 		public void onClick(View v) 
@@ -821,28 +899,31 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	public void openNoteInEditMode(int noteId) 
 	{
-		ProfessionalPANote note = NotesManager.getInstance().getNote(noteId);
+		Note note = NotesManager.getInstance().getNote(noteId);
 		
-		if(note.isListNote())
+		if(note.getType() != Note.EVENT_NOTE)
 		{
-			Intent intent = new Intent(getApplicationContext(),
-					ListItemCreatorActivity.class);
-
-			intent.putExtra(ProfessionalPAConstants.NOTE_ID, noteId);
+			TextNote textNote = (TextNote)note;
 			
-			startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
-		}
-		else
-		{
-			Intent intent = new Intent(getApplicationContext(),
-					ParagraphNoteCreatorActivity.class);
+			if(textNote.isListNote())
+			{
+				Intent intent = new Intent(getApplicationContext(),
+						ListItemCreatorActivity.class);
 
-			intent.putExtra(ProfessionalPAConstants.NOTE_ID, noteId);
-			
-			startActivityForResult(intent, PARAGRAPH_ACTIVITY_RESULT_CREATED);
+				intent.putExtra(ProfessionalPAConstants.NOTE_ID, noteId);
+				
+				startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
+			}
+			else
+			{
+				Intent intent = new Intent(getApplicationContext(),
+						ParagraphNoteCreatorActivity.class);
+
+				intent.putExtra(ProfessionalPAConstants.NOTE_ID, noteId);
+				
+				startActivityForResult(intent, PARAGRAPH_ACTIVITY_RESULT_CREATED);
+			}
 		}
-		
-//		startActivity(intent);
 	}
 
 	@Override
@@ -872,11 +953,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			{
 				view.setBackgroundColor(noteColor);
 				
-				ProfessionalPANote note = NotesManager.getInstance().getNote(selectedNoteId);
+				Note note = NotesManager.getInstance().getNote(selectedNoteId);
 				
-				if(note != null)
+				if(note != null && note.getType() != Note.EVENT_NOTE)
 				{
-					note.setNoteColor(noteColor);
+					((TextNote)note).setNoteColor(noteColor);
 
 					NotesDBManager.getInstance().setNoteColorAttribute(selectedNoteId, noteColor);
 				}
@@ -905,11 +986,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			
 			if(view != null)
 			{
-				ProfessionalPANote note = NotesManager.getInstance().getNote(selectedNoteId);
+				Note note = NotesManager.getInstance().getNote(selectedNoteId);
 
-				if(note != null)
+				if(note != null && note.getType() != Note.EVENT_NOTE)
 				{
-					view.setBackgroundColor(note.getNoteColor());
+					view.setBackgroundColor(((TextNote)note).getNoteColor());
 				}
 			}
 		}

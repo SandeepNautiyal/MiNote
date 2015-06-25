@@ -28,8 +28,9 @@ import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.colorpicker.ColorPickerCreator;
 import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
 import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
+import com.gp.app.professionalpa.data.Note;
 import com.gp.app.professionalpa.data.NoteItem;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
@@ -121,61 +122,66 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 				
 				if(noteId != 0)
 				{
-			    	ProfessionalPANote professionalPANote = NotesManager.getInstance().getNote(noteId);
+			    	Note note = NotesManager.getInstance().getNote(noteId);
 
-			    	if(professionalPANote != null)
+			    	if(note.getType() != Note.EVENT_NOTE)
 			    	{
-			    		if(professionalPANote.getNoteType() == ProfessionalPAConstants.IMAGE_NOTE)
-			    		{
-			    			createActivityLayoutForNote(professionalPANote);
-				    		
-				    		isSaveButtonToBeCreated  = false;
-			    		}
-			    		else
-			    		{
-			    			List<NoteItem> listItems = professionalPANote.getNoteItems();
-			    			
-			    			for(int i = 0; i < listItems.size(); i++)
-			    			{
-			    				NoteItem item = listItems.get(i);
-			    				
-			    				if(item != null)
-			    				{
-			    					if(item.isTitle())
-			    					{
-			    						titleEditText.setText(item.getText());
-			    					}
-			    					else
-			    					{
-			    						String textViewData = item.getText();
-				    					
-				    					String imageName = item.getImageName();
-				    					
-				    					if(textViewData != null && !textViewData.equals(""))
+			    		TextNote professionalPANote = (TextNote)note;
+			    		
+			    		if(professionalPANote != null)
+				    	{
+				    		if(professionalPANote.getType() == Note.IMAGE_NOTE)
+				    		{
+				    			createActivityLayoutForNote(professionalPANote);
+					    		
+					    		isSaveButtonToBeCreated  = false;
+				    		}
+				    		else
+				    		{
+				    			List<NoteItem> listItems = professionalPANote.getNoteItems();
+				    			
+				    			for(int i = 0; i < listItems.size(); i++)
+				    			{
+				    				NoteItem item = listItems.get(i);
+				    				
+				    				if(item != null)
+				    				{
+				    					if(item.isTitle())
 				    					{
-				    						addNewListItem();
-				    						
-				    						lastAddedListItem.setText(textViewData);
-				    						
-				    						lastAddedListItem.setTextColour(item.getTextColour());
+				    						titleEditText.setText(item.getText());
 				    					}
-				    					
-				    					if(imageName != null && !imageName.equals(""))
+				    					else
 				    					{
-		                                    addNewListItem();
-				    						
-				    						lastAddedListItem.setImage(imageName, ImageLocationPathManager.getInstance().getImage(imageName, true), true);
+				    						String textViewData = item.getText();
+					    					
+					    					String imageName = item.getImageName();
+					    					
+					    					if(textViewData != null && !textViewData.equals(""))
+					    					{
+					    						addNewListItem();
+					    						
+					    						lastAddedListItem.setText(textViewData);
+					    						
+					    						lastAddedListItem.setTextColour(item.getTextColour());
+					    					}
+					    					
+					    					if(imageName != null && !imageName.equals(""))
+					    					{
+			                                    addNewListItem();
+					    						
+					    						lastAddedListItem.setImage(imageName, ImageLocationPathManager.getInstance().getImage(imageName, true), true);
+					    					}
 				    					}
-			    					}
-			    				}
-			    			}
-			    			
-			    			updateActivityLayout();
-			    			
-			    			isLastItemToBeAddedInLayout = false;
+				    				}
+				    			}
+				    			
+				    			updateActivityLayout();
+				    			
+				    			isLastItemToBeAddedInLayout = false;
 
-			    			modifiedNoteId = noteId;
-			    		}
+				    			modifiedNoteId = noteId;
+				    		}
+				    	}
 			    	}
 				}
 			}
@@ -224,9 +230,9 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	    }
 	}
 	
-	private void createActivityLayoutForNote(ProfessionalPANote professionalPANote) 
+	private void createActivityLayoutForNote(TextNote professionalPANote) 
 	{
-		if(professionalPANote.getNoteType() == ProfessionalPAConstants.IMAGE_NOTE)
+		if(professionalPANote.getType() == Note.IMAGE_NOTE)
 		{
 			NoteItem item = professionalPANote.getNoteItems().get(0);
 
@@ -398,13 +404,13 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			}
 		}
 
-		ProfessionalPANote note = null;
+		TextNote note = null;
 		
 		if(noteItems.size() > 0)
 		{
 			int noteId = modifiedNoteId == -1 ? NotesManager.getInstance().getNextFreeNoteId() : modifiedNoteId;
 			
-			note = new ProfessionalPANote(noteId, ProfessionalPAConstants.LIST_NOTE, noteItems);
+			note = new TextNote(noteId, Note.LIST_NOTE, noteItems);
 			
 			long creationTime = System.currentTimeMillis();
 			
@@ -445,7 +451,7 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	    super.onBackPressed();
 	}
 	
-	private void persistListElement(List<ProfessionalPANote> notes)
+	private void persistListElement(List<TextNote> notes)
 	{
 		NotesDBManager.getInstance().saveNotes(notes);
 	}

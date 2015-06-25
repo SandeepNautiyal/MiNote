@@ -13,16 +13,16 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.gp.app.professionalpa.data.NoteItem;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.interfaces.XMLEntity;
 import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class ProfessionalPANotesParser extends DefaultHandler
 {
-	private List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
+	private List<TextNote> notes = new ArrayList<TextNote>();
 	
-	private ProfessionalPANote currentNote = null;
+	private TextNote currentNote = null;
 	
 	private NoteItem currentNoteItem = null;
 	
@@ -60,7 +60,7 @@ public class ProfessionalPANotesParser extends DefaultHandler
     {
 		if (qName.equalsIgnoreCase("note"))
 		{
-			currentNote = new ProfessionalPANote();
+			currentNote = new TextNote();
 			
 			//Fetching the ID of TownCenter, we use it as a reference to fetch the child nodes.
 			String typeOfNote = attributes.getValue("type");
@@ -172,20 +172,20 @@ public class ProfessionalPANotesParser extends DefaultHandler
 		}
 	}
 	
-	public List<ProfessionalPANote> getNotes()
+	public List<TextNote> getNotes()
 	{
 		return notes;
 	}
 
-	public ProfessionalPANote getNote(int noteId) 
+	public TextNote getNote(int noteId) 
 	{
-		ProfessionalPANote result = null;
+		TextNote result = null;
 		
 		for(int i = 0; i < notes.size(); i++)
 		{
-			ProfessionalPANote note = notes.get(i);
+			TextNote note = notes.get(i);
 			
-			if(note.getNoteId() == noteId)
+			if(note.getId() == noteId)
 			{
 				result = note;
 				

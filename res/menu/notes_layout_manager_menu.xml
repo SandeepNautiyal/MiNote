@@ -15,6 +15,32 @@
         android:title="@string/action_settings"/>
     
     <item
+        android:id="@+id/action_filter"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_filter">
+        <menu>
+            <item
+                android:id="@+id/defaultFilter"
+                android:orderInCategory="100"
+                android:showAsAction="never"
+                android:title="@string/defaultFilter"/>
+            
+            <item
+                android:id="@+id/note"
+                android:orderInCategory="100"
+                android:showAsAction="never"
+                android:title="@string/note"/>
+        
+            <item
+                android:id="@+id/event"
+                android:orderInCategory="100"
+                android:showAsAction="never"
+                android:title="@string/event"/>
+        </menu>
+    </item>
+    
+    <item
         android:id="@+id/export_notes"
         android:orderInCategory="100"
         android:showAsAction="never"

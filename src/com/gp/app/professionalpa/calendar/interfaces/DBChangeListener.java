@@ -1,6 +1,6 @@
 package com.gp.app.professionalpa.calendar.interfaces;
 
-import com.gp.app.professionalpa.calendar.events.Event;
+import com.gp.app.professionalpa.data.Event;
 
 public interface DBChangeListener 
 {

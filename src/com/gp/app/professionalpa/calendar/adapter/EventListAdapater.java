@@ -12,9 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.calendar.events.Event;
 import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
 import com.gp.app.professionalpa.calendar.ui.EventCreationGUI;
+import com.gp.app.professionalpa.data.Event;
 
 public class EventListAdapater extends ArrayAdapter<Event>
 {
@@ -75,7 +75,7 @@ public class EventListAdapater extends ArrayAdapter<Event>
 				
 				notifyDataSetChanged();
 				
-				CalendarDBManager.getInstance().deleteEvent(event.getEventId());
+				CalendarDBManager.getInstance().deleteEvent(event.getId());
 			}
 		});
         
@@ -92,7 +92,7 @@ public class EventListAdapater extends ArrayAdapter<Event>
 		
 		eventCreationGUI.createGuiForEventAddition(context, Integer.valueOf(dateAsArray[0]), Integer.valueOf(dateAsArray[1]), Integer.valueOf(dateAsArray[2]), EventCreationGUI.CREATE_GUI_IN_EDIT_MODE);
 		
-		eventCreationGUI.setEventId(event.getEventId());
+		eventCreationGUI.setEventId(event.getId());
 		
 		eventCreationGUI.setEventName(event.getEventName());
 		

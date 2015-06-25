@@ -44,4 +44,8 @@
     <string name="cross_mark">✘</string>
     <string name="search_hint">Search Note</string>
     <string name="note_search_manager_title">Search</string>
+    <string name="action_filter">Filter</string>
+    <string name="note">Note</string>
+    <string name="event">Event</string>
+    <string name="defaultFilter">Default</string>
 </resources>

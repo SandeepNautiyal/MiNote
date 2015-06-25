@@ -8,11 +8,10 @@ import java.util.Map;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.interfaces.XMLEntity;
 
 
-public class ProfessionalPANote implements XMLEntity, Parcelable
+public class TextNote extends Note
 {
     public static final String NOTE_TABLE_NAME = "Note";
     public static final String NOTE_ID = "noteId";
@@ -25,7 +24,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 	
 	private byte state = XMLEntity.INSERT_STATE;
 	
-	private byte noteType = ProfessionalPAConstants.LIST_NOTE;
+	private byte noteType = Note.LIST_NOTE;
 	
 	private List<NoteItem> noteItems = new ArrayList<NoteItem>();
 	
@@ -35,7 +34,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 	
 	private int noteColor;
 
-	public ProfessionalPANote(int noteId, byte noteType, List<NoteItem> values) 
+	public TextNote(int noteId, byte noteType, List<NoteItem> values) 
 	{
 		this.noteId = noteId;
 		
@@ -47,11 +46,11 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		}
 	}
 
-	public ProfessionalPANote()
+	public TextNote()
 	{
 	}
 
-	public ProfessionalPANote(int noteId, byte noteType, int noteColor,
+	public TextNote(int noteId, byte noteType, int noteColor,
 			long creationTime, long lastEditedTime) 
 	{
         this.noteId = noteId;
@@ -65,14 +64,14 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		this.lastEditedTime = lastEditedTime;
 	}
 
-	public byte getNoteType()
+	public byte getType()
 	{
 		return noteType;
 	}
 	
 	public boolean isListNote() 
 	{
-		return noteType == ProfessionalPAConstants.LIST_NOTE;
+		return noteType == Note.LIST_NOTE;
 	}
 
 	public void setTypeOfNote(byte noteType) 
@@ -132,7 +131,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		dest.writeIntArray(new int[]{noteId, noteColor});
 	}
 
-	public int getNoteId()
+	public int getId()
 	{
 		return noteId;
 	}
@@ -142,10 +141,10 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		this.noteId = noteId;
 	}
 
-	public static final Parcelable.Creator<ProfessionalPANote> CREATOR = new Parcelable.Creator<ProfessionalPANote>() {
+	public static final Parcelable.Creator<TextNote> CREATOR = new Parcelable.Creator<TextNote>() {
 
 		@Override
-		public ProfessionalPANote createFromParcel(Parcel source) {
+		public TextNote createFromParcel(Parcel source) {
 			
 			List<NoteItem> noteItems = source.createTypedArrayList(NoteItem.CREATOR);
 			
@@ -161,7 +160,7 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 			
 			source.readIntArray(noteAttributes);
 			
-			ProfessionalPANote note = new ProfessionalPANote(noteAttributes[0], noteState[0], noteItems);
+			TextNote note = new TextNote(noteAttributes[0], noteState[0], noteItems);
 			
 			note.setCreationTime(timeAttributes[0]);
 
@@ -175,8 +174,8 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 		}
 
 		@Override
-		public ProfessionalPANote[] newArray(int size) {
-			return new ProfessionalPANote[size];
+		public TextNote[] newArray(int size) {
+			return new TextNote[size];
 		}
 	};
 	
@@ -194,8 +193,8 @@ public class ProfessionalPANote implements XMLEntity, Parcelable
 	@Override
 	public boolean equals(Object obj)
 	{
-		return this.creationTime == ((ProfessionalPANote)obj).getCreationTime()
-				&& this.lastEditedTime == ((ProfessionalPANote)obj).getLastEditedTime();
+		return this.creationTime == ((TextNote)obj).getCreationTime()
+				&& this.lastEditedTime == ((TextNote)obj).getLastEditedTime();
 	}
 	
 	public static class NotePropertyValues 

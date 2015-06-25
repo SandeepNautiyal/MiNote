@@ -6,33 +6,34 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 
-public class ProfessionalPANoteFragment extends ListFragment
+public class TextNoteFragment extends ListFragment
 {
-	private int noteId = -1;
-	
-	private NoteFragmentAdapter adapter;
+	private TextNoteFragmentAdapter adapter;
 
 	private ListView listView = null;
 	
-	private int noteColor;
+	private TextNote note;
 	
-	public ProfessionalPANoteFragment()
+	public TextNoteFragment()
 	{
 		super();
 	}
 	
-	public ProfessionalPANoteFragment(int noteColor)
+	public TextNoteFragment(TextNote note)
 	{
 		super();
 		
-		this.noteColor = noteColor;
+		this.note = note;
 	}
 	
 	/**
@@ -57,46 +58,45 @@ public class ProfessionalPANoteFragment extends ListFragment
 		
 		if(bundle != null)
 		{
-			ProfessionalPANote note = bundle.getParcelable(ProfessionalPAConstants.NOTE_DATA);
+			TextNote note = bundle.getParcelable(ProfessionalPAConstants.NOTE_DATA);
 			
 		    if(note != null)
 		    {
-				adapter = new NoteFragmentAdapter(getActivity(), note);
+				adapter = new TextNoteFragmentAdapter(getActivity(), note);
 				
 				listView.setAdapter(adapter);
 				
 				listView.setDivider(null);
 				
+				listView.setOnItemLongClickListener(new OnItemLongClickListener()
+				{
+
+					@Override
+					public boolean onItemLongClick(AdapterView<?> parent,
+							View view, int position, long id) {
+						
+						selectNote();
+
+						return false;
+					}
+					
+				});
+				
 				listView.setDividerHeight(0);			
 				
 				setListViewHeightBasedOnItems();
 //				setListShown(true);
-				listView.setBackgroundColor(noteColor);
+				listView.setBackgroundColor(note.getNoteColor());
 				
 				adapter.notifyDataSetChanged();
 		    }
 		}
 	}
 	
-	public void setNoteFragmentId(int noteId)
-	{
-		this.noteId = noteId;
-	}
-	
 	@Override
 	public void onDestroy() 
 	{
 		super.onDestroy();
-	}
-	
-	public int getFragmentNoteId()
-	{
-		return noteId;
-	}
-	
-	public int getNumberOfItems()
-	{
-		return NotesManager.getInstance().getNote(noteId).getNoteItems().size();
 	}
 	
 	/**
@@ -140,6 +140,20 @@ public class ProfessionalPANoteFragment extends ListFragment
 	
 	public int getFragmentLength()
 	{
-		return NotesManager.getInstance().getNote(noteId).getLength();
+		int length = 0;
+		
+		if(note != null)
+		{
+			length = note.getLength();
+		}
+		
+		return length;
+	}
+	
+	private void selectNote() 
+	{
+        NotesOperationManager notesOperationManager = NotesOperationManager.getInstance(); 
+		
+		notesOperationManager.selectNote(note.getId());
 	}
 }

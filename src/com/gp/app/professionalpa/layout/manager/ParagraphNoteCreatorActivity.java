@@ -24,8 +24,9 @@ import android.widget.RelativeLayout;
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.colorpicker.ColorPickerCreator;
 import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
+import com.gp.app.professionalpa.data.Note;
 import com.gp.app.professionalpa.data.NoteItem;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
@@ -90,30 +91,35 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 				
 				if(noteId != 0)
 				{
-			    	ProfessionalPANote professionalPANote = NotesManager.getInstance().getNote(noteId);
+			    	Note note = NotesManager.getInstance().getNote(noteId);
 			    	
-			    	List<NoteItem> items = professionalPANote.getNoteItems();
-			    	
-			    	for(int i = 0; i < items.size(); i++)
+			    	if(note != null && note.getType() != Note.EVENT_NOTE)
 			    	{
-			    		NoteItem item = items.get(i);
+			    		TextNote textNote = (TextNote)note;
 			    		
-			    		if(item.isTitle())
-			    		{
-			    			titleEditText.setText(items.get(0).getText());
-					    	
-					    	titleEditText.setText(items.get(0).getTextColour());
-			    		}
-			    		else
-			    		{
-			    			EditText editText = (EditText)activityLayout.findViewById(R.id.paragraphNote);
-					    	
-					    	editText.setText(professionalPANote.getNoteItems().get(0).getText());
-					    	
-		                    ImageView imageView = (ImageView)activityLayout.findViewById(R.id.paragraphNoteImportanceView);
-					    	
-		                    imageView.setImageBitmap(ImageLocationPathManager.getInstance().getImage(professionalPANote.getNoteItems().get(0).getImageName(), true));
-			    		}
+			    		List<NoteItem> items = textNote.getNoteItems();
+				    	
+				    	for(int i = 0; i < items.size(); i++)
+				    	{
+				    		NoteItem item = items.get(i);
+				    		
+				    		if(item.isTitle())
+				    		{
+				    			titleEditText.setText(items.get(0).getText());
+						    	
+						    	titleEditText.setText(items.get(0).getTextColour());
+				    		}
+				    		else
+				    		{
+				    			EditText editText = (EditText)activityLayout.findViewById(R.id.paragraphNote);
+						    	
+						    	editText.setText(textNote.getNoteItems().get(0).getText());
+						    	
+			                    ImageView imageView = (ImageView)activityLayout.findViewById(R.id.paragraphNoteImportanceView);
+						    	
+			                    imageView.setImageBitmap(ImageLocationPathManager.getInstance().getImage(textNote.getNoteItems().get(0).getImageName(), true));
+				    		}
+				    	} 
 			    	}
 				}
 			}
@@ -219,7 +225,7 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 		
 		boolean isValidListText =  listItemData != null && listItemData.length() > 0 && !listItemData.trim().equals("");
 
-		ProfessionalPANote note = null;
+		TextNote note = null;
 
 		if(isValidImageName || isValidListText)
 		{
@@ -227,7 +233,7 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 			
 			 List<NoteItem> items = titleItem != null ? Arrays.asList(titleItem, listItem) : Arrays.asList(listItem);
 		    
-			note = new ProfessionalPANote(noteId, ProfessionalPAConstants.PARAGRAPH_NOTE, items);
+			note = new TextNote(noteId, Note.PARAGRAPH_NOTE, items);
 
 	        long creationTime = System.currentTimeMillis();
 			
@@ -248,7 +254,7 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 	}
 	
 	
-	private void persistListElement(List<ProfessionalPANote> notes)
+	private void persistListElement(List<TextNote> notes)
 	{
 		NotesDBManager.getInstance().saveNotes(notes);
 	}

@@ -23,20 +23,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.data.Note;
 import com.gp.app.professionalpa.data.NoteItem;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
-import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.notes.images.ImageLocationPathManager;
 import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
-import com.gp.app.professionalpa.views.listeners.NoteItemLongClickListener;
 
-public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
+public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 {
-	private ProfessionalPANote note = null;
+	private TextNote note = null;
 	
 	private Context context;
     
-	public NoteFragmentAdapter(Context context, ProfessionalPANote note) 
+	public TextNoteFragmentAdapter(Context context, TextNote note) 
 	{
 		super(context, 0, note.getNoteItems());
 		
@@ -59,11 +58,11 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 		
 		final ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
 		
-        final int noteId = note.getNoteId();
+        final int noteId = note.getId();
         
-        editText.setOnLongClickListener(new NoteItemLongClickListener(noteId));
-        
-        imageView.setOnLongClickListener(new NoteItemLongClickListener(noteId));
+//        editText.setOnLongClickListener(new NoteItemLongClickListener(noteId));
+//        
+//        imageView.setOnLongClickListener(new NoteItemLongClickListener(noteId));
         
         editText.setOnClickListener(new View.OnClickListener()
 		{
@@ -100,9 +99,9 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 	    
 	    int compressedViewHeight = (int)androidResources.getDimension(R.dimen.composite_control_textview_height_compressed);
 
-	    byte noteType = note.getNoteType();
+	    byte noteType = note.getType();
 	    	
-		if (noteType == ProfessionalPAConstants.LIST_NOTE && (noteListItem.getImageName() == null || noteListItem.getImageName().equals("")))
+		if (noteType == Note.LIST_NOTE && (noteListItem.getImageName() == null || noteListItem.getImageName().equals("")))
 		{
 			if(noteListItem.isTitle())
 			{
@@ -116,7 +115,7 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 				bulletPointImage.setLayoutParams(bulletPointImageViewParams);
 			}
 		} 
-		else if (noteType == ProfessionalPAConstants.PARAGRAPH_NOTE) 
+		else if (noteType == Note.PARAGRAPH_NOTE) 
 		{
 			LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
 			importanceButtonParams.height = 0;

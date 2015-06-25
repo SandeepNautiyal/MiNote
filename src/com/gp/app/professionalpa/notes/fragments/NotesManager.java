@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.data.Note;
+import com.gp.app.professionalpa.data.TextNote;
 
 public class NotesManager 
 {
 	private static NotesManager notesManager = null;
 	
-	Map<Integer, ProfessionalPANote> notes = new TreeMap<Integer, ProfessionalPANote>();
+	Map<Integer, Note> notes = new TreeMap<Integer, Note>();
 	
 	private NotesManager()
 	{
@@ -27,19 +28,14 @@ public class NotesManager
 		return notesManager;
 	}
 
-	public ProfessionalPANote getNote(int noteId)
+	public Note getNote(int noteId)
 	{
 		return notes.get(noteId);
 	}
 	
-	public void addNote(int noteId, ProfessionalPANote note)
+	public void addNote(int noteId, Note note)
 	{
 		notes.put(noteId, note);
-	}
-
-	public Map<Integer, ProfessionalPANote> getNotes()
-	{
-		return notes;
 	}
 
 	public void deleteAllNotes()
@@ -61,7 +57,7 @@ public class NotesManager
 		
 		if(notes.size() > 0)
 		{
-			lastOccupiedKey = ((TreeMap<Integer, ProfessionalPANote>)notes).lastKey();
+			lastOccupiedKey = ((TreeMap<Integer, Note>)notes).lastKey();
 		}
 		 
 		return ++lastOccupiedKey;

@@ -11,8 +11,10 @@ import android.widget.GridView;
 
 import com.gp.app.professionalpa.colorpicker.ColourPickerAdapter;
 import com.gp.app.professionalpa.colorpicker.ColourProperties;
+import com.gp.app.professionalpa.data.Event;
+import com.gp.app.professionalpa.data.Note;
 import com.gp.app.professionalpa.data.NoteItem;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.notes.images.ImageLocationPathManager;
@@ -38,15 +40,17 @@ public class NotesOperationManager
 
 		for(int i = 0; i < selectedNoteIds.size(); i++)
 		{
-			ProfessionalPANote note = NotesManager.getInstance().getNote(selectedNoteIds.get(i));
+			Note note = NotesManager.getInstance().getNote(selectedNoteIds.get(i));
 			
-			if(note != null)
+			if(note != null && note.getType() != Note.EVENT_NOTE)
 			{
-				List<NoteItem> items = note.getNoteItems();
+				TextNote textNote = (TextNote)note;
+				
+				List<NoteItem> items = textNote.getNoteItems();
 				
 				for(int j = 0, size = items.size(); j < size; j++)
 				{
-					NoteItem item = note.getNoteItems().get(i);
+					NoteItem item = textNote.getNoteItems().get(i);
 					
 					ImageLocationPathManager.getInstance().deleteImage(item.getImageName());
 				}
@@ -165,5 +169,10 @@ public class NotesOperationManager
 	public void selectNote(int noteId) 
 	{
 		addSelectedNote(noteId);
+	}
+
+	public void createEventNote(Event event) 
+	{
+		ProfessionalPAParameters.getNotesActivity().createFragmentForNote(event);
 	}
 }

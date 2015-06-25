@@ -3,6 +3,9 @@ package com.gp.app.professionalpa.calendar.events;
 import java.util.List;
 
 import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
+import com.gp.app.professionalpa.data.Event;
+import com.gp.app.professionalpa.notes.fragments.NotesManager;
+import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 import com.gp.app.professionalpa.notification.service.AlarmRequestCreator;
 
 
@@ -33,6 +36,8 @@ public class EventManager
 		else
 		{
 			CalendarDBManager.getInstance().saveEventToDatabase(event);
+			
+			NotesOperationManager.getInstance().createEventNote(event);
 		}
 		
 		AlarmRequestCreator.createAlarmRequest(event.getStartDate(), event.getStartTime());
