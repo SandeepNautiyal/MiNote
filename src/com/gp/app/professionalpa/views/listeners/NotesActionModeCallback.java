@@ -27,8 +27,6 @@ public class NotesActionModeCallback implements ActionMode.Callback
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu)
     {
-    	System.out.println("onPrepareActionMode -> NotesOperationManager.getInstance().getSelectedNoteIds()="+
-    			NotesOperationManager.getInstance().getSelectedNoteIds());
     	if(NotesOperationManager.getInstance().getSelectedNoteIds().size() > 1)
     	{
     		MenuItem item = menu.findItem(R.id.itemEdit);
