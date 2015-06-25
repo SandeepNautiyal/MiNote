@@ -1,15 +1,17 @@
-package com.gp.app.professionalpa.calendar.events;
+package com.gp.app.professionalpa.data;
 
-import java.text.ParseException;
 
-import com.gp.app.professionalpa.util.ProfessionalPAUtil;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.BaseColumns;
 
-public class Event implements BaseColumns
+public class Event extends Note implements BaseColumns
 {
 	private String eventName;
-	private String description;
 	private String eventLocation;
 	private int eventId;
 	private String startDay;
@@ -49,11 +51,6 @@ public class Event implements BaseColumns
 		this.eventLocation = location;
 		
 		eventId = (int)Math.abs((Math.random() * 1000000));
-	}
-	
-	public int getEventId()
-	{
-		return (int)eventId;
 	}
 	
 	public void setEventName(String name)
@@ -111,7 +108,6 @@ public class Event implements BaseColumns
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("\neventName="+eventName);
-		sb.append("\ndescription="+description);
 		sb.append("\nlocation="+eventLocation);
 		sb.append("\nstart="+startDay);
 		sb.append("\nend="+endDay);
@@ -139,7 +135,7 @@ public class Event implements BaseColumns
 	@Override
 	public boolean equals(Object obj) 
 	{
-		return ((Event)obj).getEventId() == this.getEventId();
+		return ((Event)obj).getId() == this.getId();
 	}
 
 	public void setIsAlarmActivated(boolean isAlarmActivated) 
@@ -151,9 +147,70 @@ public class Event implements BaseColumns
 	{
 		return isAlarmActivated;
 	}
+
+	@Override
+	public byte getType() 
+	{
+		return Note.EVENT_NOTE;
+	}
+
+	@Override
+	public int getId() 
+	{
+		return eventId;
+	}
+
+	@Override
+	public byte getState() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int describeContents() 
+	{
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) 
+	{
+		dest.writeStringList(Arrays.asList(new String[]{eventName, eventLocation, startDay, startTime, endDay, endTime}));
+		
+		dest.writeBooleanArray(new boolean[]{isAlarmActivated});
+		
+		dest.writeInt(eventId);
+	}
 	
-//	public boolean isNotificationActivated()
-//	{
-//		return isNotificationActivated;
-//	}
+	public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
+
+		@Override
+		public Event createFromParcel(Parcel source) 
+		{
+			String [] eventAttributes = new String[6];
+			
+			source.readStringArray(eventAttributes);
+			
+			boolean [] isAlarm = new boolean[1];
+			
+			source.readBooleanArray(isAlarm);
+			
+			int eventId = source.readInt();
+			
+			Event event = new Event(eventAttributes[0], eventAttributes[1], eventAttributes[2]
+					, eventAttributes[3], eventAttributes[4], eventAttributes[5]);
+			
+			event.setIsAlarmActivated(isAlarm[0]);
+			
+			event.setEventId(eventId);
+			
+			return event;
+		}
+
+		@Override
+		public Event[] newArray(int size)
+		{
+			return new Event[size];
+		}
+	};
 }

@@ -10,10 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.gp.app.professionalpa.calendar.adapter.EventListAdapater;
-import com.gp.app.professionalpa.calendar.events.Event;
 import com.gp.app.professionalpa.calendar.events.EventManager;
 import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
 import com.gp.app.professionalpa.calendar.interfaces.DBChangeListener;
+import com.gp.app.professionalpa.data.Event;
 
 public class EventModificationGUI implements DBChangeListener
 {

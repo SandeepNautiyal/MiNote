@@ -22,16 +22,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.ScrollView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.colorpicker.ColorPickerCreator;
 import com.gp.app.professionalpa.colorpicker.ColourPickerChangeListener;
 import com.gp.app.professionalpa.compositecontrols.ListViewItemLayout;
+import com.gp.app.professionalpa.data.Note;
 import com.gp.app.professionalpa.data.NoteItem;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
-import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
@@ -55,9 +54,9 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	
 	private int modifiedNoteId = -1;
 	
-	private List<View> selectedViewId = new ArrayList<View>(1);
+	private List<View> selectedViews = new ArrayList<View>(1);
 
-	private EditText editText;
+	private EditText titleEditText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -72,7 +71,18 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			
 			activityLayout = (RelativeLayout)scrollView.findViewById(R.id.list_item_creator_activity_layout);
 			
-			editText = (EditText)activityLayout.findViewById(R.id.noteTitle);
+			titleEditText = (EditText)activityLayout.findViewById(R.id.noteTitle);
+			
+			titleEditText.setOnFocusChangeListener(new OnFocusChangeListener() 
+			{
+				@Override
+				public void onFocusChange(View view, boolean hasFocus)
+				{
+					selectedViews.clear();
+					
+					selectedViews.add(view);
+				}
+			});
 			
 			editNotes();
 			
@@ -112,52 +122,66 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 				
 				if(noteId != 0)
 				{
-			    	ProfessionalPANote professionalPANote = NotesManager.getInstance().getNote(noteId);
+			    	Note note = NotesManager.getInstance().getNote(noteId);
 
-			    	if(professionalPANote != null)
+			    	if(note.getType() != Note.EVENT_NOTE)
 			    	{
-			    		if(professionalPANote.getNoteType() == ProfessionalPAConstants.IMAGE_NOTE)
-			    		{
-			    			createActivityLayoutForNote(professionalPANote);
-				    		
-				    		isSaveButtonToBeCreated  = false;
-			    		}
-			    		else
-			    		{
-			    			List<NoteItem> listItems = professionalPANote.getNoteItems();
-			    			
-			    			for(int i = 0; i < listItems.size(); i++)
-			    			{
-			    				NoteItem item = listItems.get(i);
-			    				
-			    				if(item != null)
-			    				{
-			    					String textViewData = item.getText();
-			    					
-			    					String imageName = item.getImageName();
-			    					
-			    					if(textViewData != null && !textViewData.equals(""))
-			    					{
-			    						addNewListItem();
-			    						
-			    						lastAddedListItem.setText(textViewData);
-			    					}
-			    					
-			    					if(imageName != null && !imageName.equals(""))
-			    					{
-	                                    addNewListItem();
-			    						
-			    						lastAddedListItem.setImage(imageName, ImageLocationPathManager.getInstance().getImage(imageName, true), true);
-			    					}
-			    				}
-			    			}
-			    			
-			    			updateActivityLayout();
-			    			
-			    			isLastItemToBeAddedInLayout = false;
+			    		TextNote professionalPANote = (TextNote)note;
+			    		
+			    		if(professionalPANote != null)
+				    	{
+				    		if(professionalPANote.getType() == Note.IMAGE_NOTE)
+				    		{
+				    			createActivityLayoutForNote(professionalPANote);
+					    		
+					    		isSaveButtonToBeCreated  = false;
+				    		}
+				    		else
+				    		{
+				    			List<NoteItem> listItems = professionalPANote.getNoteItems();
+				    			
+				    			for(int i = 0; i < listItems.size(); i++)
+				    			{
+				    				NoteItem item = listItems.get(i);
+				    				
+				    				if(item != null)
+				    				{
+				    					if(item.isTitle())
+				    					{
+				    						titleEditText.setText(item.getText());
+				    					}
+				    					else
+				    					{
+				    						String textViewData = item.getText();
+					    					
+					    					String imageName = item.getImageName();
+					    					
+					    					if(textViewData != null && !textViewData.equals(""))
+					    					{
+					    						addNewListItem();
+					    						
+					    						lastAddedListItem.setText(textViewData);
+					    						
+					    						lastAddedListItem.setTextColour(item.getTextColour());
+					    					}
+					    					
+					    					if(imageName != null && !imageName.equals(""))
+					    					{
+			                                    addNewListItem();
+					    						
+					    						lastAddedListItem.setImage(imageName, ImageLocationPathManager.getInstance().getImage(imageName, true), true);
+					    					}
+				    					}
+				    				}
+				    			}
+				    			
+				    			updateActivityLayout();
+				    			
+				    			isLastItemToBeAddedInLayout = false;
 
-			    			modifiedNoteId = noteId;
-			    		}
+				    			modifiedNoteId = noteId;
+				    		}
+				    	}
 			    	}
 				}
 			}
@@ -206,9 +230,9 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	    }
 	}
 	
-	private void createActivityLayoutForNote(ProfessionalPANote professionalPANote) 
+	private void createActivityLayoutForNote(TextNote professionalPANote) 
 	{
-		if(professionalPANote.getNoteType() == ProfessionalPAConstants.IMAGE_NOTE)
+		if(professionalPANote.getType() == Note.IMAGE_NOTE)
 		{
 			NoteItem item = professionalPANote.getNoteItems().get(0);
 
@@ -282,14 +306,15 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 				}
 			});
 		}
+		
 		currentAddedListItem.getEditText().setOnFocusChangeListener(new OnFocusChangeListener() 
 		{
 			@Override
 			public void onFocusChange(View view, boolean hasFocus)
 			{
-				selectedViewId.clear();
+				selectedViews.clear();
 				
-				selectedViewId.add(view);
+				selectedViews.add(view);
 			}
 		});
 		
@@ -344,13 +369,13 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	{
 		List<NoteItem> noteItems = new ArrayList<NoteItem>();
 		
-		String title = editText.getText().toString();
+		String title = titleEditText.getText().toString();
 		
 		if(title != null && !title.equals(""))
 		{
 			NoteItem item = new NoteItem(title);
 			
-			item.setTextColour(editText.getCurrentTextColor());
+			item.setTextColour(titleEditText.getCurrentTextColor());
 
 			noteItems.add(item);
 			
@@ -379,13 +404,13 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			}
 		}
 
-		ProfessionalPANote note = null;
+		TextNote note = null;
 		
 		if(noteItems.size() > 0)
 		{
 			int noteId = modifiedNoteId == -1 ? NotesManager.getInstance().getNextFreeNoteId() : modifiedNoteId;
 			
-			note = new ProfessionalPANote(noteId, ProfessionalPAConstants.LIST_NOTE, noteItems);
+			note = new TextNote(noteId, Note.LIST_NOTE, noteItems);
 			
 			long creationTime = System.currentTimeMillis();
 			
@@ -426,7 +451,7 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	    super.onBackPressed();
 	}
 	
-	private void persistListElement(List<ProfessionalPANote> notes)
+	private void persistListElement(List<TextNote> notes)
 	{
 		NotesDBManager.getInstance().saveNotes(notes);
 	}
@@ -434,7 +459,7 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	@Override
 	public void changeColour(int colourCode) 
 	{
-        EditText selectedView = (EditText)selectedViewId.get(0);
+        EditText selectedView = (EditText)selectedViews.get(0);
 		
 		if(selectedView != null)
 		{

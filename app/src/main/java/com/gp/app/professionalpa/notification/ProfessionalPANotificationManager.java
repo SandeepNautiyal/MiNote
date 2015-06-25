@@ -9,14 +9,14 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.media.RingtoneManager;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.calendar.events.Event;
 import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
+import com.gp.app.professionalpa.data.Event;
 import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.professionalpa.notification.service.AlarmRequestCreator;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
@@ -79,7 +79,7 @@ public class ProfessionalPANotificationManager
 			    	
 			    NotificationManager notificationManager =(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-			    notificationManager.notify(event.getEventId(), notification);
+			    notificationManager.notify(event.getId(), notification);
 	    	}
 	    }
 	}

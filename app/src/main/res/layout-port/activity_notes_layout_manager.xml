@@ -82,4 +82,19 @@
     android:background="@drawable/layout_border">
 </FrameLayout>
 
+<FrameLayout 
+        android:id="@+id/zoomedImageViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null">
+        
+        <ImageView 
+            android:id="@+id/zommedImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+            android:visibility="invisible"/>
+    </FrameLayout>
 </RelativeLayout>

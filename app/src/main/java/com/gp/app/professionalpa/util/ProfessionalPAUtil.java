@@ -5,13 +5,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
 
 public class ProfessionalPAUtil 
 {

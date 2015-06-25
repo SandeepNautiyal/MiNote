@@ -32,10 +32,4 @@ public interface ProfessionalPAConstants
 	public static final String NOTE_ID = "NOTE_ID";
 
 	public static final byte MIXED_CONTENT_NOTE = 3;
-	
-	public static final byte IMAGE_NOTE = 2;
-
-	public static final byte PARAGRAPH_NOTE = 1;
-
-	public static final byte LIST_NOTE = 0;
 }

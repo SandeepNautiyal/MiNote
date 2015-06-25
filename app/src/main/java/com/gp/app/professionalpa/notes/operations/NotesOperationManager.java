@@ -7,23 +7,20 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
-import android.view.ActionMode;
-import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
 
+import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
 import com.gp.app.professionalpa.colorpicker.ColourPickerAdapter;
 import com.gp.app.professionalpa.colorpicker.ColourProperties;
+import com.gp.app.professionalpa.data.Event;
+import com.gp.app.professionalpa.data.Note;
 import com.gp.app.professionalpa.data.NoteItem;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
-import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
-import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.fragments.NotesManager;
 import com.gp.app.professionalpa.notes.images.ImageLocationPathManager;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
-import com.gp.app.professionalpa.views.listeners.NotesActionModeCallback;
 
 public class NotesOperationManager 
 {
@@ -37,28 +34,39 @@ public class NotesOperationManager
 
     public void deleteSelectedNotes()
     {
-    	NotesManager.getInstance().deleteNotes(selectedNoteIds);
-
-        NotesDBManager.getInstance().deleteNotes(selectedNoteIds);
-	        
-		ProfessionalPAParameters.getNotesActivity().deleteNotes(selectedNoteIds);
-
 		for(int i = 0; i < selectedNoteIds.size(); i++)
 		{
-			ProfessionalPANote note = NotesManager.getInstance().getNote(selectedNoteIds.get(i));
+			int selectNoteId = selectedNoteIds.get(i);
+
+			Note note = NotesManager.getInstance().getNote(selectNoteId);
 			
 			if(note != null)
 			{
-				List<NoteItem> items = note.getNoteItems();
-				
-				for(int j = 0, size = items.size(); j < size; j++)
+				if(note.getType() != Note.EVENT_NOTE)
 				{
-					NoteItem item = note.getNoteItems().get(i);
+					TextNote textNote = (TextNote)note;
 					
-					ImageLocationPathManager.getInstance().deleteImage(item.getImageName());
+					List<NoteItem> items = textNote.getNoteItems();
+					
+					for(int j = 0, size = items.size(); j < size; j++)
+					{
+						NoteItem item = textNote.getNoteItems().get(i);
+						
+						ImageLocationPathManager.getInstance().deleteImage(item.getImageName());
+					}
+					
+			        NotesDBManager.getInstance().deleteNotes(Arrays.asList(selectNoteId));
+				}
+				else
+				{
+					CalendarDBManager.getInstance().deleteEvent(selectNoteId);
 				}
 			}
 		}
+		
+		NotesManager.getInstance().deleteNotes(selectedNoteIds);
+
+		ProfessionalPAParameters.getNotesActivity().deleteNotes(selectedNoteIds);
 		
 		selectedNoteIds.clear();
     }
@@ -172,5 +180,10 @@ public class NotesOperationManager
 	public void selectNote(int noteId) 
 	{
 		addSelectedNote(noteId);
+	}
+
+	public void createEventNote(Event event) 
+	{
+		ProfessionalPAParameters.getNotesActivity().createFragmentForNote(event);
 	}
 }

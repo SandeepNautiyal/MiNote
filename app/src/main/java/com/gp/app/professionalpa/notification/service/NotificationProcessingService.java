@@ -1,10 +1,10 @@
 package com.gp.app.professionalpa.notification.service;
 
-import com.gp.app.professionalpa.util.ProfessionalPAParameters;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+
+import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NotificationProcessingService extends Service 
 {

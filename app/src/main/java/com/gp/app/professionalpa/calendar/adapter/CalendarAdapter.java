@@ -7,7 +7,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,10 +19,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
-import com.gp.app.professionalpa.calendar.events.Event;
 import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
 import com.gp.app.professionalpa.calendar.ui.EventCreationGUI;
 import com.gp.app.professionalpa.calendar.ui.EventModificationGUI;
+import com.gp.app.professionalpa.data.Event;
 import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
 public class CalendarAdapter extends BaseAdapter

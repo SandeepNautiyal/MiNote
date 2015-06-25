@@ -9,7 +9,7 @@
     <ImageView 
         android:id="@+id/compositeControlImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@null"
         android:contentDescription="@string/note_image"
         android:scaleType="fitStart"

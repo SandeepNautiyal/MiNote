@@ -21,9 +21,9 @@ import android.widget.TextView;
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.calendar.adapter.CalendarAdapter;
 import com.gp.app.professionalpa.calendar.adapter.CalendarAdapter.DateInformation;
-import com.gp.app.professionalpa.calendar.events.Event;
 import com.gp.app.professionalpa.calendar.events.database.CalendarDBManager;
 import com.gp.app.professionalpa.calendar.interfaces.DBChangeListener;
+import com.gp.app.professionalpa.data.Event;
 
 public class ProfessionalPACalendarView extends RelativeLayout implements OnItemClickListener,
 	OnClickListener, DBChangeListener{

@@ -25,7 +25,7 @@ import org.w3c.dom.NodeList;
 import android.os.Environment;
 
 import com.gp.app.professionalpa.data.NoteItem;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.exceptions.ProfessionPARuntimeException;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.util.ProfessionalPAUtil;
@@ -73,7 +73,7 @@ public class ProfessionalPANotesWriter
 		
 		try
 		{
-			List<ProfessionalPANote> notes = ProfessionalPANotesReader.readNotes(false);
+			List<TextNote> notes = ProfessionalPANotesReader.readNotes(false);
 			
 			for(int i = 0, size = notes == null ? 0 : notes.size(); i < size; i++)
 			{
@@ -87,7 +87,7 @@ public class ProfessionalPANotesWriter
 		
 	}
     
-	public void writeNotes(List<ProfessionalPANote> notes) throws ProfessionalPABaseException
+	public void writeNotes(List<TextNote> notes) throws ProfessionalPABaseException
 	{
 		for(int i = 0, size = notes == null ? 0 : notes.size(); i < size; i++)
 		{
@@ -95,7 +95,7 @@ public class ProfessionalPANotesWriter
 		}
 	}
 	
-	private void writeNote(ProfessionalPANote note) throws ProfessionalPABaseException
+	private void writeNote(TextNote note) throws ProfessionalPABaseException
     {
 		if(note == null)
 		{
@@ -104,9 +104,9 @@ public class ProfessionalPANotesWriter
 		
 		Element noteElement = xmlDocument.createElement("Note");
 
-		noteElement.setAttribute("type", Byte.toString(note.getNoteType()));
+		noteElement.setAttribute("type", Byte.toString(note.getType()));
 
-		noteElement.setAttribute("noteId", Integer.toString(note.getNoteId()));
+		noteElement.setAttribute("noteId", Integer.toString(note.getId()));
 
 		String creationDate = ProfessionalPAUtil.createStringForDate(note.getCreationTime(), "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
 

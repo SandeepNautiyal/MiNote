@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,20 +23,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gp.app.professionalpa.R;
+import com.gp.app.professionalpa.data.Note;
 import com.gp.app.professionalpa.data.NoteItem;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
-import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.notes.images.ImageLocationPathManager;
 import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
-import com.gp.app.professionalpa.views.listeners.NoteItemLongClickListener;
 
-public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
+public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 {
-	private ProfessionalPANote note = null;
+	private TextNote note = null;
 	
-	public NoteFragmentAdapter(Context context, ProfessionalPANote note) {
-		
+	private Context context;
+    
+	public TextNoteFragmentAdapter(Context context, TextNote note) 
+	{
 		super(context, 0, note.getNoteItems());
+		
+		this.context = context;
 		
 		this.note = note;
 	}
@@ -51,13 +56,13 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 		
 		ImageButton bulletPointImage = (ImageButton) convertView.findViewById(R.id.compositeControlBulletButton);
 		
-		ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
+		final ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
 		
-        final int noteId = note.getNoteId();
+        final int noteId = note.getId();
         
-        editText.setOnLongClickListener(new NoteItemLongClickListener(noteId));
-        
-        imageView.setOnLongClickListener(new NoteItemLongClickListener(noteId));
+//        editText.setOnLongClickListener(new NoteItemLongClickListener(noteId));
+//        
+//        imageView.setOnLongClickListener(new NoteItemLongClickListener(noteId));
         
         editText.setOnClickListener(new View.OnClickListener()
 		{
@@ -73,19 +78,30 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
             @Override
             public void onClick(View v)
             {
-            	NotesOperationManager.getInstance().deSelectNote(noteId);
+            	if(NotesOperationManager.getInstance().getSelectedNoteIds().contains((Integer)noteId))
+            	{
+                	NotesOperationManager.getInstance().deSelectNote(noteId);
+            	}
+            	else
+            	{
+            		Intent intent = new Intent();
+            		intent.setAction(Intent.ACTION_VIEW);
+            		String imagePath = ImageLocationPathManager.getInstance().getImagePath(noteListItem.getImageName());
+            		intent.setDataAndType(Uri.parse("file://"+imagePath), "image/*");
+            		context.startActivity(intent);
+            	}
             }
+
+			
         });
 		
 	    Resources androidResources = getContext().getResources();
 	    
 	    int compressedViewHeight = (int)androidResources.getDimension(R.dimen.composite_control_textview_height_compressed);
 
-//	    ImageButton alarmImageButton = (ImageButton)convertView.findViewById(R.id.composite_control_alarm_button);
-
-	    byte noteType = note.getNoteType();
+	    byte noteType = note.getType();
 	    	
-		if (noteType == ProfessionalPAConstants.LIST_NOTE && (noteListItem.getImageName() == null || noteListItem.getImageName().equals("")))
+		if (noteType == Note.LIST_NOTE && (noteListItem.getImageName() == null || noteListItem.getImageName().equals("")))
 		{
 			if(noteListItem.isTitle())
 			{
@@ -99,7 +115,7 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 				bulletPointImage.setLayoutParams(bulletPointImageViewParams);
 			}
 		} 
-		else if (noteType == ProfessionalPAConstants.PARAGRAPH_NOTE) 
+		else if (noteType == Note.PARAGRAPH_NOTE) 
 		{
 			LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
 			importanceButtonParams.height = 0;
@@ -178,4 +194,5 @@ public class NoteFragmentAdapter extends ArrayAdapter<NoteItem>
 
 	    return convertView;
 	}
+	
 }

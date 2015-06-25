@@ -8,7 +8,7 @@ import java.util.List;
 
 import android.os.Environment;
 
-import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.notes.database.NotesDBManager;
 import com.gp.app.professionalpa.notes.xml.ProfessionalPANotesWriter;
@@ -69,7 +69,7 @@ public class NotesBackupManager
 
 	private static void updateBackupXmlFile()
 	{
-		List<ProfessionalPANote> notes = NotesDBManager.getInstance().readNotes();
+		List<TextNote> notes = NotesDBManager.getInstance().readNotes();
 		
 		try 
 		{

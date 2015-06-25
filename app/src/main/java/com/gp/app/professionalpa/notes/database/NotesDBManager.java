@@ -15,7 +15,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.gp.app.professionalpa.data.NoteItem;
-import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
 public class NotesDBManager extends SQLiteOpenHelper
@@ -47,7 +47,7 @@ public class NotesDBManager extends SQLiteOpenHelper
     public void onUpgrade(SQLiteDatabase db, int oldVersion, 
                           int newVersion) 
     {
-        db.execSQL("DROP TABLE IF EXISTS "+ProfessionalPANote.NOTE_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+TextNote.NOTE_TABLE_NAME);
         
         db.execSQL("DROP TABLE IF EXISTS "+NoteItem.NOTE_ITEM_TABLE_NAME);
 
@@ -56,39 +56,39 @@ public class NotesDBManager extends SQLiteOpenHelper
     
 	private void createTables(SQLiteDatabase db)
 	{
-		db.execSQL("CREATE TABLE " + ProfessionalPANote.NOTE_TABLE_NAME + "(" + ProfessionalPANote.NOTE_ID +  " INTEGER, " +
-				ProfessionalPANote.NOTE_TYPE + " INTEGER, " + ProfessionalPANote.NOTE_COLOR + " INTEGER, " + ProfessionalPANote.NOTE_CREATION_TIME + " INTEGER, "
-				+ ProfessionalPANote.NOTE_MODIFIED_TIME + " INTEGER);");
+		db.execSQL("CREATE TABLE " + TextNote.NOTE_TABLE_NAME + "(" + TextNote.NOTE_ID +  " INTEGER, " +
+				TextNote.NOTE_TYPE + " INTEGER, " + TextNote.NOTE_COLOR + " INTEGER, " + TextNote.NOTE_CREATION_TIME + " INTEGER, "
+				+ TextNote.NOTE_MODIFIED_TIME + " INTEGER);");
 		
 		db.execSQL("CREATE TABLE " + NoteItem.NOTE_ITEM_TABLE_NAME + "(" + NoteItem.NOTE_ID +  " INTEGER, " +
 				NoteItem.DATA + " TEXT, " + NoteItem.IMAGE_NAME + " TEXT, " + NoteItem.TEXT_COLOR + " INTEGER, "+
 				NoteItem.IS_TITLE + " TEXT, "+
-				" FOREIGN KEY ("+NoteItem.NOTE_ID+") REFERENCES "+ProfessionalPANote.NOTE_TABLE_NAME+" ("+ProfessionalPANote.NOTE_ID+"));");
+				" FOREIGN KEY ("+NoteItem.NOTE_ID+") REFERENCES "+TextNote.NOTE_TABLE_NAME+" ("+TextNote.NOTE_ID+"));");
 	}
 
-	public void saveNotes(List<ProfessionalPANote> notes) 
+	public void saveNotes(List<TextNote> notes) 
 	{
 	    for(int i = 0; i < notes.size(); i++)
 	    {
-	    	ProfessionalPANote note = notes.get(i);
+	    	TextNote note = notes.get(i);
 	    	
 	    	saveNote(note);
 	    }
 	}
 	
-	private void saveNote(ProfessionalPANote note) 
+	private void saveNote(TextNote note) 
 	{
 		SQLiteDatabase db = getWritableDatabase();
 		
 		ContentValues noteValues = new ContentValues();
-		noteValues.put(ProfessionalPANote.NOTE_ID, note.getNoteId());
-		noteValues.put(ProfessionalPANote.NOTE_TYPE, note.getNoteType());
-		noteValues.put(ProfessionalPANote.NOTE_COLOR, note.getNoteColor());
-		noteValues.put(ProfessionalPANote.NOTE_CREATION_TIME, note.getCreationTime());
-		noteValues.put(ProfessionalPANote.NOTE_MODIFIED_TIME, note.getLastEditedTime());
+		noteValues.put(TextNote.NOTE_ID, note.getId());
+		noteValues.put(TextNote.NOTE_TYPE, note.getType());
+		noteValues.put(TextNote.NOTE_COLOR, note.getNoteColor());
+		noteValues.put(TextNote.NOTE_CREATION_TIME, note.getCreationTime());
+		noteValues.put(TextNote.NOTE_MODIFIED_TIME, note.getLastEditedTime());
 		
 		db.insert(
-				 ProfessionalPANote.NOTE_TABLE_NAME, null,
+				 TextNote.NOTE_TABLE_NAME, null,
 				 noteValues);
 		
 		List<NoteItem> noteItems = note.getNoteItems();
@@ -97,7 +97,7 @@ public class NotesDBManager extends SQLiteOpenHelper
 		{
 			NoteItem item = noteItems.get(i);
 			ContentValues noteItemValues = new ContentValues();
-			noteItemValues.put(NoteItem.NOTE_ID, note.getNoteId());
+			noteItemValues.put(NoteItem.NOTE_ID, note.getId());
 			noteItemValues.put(NoteItem.TEXT_COLOR, item.getTextColour());
 			noteItemValues.put(NoteItem.IMAGE_NAME, item.getImageName());
 			noteItemValues.put(NoteItem.DATA, item.getText());
@@ -109,34 +109,34 @@ public class NotesDBManager extends SQLiteOpenHelper
 		}
 	}
 	
-	public List<ProfessionalPANote> readNotes()
+	public List<TextNote> readNotes()
 	{
-		List<ProfessionalPANote> notes = readNotes(null);
+		List<TextNote> notes = readNotes(null);
 		
 		return notes;
 	}
 	
-	public ProfessionalPANote readNote(int noteId)
+	public TextNote readNote(int noteId)
 	{
-		List<ProfessionalPANote> notes = readNotes(Integer.toString(noteId));
+		List<TextNote> notes = readNotes(Integer.toString(noteId));
 		
 		return notes.get(0);
 	}
 	
-	private List<ProfessionalPANote> readNotes(String noteId) 
+	private List<TextNote> readNotes(String noteId) 
 	{
 		SQLiteDatabase db = getReadableDatabase();
 
-		List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
+		List<TextNote> notes = new ArrayList<TextNote>();
 
     	String sortOrder =
-    			ProfessionalPANote.NOTE_ID + " DESC";
+    			TextNote.NOTE_ID + " DESC";
 
     	Cursor cursor = null;
     	
     	if(noteId == null)
     	{
-    		cursor = db.rawQuery("select * from "+ProfessionalPANote.NOTE_TABLE_NAME, null);
+    		cursor = db.rawQuery("select * from "+TextNote.NOTE_TABLE_NAME, null);
     	}
     	else
     	{
@@ -146,15 +146,15 @@ public class NotesDBManager extends SQLiteOpenHelper
         	
         	final String[] PROJECTION_FOR_NOTE = 
         		{
-                ProfessionalPANote.NOTE_ID,
-                ProfessionalPANote.NOTE_TYPE,
-                ProfessionalPANote.NOTE_COLOR,
-                ProfessionalPANote.NOTE_CREATION_TIME,
-                ProfessionalPANote.NOTE_MODIFIED_TIME,
+                TextNote.NOTE_ID,
+                TextNote.NOTE_TYPE,
+                TextNote.NOTE_COLOR,
+                TextNote.NOTE_CREATION_TIME,
+                TextNote.NOTE_MODIFIED_TIME,
             };
         	
         	cursor = db.query(
-        		ProfessionalPANote.NOTE_TABLE_NAME,  // The table to query
+        		TextNote.NOTE_TABLE_NAME,  // The table to query
         		PROJECTION_FOR_NOTE,                               // The columns to return
         	    where,                                // The columns for the WHERE clause
         	    whereArguments,       // The values for the WHERE clause
@@ -168,12 +168,12 @@ public class NotesDBManager extends SQLiteOpenHelper
     	
     	while (cursor.isAfterLast() == false)
     	{
-    		int readNoteId = (int)cursor.getInt(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_ID));
-    		byte noteType = (byte)cursor.getInt(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_TYPE));
-        	int noteColor = (int)cursor.getInt(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_COLOR));
-        	long creationTime = cursor.getLong(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_CREATION_TIME));
-        	long lastEditedTime = cursor.getLong(cursor.getColumnIndexOrThrow(ProfessionalPANote.NOTE_MODIFIED_TIME));
-        	ProfessionalPANote note = new ProfessionalPANote(readNoteId, noteType, noteColor, creationTime, lastEditedTime);
+    		int readNoteId = (int)cursor.getInt(cursor.getColumnIndexOrThrow(TextNote.NOTE_ID));
+    		byte noteType = (byte)cursor.getInt(cursor.getColumnIndexOrThrow(TextNote.NOTE_TYPE));
+        	int noteColor = (int)cursor.getInt(cursor.getColumnIndexOrThrow(TextNote.NOTE_COLOR));
+        	long creationTime = cursor.getLong(cursor.getColumnIndexOrThrow(TextNote.NOTE_CREATION_TIME));
+        	long lastEditedTime = cursor.getLong(cursor.getColumnIndexOrThrow(TextNote.NOTE_MODIFIED_TIME));
+        	TextNote note = new TextNote(readNoteId, noteType, noteColor, creationTime, lastEditedTime);
     	    notes.add(note);
         	List<NoteItem> noteItems = readNoteItems(readNoteId);
         	note.setNoteItems(noteItems);
@@ -264,7 +264,7 @@ public class NotesDBManager extends SQLiteOpenHelper
 		{
 			int noteId = noteIds.get(i);
 			
-			int result = db.delete(ProfessionalPANote.NOTE_TABLE_NAME, ProfessionalPANote.NOTE_ID + "=?", new String[]{Integer.toString(noteId)});
+			int result = db.delete(TextNote.NOTE_TABLE_NAME, TextNote.NOTE_ID + "=?", new String[]{Integer.toString(noteId)});
 			
 			if(result > 0)
 			{
@@ -273,31 +273,31 @@ public class NotesDBManager extends SQLiteOpenHelper
 		}
 	}
 
-	public void updateNote(ProfessionalPANote note)
+	public void updateNote(TextNote note)
 	{
         SQLiteDatabase db = getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
-		values.put(ProfessionalPANote.NOTE_COLOR, note.getNoteColor());
-		values.put(ProfessionalPANote.NOTE_TYPE, note.getNoteType());
-		values.put(ProfessionalPANote.NOTE_CREATION_TIME, note.getCreationTime());
-		values.put(ProfessionalPANote.NOTE_MODIFIED_TIME, note.getLastEditedTime());
+		values.put(TextNote.NOTE_COLOR, note.getNoteColor());
+		values.put(TextNote.NOTE_TYPE, note.getType());
+		values.put(TextNote.NOTE_CREATION_TIME, note.getCreationTime());
+		values.put(TextNote.NOTE_MODIFIED_TIME, note.getLastEditedTime());
 		
-    	String where = ProfessionalPANote.NOTE_ID+"=?";
+    	String where = TextNote.NOTE_ID+"=?";
 
-		int numberOfEffectedRows = db.update(ProfessionalPANote.NOTE_TABLE_NAME, values, where, new String[]{Integer.toString(note.getNoteId())});
+		int numberOfEffectedRows = db.update(TextNote.NOTE_TABLE_NAME, values, where, new String[]{Integer.toString(note.getId())});
     	
 		if(numberOfEffectedRows > 0)
 		{
 			List<NoteItem> items = note.getNoteItems();
 			
-	        db.delete(NoteItem.NOTE_ITEM_TABLE_NAME, NoteItem.NOTE_ID + "=?", new String[]{Integer.toString(note.getNoteId())});
+	        db.delete(NoteItem.NOTE_ITEM_TABLE_NAME, NoteItem.NOTE_ID + "=?", new String[]{Integer.toString(note.getId())});
 	        
 			for(int i = 0; i < items.size(); i++)
 			{
 				NoteItem item = items.get(i);
 				ContentValues noteItemValues = new ContentValues();
-				noteItemValues.put(NoteItem.NOTE_ID, note.getNoteId());
+				noteItemValues.put(NoteItem.NOTE_ID, note.getId());
 				noteItemValues.put(NoteItem.TEXT_COLOR, item.getTextColour());
 				noteItemValues.put(NoteItem.IMAGE_NAME, item.getImageName());
 				noteItemValues.put(NoteItem.DATA, item.getText());
@@ -313,11 +313,11 @@ public class NotesDBManager extends SQLiteOpenHelper
 		 SQLiteDatabase db = getWritableDatabase();
 			
 			ContentValues values = new ContentValues();
-			values.put(ProfessionalPANote.NOTE_COLOR, noteColor);
+			values.put(TextNote.NOTE_COLOR, noteColor);
 			
-	    	String where = ProfessionalPANote.NOTE_ID+"="+noteId;
+	    	String where = TextNote.NOTE_ID+"="+noteId;
 
-			int numberOfEffectedRows = db.update(ProfessionalPANote.NOTE_TABLE_NAME, values, where, null);
+			int numberOfEffectedRows = db.update(TextNote.NOTE_TABLE_NAME, values, where, null);
 	}
 
 	public void deleteAllNotes() 

@@ -12,7 +12,7 @@ import org.xml.sax.SAXException;
 
 import android.util.Log;
 
-import com.gp.app.professionalpa.data.ProfessionalPANote;
+import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.exceptions.ProfessionalPABaseException;
 import com.gp.app.professionalpa.util.ProfessionalPAUtil;
 
@@ -23,7 +23,7 @@ public class ProfessionalPANotesReader
 		
 	}
 	
-	public static List<ProfessionalPANote> readNotes(boolean isImportedFile) throws ProfessionalPABaseException
+	public static List<TextNote> readNotes(boolean isImportedFile) throws ProfessionalPABaseException
 	{
         SAXParserFactory factory = SAXParserFactory.newInstance();
 		
@@ -40,7 +40,7 @@ public class ProfessionalPANotesReader
 		
 		ProfessionalPANotesParser parser = new ProfessionalPANotesParser();
 		
-		List<ProfessionalPANote> notes = new ArrayList<ProfessionalPANote>();
+		List<TextNote> notes = new ArrayList<TextNote>();
 		
 		String filePath =  isImportedFile ? ProfessionalPAUtil.createExportedFilePath() :
 			ProfessionalPAUtil.createInternalXMLFilePath();
