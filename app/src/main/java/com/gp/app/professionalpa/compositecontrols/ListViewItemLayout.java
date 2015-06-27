@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -157,6 +158,8 @@ public class ListViewItemLayout extends RelativeLayout
 		}
 	    
 	    imageView.setImageBitmap(image);
+	    
+	    textView.setVisibility(View.GONE);
 	    
 	    this.imageName = imageName;
 	}

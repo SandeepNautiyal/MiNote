@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import android.animation.Animator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
@@ -406,14 +405,12 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private TextNote createProfessionalPANoteFromImage(String imagePath)
 	{
-		TextNote note;
-
 		ArrayList<NoteItem> items = new ArrayList<NoteItem>();
 
 		items.add(new NoteItem(null, ImageLocationPathManager.getInstance()
 				.getImageName(imagePath)));
 
-		note = new TextNote(NotesManager.getInstance().getNextFreeNoteId(),
+		TextNote note = new TextNote(NotesManager.getInstance().getNextFreeNoteId(),
 				Note.IMAGE_NOTE, items);
 
 		long creationTime = Long.valueOf(imageCaptureManager
@@ -445,6 +442,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			}
 		}
 	}
+
 
 	private void createActivityLayout(Fragment fragment, int noteId, boolean isTextNote) 
 	{

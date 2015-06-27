@@ -21,4 +21,9 @@
         android:icon="@drawable/color_picker_icon"
         android:title="@string/pickColour"
         android:showAsAction="always" />
+    
+    <item android:id="@+id/shareNote"
+        android:icon="@drawable/ic_action_share"
+        android:title="@string/action_share"
+        android:showAsAction="always"/>
 </menu>

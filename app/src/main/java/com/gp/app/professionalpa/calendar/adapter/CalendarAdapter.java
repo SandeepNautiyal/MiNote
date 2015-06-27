@@ -121,8 +121,6 @@ public class CalendarAdapter extends BaseAdapter
 			
 			String formattedDate = ProfessionalPAUtil.pad(date.getDay())+"/"+ProfessionalPAUtil.pad(date.getMonth()+1)+"/"+ProfessionalPAUtil.pad(date.getYear());
 			
-			System.out.println("date event -> formattedDate="+formattedDate);
-			
 			List<Event> events = CalendarDBManager.getInstance().readEvents(formattedDate);
 			
 			int numberOfEvents = events.size();
