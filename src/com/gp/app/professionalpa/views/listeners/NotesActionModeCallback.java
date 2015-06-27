@@ -45,17 +45,22 @@ public class NotesActionModeCallback implements ActionMode.Callback
             case R.id.itemDelete:
             	NotesOperationManager.getInstance().deleteSelectedNotes();
             	mode.finish();
-                return true;
+            	break;
             case R.id.itemEdit:
             	NotesOperationManager.getInstance().editSelectedNote();
+            	break;
             case R.id.pickColor:
             	NotesOperationManager.getInstance().createColourPicker();
+            	break;
+            case R.id.shareNote:
+            	NotesOperationManager.getInstance().shareSelectedNote();
+            	break;
             default:
         }
         
         mode.finish();
         
-        return false;
+        return true;
     }
 
 	private void copyNote() 

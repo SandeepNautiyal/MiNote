@@ -197,41 +197,6 @@ public class TextNote extends Note
 				&& this.lastEditedTime == ((TextNote)obj).getLastEditedTime();
 	}
 	
-	public static class NotePropertyValues 
-	{
-		private Map<String, String> properties = new HashMap<String, String>();
-		
-		private boolean isValidProperty(String key)
-		{
-			if(key.equals(NOTE_ID) || key.equals(NOTE_CREATION_TIME)
-					|| key.equals(NOTE_MODIFIED_TIME)
-					|| key.equals(NOTE_TYPE))
-			{
-				return true;
-			}
-			
-			return false;
-		}
-		
-		public void addProperties(String property, String propertyValue)
-		{
-			if(isValidProperty(property))
-			{
-				properties.put(property, propertyValue);
-			}
-		}
-		
-		public String getValue(String property)
-		{
-			if(isValidProperty(property))
-			{
-				return properties.get(property);
-			}
-			
-			return null;
-		}
-	}
-	
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();

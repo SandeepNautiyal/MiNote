@@ -14,6 +14,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
@@ -91,9 +92,31 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
             		context.startActivity(intent);
             	}
             }
-
-			
         });
+		
+		editText.setOnLongClickListener(new OnLongClickListener()
+		{
+			@Override
+			public boolean onLongClick(View v)
+			{
+				NotesOperationManager.getInstance().selectNote(note.getId());
+				
+				return true;
+			}
+			
+		});
+		
+		imageView.setOnLongClickListener(new OnLongClickListener()
+		{
+			@Override
+			public boolean onLongClick(View v)
+			{
+				NotesOperationManager.getInstance().selectNote(note.getId());
+				
+				return true;
+			}
+			
+		});
 		
 	    Resources androidResources = getContext().getResources();
 	    

@@ -396,7 +396,7 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 
 			if(isValidImageName || isValidListText)
 			{
-	            NoteItem listItem = new NoteItem(compoundControl.getText(), compoundControl.getImageName());
+	            NoteItem listItem = new NoteItem(listItemData, imageName);
 
 	            listItem.setTextColour(compoundControl.getEditText().getCurrentTextColor());
 	            

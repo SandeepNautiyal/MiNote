@@ -6,15 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.data.TextNote;
 import com.gp.app.professionalpa.interfaces.ProfessionalPAConstants;
-import com.gp.app.professionalpa.notes.operations.NotesOperationManager;
 
 public class TextNoteFragment extends ListFragment
 {
@@ -67,20 +64,6 @@ public class TextNoteFragment extends ListFragment
 				listView.setAdapter(adapter);
 				
 				listView.setDivider(null);
-				
-				listView.setOnItemLongClickListener(new OnItemLongClickListener()
-				{
-
-					@Override
-					public boolean onItemLongClick(AdapterView<?> parent,
-							View view, int position, long id) {
-						
-						selectNote();
-
-						return false;
-					}
-					
-				});
 				
 				listView.setDividerHeight(0);			
 				
@@ -148,12 +131,5 @@ public class TextNoteFragment extends ListFragment
 		}
 		
 		return length;
-	}
-	
-	private void selectNote() 
-	{
-        NotesOperationManager notesOperationManager = NotesOperationManager.getInstance(); 
-		
-		notesOperationManager.selectNote(note.getId());
 	}
 }
