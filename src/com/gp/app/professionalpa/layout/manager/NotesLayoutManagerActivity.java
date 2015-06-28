@@ -974,7 +974,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		}
 	}
 
-	private void resetNoteColor(int selectedNoteId) {
+	private void resetNoteColor(int selectedNoteId) 
+	{
 		FrameLayout frameLayout = childFrames.get(selectedNoteId);
 
 		if(frameLayout != null)
@@ -988,6 +989,10 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 				if(note != null && note.getType() != Note.EVENT_NOTE)
 				{
 					view.setBackgroundColor(((TextNote)note).getNoteColor());
+				}
+				else
+				{
+					view.setBackgroundColor(Color.rgb(255, 255, 255));
 				}
 			}
 		}
@@ -1129,7 +1134,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			currenActionMode.finish();
 		}
-		else if(NotesOperationManager.getInstance().getSelectedNoteIds().size() == 1)
+		else if(NotesOperationManager.getInstance().getSelectedNoteIds().size() == 1
+				&& !NotesOperationManager.getInstance().isSelectedNoteEvent())
 		{
 			Menu menu = currenActionMode.getMenu();
 			

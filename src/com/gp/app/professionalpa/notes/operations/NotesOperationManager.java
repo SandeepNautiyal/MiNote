@@ -34,7 +34,7 @@ public class NotesOperationManager
 
 	private List<Integer> selectedNoteIds = new ArrayList<Integer>();
 
-    public void deleteSelectedNotes()
+	public void deleteSelectedNotes()
     {
 		for(int i = 0; i < selectedNoteIds.size(); i++)
 		{
@@ -121,7 +121,7 @@ public class NotesOperationManager
 		gridView.setNumColumns(5);
 		
 		//TODO to be checked and removed.
-		Dialog dialog = new Dialog(ProfessionalPAParameters.getApplicationContext());
+		Dialog dialog = new Dialog(noteActivity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		ColourPickerAdapter adapter = new ColourPickerAdapter(noteActivity, gridArray, dialog);
 		
@@ -146,6 +146,8 @@ public class NotesOperationManager
 	public void addSelectedNote(int noteId) 
 	{
 		selectedNoteIds.add(noteId);
+		
+		Note note = NotesManager.getInstance().getNote(noteId);
 		
 		ProfessionalPAParameters.getNotesActivity().setNoteSelected(noteId);
 	}
@@ -272,5 +274,22 @@ public class NotesOperationManager
 			   }
 			}
 		}
+	}
+	
+	public boolean isSelectedNoteEvent() 
+    {
+		boolean isEventNoteSelected = false;
+		
+		for(int i = 0; i < selectedNoteIds.size(); i++)
+		{
+			Note selectedNote = NotesManager.getInstance().getNote(selectedNoteIds.get(0));
+			
+			if(selectedNote != null && selectedNote.getType() == Note.EVENT_NOTE)
+			{
+				isEventNoteSelected = true;
+			}
+		}
+		
+		return isEventNoteSelected;
 	}
 }
