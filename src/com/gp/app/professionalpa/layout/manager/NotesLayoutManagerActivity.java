@@ -83,6 +83,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private static final String APPLIED_FILTER = "currentAppliedFilter";
 
+	private static final String SELECTED_NOTE_IDS = "selectedNoteIds";
+
 	private SparseIntArray linearLayoutOccupancy = new SparseIntArray();
 	
 	private Map<Integer, FrameLayout> childFrames = new LinkedHashMap<Integer, FrameLayout>();
@@ -172,6 +174,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		outState.putByte(APPLIED_FILTER, currentAppliedFilter);
 		
+		outState.putIntegerArrayList(SELECTED_NOTE_IDS, new ArrayList<>(NotesOperationManager.getInstance().getSelectedNoteIds()));
+
 		super.onSaveInstanceState(outState);
 	}
 
@@ -190,6 +194,15 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 				.getByte(APPLIED_FILTER);
 		
 		fillLinearLayoutList();
+		
+		List<Integer> selectedIds =  savedInstanceState.getIntegerArrayList(SELECTED_NOTE_IDS);
+		
+		for(int i = 0; i < selectedIds.size(); i++)
+		{
+			int selectedNoteId = selectedIds.get(i);
+			
+			NotesOperationManager.getInstance().selectNote(selectedNoteId);
+		}
 		
 	    applyFilter(currentAppliedFilter);
 	}
@@ -471,6 +484,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		super.onDestroy();
 
 		NotesManager.getInstance().deleteAllNotes();
+		
+		System.out.println("onDestroy -> all notes deleted");
 		
 		NotesOperationManager.getInstance().clearSelectedNotes();
 	}
