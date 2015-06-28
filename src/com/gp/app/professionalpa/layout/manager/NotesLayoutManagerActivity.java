@@ -148,8 +148,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		ActionBar actionBar = getActionBar();
 
-		actionBar.setBackgroundDrawable(new ColorDrawable(Color
-				.parseColor("#7F7CD9")));
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(120, 100, 255)));
 
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
