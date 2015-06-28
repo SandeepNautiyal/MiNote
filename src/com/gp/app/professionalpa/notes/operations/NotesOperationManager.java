@@ -2,6 +2,7 @@ package com.gp.app.professionalpa.notes.operations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import android.app.Activity;
@@ -75,7 +76,7 @@ public class NotesOperationManager
 
 	public void startCopyProcess() 
 	{
-		notesCopyManager = new NoteCopyManager(selectedNoteIds);
+		notesCopyManager = new NoteCopyManager();
 		
 		isCopyInProgress = true;
 	}
@@ -84,7 +85,23 @@ public class NotesOperationManager
 	{
 		if(isCopyInProgress)
 		{
-			notesCopyManager.copyNote();
+			notesCopyManager.copyNote(selectedNoteIds);
+			
+			deSelectSelectedNotes();
+			
+			isCopyInProgress = false;
+		}
+	}
+
+	private void deSelectSelectedNotes() 
+	{
+		Iterator<Integer> iterator = selectedNoteIds.iterator();
+		
+		while(iterator.hasNext())
+		{
+            ProfessionalPAParameters.getNotesActivity().deSelectNote(iterator.next());
+            
+            iterator.remove();
 		}
 	}
 
@@ -176,9 +193,9 @@ public class NotesOperationManager
 	{   
 		if(selectedNoteIds.contains(noteId))
 		{
-			selectedNoteIds.remove((Integer)noteId);
-
 			ProfessionalPAParameters.getNotesActivity().deSelectNote(noteId);
+			
+			selectedNoteIds.remove((Integer)noteId);
 		}
 	}
 

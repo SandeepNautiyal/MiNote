@@ -10,6 +10,14 @@
     </item>
     
     <item
+        android:id="@+id/noteCopy"
+        android:icon="@drawable/ic_action_copy"
+        android:showAsAction="always"
+        android:title="Copy"
+        android:titleCondensed="Copy">
+    </item>
+    
+    <item
         android:id="@+id/itemDelete"
         android:icon="@drawable/professional_pa_discard_note"
         android:showAsAction="always"

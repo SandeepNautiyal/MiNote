@@ -55,6 +55,9 @@ public class NotesActionModeCallback implements ActionMode.Callback
             case R.id.shareNote:
             	NotesOperationManager.getInstance().shareSelectedNote();
             	break;
+            case R.id.noteCopy:
+            	NotesOperationManager.getInstance().startCopyProcess();
+            	break;
             default:
         }
         

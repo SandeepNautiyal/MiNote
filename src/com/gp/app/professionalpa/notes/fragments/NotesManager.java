@@ -62,4 +62,17 @@ public class NotesManager
 		 
 		return ++lastOccupiedKey;
 	}
+
+	public TextNote createCopyOfNote(TextNote note) 
+	{
+		int noteId = NotesManager.getInstance().getNextFreeNoteId();
+		
+		TextNote copiedNote = new TextNote(noteId, note.getType(), note.getNoteItems());
+		
+		copiedNote.setCreationTime(System.currentTimeMillis());
+		
+		copiedNote.setLastEditedTime(System.currentTimeMillis());
+		
+		return copiedNote;
+	}
 }

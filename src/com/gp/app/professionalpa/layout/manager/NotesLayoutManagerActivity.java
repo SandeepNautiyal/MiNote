@@ -206,6 +206,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		
 	    applyFilter(currentAppliedFilter);
 	}
+	
+	public void copyNote(View view)
+	{
+		NotesOperationManager.getInstance().copyNote();
+	}
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) 
@@ -460,7 +465,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
         final FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
-		int fragmentLength = isTextNote ? ((TextNoteFragment)fragment).getFragmentLength() : 3;
+		int fragmentLength = isTextNote ? ((TextNoteFragment)fragment).getFragmentLength() : 8;
 
 		frameLayout.setClickable(true);
 		
@@ -484,8 +489,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		super.onDestroy();
 
 		NotesManager.getInstance().deleteAllNotes();
-		
-		System.out.println("onDestroy -> all notes deleted");
 		
 		NotesOperationManager.getInstance().clearSelectedNotes();
 	}
@@ -1030,9 +1033,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 				minimumOccupiedLayoutIndex = linearLayoutIndex;
 			}
 		}
-		
-		System.out.println("getMinimumOccupiedLayoutIndex -> minimumOccupiedLayoutIndex="+minimumOccupiedLayoutIndex
-				+"minimumOccupancy="+minimumOccupancy);
 		
 		return minimumOccupiedLayoutIndex;
 	}
