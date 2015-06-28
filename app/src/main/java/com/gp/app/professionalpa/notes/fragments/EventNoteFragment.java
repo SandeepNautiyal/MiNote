@@ -1,11 +1,13 @@
 package com.gp.app.professionalpa.notes.fragments;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
@@ -64,18 +66,29 @@ public class EventNoteFragment extends Fragment
 				
 				listView.setAdapter(adapter);
 				
-				listView.setOnItemLongClickListener(new OnItemLongClickListener() {
-
+				listView.setOnItemLongClickListener(new OnItemLongClickListener() 
+				{
 					@Override
 					public boolean onItemLongClick(AdapterView<?> parent,
 							View view, int position, long id) 
 					{
 						selectNote();
 						
-						return false;
+						return true;
 					}
-
-		            });
+		        });
+				
+				listView.setOnItemClickListener(new OnItemClickListener() 
+				{
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) 
+					{
+						deSelectNote();
+					}
+		        });
+				
+				listView.setBackgroundColor(Color.rgb(255, 255, 255));
 				
 				adapter.notifyDataSetChanged();
 		    }
@@ -86,6 +99,14 @@ public class EventNoteFragment extends Fragment
 	public void onDestroy() 
 	{
 		super.onDestroy();
+	}
+	
+	private void deSelectNote() 
+	{
+		if(NotesOperationManager.getInstance().getSelectedNoteIds().contains(event.getId()))
+		{
+			NotesOperationManager.getInstance().deSelectNote(event.getId());
+		}
 	}
 	
 	private void selectNote() 

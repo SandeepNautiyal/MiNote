@@ -6,7 +6,6 @@ import com.gp.app.professionalpa.interfaces.XMLEntity;
 
 public abstract class Note implements XMLEntity, Parcelable
 {
-    private int id;
 	public static final byte LIST_NOTE = 0;
 	public static final byte PARAGRAPH_NOTE = 1;
 	public static final byte IMAGE_NOTE = 2;

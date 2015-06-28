@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -32,7 +33,7 @@ public class TextNote extends Note
 	
 	private long lastEditedTime = 0L;
 	
-	private int noteColor;
+	private int noteColor = Color.rgb(255, 255, 255);
 
 	public TextNote(int noteId, byte noteType, List<NoteItem> values) 
 	{

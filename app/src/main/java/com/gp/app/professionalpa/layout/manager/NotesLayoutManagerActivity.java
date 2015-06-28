@@ -83,6 +83,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private static final String APPLIED_FILTER = "currentAppliedFilter";
 
+	private static final String SELECTED_NOTE_IDS = "selectedNoteIds";
+
 	private SparseIntArray linearLayoutOccupancy = new SparseIntArray();
 	
 	private Map<Integer, FrameLayout> childFrames = new LinkedHashMap<Integer, FrameLayout>();
@@ -172,6 +174,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		outState.putByte(APPLIED_FILTER, currentAppliedFilter);
 		
+		outState.putIntegerArrayList(SELECTED_NOTE_IDS, new ArrayList<>(NotesOperationManager.getInstance().getSelectedNoteIds()));
+
 		super.onSaveInstanceState(outState);
 	}
 
@@ -191,7 +195,21 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		
 		fillLinearLayoutList();
 		
+		List<Integer> selectedIds =  savedInstanceState.getIntegerArrayList(SELECTED_NOTE_IDS);
+		
+		for(int i = 0; i < selectedIds.size(); i++)
+		{
+			int selectedNoteId = selectedIds.get(i);
+			
+			NotesOperationManager.getInstance().selectNote(selectedNoteId);
+		}
+		
 	    applyFilter(currentAppliedFilter);
+	}
+	
+	public void copyNote(View view)
+	{
+		NotesOperationManager.getInstance().copyNote();
 	}
 
 	@Override
@@ -447,7 +465,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
         final FrameLayout frameLayout =  (FrameLayout)getLayoutInflater().inflate(R.layout.professional_pa_frame_layout, null, false);
 		
-		int fragmentLength = isTextNote ? ((TextNoteFragment)fragment).getFragmentLength() : 3;
+		int fragmentLength = isTextNote ? ((TextNoteFragment)fragment).getFragmentLength() : 8;
 
 		frameLayout.setClickable(true);
 		
@@ -974,7 +992,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		}
 	}
 
-	private void resetNoteColor(int selectedNoteId) {
+	private void resetNoteColor(int selectedNoteId) 
+	{
 		FrameLayout frameLayout = childFrames.get(selectedNoteId);
 
 		if(frameLayout != null)
@@ -988,6 +1007,10 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 				if(note != null && note.getType() != Note.EVENT_NOTE)
 				{
 					view.setBackgroundColor(((TextNote)note).getNoteColor());
+				}
+				else
+				{
+					view.setBackgroundColor(Color.rgb(255, 255, 255));
 				}
 			}
 		}
@@ -1010,9 +1033,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 				minimumOccupiedLayoutIndex = linearLayoutIndex;
 			}
 		}
-		
-		System.out.println("getMinimumOccupiedLayoutIndex -> minimumOccupiedLayoutIndex="+minimumOccupiedLayoutIndex
-				+"minimumOccupancy="+minimumOccupancy);
 		
 		return minimumOccupiedLayoutIndex;
 	}
@@ -1129,7 +1149,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			currenActionMode.finish();
 		}
-		else if(NotesOperationManager.getInstance().getSelectedNoteIds().size() == 1)
+		else if(NotesOperationManager.getInstance().getSelectedNoteIds().size() == 1
+				&& !NotesOperationManager.getInstance().isSelectedNoteEvent())
 		{
 			Menu menu = currenActionMode.getMenu();
 			
