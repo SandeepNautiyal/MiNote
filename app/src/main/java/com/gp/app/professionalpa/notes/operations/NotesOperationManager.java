@@ -215,6 +215,8 @@ public class NotesOperationManager
 					noteText.append(event.getStartDate()+"  "+event.getStartTime()+"\n");
 
 					noteText.append(event.getEndDate()+"  "+event.getEndTime());
+					
+					System.out.println("noteText ="+noteText);
 				}
 				else
 				{
