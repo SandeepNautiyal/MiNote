@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -16,9 +16,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.gp.app.professionalpa.data.NoteItem;
 import com.gp.app.professionalpa.data.TextNote;
+import com.gp.app.professionalpa.database.search.NotesSearch;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
-public class NotesDBManager extends SQLiteOpenHelper
+public class NotesDBManager extends SQLiteOpenHelper implements NotesSearch
 {
     private static NotesDBManager instance;
 	
@@ -320,15 +321,6 @@ public class NotesDBManager extends SQLiteOpenHelper
 			int numberOfEffectedRows = db.update(TextNote.NOTE_TABLE_NAME, values, where, null);
 	}
 
-	public void deleteAllNotes() 
-	{
-        SQLiteDatabase db = getWritableDatabase();
-        
-//        db.execSQL("DELETE '*' from "+NoteListItem.NOTE_ITEM_TABLE_NAME);
-//
-//        db.execSQL("DELETE '*' from "+ProfessionalPANote.NOTE_TABLE_NAME);
-	}
-	
 	public List<Integer> getSearchNoteIds(String searchString)
 	{
         List<Integer> noteIds = new ArrayList<Integer>();
@@ -352,34 +344,22 @@ public class NotesDBManager extends SQLiteOpenHelper
     	
     	return noteIds;
 	}
-	
-	public class NotesSearchManager
+
+	@Override
+	public Set<Integer> getMatchingNoteIds(String query) 
 	{
-		Map<String, Integer> notesData = null;
+		Map<String, Integer> notesData = readNoteItems();
 		
-		public NotesSearchManager()
-		{
-			notesData = readNoteItems();
-		}
-		
-		public Set<Integer> getMatchingNoteIds(String query)
-		{
-			Set<Integer> noteIds = new HashSet<Integer>();
+		Set<Integer> noteIds = new HashSet<Integer>();
 
-			System.out.println("getMatchingNoteIds -> notesData="+notesData);
-			
-			for (Entry<String, Integer> entry : notesData.entrySet())
+		for (Entry<String, Integer> entry : notesData.entrySet())
+		{
+			if (entry.getKey().toUpperCase(Locale.US).contains(query.toUpperCase(Locale.US))) 
 			{
-				//TODO support localization
-				if (entry.getKey().toUpperCase(Locale.US).contains(query.toUpperCase(Locale.US))) 
-				{
-					noteIds.add(entry.getValue());
-				}
+				noteIds.add(entry.getValue());
 			}
-
-			System.out.println("getMatchingNoteIds <- noteIds=" + noteIds);
-
-			return noteIds;
 		}
+
+		return noteIds;
 	}
 }

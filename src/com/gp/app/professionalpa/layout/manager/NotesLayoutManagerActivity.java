@@ -93,8 +93,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private ImageLocationPathManager imageCaptureManager = null;
 	
-	private NotesDBManager.NotesSearchManager notesSearchManager = null;
-	
 	private RelativeLayout scrollView = null;
 	
 	private FrameLayout noteCreatorFrameLayout = null;
@@ -289,7 +287,6 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	//
 		    	return true;
 			case R.id.actionSearch :
-				notesSearchManager =  NotesDBManager.getInstance().new  NotesSearchManager();
 				return true;
 
 			default:
@@ -1095,7 +1092,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
     @Override
 	public boolean onQueryTextChange(String query) 
 	{
-		Set<Integer> noteIds = notesSearchManager.getMatchingNoteIds(query);
+		Set<Integer> noteIds = NotesDBManager.getInstance().getMatchingNoteIds(query);
+		
+		Set<Integer> eventIds = CalendarDBManager.getInstance().getMatchingNoteIds(query);
+		
+		noteIds.addAll(eventIds);
 		
 		filterNotes(noteIds);
 		

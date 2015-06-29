@@ -1,7 +1,9 @@
 package com.gp.app.professionalpa.calendar.events.database;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -14,9 +16,10 @@ import com.gp.app.professionalpa.calendar.interfaces.DBChangeListener;
 import com.gp.app.professionalpa.calendar.interfaces.DBchangePublisher;
 import com.gp.app.professionalpa.data.Event;
 import com.gp.app.professionalpa.data.TextNote;
+import com.gp.app.professionalpa.database.search.NotesSearch;
 import com.gp.app.professionalpa.util.ProfessionalPAParameters;
 
-public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePublisher
+public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePublisher, NotesSearch
 {
 	private static final String DATABASE_NAME = "Calendar";
 	private static final int DATABASE_VERSION = 4;
@@ -357,5 +360,27 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
     	}
     	
     	return events;
+	}
+
+	@Override
+	public Set<Integer> getMatchingNoteIds(String query) 
+	{
+		List<Event> events = readAllEvents();
+		
+		Set<Integer> eventIds = new HashSet<Integer>();
+		
+        for(int i = 0; i < events.size(); i++)
+        {
+        	Event event = events.get(i);
+        	
+        	if(event.getEventName().contains(query) || event.getLocation().contains(query) ||
+        		event.getStartDate().contains(query) || event.getStartTime().contains(query) ||
+        		    event.getEndDate().contains(query) || event.getEndTime().contains(query))
+        	{
+            	eventIds.add(events.get(i).getId());
+        	}
+        }
+        
+		return eventIds;
 	}
 }
