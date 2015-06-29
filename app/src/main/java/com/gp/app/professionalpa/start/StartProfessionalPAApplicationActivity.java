@@ -26,8 +26,6 @@ public class StartProfessionalPAApplicationActivity extends Activity {
 		
 		ProfessionalPAParameters.setApplicationContext(getApplicationContext());
 		
-   	    NotesDBManager.getInstance().deleteAllNotes();
-
 		NotesBackupManager.setInitialBackupTime();
 
         DisplayMetrics metrics = new DisplayMetrics();
