@@ -33,7 +33,7 @@ public class TextNote extends Note
 	
 	private long lastEditedTime = 0L;
 	
-	private int noteColor = Color.rgb(255, 255, 255);
+	private int noteColor = 0;
 
 	public TextNote(int noteId, byte noteType, List<NoteItem> values) 
 	{

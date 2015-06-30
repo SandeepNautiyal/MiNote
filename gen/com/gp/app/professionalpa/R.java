@@ -53,8 +53,8 @@ public final class R {
         public static final int ic_launcher=0x7f02000d;
         public static final int ic_pin_black_bullet_point=0x7f02000e;
         public static final int layout_border=0x7f02000f;
-        public static final int list_view_border=0x7f020010;
-        public static final int list_view_selector=0x7f020011;
+        public static final int list_view_border_blue=0x7f020010;
+        public static final int list_view_border_red=0x7f020011;
         public static final int navigation_next_item=0x7f020012;
         public static final int navigation_previous_item=0x7f020013;
         public static final int normal_day=0x7f020014;

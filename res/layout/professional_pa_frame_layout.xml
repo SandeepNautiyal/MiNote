@@ -2,6 +2,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/professional_pa_frame_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/layout_border">
+    android:layout_height="wrap_content">
 </FrameLayout>
