@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/composite_control_layout"
-    android:background="@null"
     tools:context="com.gp.app.professionalpa.layout.ListItemLayout" >
     
     <ImageView 

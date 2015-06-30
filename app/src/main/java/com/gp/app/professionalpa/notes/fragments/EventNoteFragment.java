@@ -2,6 +2,7 @@ package com.gp.app.professionalpa.notes.fragments;
 
 import android.app.Fragment;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,7 +89,9 @@ public class EventNoteFragment extends Fragment
 					}
 		        });
 				
-				listView.setBackgroundColor(Color.rgb(255, 255, 255));
+				listView.setBackgroundColor(0);
+				
+				listView.setBackgroundResource(R.drawable.list_view_border_red);
 				
 				adapter.notifyDataSetChanged();
 		    }

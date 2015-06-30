@@ -53,7 +53,7 @@ public class NotesOperationManager
 					
 					for(int j = 0, size = items.size(); j < size; j++)
 					{
-						NoteItem item = textNote.getNoteItems().get(i);
+						NoteItem item = textNote.getNoteItems().get(j);
 						
 						ImageLocationPathManager.getInstance().deleteImage(item.getImageName());
 					}

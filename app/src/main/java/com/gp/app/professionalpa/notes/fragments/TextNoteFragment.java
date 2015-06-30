@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout.LayoutParams;
 
 import com.gp.app.professionalpa.R;
 import com.gp.app.professionalpa.data.TextNote;
@@ -70,6 +71,8 @@ public class TextNoteFragment extends ListFragment
 				setListViewHeightBasedOnItems();
 //				setListShown(true);
 				listView.setBackgroundColor(note.getNoteColor());
+				
+				listView.setBackgroundResource(R.drawable.list_view_border_blue);
 				
 				adapter.notifyDataSetChanged();
 		    }
