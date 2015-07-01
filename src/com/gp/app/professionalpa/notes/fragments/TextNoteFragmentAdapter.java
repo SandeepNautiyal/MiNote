@@ -145,6 +145,8 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 			importanceButtonParams.width = 0;
 			bulletPointImage.setLayoutParams(importanceButtonParams);
 			bulletPointImage.setVisibility(View.GONE);
+			
+			editText.setPadding(10, 0, 10, 0);
 		}
 
 		if (noteListItem.getText() != null && !noteListItem.getText().equals(""))
