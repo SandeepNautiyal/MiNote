@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout.LayoutParams;
@@ -73,6 +74,10 @@ public class TextNoteFragment extends ListFragment
 				listView.setBackgroundColor(note.getNoteColor());
 				
 				listView.setBackgroundResource(R.drawable.list_view_border_blue);
+				
+				MarginLayoutParams p = (MarginLayoutParams)listView.getLayoutParams();
+				
+				p.setMargins(5,5,5,5);
 				
 				adapter.notifyDataSetChanged();
 		    }

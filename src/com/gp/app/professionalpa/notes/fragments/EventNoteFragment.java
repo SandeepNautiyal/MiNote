@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -93,6 +94,10 @@ public class EventNoteFragment extends Fragment
 				
 				listView.setBackgroundResource(R.drawable.list_view_border_red);
 				
+                MarginLayoutParams p = (MarginLayoutParams)listView.getLayoutParams();
+				
+				p.setMargins(5,5,5,5);
+				 
 				adapter.notifyDataSetChanged();
 		    }
 		}
