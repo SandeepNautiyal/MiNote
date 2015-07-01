@@ -193,16 +193,24 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 
 		if (noteListItem.getImageName() != null && !noteListItem.getImageName().equals("")) 
 		{
-			LayoutParams imageViewParams = imageView.getLayoutParams();
-			imageViewParams.height = LayoutParams.WRAP_CONTENT;
-			imageViewParams.width = LayoutParams.MATCH_PARENT;
+			if(noteType == Note.PARAGRAPH_NOTE)
+			{
+				final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+				params.addRule(RelativeLayout.BELOW, editText.getId());
+				params.height = LayoutParams.WRAP_CONTENT;
+				params.width = LayoutParams.MATCH_PARENT;
+				imageView.setLayoutParams(params);
+			}
+			else
+			{
+				editText.setVisibility(View.INVISIBLE);
+			}
 
 			Bitmap image = ImageLocationPathManager.getInstance().getImage(
 					noteListItem.getImageName(), true);
 
 			image = Bitmap.createScaledBitmap(image, 350, 350, false);
 			imageView.setImageBitmap(image);
-			imageView.setLayoutParams(imageViewParams);
 			
 			LayoutParams importanceButtonParams = bulletPointImage.getLayoutParams();
 			importanceButtonParams.height = 0;
@@ -210,11 +218,11 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 			bulletPointImage.setLayoutParams(importanceButtonParams);
 			bulletPointImage.setVisibility(View.INVISIBLE);
 			
-			LayoutParams textButtonParams = editText.getLayoutParams();
-			textButtonParams.height = 0;
-			textButtonParams.width = 0;
-			editText.setLayoutParams(textButtonParams);
-			editText.setVisibility(View.INVISIBLE);
+//			LayoutParams textButtonParams = editText.getLayoutParams();
+//			textButtonParams.height = 0;
+//			textButtonParams.width = 0;
+//			editText.setLayoutParams(textButtonParams);
+//			editText.setVisibility(View.INVISIBLE);
 		}
 
 	    return convertView;

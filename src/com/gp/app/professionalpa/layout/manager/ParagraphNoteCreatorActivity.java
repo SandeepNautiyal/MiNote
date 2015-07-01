@@ -77,6 +77,8 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 			}
 		});
 		
+		listItem = new NoteItem();
+
         Intent intent = getIntent();
 		
 		if(intent != null)
@@ -105,19 +107,21 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 				    		
 				    		if(item.isTitle())
 				    		{
-				    			titleEditText.setText(items.get(0).getText());
+				    			titleEditText.setText(item.getText());
 						    	
-						    	titleEditText.setText(items.get(0).getTextColour());
+						    	titleEditText.setTextColor(item.getTextColour());
 				    		}
 				    		else
 				    		{
-				    			EditText editText = (EditText)activityLayout.findViewById(R.id.paragraphNote);
+						    	paragraphEditText.setText(item.getText());
 						    	
-						    	editText.setText(textNote.getNoteItems().get(0).getText());
-						    	
+						    	paragraphEditText.setTextColor(item.getTextColour());
+
 			                    ImageView imageView = (ImageView)activityLayout.findViewById(R.id.paragraphNoteImportanceView);
 						    	
-			                    imageView.setImageBitmap(ImageLocationPathManager.getInstance().getImage(textNote.getNoteItems().get(0).getImageName(), true));
+			                    imageView.setImageBitmap(ImageLocationPathManager.getInstance().getImage(item.getImageName(), true));
+			                    
+			                    listItem.setImageName(item.getImageName());
 				    		}
 				    	} 
 			    	}
@@ -125,8 +129,6 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 			}
 		}
 
-		listItem = new NoteItem();
-		
         ActionBar actionBar = getActionBar();
 		
 		actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(120, 100, 255)));

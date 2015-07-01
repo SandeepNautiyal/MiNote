@@ -187,6 +187,8 @@ public class NotesOperationManager
 	public void editSelectedNote() 
 	{
 		ProfessionalPAParameters.getNotesActivity().openNoteInEditMode(selectedNoteIds.get(0));
+		
+		deSelectNote(selectedNoteIds.get(0));
 	}
 
 	public void deSelectNote(int noteId) 
