@@ -96,7 +96,10 @@ public class EventNoteFragment extends Fragment
 				
                 MarginLayoutParams p = (MarginLayoutParams)listView.getLayoutParams();
 				
-				p.setMargins(5,5,5,5);
+                if(p != null)
+				{
+					p.setMargins(5,5,5,5);
+				}
 				 
 				adapter.notifyDataSetChanged();
 		    }
