@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gp.app.professionalpa"
+    package="com.gp.app.minote"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -41,25 +41,25 @@
             
         </activity>
         <activity
-            android:name="com.gp.app.professionalpa.layout.manager.ParagraphNoteCreatorActivity"
+            android:name="com.gp.app.minote.layout.manager.ParagraphNoteCreatorActivity"
             android:label="@string/paragraph_note_creator_activity_title"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.gp.app.professionalpa.layout.manager.ListItemCreatorActivity"
+            android:name="com.gp.app.minote.layout.manager.ListItemCreatorActivity"
             android:label="@string/title_activity_list_item_creator" 
             android:screenOrientation="portrait">
         </activity>
 
         <receiver
-            android:name="com.gp.app.professionalpa.notification.service.NotificationReceiver"
+            android:name="com.gp.app.minote.notification.service.NotificationReceiver"
             android:enabled="true" 
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <service android:enabled="true" android:name="com.gp.app.professionalpa.notification.service.NotificationProcessingService"/>
-        <service android:enabled="true" android:name="com.gp.app.professionalpa.notification.service.AlarmRecreatorService"/>
+        <service android:enabled="true" android:name="com.gp.app.minote.notification.service.NotificationProcessingService"/>
+        <service android:enabled="true" android:name="com.gp.app.minote.notification.service.AlarmRecreatorService"/>
     </application>
 </manifest>

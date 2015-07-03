@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:onClick="copyNote"
     android:id="@+id/notesLayoutManagerParentRelativeLayout"
-    tools:context="com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity">
+    tools:context="com.gp.app.minote.layout.manager.NotesLayoutManagerActivity">
     
 <ScrollView 
     android:id="@+id/notesLayoutManagerScrollView"
