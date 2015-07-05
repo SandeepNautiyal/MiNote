@@ -46,6 +46,7 @@ import com.gp.app.minote.data.TextNote;
 import com.gp.app.minote.exceptions.MiNoteBaseException;
 import com.gp.app.minote.export.MiNoteNotesExporter;
 import com.gp.app.minote.interfaces.MiNoteConstants;
+import com.gp.app.minote.listeners.NotesActionModeCallback;
 import com.gp.app.minote.notes.database.NotesDBManager;
 import com.gp.app.minote.notes.fragments.FragmentCreationManager;
 import com.gp.app.minote.notes.fragments.NotesManager;
@@ -54,7 +55,6 @@ import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.notes.operations.NotesOperationManager;
 import com.gp.app.minote.util.MiNoteParameters;
 import com.gp.app.minote.R;
-import com.gp.app.professionalpa.minote.listeners.NotesActionModeCallback;
 
 //TODO create notes for calendar events also
 public class NotesLayoutManagerActivity extends Activity implements ColourPickerChangeListener, OnQueryTextListener 

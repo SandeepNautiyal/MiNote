@@ -1,4 +1,4 @@
-package com.gp.app.professionalpa.minote.listeners;
+package com.gp.app.minote.listeners;
 
 import android.view.ActionMode;
 import android.view.Menu;
