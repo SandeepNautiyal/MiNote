@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gp.app.professionalpa"
+    package="com.gp.app.minote"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -23,7 +23,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
-            android:name="com.gp.app.professionalpa.start.StartProfessionalPAApplicationActivity"
+            android:name="com.gp.app.minote.start.StartProfessionalPAApplicationActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.gp.app.professionalpa.layout.manager.NotesLayoutManagerActivity"
+            android:name="com.gp.app.minote.layout.manager.NotesLayoutManagerActivity"
             android:label="@string/notes_layout_manager_activity_title"
             android:launchMode="singleTop" >
             <intent-filter>
@@ -44,18 +44,18 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="com.gp.app.professionalpa.layout.manager.ParagraphNoteCreatorActivity"
+            android:name="com.gp.app.minote.layout.manager.ParagraphNoteCreatorActivity"
             android:label="@string/paragraph_note_creator_activity_title"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.gp.app.professionalpa.layout.manager.ListItemCreatorActivity"
+            android:name="com.gp.app.minote.layout.manager.ListItemCreatorActivity"
             android:label="@string/title_activity_list_item_creator"
             android:screenOrientation="portrait" >
         </activity>
 
         <receiver
-            android:name="com.gp.app.professionalpa.notification.service.NotificationReceiver"
+            android:name="com.gp.app.minote.notification.service.NotificationReceiver"
             android:enabled="true"
             android:noHistory="true" >
             <intent-filter>
@@ -64,10 +64,10 @@
         </receiver>
 
         <service
-            android:name="com.gp.app.professionalpa.notification.service.NotificationProcessingService"
+            android:name="com.gp.app.minote.notification.service.NotificationProcessingService"
             android:enabled="true" />
         <service
-            android:name="com.gp.app.professionalpa.notification.service.AlarmRecreatorService"
+            android:name="com.gp.app.minote.notification.service.AlarmRecreatorService"
             android:enabled="true" />
     </application>
 
