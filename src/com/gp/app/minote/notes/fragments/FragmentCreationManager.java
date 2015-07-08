@@ -33,7 +33,7 @@ public class FragmentCreationManager extends ListFragment
     	{
     		Event event = (Event)note;
     		
-            EventNoteFragment fragment = new EventNoteFragment(event);
+            EventNoteFragment fragment = new EventNoteFragment);
     	    
     		Bundle bundle = new Bundle();
 

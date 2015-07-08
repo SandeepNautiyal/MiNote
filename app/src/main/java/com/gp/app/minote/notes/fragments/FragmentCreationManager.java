@@ -19,7 +19,7 @@ public class FragmentCreationManager extends ListFragment
     	{
     		TextNote textNote = (TextNote)note;
     		
-    		TextNoteFragment fragment = new TextNoteFragment(textNote);
+    		TextNoteFragment fragment = new TextNoteFragment();
     	    
     		Bundle bundle = new Bundle();
 
@@ -33,7 +33,7 @@ public class FragmentCreationManager extends ListFragment
     	{
     		Event event = (Event)note;
     		
-            EventNoteFragment fragment = new EventNoteFragment(event);
+            EventNoteFragment fragment = new EventNoteFragment();
     	    
     		Bundle bundle = new Bundle();
 

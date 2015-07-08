@@ -9,11 +9,10 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout.LayoutParams;
 
+import com.gp.app.minote.R;
 import com.gp.app.minote.data.TextNote;
 import com.gp.app.minote.interfaces.MiNoteConstants;
-import com.gp.app.minote.R;
 
 public class TextNoteFragment extends ListFragment
 {
@@ -26,13 +25,6 @@ public class TextNoteFragment extends ListFragment
 	public TextNoteFragment()
 	{
 		super();
-	}
-	
-	public TextNoteFragment(TextNote note)
-	{
-		super();
-		
-		this.note = note;
 	}
 	
 	/**
@@ -61,6 +53,8 @@ public class TextNoteFragment extends ListFragment
 			
 		    if(note != null)
 		    {
+                this.note = note;
+
 				adapter = new TextNoteFragmentAdapter(getActivity(), note);
 				
 				listView.setAdapter(adapter);
@@ -96,7 +90,6 @@ public class TextNoteFragment extends ListFragment
 	/**
 	 * Sets ListView height dynamically based on the height of the items.   
 	 *
-	 * @param listView to be resized
 	 * @return true if the listView is successfully resized, false otherwise
 	 */
 	public void setListViewHeightBasedOnItems() 

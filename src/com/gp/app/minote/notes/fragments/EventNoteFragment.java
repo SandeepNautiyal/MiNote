@@ -31,13 +31,6 @@ public class EventNoteFragment extends Fragment
 		super();
 	}
 	
-	public EventNoteFragment(Event event)
-    {
-		super();
-		
-    	this.event  = event;
-    }
-	
 	/**
 	 * 
 	 */

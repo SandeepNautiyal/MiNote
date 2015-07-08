@@ -1,13 +1,5 @@
 package com.gp.app.minote.layout.manager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
@@ -19,6 +11,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.SparseIntArray;
@@ -35,7 +28,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
+import android.widget.Toast;
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.gp.app.minote.R;
+import com.gp.app.minote.backend.registration.Registration;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
 import com.gp.app.minote.calendar.ui.ProfessionalPACalendarView;
 import com.gp.app.minote.colorpicker.ColourPickerChangeListener;
@@ -54,7 +53,17 @@ import com.gp.app.minote.notes.fragments.TextNoteFragment;
 import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.notes.operations.NotesOperationManager;
 import com.gp.app.minote.util.MiNoteParameters;
-import com.gp.app.minote.R;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //TODO create notes for calendar events also
 public class NotesLayoutManagerActivity extends Activity implements ColourPickerChangeListener, OnQueryTextListener 
@@ -155,6 +164,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		MiNoteParameters.setNotesActivity(this);
 		
 		handleIntent(getIntent());
+
+        new GcmRegistrationAsyncTask(this).execute();
 	}
 
 	private void reInitializeLinearLayoutOccupancy(int numberOfLinearLayouts) 
@@ -1163,4 +1174,56 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			}
 		}
 	}
+
+
+    //TODO to be removed.
+    class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
+        private Registration regService = null;
+        private GoogleCloudMessaging gcm;
+        private Context context;
+
+        // TODO: change to your own sender ID to Google Developers Console project number, as per instructions above
+        private static final String SENDER_ID = "700276642861";
+
+        public GcmRegistrationAsyncTask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            if (regService == null) {
+                Registration.Builder builder = new Registration.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+                        .setRootUrl("https://minote-997.appspot.com/_ah/api/");
+                // end of optional local run code
+
+                regService = builder.build();
+            }
+
+            String msg = "";
+            try {
+                if (gcm == null) {
+                    gcm = GoogleCloudMessaging.getInstance(context);
+                }
+                String regId = gcm.register(SENDER_ID);
+                msg = "Device registered, registration ID=" + regId;
+
+                // You should send the registration ID to your server over HTTP,
+                // so it can use GCM/HTTP or CCS to send messages to your app.
+                // The request to your server should be authenticated if your app
+                // is using accounts.
+                regService.register(regId).execute();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                msg = "Error: " + ex.getMessage();
+            }
+            return msg;
+        }
+
+        @Override
+        protected void onPostExecute(String msg) {
+            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+            Logger.getLogger("REGISTRATION").log(Level.INFO, msg);
+        }
+    }
 }

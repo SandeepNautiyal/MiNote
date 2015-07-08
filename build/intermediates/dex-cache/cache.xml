@@ -2,32 +2,256 @@
 <items version="2" >
 
     <item
-        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jar="C:\Users\dell\.gradle\caches\modules-2\files-2.1\com.google.guava\guava-jdk5\13.0\381ae6c8add7c98e9bcddb1e0b898400cd6fc3f7\guava-jdk5-13.0.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-385a73b301271f8807486d28e8e0e1ffe075b81a.jar" />
+        sha1="381ae6c8add7c98e9bcddb1e0b898400cd6fc3f7">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\guava-jdk5-13.0-5fb8fe3186d0629c51b831879f46fc9a2a3667fd.jar" />
     </item>
     <item
-        jar="C:\Users\dell\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-6fa8b539f0410dc10e47ed292cb5402e0448bbfd.jar" />
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-ef9f18999c1d6b59a79aa09f3156fe82de5d2dc5.jar" />
     </item>
     <item
-        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.5.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-631052994f4be6360dfa5fa1658d62791d360cd7.jar" />
+        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-0184adda872ae033b07298d1de2501ff06829cc0.jar" />
     </item>
     <item
-        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.5.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-c77e077331dd72963d69f206dea890425bef46d8.jar" />
+        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-27422bf6c04637710eee25d1553b43d902125067.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-051bf981c3c7160756f3a4da1911dec39692f930.jar" />
+    </item>
+    <item
+        jar="C:\Users\dell\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\1.3.9\40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf\jsr305-1.3.9.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\jsr305-1.3.9-fd126955e62eaae1b15ae404a4583ca8de3e328c.jar" />
+    </item>
+    <item
+        jar="C:\Users\dell\.gradle\caches\modules-2\files-2.1\com.google.api-client\google-api-client\1.19.0\6a21277d9bebe267b7ddee028b241eebc756c040\google-api-client-1.19.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6a21277d9bebe267b7ddee028b241eebc756c040">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\google-api-client-1.19.0-9993164c94f1b6b5ea03c88905685198806c9f30.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-7fd1f0cdf010887babe9cb8dc2443e00eb390959.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-1600a8d3faea49076a2d6fcd8354d4a04357948e.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-400ac0bbbbfdc2aa783a188482dda92611424bc5.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-959a129e227e624fe7fb5b4d4c25e218b4de1fb7.jar" />
+    </item>
+    <item
+        jar="C:\Users\dell\.gradle\caches\modules-2\files-2.1\com.google.api-client\google-api-client-android\1.19.0\ba2aafb867f6af469f936ae76426cf0a280094bd\google-api-client-android-1.19.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ba2aafb867f6af469f936ae76426cf0a280094bd">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\google-api-client-android-1.19.0-40a96a7cf0287d8a207c6ee8c6ecc518925e2ae5.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-42e294434238d3ecbda5074c530daf411af0a077.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-52fc4a6e6feaf7774b113443d60de9d8d7e9a9d8.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.0.0\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-cd27f2cffd9070e2267fbb443967738f9dd625a7.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-0f0e97d1106f97db6320721703c016a267df0894.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\minote-backend\build\libs\minote-backend-android-endpoints.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ba32af260a02b8e247c5fc491828141f5a69c88f">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\minote-backend-android-endpoints-6045e8ec3e739ac5cf1af54ae1f1684537178e6b.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-1f859c29718c7211c1057518f824a608f4f9e48d.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a78183f30e769a98ab4820794f597763088d3065">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-ccc907fc68a5f3d4c688fc5201cd9ef001269929.jar" />
+    </item>
+    <item
+        jar="E:\Softwares\Android SDK\android-sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-888b242bc67e975b526998d7070badf73276a9cd.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-d9f16f00b133c2a7e6aaee0d7107cb363f123b60.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-17ef1d9df2ea1c0e6f47fb6e8cf257b95b8af991.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-4803eb240ad43f2fca3404cc16ebcd95bfb2cd48.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-387f990a2105d7b69ce03c8d444c8459e306d5e4.jar" />
+    </item>
+    <item
+        jar="C:\Users\dell\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.1.3\f6c3aed1cdfa21b5c1737c915186ea93a95a58bd\jackson-core-2.1.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f6c3aed1cdfa21b5c1737c915186ea93a95a58bd">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\jackson-core-2.1.3-c16dc881a7e3aace80c254fd829291fc3c8b61be.jar" />
+    </item>
+    <item
+        jar="C:\Users\dell\.gradle\caches\modules-2\files-2.1\com.google.oauth-client\google-oauth-client\1.19.0\d473a8962e14a707a3716637e4898bb2dd9643f2\google-oauth-client-1.19.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d473a8962e14a707a3716637e4898bb2dd9643f2">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\google-oauth-client-1.19.0-942a05371f2f9684fe9e0438dfd61d360cf09ed0.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-b94b624415ebfd767d5604df3bffd029ef2f00eb.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d405025c600055237c171a0bbabaa49d69696573">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-9d589c27b2e395e9ff0798be50195913a51b5b9c.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-358fb3e0b0fd504e2324edad38b4db9c43c1bd55.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-5a675ee40e6e33b5bfce0dcbb962887a18ff1833.jar" />
+    </item>
+    <item
+        jar="C:\Users\dell\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client-jackson2\1.19.0\81dbf9795d387d5e80e55346582d5f2fb81a42eb\google-http-client-jackson2-1.19.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81dbf9795d387d5e80e55346582d5f2fb81a42eb">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\google-http-client-jackson2-1.19.0-dd00519a4a58ea1316272af420de4652fe38d4aa.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f44d03c138cb6488fdbaa65e3a7e5878861a56d8">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-c47b6da8ace4e7894f15fb7bbed1682e603946cb.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-dd3a13e0f5e5c35338981a9ef5d1db7382d7b302.jar" />
+    </item>
+    <item
+        jar="C:\Users\dell\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client\1.19.0\cdca49ad0977c040f603478aa2e16b2775c8fec6\google-http-client-1.19.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="cdca49ad0977c040f603478aa2e16b2775c8fec6">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\google-http-client-1.19.0-d06a648722842f816bad5eabae7eccda007beb84.jar" />
+    </item>
+    <item
+        jar="C:\Users\dell\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client-android\1.19.0\e3f11020c2c812112803d252d1392872d3f619c8\google-http-client-android-1.19.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e3f11020c2c812112803d252d1392872d3f619c8">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\google-http-client-android-1.19.0-d5e6cdf307014dc90ea8aa46553999b4a9a9cbfa.jar" />
+    </item>
+    <item
+        jar="E:\New Eclipse Workspace\MiNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
+        <dex dex="E:\New Eclipse Workspace\MiNote\app\build\intermediates\pre-dexed\debug\classes-0dc4c3c378f8cf2be9c32a48db0d954f12f2c598.jar" />
     </item>
 
 </items>
