@@ -1,5 +1,13 @@
 package com.gp.app.minote.notes.xml;
 
+import android.util.Log;
+
+import com.gp.app.minote.data.TextNote;
+import com.gp.app.minote.exceptions.MiNoteBaseException;
+import com.gp.app.minote.util.MiNoteUtil;
+
+import org.xml.sax.SAXException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,14 +15,6 @@ import java.util.List;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.SAXException;
-
-import android.util.Log;
-
-import com.gp.app.minote.data.TextNote;
-import com.gp.app.minote.exceptions.MiNoteBaseException;
-import com.gp.app.minote.util.MiNoteUtil;
 
 public class NotesReader 
 {

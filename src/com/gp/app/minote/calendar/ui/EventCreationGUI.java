@@ -17,11 +17,11 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.gp.app.minote.R;
 import com.gp.app.minote.calendar.events.EventManager;
 import com.gp.app.minote.data.Event;
 import com.gp.app.minote.util.MiNoteParameters;
 import com.gp.app.minote.util.MiNoteUtil;
-import com.gp.app.minote.R;
 
 public class EventCreationGUI
 {

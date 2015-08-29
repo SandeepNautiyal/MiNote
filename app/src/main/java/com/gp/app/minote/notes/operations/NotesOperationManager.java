@@ -1,18 +1,20 @@
 package com.gp.app.minote.notes.operations;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.view.Window;
 import android.widget.GridView;
+import android.widget.Toast;
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.gp.app.minote.backend.messaging.Messaging;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
 import com.gp.app.minote.colorpicker.ColourPickerAdapter;
 import com.gp.app.minote.colorpicker.ColourProperties;
@@ -20,10 +22,19 @@ import com.gp.app.minote.data.Event;
 import com.gp.app.minote.data.Note;
 import com.gp.app.minote.data.NoteItem;
 import com.gp.app.minote.data.TextNote;
+import com.gp.app.minote.layout.manager.ShareNoteActivity;
 import com.gp.app.minote.notes.database.NotesDBManager;
 import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.util.MiNoteParameters;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NotesOperationManager 
 {
@@ -211,91 +222,170 @@ public class NotesOperationManager
 		MiNoteParameters.getNotesActivity().createFragmentForNote(event);
 	}
 
-	public void shareSelectedNote()
+	public void shareSelectedNote(boolean shareWithFriends)
 	{
-		for(int i = 0; i < selectedNoteIds.size(); i++)
-		{
-			Note note = NotesManager.getInstance().getNote(selectedNoteIds.get(i));
-			
-			if(note != null)
-			{
-				StringBuilder noteText = new StringBuilder();
-				
-				Uri imageUri = null;
-				
-				if(note.getType() == Note.EVENT_NOTE)
-				{
-					Event event = (Event)note;
-					
-					noteText.append("Event"+"\n");
-					
-					noteText.append(event.getEventName()+"\n");
-					
-					noteText.append(event.getLocation()+"\n");
-
-					noteText.append(event.getStartDate()+"  "+event.getStartTime()+"\n");
-
-					noteText.append(event.getEndDate()+"  "+event.getEndTime());
-					
-					System.out.println("noteText ="+noteText);
-				}
-				else
-				{
-					TextNote textNote = (TextNote)note;
-					
-					List<NoteItem> items = textNote.getNoteItems();
-					
-					for(int j = 0; j < items.size(); j++)
-					{
-						NoteItem item = items.get(j);
-						
-						String imageName = item.getImageName();
-						
-						if(imageName != null && !imageName.trim().equals(""))
-						{
-							String path = ImageLocationPathManager.getInstance().getImagePath(imageName);
-							
-							imageUri = Uri.parse("file://"+path);
-						}
-						
-						String text = item.getText();
-						
-						if(text != null && !text.trim().equals(""))
-						{
-							noteText.append(text+"\n");
-						}
-					}
-				}
-			   
-				Intent shareIntent = new Intent();
-			   shareIntent.setAction(Intent.ACTION_SEND);
-			   //Target whatsapp:
-			   //Add text and then Image URI
-			   shareIntent.putExtra(Intent.EXTRA_TEXT, noteText.toString());
-			   if(imageUri != null)
-			   {
-				   shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-				   shareIntent.setType("image/jpeg");
-			   }
-			   else
-			   {
-				   shareIntent.setType("text/plain");
-			   }
-			   
-			   shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			   shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			
-			   try 
-			   {
-			       MiNoteParameters.getApplicationContext().startActivity(shareIntent);
-			   } catch (android.content.ActivityNotFoundException ex) {
-//			       ToastHelper.MakeShortText("Whatsapp have not been installed.");
-			   }
-			}
-		}
+        if(!shareWithFriends)
+        {
+            shareNotesWithCmpatibleAplications();
+        }
+        else
+        {
+            shareNotesWithFriends();
+        }
 	}
-	
-	public boolean isSelectedNoteEvent() 
+
+    public void shareNotesWithCmpatibleAplications()
+    {
+        for(int i = 0; i < selectedNoteIds.size(); i++)
+        {
+            Note note = NotesManager.getInstance().getNote(selectedNoteIds.get(i));
+
+            if (note != null)
+            {
+                StringBuilder noteText = new StringBuilder();
+
+                Uri imageUri = null;
+
+                if (note.getType() == Note.EVENT_NOTE)
+                {
+                    Event event = (Event) note;
+
+                    noteText.append("Event" + "\n");
+
+                    noteText.append(event.getEventName() + "\n");
+
+                    noteText.append(event.getLocation() + "\n");
+
+                    noteText.append(event.getStartDate() + "  " + event.getStartTime() + "\n");
+
+                    noteText.append(event.getEndDate() + "  " + event.getEndTime());
+
+                }
+                else
+                {
+                    TextNote textNote = (TextNote) note;
+
+                    List<NoteItem> items = textNote.getNoteItems();
+
+                    for (int j = 0; j < items.size(); j++) {
+                        NoteItem item = items.get(j);
+
+                        String imageName = item.getImageName();
+
+                        if (imageName != null && !imageName.trim().equals("")) {
+                            String path = ImageLocationPathManager.getInstance().getImagePath(imageName);
+
+                            imageUri = Uri.parse("file://" + path);
+                        }
+
+                        String text = item.getText();
+
+                        if (text != null && !text.trim().equals("")) {
+                            noteText.append(text + "\n");
+                        }
+                    }
+                }
+
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                //Target whatsapp:
+                //Add text and then Image URI
+                shareIntent.putExtra(Intent.EXTRA_TEXT, noteText.toString());
+
+                if (imageUri != null)
+                {
+                    shareIntent.setType("image/jpeg");
+                }
+                else
+                {
+                    shareIntent.setType("text/plain");
+                }
+
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                try {
+                    MiNoteParameters.getApplicationContext().startActivity(shareIntent);
+                } catch (android.content.ActivityNotFoundException ex) {
+//			       ToastHelper.MakeShortText("Whatsapp have not been installed.");
+                }
+            }
+        }
+    }
+
+    public void shareNotesWithFriends()
+    {
+        for(int i = 0; i < selectedNoteIds.size(); i++)
+        {
+            Note note = NotesManager.getInstance().getNote(selectedNoteIds.get(i));
+
+            if (note != null)
+            {
+                StringBuilder noteText = new StringBuilder();
+
+                Uri imageUri = null;
+
+                if (note.getType() == Note.EVENT_NOTE)
+                {
+                    Event event = (Event) note;
+
+                    noteText.append("Event=true" + "$$");
+
+                    noteText.append("EventName="+event.getEventName() + " $$ ");
+
+                    noteText.append("EventLocation="+event.getLocation() + " $$ ");
+
+                    noteText.append("EventStartDate="+event.getStartDate()+" $$ ");
+
+                    noteText.append("EventStartTime="+event.getStartTime()+" $$ ");
+
+                    noteText.append("EventEndDate="+event.getEndDate()+" $$ ");
+
+                    noteText.append("EventEndTime="+event.getEndTime()+" $$ ");
+                }
+                else
+                {
+                    TextNote textNote = (TextNote) note;
+
+                    noteText.append("Event=false"+" $$ ");
+
+					noteText.append("NoteText=");
+
+                    List<NoteItem> items = textNote.getNoteItems();
+
+                    for (int j = 0; j < items.size(); j++)
+                    {
+                        NoteItem item = items.get(j);
+
+                        String imageName = item.getImageName();
+
+                        if (imageName != null && !imageName.trim().equals("")) {
+                            String path = ImageLocationPathManager.getInstance().getImagePath(imageName);
+
+                            imageUri = Uri.parse("file://" + path);
+                        }
+
+                        String text = item.getText();
+
+                        if (text != null && !text.trim().equals(""))
+                        {
+                            noteText.append(text + ";");
+                        }
+                    }
+                }
+
+                Intent intent = new Intent(MiNoteParameters.getApplicationContext(), ShareNoteActivity.class);
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                intent.putExtra("MESSAGE", noteText.toString());
+
+                MiNoteParameters.getApplicationContext().startActivity(intent);
+            }
+        }
+    }
+
+	public boolean isSelectedNoteEvent()
     {
 		boolean isEventNoteSelected = false;
 		
@@ -308,7 +398,7 @@ public class NotesOperationManager
 				isEventNoteSelected = true;
 			}
 		}
-		
+
 		return isEventNoteSelected;
 	}
 }

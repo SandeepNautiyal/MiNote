@@ -1,10 +1,5 @@
 package com.gp.app.minote.notes.operations;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -24,6 +19,11 @@ import com.gp.app.minote.notes.database.NotesDBManager;
 import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.util.MiNoteParameters;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public class NotesOperationManager 
 {

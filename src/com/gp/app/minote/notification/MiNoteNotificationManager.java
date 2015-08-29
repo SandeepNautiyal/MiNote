@@ -1,8 +1,5 @@
 package com.gp.app.minote.notification;
 
-import java.util.Calendar;
-import java.util.List;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,13 +11,16 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
+import com.gp.app.minote.R;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
 import com.gp.app.minote.data.Event;
 import com.gp.app.minote.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.minote.notification.service.AlarmRequestCreator;
 import com.gp.app.minote.util.MiNoteParameters;
 import com.gp.app.minote.util.MiNoteUtil;
-import com.gp.app.minote.R;
+
+import java.util.Calendar;
+import java.util.List;
 
 public class MiNoteNotificationManager 
 {

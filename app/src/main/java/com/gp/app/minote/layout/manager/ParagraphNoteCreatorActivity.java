@@ -1,16 +1,14 @@
 package com.gp.app.minote.layout.manager;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -20,7 +18,15 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.gp.app.minote.R;
+import com.gp.app.minote.backend.entities.eventEntityApi.EventEntityApi;
+import com.gp.app.minote.backend.entities.eventEntityApi.model.EventEntity;
+import com.gp.app.minote.backend.messaging.Messaging;
 import com.gp.app.minote.colorpicker.ColorPickerCreator;
 import com.gp.app.minote.colorpicker.ColourPickerChangeListener;
 import com.gp.app.minote.data.Note;
@@ -32,7 +38,13 @@ import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.util.MiNoteParameters;
 import com.gp.app.minote.util.MiNoteUtil;
-import com.gp.app.minote.R;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ParagraphNoteCreatorActivity extends Activity implements ColourPickerChangeListener
 {
@@ -245,7 +257,7 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 			
 			persistListElement(Arrays.asList(note));
 		}
-		
+
 		Intent returnIntent = new Intent();
 		
 		returnIntent.putExtra(MiNoteConstants.NOTE_DATA, note);

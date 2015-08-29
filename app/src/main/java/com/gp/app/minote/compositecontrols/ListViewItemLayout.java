@@ -1,7 +1,5 @@
 package com.gp.app.minote.compositecontrols;
 
-import java.io.ByteArrayOutputStream;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.gp.app.minote.R;
+
+import java.io.ByteArrayOutputStream;
 
 public class ListViewItemLayout extends RelativeLayout
 {

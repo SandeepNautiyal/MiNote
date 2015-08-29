@@ -2,16 +2,18 @@ package com.gp.app.minote.start;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
+import com.gp.app.minote.R;
 import com.gp.app.minote.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.minote.notes.backup.NotesBackupManager;
-import com.gp.app.minote.notes.database.NotesDBManager;
 import com.gp.app.minote.util.MiNoteParameters;
-import com.gp.app.minote.R;
 
 public class StartMiNoteActivity extends Activity {
 
@@ -20,24 +22,24 @@ public class StartMiNoteActivity extends Activity {
 	{
 		super.onCreate(savedInstanceState);
 		
-		Intent startLayoutManager = new Intent(this, NotesLayoutManagerActivity.class);
-		
-		startLayoutManager.setAction("START_LAYOUT_MANAGER_ACTIVITY");
-		
 		MiNoteParameters.setApplicationContext(getApplicationContext());
 		
 		NotesBackupManager.setInitialBackupTime();
 
-        DisplayMetrics metrics = new DisplayMetrics();
-	    
-	    getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		SharedPreferences sharedPreferences = getSharedPreferences("MiNoteSharedPref", MODE_PRIVATE);
 
-	    int height = metrics.heightPixels;
-	    int width = metrics.widthPixels;
-	    
-		startActivity(startLayoutManager);
-		
-//		setContentView(R.layout.activity_start_professional_pa_application);
+		String userEmailId = sharedPreferences.getString("UserEmailId", "invalid");
+
+		if(!userEmailId.equals("invalid"))
+		{
+			Intent startLayoutManager = new Intent(this, NotesLayoutManagerActivity.class);
+
+			startLayoutManager.setAction("START_LAYOUT_MANAGER_ACTIVITY");
+
+			startActivity(startLayoutManager);
+		}
+
+		setContentView(R.layout.activity_start_professional_pa_application);
 	}
 
 	@Override
@@ -57,5 +59,30 @@ public class StartMiNoteActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void submitEmaidId(View view)
+	{
+		SharedPreferences sharedPreferences = getSharedPreferences("MiNoteSharedPref", MODE_PRIVATE);
+
+		SharedPreferences.Editor edit = sharedPreferences.edit();
+
+		String userName = ((EditText)findViewById(R.id.nameEditText)).getText().toString();
+
+		String emailId = ((EditText)findViewById(R.id.emailEditText)).getText().toString();
+
+		System.out.println("User userName="+userName+" email Id :"+emailId);
+
+		edit.putString("UserName", userName);
+
+		edit.putString("UserEmailId", emailId.toLowerCase());
+
+		edit.commit();
+
+		Intent startLayoutManager = new Intent(this, NotesLayoutManagerActivity.class);
+
+		startLayoutManager.setAction("START_LAYOUT_MANAGER_ACTIVITY");
+
+		startActivity(startLayoutManager);
 	}
 }

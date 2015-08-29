@@ -1,14 +1,5 @@
 package com.gp.app.minote.notes.database;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,6 +9,15 @@ import com.gp.app.minote.data.NoteItem;
 import com.gp.app.minote.data.TextNote;
 import com.gp.app.minote.database.search.NotesSearch;
 import com.gp.app.minote.util.MiNoteParameters;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class NotesDBManager extends SQLiteOpenHelper implements NotesSearch
 {

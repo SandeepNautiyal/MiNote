@@ -5,8 +5,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.gp.app.minote.notes.operations.NotesOperationManager;
 import com.gp.app.minote.R;
+import com.gp.app.minote.notes.operations.NotesOperationManager;
 
 public class NotesActionModeCallback implements ActionMode.Callback 
 {
@@ -53,11 +53,14 @@ public class NotesActionModeCallback implements ActionMode.Callback
             	NotesOperationManager.getInstance().createColourPicker();
             	break;
             case R.id.shareNote:
-            	NotesOperationManager.getInstance().shareSelectedNote();
+            	NotesOperationManager.getInstance().shareSelectedNote(false);
             	break;
             case R.id.noteCopy:
             	NotesOperationManager.getInstance().startCopyProcess();
             	break;
+            case R.id.connectFriends:
+                NotesOperationManager.getInstance().shareSelectedNote(true);
+                break;
             default:
         }
         

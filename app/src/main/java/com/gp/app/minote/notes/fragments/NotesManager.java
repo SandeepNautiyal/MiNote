@@ -1,11 +1,11 @@
 package com.gp.app.minote.notes.fragments;
 
+import com.gp.app.minote.data.Note;
+import com.gp.app.minote.data.TextNote;
+
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import com.gp.app.minote.data.Note;
-import com.gp.app.minote.data.TextNote;
 
 public class NotesManager 
 {

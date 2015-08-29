@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" 
-    android:id="@android:id/list"
-    android:background="@null">
-</ListView>
-<!-- From: file:/E:/New%20Eclipse%20Workspace/ProfessionalPA/app/src/main/res/layout/listview_for_list_fragment.xml -->

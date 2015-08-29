@@ -1,6 +1,20 @@
 package com.gp.app.minote.notes.xml;
- 
- 
+
+
+import android.os.Environment;
+
+import com.gp.app.minote.data.NoteItem;
+import com.gp.app.minote.data.TextNote;
+import com.gp.app.minote.exceptions.MiNoteBaseException;
+import com.gp.app.minote.exceptions.MiNoteRuntimeException;
+import com.gp.app.minote.util.MiNoteUtil;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.ParseException;
@@ -15,20 +29,6 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import android.os.Environment;
-
-import com.gp.app.minote.data.NoteItem;
-import com.gp.app.minote.data.TextNote;
-import com.gp.app.minote.exceptions.MiNoteRuntimeException;
-import com.gp.app.minote.exceptions.MiNoteBaseException;
-import com.gp.app.minote.util.MiNoteUtil;
  
  
 public class NotesWriter

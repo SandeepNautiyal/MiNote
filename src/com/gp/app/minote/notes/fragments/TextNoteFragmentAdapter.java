@@ -1,8 +1,5 @@
 package com.gp.app.minote.notes.fragments;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -23,12 +20,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.gp.app.minote.R;
 import com.gp.app.minote.data.Note;
 import com.gp.app.minote.data.NoteItem;
 import com.gp.app.minote.data.TextNote;
 import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.notes.operations.NotesOperationManager;
-import com.gp.app.minote.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 {

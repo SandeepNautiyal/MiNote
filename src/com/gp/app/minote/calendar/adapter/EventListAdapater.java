@@ -1,7 +1,5 @@
 package com.gp.app.minote.calendar.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.gp.app.minote.R;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
 import com.gp.app.minote.calendar.ui.EventCreationGUI;
 import com.gp.app.minote.data.Event;
-import com.gp.app.minote.R;
+
+import java.util.List;
 
 public class EventListAdapater extends ArrayAdapter<Event>
 {

@@ -1,5 +1,15 @@
 package com.gp.app.minote.notes.xml;
 
+import com.gp.app.minote.data.NoteItem;
+import com.gp.app.minote.data.TextNote;
+import com.gp.app.minote.exceptions.MiNoteBaseException;
+import com.gp.app.minote.interfaces.XMLEntity;
+import com.gp.app.minote.util.MiNoteUtil;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,16 +17,6 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
-import com.gp.app.minote.data.NoteItem;
-import com.gp.app.minote.data.TextNote;
-import com.gp.app.minote.exceptions.MiNoteBaseException;
-import com.gp.app.minote.interfaces.XMLEntity;
-import com.gp.app.minote.util.MiNoteUtil;
 
 public class NotesParser extends DefaultHandler
 {

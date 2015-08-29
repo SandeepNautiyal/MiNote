@@ -26,8 +26,7 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
-
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -87,10 +86,31 @@
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="com.gp.app.minote.gcm" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".gcm.MiNoteGcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".gcm.MiNoteInstanceIDListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
         <service android:name=".gcm.GcmIntentService" />
+
+        <activity
+            android:name=".layout.manager.ShareNoteActivity"
+            android:label="@string/title_activity_share_note" >
+        </activity>
     </application>
 
 </manifest>

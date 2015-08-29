@@ -1,8 +1,6 @@
 package com.gp.app.minote.notes.fragments;
 
 import android.app.Fragment;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +11,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
+import com.gp.app.minote.R;
 import com.gp.app.minote.data.Event;
 import com.gp.app.minote.interfaces.MiNoteConstants;
 import com.gp.app.minote.notes.operations.NotesOperationManager;
-import com.gp.app.minote.R;
 
 public class EventNoteFragment extends Fragment
 {

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
-   <solid android:color="#ffffff" />
-   <stroke android:width="2dip" android:color="#000000"/>
-</shape>
-<!-- From: file:/E:/New%20Eclipse%20Workspace/MiNote/app/src/main/res/drawable/note_title_border.xml -->

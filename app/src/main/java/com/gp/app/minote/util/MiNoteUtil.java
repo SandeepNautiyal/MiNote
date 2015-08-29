@@ -1,10 +1,5 @@
 package com.gp.app.minote.util;
 
-import java.lang.reflect.Field;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
@@ -12,6 +7,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.gp.app.minote.interfaces.MiNoteConstants;
+
+import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MiNoteUtil 
 {

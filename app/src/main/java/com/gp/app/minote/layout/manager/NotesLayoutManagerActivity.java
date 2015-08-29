@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -22,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,7 +36,11 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.gp.app.minote.R;
+import com.gp.app.minote.backend.entities.eventEntityApi.EventEntityApi;
+import com.gp.app.minote.backend.messaging.Messaging;
 import com.gp.app.minote.backend.registration.Registration;
+import com.gp.app.minote.backend.userdata.userRegistrationInfoApi.UserRegistrationInfoApi;
+import com.gp.app.minote.backend.userdata.userRegistrationInfoApi.model.UserRegistrationInfo;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
 import com.gp.app.minote.calendar.ui.ProfessionalPACalendarView;
 import com.gp.app.minote.colorpicker.ColourPickerChangeListener;
@@ -179,7 +185,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	@Override
 	protected void onSaveInstanceState(Bundle outState) 
 	{
-		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, (byte)linearLayoutOccupancy.size());
+		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, (byte) linearLayoutOccupancy.size());
 
 		outState.putByte(APPLIED_FILTER, currentAppliedFilter);
 		
@@ -623,10 +629,9 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		button.setImageDrawable(getResources().getDrawable(R.drawable.color_picker_icon));
 		
 		button.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
-			public void onClick(View v) 
-			{
+			public void onClick(View v) {
 				createNoteTypeButtons();
 			}
 		});
@@ -1177,8 +1182,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 
     //TODO to be removed.
-    class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
-        private Registration regService = null;
+    class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String>
+	{
         private GoogleCloudMessaging gcm;
         private Context context;
 
@@ -1191,33 +1196,60 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
         @Override
         protected String doInBackground(Void... params) {
-            if (regService == null) {
-                Registration.Builder builder = new Registration.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-                        .setRootUrl("https://minote-997.appspot.com/_ah/api/");
-                // end of optional local run code
 
-                regService = builder.build();
-            }
+			boolean isDeviceRegistered = false;
 
             String msg = "";
             try {
                 if (gcm == null) {
                     gcm = GoogleCloudMessaging.getInstance(context);
                 }
-                String regId = gcm.register(SENDER_ID);
-                msg = "Device registered, registration ID=" + regId;
+
+				String regId = gcm.register(SENDER_ID);
+
+				msg = "Device registered, registration ID=" + regId;
+
+				UserRegistrationInfo userRegistrationInfo = new UserRegistrationInfo();
+
+				SharedPreferences sharedPreferences = getSharedPreferences("MiNoteSharedPref", MODE_PRIVATE);
+
+				String userEmailId = sharedPreferences.getString("UserEmailId", "invalid");
+
+				String userName = sharedPreferences.getString("UserName", "invalid");
+
+				userRegistrationInfo.setDeviceRegistrationId(regId);
+
+				if(!userEmailId.equals("invalid"))
+				{
+					userRegistrationInfo.setUserEmail(userEmailId);
+				}
+
+				if(!userName.equals("invalid"))
+				{
+					userRegistrationInfo.setUserName(userName);
+				}
+
+				userRegistrationInfo.setUserEmail(userEmailId);
+
+				UserRegistrationInfoApi.Builder builder = new UserRegistrationInfoApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+						.setRootUrl("https://minote-997.appspot.com/_ah/api/");
+
+				UserRegistrationInfoApi userRegistrationInfoApi = builder.build();
+
+				UserRegistrationInfoApi.Insert insertUserInfoEntity = userRegistrationInfoApi.insert(userRegistrationInfo);
+
+				insertUserInfoEntity.execute();
 
                 // You should send the registration ID to your server over HTTP,
                 // so it can use GCM/HTTP or CCS to send messages to your app.
                 // The request to your server should be authenticated if your app
                 // is using accounts.
-                regService.register(regId).execute();
 
             } catch (IOException ex) {
                 ex.printStackTrace();
                 msg = "Error: " + ex.getMessage();
             }
-            return msg;
+            return "Hello";
         }
 
         @Override

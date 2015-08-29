@@ -11,9 +11,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout.LayoutParams;
 
+import com.gp.app.minote.R;
 import com.gp.app.minote.data.TextNote;
 import com.gp.app.minote.interfaces.MiNoteConstants;
-import com.gp.app.minote.R;
 
 public class TextNoteFragment extends ListFragment
 {

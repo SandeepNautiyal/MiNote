@@ -1,11 +1,5 @@
 package com.gp.app.minote.calendar.adapter;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -24,6 +18,12 @@ import com.gp.app.minote.calendar.ui.EventCreationGUI;
 import com.gp.app.minote.calendar.ui.EventModificationGUI;
 import com.gp.app.minote.data.Event;
 import com.gp.app.minote.util.MiNoteUtil;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class CalendarAdapter extends BaseAdapter
 {

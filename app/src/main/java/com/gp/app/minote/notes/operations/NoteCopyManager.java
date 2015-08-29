@@ -1,16 +1,13 @@
 package com.gp.app.minote.notes.operations;
 
-import java.util.Arrays;
-import java.util.List;
-
-import android.content.Intent;
-
 import com.gp.app.minote.data.Note;
 import com.gp.app.minote.data.TextNote;
-import com.gp.app.minote.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.minote.notes.database.NotesDBManager;
 import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.util.MiNoteParameters;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class NoteCopyManager 
 {

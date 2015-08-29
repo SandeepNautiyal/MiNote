@@ -1,11 +1,5 @@
 package com.gp.app.minote.notes.backup;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import android.os.Environment;
 
 import com.gp.app.minote.data.TextNote;
@@ -14,6 +8,12 @@ import com.gp.app.minote.notes.database.NotesDBManager;
 import com.gp.app.minote.notes.xml.NotesWriter;
 import com.gp.app.minote.notification.service.AlarmRequestCreator;
 import com.gp.app.minote.util.MiNoteUtil;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class NotesBackupManager 
 {

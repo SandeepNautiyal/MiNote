@@ -1,15 +1,12 @@
 package com.gp.app.minote.data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.gp.app.minote.interfaces.XMLEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class TextNote extends Note

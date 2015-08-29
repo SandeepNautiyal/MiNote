@@ -1,10 +1,6 @@
 package com.gp.app.minote.layout.manager;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -21,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.gp.app.minote.R;
 import com.gp.app.minote.colorpicker.ColorPickerCreator;
 import com.gp.app.minote.colorpicker.ColourPickerChangeListener;
 import com.gp.app.minote.data.Note;
@@ -32,7 +29,10 @@ import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.util.MiNoteParameters;
 import com.gp.app.minote.util.MiNoteUtil;
-import com.gp.app.minote.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ParagraphNoteCreatorActivity extends Activity implements ColourPickerChangeListener
 {

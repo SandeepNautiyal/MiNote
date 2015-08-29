@@ -14,8 +14,9 @@
         <init-param>
             <param-name>services</param-name>
             <param-value>com.gp.app.minote.backend.RegistrationEndpoint,
-                com.gp.app.minote.backend.MessagingEndpoint
-            </param-value>
+                com.gp.app.minote.backend.MessagingEndpoint,
+                com.gp.app.minote.backend.entities.EventEntityEndpoint,
+                com.gp.app.minote.backend.userdata.UserRegistrationInfoEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

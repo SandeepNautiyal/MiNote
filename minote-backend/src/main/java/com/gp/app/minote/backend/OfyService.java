@@ -11,7 +11,7 @@ import com.googlecode.objectify.ObjectifyService;
 public class OfyService {
 
     static {
-        ObjectifyService.register(RegistrationRecord.class);
+            ObjectifyService.register(RegistrationRecord.class);
     }
 
     public static Objectify ofy() {

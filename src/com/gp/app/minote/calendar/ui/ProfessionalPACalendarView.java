@@ -1,8 +1,5 @@
 package com.gp.app.minote.calendar.ui;
 
-import java.util.Calendar;
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -18,12 +15,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.gp.app.minote.R;
 import com.gp.app.minote.calendar.adapter.CalendarAdapter;
 import com.gp.app.minote.calendar.adapter.CalendarAdapter.DateInformation;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
 import com.gp.app.minote.calendar.interfaces.DBChangeListener;
 import com.gp.app.minote.data.Event;
-import com.gp.app.minote.R;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 public class ProfessionalPACalendarView extends RelativeLayout implements OnItemClickListener,
 	OnClickListener, DBChangeListener{

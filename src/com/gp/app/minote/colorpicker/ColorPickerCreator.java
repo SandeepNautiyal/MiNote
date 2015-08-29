@@ -1,12 +1,12 @@
 package com.gp.app.minote.colorpicker;
 
-import java.util.ArrayList;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Window;
 import android.widget.GridView;
+
+import java.util.ArrayList;
 
 public class ColorPickerCreator 
 {

@@ -1,13 +1,11 @@
 package com.gp.app.minote.data;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.BaseColumns;
+
+import java.util.Arrays;
 
 public class Event extends Note implements BaseColumns
 {

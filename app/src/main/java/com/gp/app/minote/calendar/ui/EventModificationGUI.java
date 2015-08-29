@@ -1,7 +1,5 @@
 package com.gp.app.minote.calendar.ui;
 
-import java.util.List;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.view.ViewGroup.LayoutParams;
@@ -14,6 +12,8 @@ import com.gp.app.minote.calendar.events.EventManager;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
 import com.gp.app.minote.calendar.interfaces.DBChangeListener;
 import com.gp.app.minote.data.Event;
+
+import java.util.List;
 
 public class EventModificationGUI implements DBChangeListener
 {

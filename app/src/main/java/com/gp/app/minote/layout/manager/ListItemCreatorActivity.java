@@ -1,15 +1,13 @@
 package com.gp.app.minote.layout.manager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -23,7 +21,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.gp.app.minote.R;
+import com.gp.app.minote.backend.entities.eventEntityApi.EventEntityApi;
+import com.gp.app.minote.backend.entities.eventEntityApi.model.EventEntity;
 import com.gp.app.minote.colorpicker.ColorPickerCreator;
 import com.gp.app.minote.colorpicker.ColourPickerChangeListener;
 import com.gp.app.minote.compositecontrols.ListViewItemLayout;
@@ -36,7 +41,13 @@ import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.util.MiNoteParameters;
 import com.gp.app.minote.util.MiNoteUtil;
-import com.gp.app.minote.R;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ListItemCreatorActivity extends Activity implements ColourPickerChangeListener
 {
@@ -433,7 +444,10 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			
 			modifiedNoteId = -1;
 		}
-		
+
+
+        new EventStoreAsyncTask(this).execute();
+
 		Intent returnIntent = new Intent();
 
 		returnIntent.putExtra(MiNoteConstants.NOTE_DATA, note);
@@ -468,4 +482,68 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			selectedView.setTextColor(colourCode);
 		}
 	}
+
+    //TODO to be removed.
+    class EventStoreAsyncTask extends AsyncTask<Void, Void, String> {
+
+        private GoogleCloudMessaging gcm;
+        private Context context;
+
+        // TODO: change to your own sender ID to Google Developers Console project number, as per instructions above
+        private static final String SENDER_ID = "700276642861";
+
+        public EventStoreAsyncTask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected String doInBackground(Void... params)
+        {
+
+                EventEntityApi.Builder builder = new EventEntityApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+                        .setRootUrl("https://minote-997.appspot.com/_ah/api/");
+                // end of optional local run code
+
+                EventEntity eventEntity = new EventEntity();
+
+			eventEntity.setEventName("First");
+
+			eventEntity.setLocation("First");
+
+			eventEntity.setStartDate("18/7/2015");
+
+			eventEntity.setStartTime("6:00");
+
+			eventEntity.setEndDate("18/7/2015");
+
+			eventEntity.setEndTime("7:00");
+
+			EventEntityApi eventApi = builder.build();
+
+                try
+                {
+                    System.out.println("inserting events");
+
+                    EventEntityApi.Insert insertEventEntity = eventApi.insert(eventEntity);
+
+                    insertEventEntity.execute();
+
+                    System.out.println("inserting events1");
+                }
+                catch(IOException exception)
+                {
+                    System.out.println("IoException ="+exception.getStackTrace());
+                }
+
+
+
+            return "Success";
+        }
+
+        @Override
+        protected void onPostExecute(String msg) {
+            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+            Logger.getLogger("REGISTRATION").log(Level.INFO, msg);
+        }
+    }
 }

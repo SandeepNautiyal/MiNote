@@ -49,4 +49,8 @@
     <string name="event">Event</string>
     <string name="defaultFilter">Default</string>
     <string name="action_share">Share</string>
+    <string name="action_group">Connect</string>
+    <string name="title_activity_share_note">ShareNoteActivity</string>
+    <string name="enter_email_id">Enter Email Id</string>
+    <string name="hello_world">Hello world!</string>
 </resources>

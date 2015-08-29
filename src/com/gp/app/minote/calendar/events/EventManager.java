@@ -1,12 +1,11 @@
 package com.gp.app.minote.calendar.events;
 
-import java.util.List;
-
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
 import com.gp.app.minote.data.Event;
-import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.notes.operations.NotesOperationManager;
 import com.gp.app.minote.notification.service.AlarmRequestCreator;
+
+import java.util.List;
 
 
 public class EventManager

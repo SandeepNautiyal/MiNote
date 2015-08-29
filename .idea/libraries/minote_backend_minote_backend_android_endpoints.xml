@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="minote-backend.minote-backend-android-endpoints">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/minote-backend/build/libs/minote-backend-android-endpoints.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

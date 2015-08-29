@@ -9,22 +9,6 @@
         android:titleCondensed="Delete">
     </item>
     
-    <item
-        android:id="@+id/noteCopy"
-        android:icon="@drawable/ic_action_copy"
-        android:showAsAction="always"
-        android:title="Copy"
-        android:titleCondensed="Copy">
-    </item>
-    
-    <item
-        android:id="@+id/itemDelete"
-        android:icon="@drawable/professional_pa_discard_note"
-        android:showAsAction="always"
-        android:title="Delete"
-        android:titleCondensed="Delete">
-    </item>
-    
     <item android:id="@+id/pickColor"
         android:icon="@drawable/color_picker_icon"
         android:title="@string/pickColour"
@@ -34,4 +18,23 @@
         android:icon="@drawable/ic_action_share"
         android:title="@string/action_share"
         android:showAsAction="always"/>
+
+    <item android:id="@+id/connectFriends"
+        android:icon="@drawable/ic_action_group"
+        android:title="@string/action_group"
+        android:showAsAction="always"/>
+
+    <item
+        android:id="@+id/noteCopy"
+        android:icon="@drawable/ic_action_copy"
+        android:title="Copy"
+        android:titleCondensed="Copy">
+    </item>
+
+    <item
+        android:id="@+id/itemDelete"
+        android:icon="@drawable/professional_pa_discard_note"
+        android:title="Delete"
+        android:titleCondensed="Delete">
+    </item>
 </menu>

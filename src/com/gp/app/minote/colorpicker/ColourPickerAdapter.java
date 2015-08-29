@@ -1,7 +1,5 @@
 package com.gp.app.minote.colorpicker;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -13,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import com.gp.app.minote.R;
+
+import java.util.ArrayList;
 
 public class ColourPickerAdapter extends ArrayAdapter<ColourProperties> 
 {

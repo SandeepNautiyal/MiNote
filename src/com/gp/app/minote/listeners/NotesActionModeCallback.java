@@ -5,8 +5,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.gp.app.minote.notes.operations.NotesOperationManager;
 import com.gp.app.minote.R;
+import com.gp.app.minote.notes.operations.NotesOperationManager;
 
 public class NotesActionModeCallback implements ActionMode.Callback 
 {

@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.gp.app.minote.data.Event;
 import com.gp.app.minote.R;
+import com.gp.app.minote.data.Event;
 
 public class EventNoteFragmentAdapter extends BaseAdapter
 {

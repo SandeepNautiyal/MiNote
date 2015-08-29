@@ -16,7 +16,8 @@
 
             Once you have your API key (which starts with â€œAIza...â€�), replace the "gcm.api.key" string in this file.
             -->
-
         <property name="gcm.api.key" value="AIzaSyCc14l7gaNSJGmF1x7wqAUkG2hbTrzckm0" />
+
+        <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     </system-properties>
 </appengine-web-app>

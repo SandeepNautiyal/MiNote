@@ -1,10 +1,5 @@
 package com.gp.app.minote.calendar.events.database;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -15,9 +10,13 @@ import android.net.Uri;
 import com.gp.app.minote.calendar.interfaces.DBChangeListener;
 import com.gp.app.minote.calendar.interfaces.DBchangePublisher;
 import com.gp.app.minote.data.Event;
-import com.gp.app.minote.data.TextNote;
 import com.gp.app.minote.database.search.NotesSearch;
 import com.gp.app.minote.util.MiNoteParameters;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePublisher, NotesSearch
 {

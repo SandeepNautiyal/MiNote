@@ -7,11 +7,10 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gp.app.minote.R;
 import com.gp.app.minote.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.minote.notes.backup.NotesBackupManager;
-import com.gp.app.minote.notes.database.NotesDBManager;
 import com.gp.app.minote.util.MiNoteParameters;
-import com.gp.app.minote.R;
 
 public class StartMiNoteActivity extends Activity {
 
