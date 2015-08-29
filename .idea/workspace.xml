@@ -18,769 +18,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02ca7fe2-e361-40d4-8352-f4ca72f98141" name="Default" comment="GCM introduced in MiNote">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_action_group.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_action_group.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_action_group.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_action_group.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/entities/EventEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/entities/EventEntityEndpoint.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/gcm/MiNoteGcmListenerService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/gcm/MiNoteInstanceIDListenerService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ShareNoteActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/userdata/UserRegistrationInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/userdata/UserRegistrationInfoEndpoint.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/asm_4_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/datanucleus_api_jdo_3_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/datanucleus_appengine_2_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/datanucleus_core_3_1_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/datanucleus_enhancer_3_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/guava_17_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jdo_api_3_0_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minote-backend/src/main/webapp/WEB-INF/classes/META-INF/jdoconfig.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jta_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_share_note.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/minote_backend_minote_backend_android_endpoints.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/objectify_5_0_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/share_note_activity.xml" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\.idea\libraries\appengine_api_labs_1_7_6.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\.idea\libraries\guava_14_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\.idea\libraries\objectify_4_0b3.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\BuildConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$anim.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$attr.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$bool.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$color.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$dimen.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$drawable.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$id.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$integer.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$layout.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$menu.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$string.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$style.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$styleable.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R$xml.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\R.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\activity\state\ActivityStateMonitor.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\adapter\CalendarAdapter$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\adapter\CalendarAdapter$2.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\adapter\CalendarAdapter$3.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\adapter\CalendarAdapter$DateInformation.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\adapter\CalendarAdapter.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\adapter\EventListAdapater$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\adapter\EventListAdapater$2.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\adapter\EventListAdapater.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\events\Event.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\events\EventManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\events\database\CalendarDBManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\interfaces\DBChangeListener.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\interfaces\DBchangePublisher.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\ui\EventCreationGUI$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\ui\EventCreationGUI$2$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\ui\EventCreationGUI$2.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\ui\EventCreationGUI$3$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\ui\EventCreationGUI$3.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\ui\EventCreationGUI$4.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\ui\EventCreationGUI.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\ui\EventModificationGUI.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\ui\ProfessionalPACalendarView$OnDayClickListener.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\calendar\ui\ProfessionalPACalendarView.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\colorpicker\ColorPickerCreator.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\colorpicker\ColorPickerSelectionManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\colorpicker\ColourPickerAdapter$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\colorpicker\ColourPickerAdapter$RecordHolder.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\colorpicker\ColourPickerAdapter.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\colorpicker\ColourPickerChangeListener.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\colorpicker\ColourProperties.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\compositecontrols\ListViewItemLayout.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\data\NoteItem$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\data\NoteItem.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\data\ProfessionalPANote$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\data\ProfessionalPANote$NotePropertyValues.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\data\ProfessionalPANote.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\exceptions\ProfessionPARuntimeException.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\exceptions\ProfessionalPABaseException.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\export\ProfessionalPANotesExporter.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\export\ProfessionalPANotesImporter.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\interfaces\ProfessionalPAConstants.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\interfaces\XMLEntity.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\ImageLocationPathManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\ListItemCreatorActivity$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\ListItemCreatorActivity$2.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\ListItemCreatorActivity$3.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\ListItemCreatorActivity.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\NotesLayoutManagerActivity$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\NotesLayoutManagerActivity$2.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\NotesLayoutManagerActivity$3.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\NotesLayoutManagerActivity$4.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\NotesLayoutManagerActivity$5.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\NotesLayoutManagerActivity$6.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\NotesLayoutManagerActivity$LinearLayoutOnClickListener.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\NotesLayoutManagerActivity.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\layout\manager\ParagraphNoteCreatorActivity.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\backup\NotesBackupManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\database\NotesDBManager$NotesSearchManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\database\NotesDBManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\database\ProfessionalPADBConstants.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\fragments\FragmentCreationManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\fragments\NoteFragmentAdapter$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\fragments\NoteFragmentAdapter$2.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\fragments\NoteFragmentAdapter.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\fragments\NotesManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\fragments\ProfessionalPANoteFragment.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\images\ImageLocationPathManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\operations\NoteCopyManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\operations\NotesOperationManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\xml\ProfessionalPANotesParser.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\xml\ProfessionalPANotesReader.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notes\xml\ProfessionalPANotesWriter.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notification\ProfessionalPANotificationManager$1.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notification\ProfessionalPANotificationManager.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notification\service\AlarmRecreatorService.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notification\service\AlarmRequestCreator.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notification\service\NotificationActionPerformer.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notification\service\NotificationProcessingService.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\notification\service\NotificationReceiver.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\start\StartProfessionalPAApplicationActivity.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\util\ProfessionalPAParameters.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\util\ProfessionalPAUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\views\listeners\NoteItemLongClickListener.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\views\listeners\NotesActionMode.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\classes\debug\com\gp\app\professionalpa\views\listeners\NotesActionModeCallback.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\incremental\mergeResources\androidTest\debug\merger.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\incremental\mergeResources\debug\merger.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\manifests\androidTest\debug\AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\anim\abc_fade_in.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\anim\abc_fade_out.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\anim\abc_slide_in_bottom.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\anim\abc_slide_in_top.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\anim\abc_slide_out_bottom.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\anim\abc_slide_out_top.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\color\abc_background_cache_hint_selector_material_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\color\abc_background_cache_hint_selector_material_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\color\abc_primary_text_disable_only_material_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\color\abc_primary_text_disable_only_material_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\color\abc_primary_text_material_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\color\abc_primary_text_material_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\color\abc_search_url_text.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\color\abc_secondary_text_material_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\color\abc_secondary_text_material_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\color\date_number_text_color.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_share_pack_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_share_pack_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_btn_check_to_on_mtrl_000.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_btn_check_to_on_mtrl_015.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_btn_radio_to_on_mtrl_000.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_btn_radio_to_on_mtrl_015.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_btn_switch_to_on_mtrl_00001.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_btn_switch_to_on_mtrl_00012.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_cab_background_top_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_clear_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_commit_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_go_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_menu_moreoverflow_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_menu_selectall_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_menu_share_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_voice_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_divider_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_longpressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_menu_hardkey_panel_mtrl_mult.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_popup_background_mtrl_mult.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_switch_track_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_tab_indicator_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_activated_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_default_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_search_activated_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_search_default_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\air_india_logo.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\blue.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\calendar_image.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\day_bg.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\green.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\ic_action_add_alarm.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\ic_action_copy.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\ic_action_event.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\ic_action_share.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\ic_pin_black_bullet_point.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\navigation_next_item.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\navigation_previous_item.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\orange.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\personal_assistant.jpg" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\professional_pa_action_search.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\professional_pa_action_settings.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\professional_pa_camera.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\professional_pa_discard_note.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\professional_pa_ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\professional_pa_list_view.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\professional_pa_list_view1.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\professional_pa_paragraph_view.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\professional_pa_paragraph_view1.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\purple.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\quickcontact_badge_overlay_normal_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\red.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-hdpi-v4\save.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-hdpi-v17\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-hdpi-v17\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-hdpi-v17\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-hdpi-v17\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-mdpi-v17\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-mdpi-v17\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-mdpi-v17\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-mdpi-v17\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xhdpi-v17\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xhdpi-v17\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xhdpi-v17\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xhdpi-v17\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xxhdpi-v17\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xxhdpi-v17\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xxhdpi-v17\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xxhdpi-v17\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xxxhdpi-v17\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xxxhdpi-v17\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xxxhdpi-v17\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-ldrtl-xxxhdpi-v17\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_share_pack_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_share_pack_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_btn_check_to_on_mtrl_000.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_btn_check_to_on_mtrl_015.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_btn_radio_to_on_mtrl_000.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_btn_radio_to_on_mtrl_015.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_btn_switch_to_on_mtrl_00001.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_btn_switch_to_on_mtrl_00012.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_cab_background_top_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_clear_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_commit_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_go_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_menu_moreoverflow_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_menu_selectall_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_menu_share_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_voice_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_divider_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_longpressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_menu_hardkey_panel_mtrl_mult.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_popup_background_mtrl_mult.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_switch_track_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_tab_indicator_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_activated_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_default_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_search_activated_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_search_default_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\calendar_image.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\ic_action_add_alarm.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\ic_action_copy.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\ic_action_event.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\ic_action_share.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\ic_pin_black_bullet_point.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\professional_pa_action_search.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\professional_pa_action_settings.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\professional_pa_camera.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\professional_pa_discard_note.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\professional_pa_ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\professional_pa_list_view.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\professional_pa_list_view1.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\professional_pa_paragraph_view.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\professional_pa_paragraph_view1.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-mdpi-v4\save.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_share_pack_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_share_pack_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_btn_check_to_on_mtrl_000.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_btn_check_to_on_mtrl_015.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_btn_radio_to_on_mtrl_000.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_btn_radio_to_on_mtrl_015.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_btn_switch_to_on_mtrl_00001.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_btn_switch_to_on_mtrl_00012.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_cab_background_top_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_clear_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_commit_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_go_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_menu_moreoverflow_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_menu_selectall_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_menu_share_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_voice_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_divider_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_longpressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_menu_hardkey_panel_mtrl_mult.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_popup_background_mtrl_mult.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_switch_track_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_tab_indicator_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_activated_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_default_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_search_activated_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_search_default_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\calendar_image.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\day_bg.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\ic_action_add_alarm.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\ic_action_copy.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\ic_action_event.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\ic_action_share.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\ic_pin_black_bullet_point.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\navigation_next_item.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\navigation_previous_item.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\professional_pa_action_search.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\professional_pa_action_settings.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\professional_pa_camera.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\professional_pa_discard_note.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\professional_pa_ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\professional_pa_list_view.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\professional_pa_list_view1.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\professional_pa_paragraph_view.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\professional_pa_paragraph_view1.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xhdpi-v4\save.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_share_pack_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_share_pack_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_btn_check_to_on_mtrl_000.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_btn_check_to_on_mtrl_015.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_btn_radio_to_on_mtrl_000.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_btn_radio_to_on_mtrl_015.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_btn_switch_to_on_mtrl_00001.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_btn_switch_to_on_mtrl_00012.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_cab_background_top_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_clear_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_commit_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_go_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_menu_moreoverflow_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_menu_selectall_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_menu_share_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_voice_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_divider_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_longpressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_menu_hardkey_panel_mtrl_mult.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_popup_background_mtrl_mult.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_switch_track_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_tab_indicator_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_activated_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_default_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_search_activated_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_search_default_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\calendar_image.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\ic_action_add_alarm.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\ic_action_copy.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\ic_action_event.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\ic_action_share.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\ic_pin_black_bullet_point.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\professional_pa_action_search.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\professional_pa_action_settings.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\professional_pa_camera.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\professional_pa_discard_note.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\professional_pa_ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\professional_pa_list_view.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\professional_pa_list_view1.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\professional_pa_paragraph_view.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\professional_pa_paragraph_view1.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxhdpi-v4\save.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_btn_check_to_on_mtrl_000.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_btn_check_to_on_mtrl_015.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_btn_radio_to_on_mtrl_000.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_btn_radio_to_on_mtrl_015.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_btn_switch_to_on_mtrl_00001.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_btn_switch_to_on_mtrl_00012.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_ic_clear_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_ic_menu_moreoverflow_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_ic_menu_selectall_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_ic_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_ic_voice_search_api_mtrl_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_switch_track_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\abc_tab_indicator_mtrl_alpha.9.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\calendar_image.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\ic_action_add_alarm.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\ic_action_copy.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\ic_action_event.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\ic_action_share.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\ic_pin_black_bullet_point.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\professional_pa_list_view1.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\professional_pa_paragraph_view.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable-xxxhdpi-v4\professional_pa_paragraph_view1.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_btn_check_material.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_btn_radio_material.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_cab_background_internal_bg.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_cab_background_top_material.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_edit_text_material.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_item_background_holo_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_item_background_holo_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_list_selector_background_transition_holo_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_list_selector_background_transition_holo_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_list_selector_holo_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_list_selector_holo_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_switch_thumb_material.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_tab_indicator_material.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\abc_textfield_search_material.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\date_number_background.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\day_selected.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\layout_border.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\list_view_border.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\list_view_border_blue.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\list_view_border_red.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\list_view_selector.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\normal_day.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\note_title_border.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\drawable\today.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout-land\activity_notes_layout_manager.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout-large-land-v4\activity_notes_layout_manager.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout-large-port-v4\activity_notes_layout_manager.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout-port\activity_notes_layout_manager.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout-small-land-v4\activity_notes_layout_manager.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout-small-port-v4\activity_notes_layout_manager.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout-v11\abc_screen_content_include.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout-xlarge-land-v4\activity_notes_layout_manager.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout-xlarge-port-v4\activity_notes_layout_manager.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_action_bar_title_item.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_action_bar_up_container.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_action_bar_view_list_nav_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_action_menu_item_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_action_menu_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_action_mode_bar.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_action_mode_close_item_material.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_activity_chooser_view.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_activity_chooser_view_include.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_activity_chooser_view_list_item.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_expanded_menu_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_list_menu_item_checkbox.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_list_menu_item_icon.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_list_menu_item_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_list_menu_item_radio.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_popup_menu_item_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_screen_content_include.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_screen_simple.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_screen_simple_overlay_action_mode.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_screen_toolbar.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_search_dropdown_item_icons_2line.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_search_view.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\abc_simple_dropdown_hint.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\activity_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\activity_start_professional_pa_application.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\colour_picker_adapter_view.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\composite_control_for_list_view.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\day_of_week.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\day_view.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\event_adapter_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\events_modification_dialog_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\fragment_list_item_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\list_item_creator_activity.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\listview_for_list_fragment.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\note_fragment_adapter_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\notes_search_manager.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\paragraph_note_creator_activtiy.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\professional_pa_frame_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\support_simple_spinner_dropdown_item.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\layout\time_picker_and_date_picker_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\menu\contextual_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\menu\events_pop_up_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\menu\list_creator_activity_menu_items.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\menu\notes_layout_manager_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\menu\notes_selection_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\menu\paragraph_notes_activity_menu_items.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\menu\start_professional_pa_application.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-af\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-am\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ar\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-bg\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-bn-rBD\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ca\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-cs\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-da\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-de\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-el\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-en-rGB\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-en-rIN\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-es-rUS\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-es\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-et-rEE\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-eu-rES\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-fa\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-fi\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-fr-rCA\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-fr\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-gl-rES\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-hi\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-hr\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-hu\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-hy-rAM\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-in\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-is-rIS\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-it\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-iw\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ja\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ka-rGE\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-kk-rKZ\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-km-rKH\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-kn-rIN\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ko\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ky-rKG\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-land\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-large-v4\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-lo-rLA\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-lt\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-lv\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-mk-rMK\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ml-rIN\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-mn-rMN\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-mr-rIN\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ms-rMY\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-my-rMM\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-nb\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ne-rNP\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-nl\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-pl\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-port\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-pt-rPT\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-pt\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ro\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ru\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-si-rLK\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-sk\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-sl\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-sr\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-sv\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-sw600dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-sw\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ta-rIN\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-te-rIN\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-th\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-tl\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-tr\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-uk\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-ur-rPK\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-uz-rUZ\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-v11\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-v14\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-v17\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-v21\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-vi\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-w360dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-w480dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-w500dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-w600dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-w720dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-w820dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-xlarge-land-v4\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-xlarge-v4\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-zh-rCN\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-zh-rHK\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-zh-rTW\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values-zu\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\values\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\res\debug\xml\searchable.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\build\intermediates\resources\resources-debug.ap_" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$anim.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$anim.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$attr.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$bool.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$bool.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/.gitignore" afterPath="$PROJECT_DIR$/bin/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/gp/app/minote/BuildConfig.java" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/gp/app/minote/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/adapter/CalendarAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/adapter/CalendarAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/adapter/CalendarAdapter.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/adapter/CalendarAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/events/database/CalendarDBManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/events/database/CalendarDBManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/events/database/CalendarDBManager.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/events/database/CalendarDBManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/colorpicker/ColorPickerCreator.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/colorpicker/ColorPickerCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/colorpicker/ColorPickerCreator.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/colorpicker/ColorPickerCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/colorpicker/ColourPickerAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/colorpicker/ColourPickerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/colorpicker/ColourPickerAdapter.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/colorpicker/ColourPickerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/Event.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/Event.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/data/Event.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/data/Event.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/EventCreationGUI.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/EventCreationGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/ui/EventCreationGUI.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/ui/EventCreationGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/adapter/EventListAdapater.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/adapter/EventListAdapater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/adapter/EventListAdapater.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/adapter/EventListAdapater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/events/EventManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/events/EventManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/events/EventManager.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/events/EventManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/EventModificationGUI.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/EventModificationGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/ui/EventModificationGUI.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/ui/EventModificationGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/fragments/EventNoteFragment.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/fragments/EventNoteFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/EventNoteFragmentAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/EventNoteFragmentAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/fragments/EventNoteFragmentAdapter.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/fragments/EventNoteFragmentAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/images/ImageLocationPathManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/images/ImageLocationPathManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/images/ImageLocationPathManager.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/images/ImageLocationPathManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/compositecontrols/ListViewItemLayout.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/compositecontrols/ListViewItemLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/compositecontrols/ListViewItemLayout.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/compositecontrols/ListViewItemLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/MessagingEndpoint.java" afterPath="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/MessagingEndpoint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiNote.iml" afterPath="$PROJECT_DIR$/MiNote.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/export/MiNoteNotesExporter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/export/MiNoteNotesExporter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/export/MiNoteNotesExporter.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/export/MiNoteNotesExporter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notification/MiNoteNotificationManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notification/MiNoteNotificationManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notification/MiNoteNotificationManager.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notification/MiNoteNotificationManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/util/MiNoteUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/util/MiNoteUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/util/MiNoteUtil.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/util/MiNoteUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/operations/NoteCopyManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/operations/NoteCopyManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/operations/NoteCopyManager.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/operations/NoteCopyManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/listeners/NotesActionModeCallback.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/listeners/NotesActionModeCallback.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/listeners/NotesActionModeCallback.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/listeners/NotesActionModeCallback.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/backup/NotesBackupManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/backup/NotesBackupManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/backup/NotesBackupManager.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/backup/NotesBackupManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/database/NotesDBManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/database/NotesDBManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/database/NotesDBManager.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/database/NotesDBManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/NotesManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/NotesManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/fragments/NotesManager.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/fragments/NotesManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/operations/NotesOperationManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/operations/NotesOperationManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/operations/NotesOperationManager.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/operations/NotesOperationManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/xml/NotesParser.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/xml/NotesParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/xml/NotesParser.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/xml/NotesParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/xml/NotesReader.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/xml/NotesReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/xml/NotesReader.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/xml/NotesReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/xml/NotesWriter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/xml/NotesWriter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/xml/NotesWriter.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/xml/NotesWriter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/OfyService.java" afterPath="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/OfyService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/ProfessionalPACalendarView.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/ProfessionalPACalendarView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/ui/ProfessionalPACalendarView.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/calendar/ui/ProfessionalPACalendarView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/gp/app/minote/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/gp/app/minote/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/start/StartMiNoteActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/start/StartMiNoteActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/start/StartMiNoteActivity.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/start/StartMiNoteActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/TextNote.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/TextNote.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/data/TextNote.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/data/TextNote.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/fragments/TextNoteFragment.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/fragments/TextNoteFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragmentAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragmentAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/gp/app/minote/notes/fragments/TextNoteFragmentAdapter.java" afterPath="$PROJECT_DIR$/src/com/gp/app/minote/notes/fragments/TextNoteFragmentAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_start_professional_pa_application.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_start_professional_pa_application.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_22_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_22_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minote-backend/src/main/webapp/WEB-INF/appengine-web.xml" afterPath="$PROJECT_DIR$/minote-backend/src/main/webapp/WEB-INF/appengine-web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minote-backend/build.gradle" afterPath="$PROJECT_DIR$/minote-backend/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/colour_picker_adapter_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/colour_picker_adapter_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/colour_picker_adapter_view.xml" afterPath="$PROJECT_DIR$/res/layout/colour_picker_adapter_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/contextual_menu.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/contextual_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_list_item_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_list_item_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/fragment_list_item_layout.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_list_item_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/google_api_client_1_19_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/google_api_client_1_19_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/google_api_client_android_1_19_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/google_api_client_android_1_19_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/google_http_client_1_19_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/google_http_client_1_19_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/google_http_client_android_1_19_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/google_http_client_android_1_19_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/google_http_client_jackson2_1_19_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/google_http_client_jackson2_1_19_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/google_oauth_client_1_19_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/google_oauth_client_1_19_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/guava_jdk5_13_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/guava_jdk5_13_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/jackson_core_2_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/jackson_core_2_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/jarlist.cache" afterPath="$PROJECT_DIR$/bin/jarlist.cache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_creator_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_creator_activity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_item_creator_activity.xml" afterPath="$PROJECT_DIR$/res/layout/list_item_creator_activity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minote-backend/src/main/webapp/WEB-INF/logging.properties" afterPath="$PROJECT_DIR$/minote-backend/src/main/webapp/WEB-INF/logging.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/mediarouter_v7_22_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/mediarouter_v7_22_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeAssets/androidTest/debug/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeAssets/androidTest/debug/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeAssets/debug/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeAssets/debug/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minote-backend/minote-backend.iml" afterPath="$PROJECT_DIR$/minote-backend/minote-backend.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_ads_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_ads_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_analytics_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_analytics_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_appindexing_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_appindexing_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_appinvite_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_appinvite_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_appstate_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_appstate_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_base_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_base_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_cast_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_cast_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_drive_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_drive_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_fitness_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_fitness_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_games_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_games_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_gcm_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_gcm_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_identity_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_identity_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_location_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_location_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_maps_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_maps_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_nearby_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_nearby_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_panorama_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_panorama_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_plus_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_plus_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_safetynet_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_safetynet_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_wallet_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_wallet_7_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_wearable_7_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_wearable_7_5_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/notes_layout_manager_menu.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/notes_layout_manager_menu.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minote-backend/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/minote-backend/src/main/webapp/WEB-INF/web.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="E:\New Eclipse Workspace\MiNote\.idea\libraries\multidex_1_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/multidex_1_0_1.xml" />
-      <change type="MOVED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\java\com\gp\app\minote\com\gp\app\minote\gcm\GcmBroadcastReceiver.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/gcm/GcmBroadcastReceiver.java" />
-      <change type="MOVED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\java\com\gp\app\minote\com\gp\app\minote\gcm\GcmIntentService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/gcm/GcmIntentService.java" />
     </list>
     <ignored path="minote.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -873,156 +128,123 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NotesOperationManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/operations/NotesOperationManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="351" column="45" selection-start-line="351" selection-start-column="37" selection-end-line="351" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#4774#4775#0" expanded="false" />
-                <element signature="e#4814#4815#0" expanded="false" />
-                <element signature="e#4862#4863#0" expanded="false" />
-                <element signature="e#4891#4892#0" expanded="false" />
-                <element signature="e#4930#4931#0" expanded="false" />
-                <element signature="e#4961#4962#0" expanded="false" />
-                <element signature="e#5372#5373#0" expanded="false" />
-                <element signature="e#5402#5403#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GcmIntentService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/gcm/GcmIntentService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#520#521#0" expanded="false" />
-                <element signature="e#561#562#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NotificationReceiver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notification/service/NotificationReceiver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MiNoteNotificationManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MiNoteNotificationManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notification/MiNoteNotificationManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.61340207">
-              <caret line="136" column="59" selection-start-line="136" selection-start-column="53" selection-end-line="136" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="41" column="37" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Note.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/Note.java">
+      <file leaf-file-name="NotesLayoutManagerActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.9310346">
+              <caret line="1015" column="37" selection-start-line="1015" selection-start-column="37" selection-end-line="1015" selection-end-column="37" />
+              <folding>
+                <element signature="e#3611#3625#0" expanded="true" />
+                <element signature="e#6304#6305#0" expanded="true" />
+                <element signature="e#6357#6358#0" expanded="true" />
+                <element signature="e#17081#17082#0" expanded="true" />
+                <element signature="e#17109#17110#0" expanded="true" />
+                <element signature="e#21126#21246#0" expanded="true" />
+                <element signature="e#21245#21246#0" expanded="true" />
+                <element signature="e#22134#22249#0" expanded="true" />
+                <element signature="e#22248#22249#0" expanded="true" />
+                <element signature="e#23110#23227#0" expanded="true" />
+                <element signature="e#23226#23227#0" expanded="true" />
+                <element signature="e#24147#24148#0" expanded="true" />
+                <element signature="e#24169#24170#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListItemCreatorActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+              <caret line="449" column="0" selection-start-line="449" selection-start-column="0" selection-end-line="449" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Event.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/Event.java">
+      <file leaf-file-name="ParagraphNoteCreatorActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="18" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1593#1594#0" expanded="false" />
-                <element signature="e#1621#1622#0" expanded="false" />
-                <element signature="e#1658#1659#0" expanded="false" />
-                <element signature="e#1681#1682#0" expanded="false" />
-                <element signature="e#1730#1731#0" expanded="false" />
-                <element signature="e#1763#1764#0" expanded="false" />
-                <element signature="e#1799#1800#0" expanded="false" />
-                <element signature="e#1822#1823#0" expanded="false" />
-                <element signature="e#1868#1869#0" expanded="false" />
-                <element signature="e#1904#1905#0" expanded="false" />
-                <element signature="e#1938#1939#0" expanded="false" />
-                <element signature="e#1965#1966#0" expanded="false" />
-                <element signature="e#2010#2011#0" expanded="false" />
-                <element signature="e#2039#2040#0" expanded="false" />
-                <element signature="e#2071#2072#0" expanded="false" />
-                <element signature="e#2092#2093#0" expanded="false" />
-                <element signature="e#2126#2127#0" expanded="false" />
-                <element signature="e#2148#2149#0" expanded="false" />
-                <element signature="e#2181#2182#0" expanded="false" />
-                <element signature="e#2201#2202#0" expanded="false" />
-                <element signature="e#2525#2526#0" expanded="false" />
-                <element signature="e#2548#2549#0" expanded="false" />
-                <element signature="e#2725#2726#0" expanded="false" />
-                <element signature="e#2746#2747#0" expanded="false" />
-                <element signature="e#2797#2798#0" expanded="false" />
-                <element signature="e#2847#2848#0" expanded="false" />
-                <element signature="e#2998#2999#0" expanded="false" />
-                <element signature="e#3028#3029#0" expanded="false" />
-                <element signature="e#3067#3068#0" expanded="false" />
-                <element signature="e#3096#3097#0" expanded="false" />
-                <element signature="e#3132#3133#0" expanded="false" />
-                <element signature="e#3153#3154#0" expanded="false" />
-                <element signature="e#3290#3291#0" expanded="false" />
-                <element signature="e#3305#3306#0" expanded="false" />
-                <element signature="e#4275#4276#0" expanded="false" />
-                <element signature="e#4306#4307#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StringTokenizer.java" pinned="false" current-in-tab="false">
-        <entry file="file://E:/Softwares/Android SDK/android-sdk/sources/android-21/java/util/StringTokenizer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="74" column="11" selection-start-line="74" selection-start-column="11" selection-end-line="74" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#7561#0" expanded="false" />
-                <element signature="e#1760#1761#0" expanded="false" />
-                <element signature="e#1808#1809#0" expanded="false" />
-                <element signature="e#4497#4498#0" expanded="false" />
-                <element signature="e#4535#4536#0" expanded="false" />
-                <element signature="e#5663#5664#0" expanded="false" />
-                <element signature="e#5697#5698#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TextNote.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/TextNote.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="234" column="16" selection-start-line="234" selection-start-column="16" selection-end-line="234" selection-end-column="16" />
+            <state vertical-scroll-proportion="8.806701">
+              <caret line="258" column="9" selection-start-line="258" selection-start-column="9" selection-end-line="258" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MiNoteInstanceIDListenerService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/gcm/MiNoteInstanceIDListenerService.java">
+      <file leaf-file-name="StartMiNoteActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/start/StartMiNoteActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+              <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Activity.java" pinned="false" current-in-tab="false">
+        <entry file="file://E:/Softwares/Android SDK/android-sdk/sources/android-21/android/app/Activity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="2069" column="16" selection-start-line="2069" selection-start-column="16" selection-end-line="2069" selection-end-column="16" />
               <folding>
-                <element signature="imports" expanded="false" />
+                <element signature="e#91283#91284#0" expanded="true" />
+                <element signature="e#91334#91335#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_start_professional_pa_application.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_start_professional_pa_application.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.310345">
+              <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="notes_layout_manager_menu.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/notes_layout_manager_menu.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="43" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
+              <folding>
+                <element signature="e#318#341#0" expanded="true" />
+                <element signature="e#615#640#0" expanded="true" />
+                <element signature="e#795#818#0" expanded="true" />
+                <element signature="e#1022#1045#0" expanded="true" />
+                <element signature="e#1239#1253#0" expanded="true" />
+                <element signature="e#1444#1459#0" expanded="true" />
+                <element signature="e#1808#1830#0" expanded="true" />
+                <element signature="e#1979#2001#0" expanded="true" />
+                <element signature="e#2160#2185#0" expanded="true" />
+                <element signature="e#2366#2380#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.962963">
+              <caret line="55" column="30" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1032,11 +254,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="67" column="137" selection-start-line="67" selection-start-column="137" selection-end-line="67" selection-end-column="137" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#2602#2603#0" expanded="false" />
-                <element signature="e#2648#2649#0" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -3386,7 +2604,6 @@
         <option value="$PROJECT_DIR$/minote-backend/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/minote-backend/minote-backend.iml" />
         <option value="$PROJECT_DIR$/minote-backend/build/libs/minote-backend-android-endpoints.jar!/com/gp/app/minote/backend/entities/eventEntityApi/EventEntityApi.class" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java" />
         <option value="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/entities/EventEntityEndpoint.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
@@ -3400,20 +2617,22 @@
         <option value="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/RegistrationRecord.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/userdata/UserRegistrationInfo.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_start_professional_pa_application.xml" />
         <option value="$PROJECT_DIR$/minote-backend/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/contextual_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/listeners/NotesActionModeCallback.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/share_note_activity.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/start/StartMiNoteActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ShareNoteActivity.java" />
         <option value="$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/MessagingEndpoint.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/gcm/GcmIntentService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/operations/NotesOperationManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notification/MiNoteNotificationManager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/notes_layout_manager_menu.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_start_professional_pa_application.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/start/StartMiNoteActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java" />
       </list>
     </option>
   </component>
@@ -3492,10 +2711,6 @@
               <option name="myItemId" value="ProfessionalPA" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -3518,6 +2733,274 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="minote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="minote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="start" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="minote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manager" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3841,10 +3324,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="776" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2249191" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.48058254" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32903227" sideWeight="0.4684466" order="8" side_tool="false" content_ui="tabs" />
@@ -3861,7 +3345,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3381877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3381877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.40614888" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3869,7 +3353,6 @@
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2249191" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.49676377" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46774194" sideWeight="0.48139158" order="7" side_tool="false" content_ui="tabs" />
@@ -3949,20 +3432,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bin/classes/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8888888">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.datanucleus/datanucleus-api-jdo/3.1.3/5e9f664ee5a15b59d0c39237298a4ea1742f6dd3/datanucleus-api-jdo-3.1.3-sources.jar!/org/datanucleus/api/jdo/NucleusJDOHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="355" column="47" selection-start-line="355" selection-start-column="47" selection-end-line="355" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.datanucleus/datanucleus-api-jdo/3.1.3/5e9f664ee5a15b59d0c39237298a4ea1742f6dd3/datanucleus-api-jdo-3.1.3-sources.jar!/org/datanucleus/api/jdo/JDOPersistenceManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4085,16 +3554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_start_professional_pa_application.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/entities/EventEntityEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4123,13 +3582,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="547" column="5" selection-start-line="485" selection-start-column="4" selection-end-line="547" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/minote-backend/src/main/webapp/WEB-INF/appengine-web.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4148,13 +3600,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="12" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -4186,13 +3631,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="258" column="9" selection-start-line="258" selection-start-column="9" selection-end-line="258" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/listeners/NotesActionModeCallback.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4217,25 +3655,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/start/StartMiNoteActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="59" selection-start-line="77" selection-start-column="59" selection-end-line="77" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/minote-backend/src/main/java/com/gp/app/minote/backend/MessagingEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="74" column="98" selection-start-line="74" selection-start-column="98" selection-end-line="74" selection-end-column="98" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1207" column="28" selection-start-line="1207" selection-start-column="23" selection-end-line="1207" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -4274,18 +3698,6 @@
             <element signature="imports" expanded="false" />
             <element signature="e#520#521#0" expanded="false" />
             <element signature="e#561#562#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ShareNoteActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="137" selection-start-line="67" selection-start-column="137" selection-end-line="67" selection-end-column="137" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2602#2603#0" expanded="false" />
-            <element signature="e#2648#2649#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4374,7 +3786,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -4382,14 +3796,156 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="234" column="16" selection-start-line="234" selection-start-column="16" selection-end-line="234" selection-end-column="16" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#759#769#0" expanded="false" />
+            <element signature="e#1402#1403#0" expanded="false" />
+            <element signature="e#1424#1425#0" expanded="false" />
+            <element signature="e#1459#1460#0" expanded="false" />
+            <element signature="e#1499#1500#0" expanded="false" />
+            <element signature="e#1546#1547#0" expanded="false" />
+            <element signature="e#1577#1578#0" expanded="false" />
+            <element signature="e#1621#1622#0" expanded="false" />
+            <element signature="e#1647#1648#0" expanded="false" />
+            <element signature="e#1690#1691#0" expanded="false" />
+            <element signature="e#1713#1714#0" expanded="false" />
+            <element signature="e#1766#1767#0" expanded="false" />
+            <element signature="e#1805#1806#0" expanded="false" />
+            <element signature="e#1862#1863#0" expanded="false" />
+            <element signature="e#1905#1906#0" expanded="false" />
+            <element signature="e#1941#1942#0" expanded="false" />
+            <element signature="e#1967#1968#0" expanded="false" />
+            <element signature="e#2005#2006#0" expanded="false" />
+            <element signature="e#2033#2034#0" expanded="false" />
+            <element signature="e#2072#2073#0" expanded="false" />
+            <element signature="e#2091#2092#0" expanded="false" />
+            <element signature="e#2128#2129#0" expanded="false" />
+            <element signature="e#2153#2154#0" expanded="false" />
+            <element signature="e#2458#2459#0" expanded="false" />
+            <element signature="e#2478#2479#0" expanded="false" />
+            <element signature="e#2518#2519#0" expanded="false" />
+            <element signature="e#2545#2546#0" expanded="false" />
+            <element signature="e#3378#3379#0" expanded="false" />
+            <element signature="e#3412#3413#0" expanded="false" />
+            <element signature="e#3464#3465#0" expanded="false" />
+            <element signature="e#3479#3480#0" expanded="false" />
+            <element signature="e#3506#3507#0" expanded="false" />
+            <element signature="e#3537#3538#0" expanded="false" />
+            <element signature="e#3996#3997#0" expanded="false" />
+            <element signature="e#4029#4030#0" expanded="false" />
+            <element signature="e#4062#4063#0" expanded="false" />
+            <element signature="e#4085#4086#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notification/MiNoteNotificationManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61340207">
-          <caret line="136" column="59" selection-start-line="136" selection-start-column="53" selection-end-line="136" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="37" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.962963">
+          <caret line="55" column="30" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/notes_layout_manager_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="43" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
+          <folding>
+            <element signature="e#318#341#0" expanded="true" />
+            <element signature="e#615#640#0" expanded="true" />
+            <element signature="e#795#818#0" expanded="true" />
+            <element signature="e#1022#1045#0" expanded="true" />
+            <element signature="e#1239#1253#0" expanded="true" />
+            <element signature="e#1444#1459#0" expanded="true" />
+            <element signature="e#1808#1830#0" expanded="true" />
+            <element signature="e#1979#2001#0" expanded="true" />
+            <element signature="e#2160#2185#0" expanded="true" />
+            <element signature="e#2366#2380#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ShareNoteActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="137" selection-start-line="67" selection-start-column="137" selection-end-line="67" selection-end-column="137" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_start_professional_pa_application.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.310345">
+          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Softwares/Android SDK/android-sdk/sources/android-21/android/app/Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2069" column="16" selection-start-line="2069" selection-start-column="16" selection-end-line="2069" selection-end-column="16" />
+          <folding>
+            <element signature="e#91283#91284#0" expanded="true" />
+            <element signature="e#91334#91335#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/start/StartMiNoteActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.9310346">
+          <caret line="1015" column="37" selection-start-line="1015" selection-start-column="37" selection-end-line="1015" selection-end-column="37" />
+          <folding>
+            <element signature="e#3611#3625#0" expanded="true" />
+            <element signature="e#6304#6305#0" expanded="true" />
+            <element signature="e#6357#6358#0" expanded="true" />
+            <element signature="e#17081#17082#0" expanded="true" />
+            <element signature="e#17109#17110#0" expanded="true" />
+            <element signature="e#21126#21246#0" expanded="true" />
+            <element signature="e#21245#21246#0" expanded="true" />
+            <element signature="e#22134#22249#0" expanded="true" />
+            <element signature="e#22248#22249#0" expanded="true" />
+            <element signature="e#23110#23227#0" expanded="true" />
+            <element signature="e#23226#23227#0" expanded="true" />
+            <element signature="e#24147#24148#0" expanded="true" />
+            <element signature="e#24169#24170#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="449" column="0" selection-start-line="449" selection-start-column="0" selection-end-line="449" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="8.806701">
+          <caret line="258" column="9" selection-start-line="258" selection-start-column="9" selection-end-line="258" selection-end-column="9" />
           <folding />
         </state>
       </provider>

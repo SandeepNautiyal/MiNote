@@ -39,7 +39,13 @@
                 android:title="@string/event"/>
         </menu>
     </item>
-    
+
+    <item
+        android:id="@+id/editEmailId"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/edit_emailId"/>
+
     <item
         android:id="@+id/export_notes"
         android:orderInCategory="100"

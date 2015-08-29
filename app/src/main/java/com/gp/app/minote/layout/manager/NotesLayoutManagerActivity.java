@@ -7,15 +7,12 @@ import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.SparseIntArray;
 import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -23,24 +20,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
-import android.widget.Toast;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.gp.app.minote.R;
-import com.gp.app.minote.backend.entities.eventEntityApi.EventEntityApi;
-import com.gp.app.minote.backend.messaging.Messaging;
-import com.gp.app.minote.backend.registration.Registration;
-import com.gp.app.minote.backend.userdata.userRegistrationInfoApi.UserRegistrationInfoApi;
-import com.gp.app.minote.backend.userdata.userRegistrationInfoApi.model.UserRegistrationInfo;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
 import com.gp.app.minote.calendar.ui.ProfessionalPACalendarView;
 import com.gp.app.minote.colorpicker.ColourPickerChangeListener;
@@ -58,9 +45,9 @@ import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.notes.fragments.TextNoteFragment;
 import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.notes.operations.NotesOperationManager;
+import com.gp.app.minote.start.StartMiNoteActivity;
 import com.gp.app.minote.util.MiNoteParameters;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -68,8 +55,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 //TODO create notes for calendar events also
 public class NotesLayoutManagerActivity extends Activity implements ColourPickerChangeListener, OnQueryTextListener 
@@ -100,8 +85,10 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private static final String SELECTED_NOTE_IDS = "selectedNoteIds";
 
-	private SparseIntArray linearLayoutOccupancy = new SparseIntArray();
-	
+    private int layoutIndexToBeOccupiedNext = 0;
+
+    private int linearLayoutsCount = 0;
+
 	private Map<Integer, FrameLayout> childFrames = new LinkedHashMap<Integer, FrameLayout>();
 
 	private List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
@@ -151,13 +138,15 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		setContentView(scrollView);
 
-		int numberOfLinearLayouts = getNumberOfLinearLayouts();
-		
-		reInitializeLinearLayoutOccupancy(numberOfLinearLayouts);
+		linearLayoutsCount = getNumberOfLinearLayouts();
+
+        System.out.println("linearLayoutsCount ="+linearLayoutsCount);
 
 		fillLinearLayoutList();
 
-		NotesManager.getInstance().deleteAllNotes();
+        System.out.println("linearLayouts =" + linearLayouts);
+
+        NotesManager.getInstance().deleteAllNotes();
 
 	    createNotes();
 
@@ -170,22 +159,12 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		MiNoteParameters.setNotesActivity(this);
 		
 		handleIntent(getIntent());
-
-        new GcmRegistrationAsyncTask(this).execute();
-	}
-
-	private void reInitializeLinearLayoutOccupancy(int numberOfLinearLayouts) 
-	{
-		for(int i = 0; i < numberOfLinearLayouts; i++)
-		{
-			linearLayoutOccupancy.append(i, 0);
-		}
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) 
 	{
-		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, (byte) linearLayoutOccupancy.size());
+		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, (byte) linearLayoutsCount);
 
 		outState.putByte(APPLIED_FILTER, currentAppliedFilter);
 		
@@ -197,13 +176,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) 
 	{
-		linearLayoutOccupancy.clear();
-		
-		int numberOfLinearLayouts =  savedInstanceState
+        linearLayoutsCount =  savedInstanceState
 				.getByte(NUMBER_OF_LINEAR_LAYOUTS);
 		
 		updateNumberOfLinearLayoutsOnScreenChange(getResources()
-				.getConfiguration(), numberOfLinearLayouts);
+				.getConfiguration(), linearLayoutsCount);
 
 		currentAppliedFilter =  savedInstanceState
 				.getByte(APPLIED_FILTER);
@@ -306,6 +283,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			case R.id.actionSearch :
 				return true;
 
+			case R.id.editEmailId:
+				Intent intent = new Intent(this, StartMiNoteActivity.class);
+				intent.putExtra("EDIT_EMAIL_ID", true);
+				startActivity(intent);
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 	    }
@@ -400,8 +382,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			noOfLinearLayout = numberOfLinearLayouts - 1;
 		}
-		
-		reInitializeLinearLayoutOccupancy(noOfLinearLayout);
+
+        this.linearLayoutsCount = numberOfLinearLayouts;
 	}
 
 	@Override
@@ -544,15 +526,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private void updateActivityView(FrameLayout frameLayout, int fragmentLength)
 	{
-		int minimumOccupiedIndex = getMinimumOccupiedLayoutIndex();
-		
-		int occupancy = linearLayoutOccupancy.get(minimumOccupiedIndex);
-		
-		occupancy = occupancy + fragmentLength;
-		
-		linearLayoutOccupancy.put(minimumOccupiedIndex, occupancy);
-		
-		LinearLayout linearLayout = linearLayouts.get(minimumOccupiedIndex);
+		int availableLayoutIndex = getAvailableLayoutIndex();
+
+        System.out.println("availableLayoutIndex="+availableLayoutIndex);
+
+		LinearLayout linearLayout = linearLayouts.get(availableLayoutIndex);
 
 		LinearLayout parentView = (LinearLayout) frameLayout.getParent();
 
@@ -572,7 +550,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		linearLayouts.clear();
 		
-		switch (linearLayoutOccupancy.size()) 
+		switch (linearLayoutsCount)
 		{
 		    case 5:
 			    layout = (LinearLayout) findViewById(R.id.linearLayout5);
@@ -630,11 +608,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		
 		button.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				createNoteTypeButtons();
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                createNoteTypeButtons();
+            }
+        });
 		
 		noteCreatorFrameLayout.addView(button);
 	}
@@ -1029,25 +1007,24 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		}
 	}
 	
-	private int getMinimumOccupiedLayoutIndex() 
+	private int getAvailableLayoutIndex()
 	{
-		int minimumOccupiedLayoutIndex = 0;
-		
-		int minimumOccupancy = linearLayoutOccupancy.get(0);
+        int availableIndex = -1;
 
-		for(int linearLayoutIndex = 1; linearLayoutIndex < linearLayoutOccupancy.size(); linearLayoutIndex++)
-		{
-			int layoutOccupancy = linearLayoutOccupancy.get(linearLayoutIndex);
-			
-			if (layoutOccupancy < minimumOccupancy)
-			{
-				minimumOccupancy = layoutOccupancy;
-				
-				minimumOccupiedLayoutIndex = linearLayoutIndex;
-			}
-		}
-		
-		return minimumOccupiedLayoutIndex;
+		if(layoutIndexToBeOccupiedNext < linearLayoutsCount)
+        {
+            availableIndex = layoutIndexToBeOccupiedNext++;
+        }
+        else
+        {
+            layoutIndexToBeOccupiedNext = 0;
+
+            availableIndex = layoutIndexToBeOccupiedNext;
+
+            layoutIndexToBeOccupiedNext++;
+        }
+
+		return availableIndex;
 	}
 	
 	public void filterNotes(Set<Integer> noteIds) 
@@ -1179,83 +1156,4 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			}
 		}
 	}
-
-
-    //TODO to be removed.
-    class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String>
-	{
-        private GoogleCloudMessaging gcm;
-        private Context context;
-
-        // TODO: change to your own sender ID to Google Developers Console project number, as per instructions above
-        private static final String SENDER_ID = "700276642861";
-
-        public GcmRegistrationAsyncTask(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-
-			boolean isDeviceRegistered = false;
-
-            String msg = "";
-            try {
-                if (gcm == null) {
-                    gcm = GoogleCloudMessaging.getInstance(context);
-                }
-
-				String regId = gcm.register(SENDER_ID);
-
-				msg = "Device registered, registration ID=" + regId;
-
-				UserRegistrationInfo userRegistrationInfo = new UserRegistrationInfo();
-
-				SharedPreferences sharedPreferences = getSharedPreferences("MiNoteSharedPref", MODE_PRIVATE);
-
-				String userEmailId = sharedPreferences.getString("UserEmailId", "invalid");
-
-				String userName = sharedPreferences.getString("UserName", "invalid");
-
-				userRegistrationInfo.setDeviceRegistrationId(regId);
-
-				if(!userEmailId.equals("invalid"))
-				{
-					userRegistrationInfo.setUserEmail(userEmailId);
-				}
-
-				if(!userName.equals("invalid"))
-				{
-					userRegistrationInfo.setUserName(userName);
-				}
-
-				userRegistrationInfo.setUserEmail(userEmailId);
-
-				UserRegistrationInfoApi.Builder builder = new UserRegistrationInfoApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-						.setRootUrl("https://minote-997.appspot.com/_ah/api/");
-
-				UserRegistrationInfoApi userRegistrationInfoApi = builder.build();
-
-				UserRegistrationInfoApi.Insert insertUserInfoEntity = userRegistrationInfoApi.insert(userRegistrationInfo);
-
-				insertUserInfoEntity.execute();
-
-                // You should send the registration ID to your server over HTTP,
-                // so it can use GCM/HTTP or CCS to send messages to your app.
-                // The request to your server should be authenticated if your app
-                // is using accounts.
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                msg = "Error: " + ex.getMessage();
-            }
-            return "Hello";
-        }
-
-        @Override
-        protected void onPostExecute(String msg) {
-            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-            Logger.getLogger("REGISTRATION").log(Level.INFO, msg);
-        }
-    }
 }

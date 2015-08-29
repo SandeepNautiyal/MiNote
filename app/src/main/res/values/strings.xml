@@ -53,4 +53,5 @@
     <string name="title_activity_share_note">ShareNoteActivity</string>
     <string name="enter_email_id">Enter Email Id</string>
     <string name="hello_world">Hello world!</string>
+    <string name="edit_emailId">Edit Email</string>
 </resources>
