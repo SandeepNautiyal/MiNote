@@ -27,6 +27,7 @@ import com.gp.app.minote.notes.database.NotesDBManager;
 import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.util.MiNoteParameters;
+import com.gp.app.minote.util.MiNoteUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -329,49 +330,15 @@ public class NotesOperationManager
                 {
                     Event event = (Event) note;
 
-                    noteText.append("Event=true" + "$$");
+                    String eventString = MiNoteUtil.writeEvent(event);
 
-                    noteText.append("EventName="+event.getEventName() + " $$ ");
-
-                    noteText.append("EventLocation="+event.getLocation() + " $$ ");
-
-                    noteText.append("EventStartDate="+event.getStartDate()+" $$ ");
-
-                    noteText.append("EventStartTime="+event.getStartTime()+" $$ ");
-
-                    noteText.append("EventEndDate="+event.getEndDate()+" $$ ");
-
-                    noteText.append("EventEndTime="+event.getEndTime()+" $$ ");
+                    noteText.append(eventString);
                 }
                 else
                 {
                     TextNote textNote = (TextNote) note;
 
-                    noteText.append("Event=false"+" $$ ");
-
-					noteText.append("NoteText=");
-
-                    List<NoteItem> items = textNote.getNoteItems();
-
-                    for (int j = 0; j < items.size(); j++)
-                    {
-                        NoteItem item = items.get(j);
-
-                        String imageName = item.getImageName();
-
-                        if (imageName != null && !imageName.trim().equals("")) {
-                            String path = ImageLocationPathManager.getInstance().getImagePath(imageName);
-
-                            imageUri = Uri.parse("file://" + path);
-                        }
-
-                        String text = item.getText();
-
-                        if (text != null && !text.trim().equals(""))
-                        {
-                            noteText.append(text + ";");
-                        }
-                    }
+					noteText.append(MiNoteUtil.writeTextNote(textNote));
                 }
 
                 Intent intent = new Intent(MiNoteParameters.getApplicationContext(), ShareNoteActivity.class);

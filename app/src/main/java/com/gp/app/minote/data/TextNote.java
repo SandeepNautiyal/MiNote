@@ -19,9 +19,9 @@ public class TextNote extends Note
     public static final String	NOTE_COLOR = "noteColor";
 
 	private int noteId = -1;
-	
+
 	private byte state = XMLEntity.INSERT_STATE;
-	
+
 	private byte noteType = Note.LIST_NOTE;
 	
 	private List<NoteItem> noteItems = new ArrayList<NoteItem>();
@@ -116,7 +116,7 @@ public class TextNote extends Note
 	public void setState(byte state) {
 		this.state = state;
 	}
-	
+
 	@Override
 	public void writeToParcel(Parcel dest, int flags) 
 	{
@@ -203,6 +203,8 @@ public class TextNote extends Note
 		
 		sb.append("note color:"+noteColor);
 
+		sb.append("note id:"+noteId);
+
 		sb.append("Note item :"+noteItems);
 		
 		return sb.toString();
@@ -239,4 +241,12 @@ public class TextNote extends Note
 			this.noteItems = noteItems;
 		}
 	}
+
+//	public void createNoteTextForSharing()
+//	{
+//		StringBuilder sb = new StringBuilder();
+//
+//		sb.append("<Note>");
+//		sb.append("<NoteId>")
+//	}
 }

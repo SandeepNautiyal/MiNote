@@ -133,6 +133,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		super.onCreate(savedInstanceState);
 
+		if(MiNoteParameters.getApplicationContext() == null)
+		{
+			MiNoteParameters.setApplicationContext(getApplicationContext());
+		}
+
 		scrollView = (RelativeLayout) getLayoutInflater().inflate(
 				R.layout.activity_notes_layout_manager, null);
 
@@ -140,11 +145,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		linearLayoutsCount = getNumberOfLinearLayouts();
 
-        System.out.println("linearLayoutsCount ="+linearLayoutsCount);
-
 		fillLinearLayoutList();
-
-        System.out.println("linearLayouts =" + linearLayouts);
 
         NotesManager.getInstance().deleteAllNotes();
 
@@ -247,23 +248,23 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		    case R.id.event :
 		    	applyFilter(EVENT_FILTER);
 		    	return true;
-		    case R.id.export_notes :
-			
-			    try 
-			    {
-				    MiNoteNotesExporter.export();
-			    } 
-			    catch (MiNoteBaseException e)
-			    {
-				// TODO Auto-generated catch block
-				    e.printStackTrace();
-			    }
-				
-			    return true;
-	
-		    case R.id.import_notes : 
-				
-		    	List<TextNote> notes;
+//		    case R.id.export_notes :
+//
+//			    try
+//			    {
+//				    MiNoteNotesExporter.export();
+//			    }
+//			    catch (MiNoteBaseException e)
+//			    {
+//				// TODO Auto-generated catch block
+//				    e.printStackTrace();
+//			    }
+//
+//			    return true;
+//
+//		    case R.id.import_notes :
+//
+//		    	List<TextNote> notes;
 
 ////				try
 ////				{
@@ -279,7 +280,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 ////					e.printStackTrace();
 ////				}
 	//
-		    	return true;
+//		    	return true;
 			case R.id.actionSearch :
 				return true;
 
@@ -450,7 +451,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			if (fragment != null) 
 			{
 				boolean isTextNote = note.getType() != Note.EVENT_NOTE;
-				
+
 				createActivityLayout(fragment, note.getId(), isTextNote);
 			}
 		}

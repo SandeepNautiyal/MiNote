@@ -616,11 +616,11 @@ int id action_bar_spinner 0x7f0d0001
 int id action_bar_subtitle 0x7f0d003b
 int id action_bar_title 0x7f0d003a
 int id action_clear_all_notes 0x7f0d00c7
-int id action_click_photo 0x7f0d00d3
+int id action_click_photo 0x7f0d00d1
 int id action_context_bar 0x7f0d0058
-int id action_copy_notes 0x7f0d00d2
+int id action_copy_notes 0x7f0d00d0
 int id action_create_paragraph_view 0x7f0d00c4
-int id action_discard_notes 0x7f0d00d1
+int id action_discard_notes 0x7f0d00cf
 int id action_divider 0x7f0d00a7
 int id action_exit_professional_pa_application 0x7f0d00c8
 int id action_filter 0x7f0d00ca
@@ -629,7 +629,7 @@ int id action_menu_presenter 0x7f0d0003
 int id action_mode_bar 0x7f0d0054
 int id action_mode_bar_stub 0x7f0d0053
 int id action_mode_close_button 0x7f0d003c
-int id action_save_paragraph_note 0x7f0d00d4
+int id action_save_paragraph_note 0x7f0d00d2
 int id action_search 0x7f0d00c5
 int id action_settings 0x7f0d00c6
 int id activity_chooser_view_content 0x7f0d003d
@@ -702,7 +702,6 @@ int id eventsModificationToTimeTextView 0x7f0d008e
 int id exit 0x7f0d00c1
 int id expand_activities_button 0x7f0d003e
 int id expanded_menu 0x7f0d004e
-int id export_notes 0x7f0d00cf
 int id fragmentItemEditText 0x7f0d0092
 int id fragmentItemImageView 0x7f0d0091
 int id friendsEmailIdEditText 0x7f0d00b4
@@ -716,7 +715,6 @@ int id icon 0x7f0d0042
 int id ifRoom 0x7f0d001f
 int id image 0x7f0d003f
 int id imageNoteFrameLayout 0x7f0d0071
-int id import_notes 0x7f0d00d0
 int id info 0x7f0d00ae
 int id itemDelete 0x7f0d00bd
 int id itemEdit 0x7f0d00b8

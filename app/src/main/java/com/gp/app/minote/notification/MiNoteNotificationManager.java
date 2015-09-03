@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.RingtoneManager;
@@ -19,6 +20,7 @@ import com.gp.app.minote.data.NoteItem;
 import com.gp.app.minote.data.TextNote;
 import com.gp.app.minote.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.minote.notes.database.NotesDBManager;
+import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.notification.service.AlarmRequestCreator;
 import com.gp.app.minote.util.MiNoteParameters;
 import com.gp.app.minote.util.MiNoteUtil;
@@ -70,7 +72,7 @@ public class MiNoteNotificationManager
 		}
 		else
 		{
-			Intent notificationIntent =new Intent(context, NotesLayoutManagerActivity.class);
+			Intent notificationIntent = new Intent(context, NotesLayoutManagerActivity.class);
 
 			notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
 					Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -98,89 +100,39 @@ public class MiNoteNotificationManager
 
 	public static void createNotifications(String notificationMessage)
 	{
-		System.out.println("createNotifications -> notificationMessage="+notificationMessage);
-
 		Context context = MiNoteParameters.getApplicationContext();
 
-        StringTokenizer tokenizer = new StringTokenizer(notificationMessage, "$$");
+		List<Note> notes = MiNoteUtil.createNotes(notificationMessage);
 
-        List<String> tokens = new ArrayList<>();
-
-        while(tokenizer.hasMoreTokens())
+        for(int i = 0; i < notes.size(); i++)
         {
-            String token = tokenizer.nextToken();
+            Note note = notes.get(i);
 
-            System.out.println("createNotifications -> token="+token);
+            System.out.println("createNotifications -> note ="+note);
 
-            tokens.add(token);
+            if(note != null)
+            {
+                if(note.getType() == Note.EVENT_NOTE)
+                {
+                    Event event = (Event)note;
+
+                    CalendarDBManager.getInstance().saveEventToDatabase(event);
+
+                    createNotificationForEvent(event);
+                }
+                else
+                {
+                    TextNote textNote = (TextNote)note;
+
+                    if(textNote.getNoteItems().size() > 0)
+                    {
+                        NotesDBManager.getInstance().saveNotes(Arrays.asList(textNote));
+
+                        createNotificationForNote(textNote);
+                    }
+                }
+            }
         }
-
-		System.out.println("createNotifications -> tokens="+ tokens);
-
-		Map<String, List<String>> noteTokens = new HashMap<String, List<String>>();
-
-        for(int i = 0; i < tokens.size(); i++)
-        {
-            String token = tokens.get(i);
-
-			tokenizer = new StringTokenizer(token, "=");
-
-			List<String> attributes = new ArrayList<>();
-
-			while(tokenizer.hasMoreTokens())
-			{
-				String value = tokenizer.nextToken();
-
-				attributes.add(value);
-			}
-
-            List<String> noteItemAttributes = Arrays.asList(attributes.get(1).split(";"));
-
-            System.out.println("noteItemAttributes ="+noteItemAttributes);
-
-            noteTokens.put(attributes.get(0), noteItemAttributes);
-        }
-
-
-		if(noteTokens.get("Event").equals("true"))
-		{
-			String eventName = noteTokens.get("EventName").get(0);
-
-			String eventLocation = noteTokens.get("EventLocation").get(0);
-
-			String eventStartDate = noteTokens.get("EventStartDate").get(0);
-
-			String eventStartTime = noteTokens.get("EventStartTime").get(0);
-
-			String eventEndDate = noteTokens.get("EventEndDate").get(0);
-
-			String eventEndTime = noteTokens.get("EventEndTime").get(0);
-
-			Event event = new Event(eventName, eventLocation, eventStartDate, eventStartTime, eventEndDate, eventEndTime);
-
-			CalendarDBManager.getInstance().saveEventToDatabase(event);
-
-			createNotificationForEvent(event);
-		}
-		else
-		{
-			List<String> noteItemsText = noteTokens.get("NoteText");
-
-			TextNote note = new TextNote();
-
-			for(int i = 0, size = noteItemsText == null ? 0 : noteItemsText.size(); i < size; i++)
-			{
-				String noteItemText = noteItemsText.get(i);
-
-				NoteItem item = new NoteItem(noteItemText);
-
-				note.addNoteItem(item);
-			}
-
-			NotesDBManager.getInstance().saveNotes(Arrays.asList(note));
-
-			createNotificationForNote(note);
-		}
 	}
 
 	private static void createNotificationForNote(TextNote note)

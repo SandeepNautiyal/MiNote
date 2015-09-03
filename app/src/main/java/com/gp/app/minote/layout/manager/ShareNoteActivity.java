@@ -34,8 +34,6 @@ public class ShareNoteActivity extends Activity
 
         message = getIntent().getStringExtra("MESSAGE");
 
-        System.out.println("onCreate -> message="+message);
-
         setContentView(R.layout.share_note_activity);
     }
 
@@ -110,10 +108,8 @@ public class ShareNoteActivity extends Activity
         }
 
         @Override
-        protected void onPostExecute(String msg) {
-            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-            Logger.getLogger("REGISTRATION").log(Level.INFO, msg);
-
+        protected void onPostExecute(String msg)
+        {
             startNotesActivity();
         }
     }

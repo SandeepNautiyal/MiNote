@@ -45,6 +45,9 @@ public class GcmIntentService extends IntentService {
 
     protected void createNotification(String message)
     {
-        MiNoteNotificationManager.createNotifications(message);
+        if(message != null)
+        {
+            MiNoteNotificationManager.createNotifications(message);
+        }
     }
 }

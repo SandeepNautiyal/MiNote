@@ -7,11 +7,13 @@
     tools:context="com.gp.app.minote.layout.manager.ShareNoteActivity">
 
     <EditText android:id="@+id/friendsEmailIdEditText"
-        android:text="@string/enter_email_id"
+        android:hint="@string/enter_email_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:autoText="true"/>
 
     <Button android:id="@+id/submitNotifyCommand"
+        android:text="Share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/friendsEmailIdEditText"

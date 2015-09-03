@@ -2062,11 +2062,11 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f0d003b;
         public static final int action_bar_title=0x7f0d003a;
         public static final int action_clear_all_notes=0x7f0d00c7;
-        public static final int action_click_photo=0x7f0d00d3;
+        public static final int action_click_photo=0x7f0d00d1;
         public static final int action_context_bar=0x7f0d0058;
-        public static final int action_copy_notes=0x7f0d00d2;
+        public static final int action_copy_notes=0x7f0d00d0;
         public static final int action_create_paragraph_view=0x7f0d00c4;
-        public static final int action_discard_notes=0x7f0d00d1;
+        public static final int action_discard_notes=0x7f0d00cf;
         public static final int action_divider=0x7f0d00a7;
         public static final int action_exit_professional_pa_application=0x7f0d00c8;
         public static final int action_filter=0x7f0d00ca;
@@ -2075,7 +2075,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0d0054;
         public static final int action_mode_bar_stub=0x7f0d0053;
         public static final int action_mode_close_button=0x7f0d003c;
-        public static final int action_save_paragraph_note=0x7f0d00d4;
+        public static final int action_save_paragraph_note=0x7f0d00d2;
         public static final int action_search=0x7f0d00c5;
         public static final int action_settings=0x7f0d00c6;
         public static final int activity_chooser_view_content=0x7f0d003d;
@@ -2148,7 +2148,6 @@ containing a value of this type.
         public static final int exit=0x7f0d00c1;
         public static final int expand_activities_button=0x7f0d003e;
         public static final int expanded_menu=0x7f0d004e;
-        public static final int export_notes=0x7f0d00cf;
         public static final int fragmentItemEditText=0x7f0d0092;
         public static final int fragmentItemImageView=0x7f0d0091;
         public static final int friendsEmailIdEditText=0x7f0d00b4;
@@ -2162,7 +2161,6 @@ containing a value of this type.
         public static final int ifRoom=0x7f0d001f;
         public static final int image=0x7f0d003f;
         public static final int imageNoteFrameLayout=0x7f0d0071;
-        public static final int import_notes=0x7f0d00d0;
         public static final int info=0x7f0d00ae;
         public static final int itemDelete=0x7f0d00bd;
         public static final int itemEdit=0x7f0d00b8;

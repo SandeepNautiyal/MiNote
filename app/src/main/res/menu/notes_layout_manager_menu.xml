@@ -46,7 +46,7 @@
         android:showAsAction="never"
         android:title="@string/edit_emailId"/>
 
-    <item
+    <!--<item
         android:id="@+id/export_notes"
         android:orderInCategory="100"
         android:showAsAction="never"
@@ -55,7 +55,7 @@
         android:id="@+id/import_notes"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/import_notes"/>
+        android:title="@string/import_notes"/> -->
     <item
         android:id="@+id/action_clear_all_notes"
         android:orderInCategory="100"

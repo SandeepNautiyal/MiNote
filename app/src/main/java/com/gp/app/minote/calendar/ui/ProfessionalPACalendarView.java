@@ -26,8 +26,8 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class ProfessionalPACalendarView extends RelativeLayout implements OnItemClickListener,
-	OnClickListener, DBChangeListener{
-	
+	OnClickListener, DBChangeListener
+{
 	private Context context;
 	private OnDayClickListener dayListener;
 	private GridView calendar;
