@@ -56,8 +56,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-//TODO create notes for calendar events also
-public class NotesLayoutManagerActivity extends Activity implements ColourPickerChangeListener, OnQueryTextListener 
+public class NotesLayoutManagerActivity extends Activity implements ColourPickerChangeListener, OnQueryTextListener
 {
 	private static final String NUMBER_OF_LINEAR_LAYOUTS = "NUMBER_OF_LINEAR_LAYOUTS";
 
@@ -145,7 +144,9 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		linearLayoutsCount = getNumberOfLinearLayouts();
 
-		fillLinearLayoutList();
+        System.out.println("onCreate -> linearLayoutsCount="+linearLayoutsCount);
+
+        fillLinearLayoutList();
 
         NotesManager.getInstance().deleteAllNotes();
 
@@ -167,6 +168,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, (byte) linearLayoutsCount);
 
+        System.out.println("onSaveInstanceState -> linearLayoutsCount="+linearLayoutsCount);
+
 		outState.putByte(APPLIED_FILTER, currentAppliedFilter);
 		
 		outState.putIntegerArrayList(SELECTED_NOTE_IDS, new ArrayList<>(NotesOperationManager.getInstance().getSelectedNoteIds()));
@@ -179,9 +182,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
         linearLayoutsCount =  savedInstanceState
 				.getByte(NUMBER_OF_LINEAR_LAYOUTS);
-		
-		updateNumberOfLinearLayoutsOnScreenChange(getResources()
-				.getConfiguration(), linearLayoutsCount);
+
+        System.out.println("onRestoreInstanceState -> linearLayoutsCount="+linearLayoutsCount);
+
+        updateNumberOfLinearLayoutsOnScreenChange(getResources()
+                .getConfiguration());
 
 		currentAppliedFilter =  savedInstanceState
 				.getByte(APPLIED_FILTER);
@@ -262,25 +267,17 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 //
 //			    return true;
 //
-//		    case R.id.import_notes :
-//
-//		    	List<TextNote> notes;
+		    case R.id.import_notes :
 
-////				try
-////				{
-////					//TODO improve import functionality hampered
-//////					notes = NotesDBManager.getInstance().readNotes(true);
-	//////
-//////					ProfessionalPAParameters.getProfessionalPANotesWriter()
-//////							.writeNotes(notes);
-////				} 
-////				catch (ProfessionalPABaseException e) 
-////				{
-////					// TODO Auto-generated catch block
-////					e.printStackTrace();
-////				}
-	//
-//		    	return true;
+		    	View view = getLayoutInflater().inflate(R.layout.event_gui, null);
+
+				Dialog dialog = new Dialog(this);
+
+				dialog.setContentView(view);
+
+				dialog.show();;
+
+		    	return true;
 			case R.id.actionSearch :
 				return true;
 
@@ -371,20 +368,18 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
 	}
 
-	private void updateNumberOfLinearLayoutsOnScreenChange(Configuration newConfig, int numberOfLinearLayouts) 
+	private void updateNumberOfLinearLayoutsOnScreenChange(Configuration newConfig)
 	{
-		int noOfLinearLayout = numberOfLinearLayouts;
-		
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) 
 		{
-			noOfLinearLayout = numberOfLinearLayouts + 1;
+			linearLayoutsCount++;
 		}
 		else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
 		{
-			noOfLinearLayout = numberOfLinearLayouts - 1;
+			linearLayoutsCount--;
 		}
 
-        this.linearLayoutsCount = numberOfLinearLayouts;
+        System.out.println("updateNumberOfLinearLayoutsOnScreenChange -> linearLayoutsCount="+linearLayoutsCount);
 	}
 
 	@Override
@@ -510,16 +505,29 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		} else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
 			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_NORMAL_SCREEN_PORTRAIT;
-			} else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                System.out.println("getNumberOfLinearLayouts normal portrait -> numberOfLinearLayouts="+numberOfLinearLayouts);
+
+            } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_NORMAL_SCREEN_LANDSCAPE;
-			}
+                System.out.println("getNumberOfLinearLayouts normal lanscapre -> numberOfLinearLayouts="+numberOfLinearLayouts);
+
+            }
 		} else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
 			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_SMALL_SCREEN_PORTRAIT;
+
+                System.out.println("getNumberOfLinearLayouts small portrait -> numberOfLinearLayouts="+numberOfLinearLayouts);
+
+                numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_SMALL_SCREEN_PORTRAIT;
 			} else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 				numberOfLinearLayouts = NUMBER_OF_LINEAR_LAYOUT_FOR_SMALL_SCREEN_LANDSCAPE;
-			}
-		} else {
+
+                System.out.println("getNumberOfLinearLayouts small landscape -> numberOfLinearLayouts="+numberOfLinearLayouts);
+
+            }
+		}
+        else
+        {
+
 		}
 
 		return numberOfLinearLayouts;
@@ -550,33 +558,32 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		LinearLayoutOnClickListener clickListener = new LinearLayoutOnClickListener();
 
 		linearLayouts.clear();
-		
+
 		switch (linearLayoutsCount)
 		{
 		    case 5:
 			    layout = (LinearLayout) findViewById(R.id.linearLayout5);
-			    layout.setOnClickListener(clickListener);
-			    linearLayouts.add(layout);
+                layout.setOnClickListener(clickListener);
+                linearLayouts.add(layout);
 		    case 4:
 			    layout = (LinearLayout) findViewById(R.id.linearLayout4);
-			    layout.setOnClickListener(clickListener);
-			    linearLayouts.add(layout);
+                layout.setOnClickListener(clickListener);
+                linearLayouts.add(layout);
 		    case 3:
 			    layout = (LinearLayout) findViewById(R.id.linearLayout3);
-			    layout.setOnClickListener(clickListener);
-			    linearLayouts.add(layout);
+                layout.setOnClickListener(clickListener);
+                linearLayouts.add(layout);
 		    case 2:
 			    layout = (LinearLayout) findViewById(R.id.linearLayout2);
-			    layout.setOnClickListener(clickListener);
-			    linearLayouts.add(layout);
+                layout.setOnClickListener(clickListener);
+                linearLayouts.add(layout);
 		    case 1:
 			    layout = (LinearLayout) findViewById(R.id.linearLayout1);
-			    layout.setOnClickListener(clickListener);
-			    linearLayouts.add(layout);
+                layout.setOnClickListener(clickListener);
+                linearLayouts.add(layout);
 			break;
 		}
-
-	}
+    }
 
 	@Override
 	public void onBackPressed()
@@ -594,8 +601,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		noteCreatorFrameLayout.setBackgroundResource(R.drawable.day_selected);
 		
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
-		
-		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, scrollView.getId());
+
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, scrollView.getId());
 		
 		params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, scrollView.getId());
 		
@@ -1082,7 +1089,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
             String query = intent.getStringExtra(SearchManager.QUERY);
         }
     }
-    
+
     @Override
 	public boolean onQueryTextChange(String query) 
 	{

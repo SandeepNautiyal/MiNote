@@ -2,15 +2,22 @@ package com.gp.app.minote.gcm;
 
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.gp.app.minote.backend.messaging.Messaging;
+import com.gp.app.minote.layout.manager.NotesLayoutManagerActivity;
 import com.gp.app.minote.notification.MiNoteNotificationManager;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,7 +54,18 @@ public class GcmIntentService extends IntentService {
     {
         if(message != null)
         {
-            MiNoteNotificationManager.createNotifications(message);
+            new NotificationCreatorAsyncTask().execute(message);
+        }
+    }
+
+    class NotificationCreatorAsyncTask extends AsyncTask<String, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(String... params)
+        {
+            MiNoteNotificationManager.createNotifications(params[0]);
+
+            return null;
         }
     }
 }

@@ -108,8 +108,6 @@ public class MiNoteNotificationManager
         {
             Note note = notes.get(i);
 
-            System.out.println("createNotifications -> note ="+note);
-
             if(note != null)
             {
                 if(note.getType() == Note.EVENT_NOTE)
