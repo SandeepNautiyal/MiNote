@@ -3,9 +3,13 @@ package com.gp.app.minote.calendar.ui;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -36,17 +40,25 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 	private TextView month;
 	private RelativeLayout base;
 	private ImageView next,prev;
-	
+	private boolean isWithoutEvents = false;
+
 	public interface OnDayClickListener
 	{
 		public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, DateInformation day);
 	}
 
-	public ProfessionalPACalendarView(Context context) 
+	public ProfessionalPACalendarView(Context context, boolean isWithoutEvents)
 	{
 		super(context);
 		this.context = context;
-		CalendarDBManager.getInstance().addDataChangeListener(this);
+
+		if(!isWithoutEvents)
+		{
+			CalendarDBManager.getInstance().addDataChangeListener(this);
+		}
+
+		this.isWithoutEvents = isWithoutEvents;
+
 		init();
 	}
 	
@@ -68,15 +80,28 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 	{
 		cal = Calendar.getInstance();
 		base = new RelativeLayout(context);
-		base.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
-		base.setMinimumHeight(50);
-		
+        base.setBackgroundColor(Color.rgb(123,231,123));
+		base.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		base.setMinimumHeight(30);
 		base.setId(4);
 		
 		//Previous month image "<"
+
+        RelativeLayout layout = new RelativeLayout(context);
+
 		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		params.leftMargin = 16;
-		params.topMargin = 50;
+
+		if(!isWithoutEvents)
+		{
+			params.leftMargin = 16;
+			params.topMargin = 50;
+		}
+		else
+		{
+			params.leftMargin = 10;
+			params.topMargin = 30;
+		}
+
 		params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 		params.addRule(RelativeLayout.CENTER_VERTICAL);
 		prev = new ImageView(context);
@@ -84,7 +109,7 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 		prev.setLayoutParams(params);
 		prev.setImageResource(R.drawable.navigation_previous_item);
 		prev.setOnClickListener(this);
-		base.addView(prev);
+        layout.addView(prev);
 		
 		//Month name at the top
 		params = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
@@ -94,14 +119,29 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 		month.setId(2);
 		month.setLayoutParams(params);
 		month.setTextAppearance(context, android.R.attr.textAppearanceLarge);
-		month.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())+" "+cal.get(Calendar.YEAR));
-		month.setTextSize(25);
-		base.addView(month);
+		month.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + cal.get(Calendar.YEAR));
+		if(!isWithoutEvents)
+		{
+			month.setTextSize(25);
+		}
+		else
+		{
+            month.setTextSize(20);
+		}
+        layout.addView(month);
 		
 		//Next month image ">"
 		params = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		params.rightMargin = 16;
-		params.topMargin = 50;
+		if(!isWithoutEvents)
+		{
+			params.leftMargin = 16;
+			params.topMargin = 50;
+		}
+		else
+		{
+			params.leftMargin = 10;
+			params.topMargin = 30;
+		}
 		params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 		params.addRule(RelativeLayout.CENTER_VERTICAL);
 		next = new ImageView(context);
@@ -109,27 +149,52 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 		next.setLayoutParams(params);
 		next.setId(3);
 		next.setOnClickListener(this);
-		
-		base.addView(next);
+
+        layout.addView(next);
+
+        layout.setBackgroundColor(Color.rgb(120, 100, 255));
+
+        base.addView(layout);
 		
 		addView(base);
 		
 		//Days and name of days "Sun, Mon  1,2"
 		params = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		params.bottomMargin = 20;
+		if(!isWithoutEvents)
+		{
+			params.bottomMargin = 20;
+		}
+		else
+		{
+			params.bottomMargin = 5;
+
+		}
 		params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		params.addRule(RelativeLayout.BELOW, base.getId());
 		
 		calendar = new GridView(context);
+        calendar.setOnTouchListener(new OnSwipeTouchListener(context));
 		calendar.setLayoutParams(params);
-		calendar.setVerticalSpacing(4);
-		calendar.setHorizontalSpacing(4);
+
+		if(!isWithoutEvents)
+		{
+			calendar.setVerticalSpacing(4);
+			calendar.setHorizontalSpacing(4);
+		}
+		else
+		{
+			calendar.setVerticalSpacing(2);
+			calendar.setHorizontalSpacing(2);
+		}
+
 		calendar.setNumColumns(7);
+
+
 		calendar.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
 		calendar.setDrawSelectorOnTop(true);
 		
-		mAdapter = new CalendarAdapter(context,cal);
+		mAdapter = new CalendarAdapter(context,cal, isWithoutEvents);
 		calendar.setAdapter(mAdapter);
 		
 		addView(calendar);
@@ -334,4 +399,59 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 	{
 		mAdapter.notifyDataSetChanged();
 	}
+
+    public class OnSwipeTouchListener implements OnTouchListener {
+
+        private final GestureDetector gestureDetector;
+
+        public OnSwipeTouchListener(Context context) {
+            gestureDetector = new GestureDetector(context, new GestureListener());
+        }
+
+        public void onSwipeLeft() {
+            System.out.println("swipe left");
+        }
+
+        public void onSwipeRight() {
+            System.out.println("swipe right");
+        }
+
+        public boolean onTouch(View v, MotionEvent event) {
+            return gestureDetector.onTouchEvent(event);
+        }
+
+        private final class GestureListener extends GestureDetector.SimpleOnGestureListener {
+
+            private static final int SWIPE_DISTANCE_THRESHOLD = 100;
+            private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                float distanceX = e2.getX() - e1.getX();
+                float distanceY = e2.getY() - e1.getY();
+
+                if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > SWIPE_DISTANCE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                    if (distanceX > 0)
+                        onSwipeRight();
+                    else
+                        onSwipeLeft();
+                    return true;
+                }
+                return false;
+            }
+
+            public void onSwipeRight()
+            {
+                previousMonth();
+            }
+            public void onSwipeLeft() {
+                nextMonth();
+            }
+        }
+    }
 }

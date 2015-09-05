@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dayRelativeLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:minHeight="@dimen/min_cell_height"
     android:minWidth="@dimen/min_cell_width"
     android:background="@drawable/layout_border" >
@@ -25,6 +25,5 @@
         android:layout_below="@+id/dayTextView1"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="31"
         android:textAppearance="?android:attr/textAppearanceSmall"/>
 </RelativeLayout>

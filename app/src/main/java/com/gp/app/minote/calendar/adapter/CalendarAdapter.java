@@ -1,6 +1,7 @@
 package com.gp.app.minote.calendar.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,14 +32,15 @@ public class CalendarAdapter extends BaseAdapter
 	private Context context;
 	private Calendar cal;
 	private String[] days;
-	
+	private boolean isWithoutEvent = false;
 	ArrayList<DateInformation> dateList = new ArrayList<DateInformation>();
 	
-	public CalendarAdapter(Context context, Calendar cal)
+	public CalendarAdapter(Context context, Calendar cal, boolean isWithoutEvent)
 	{
 		this.cal = cal;
 		this.context = context;
 		cal.set(Calendar.DAY_OF_MONTH, 1);
+		this.isWithoutEvent = isWithoutEvent;
 		refreshDays();
 	}
 
@@ -90,7 +92,7 @@ public class CalendarAdapter extends BaseAdapter
 		if(position >= 0 && position < 7){
 			v = vi.inflate(R.layout.day_of_week, null);
 			TextView day = (TextView)v.findViewById(R.id.dayTextView2);
-			
+
 			if(position == 0){
 				day.setText(R.string.sunday);
 			}else if(position == 1){
@@ -118,30 +120,38 @@ public class CalendarAdapter extends BaseAdapter
 	        final int day = date.getDay();
 			final int month = date.getMonth()+1;
 			final int year = date.getYear();
-			
+
 			String formattedDate = MiNoteUtil.pad(date.getDay())+"/"+MiNoteUtil.pad(date.getMonth()+1)+"/"+MiNoteUtil.pad(date.getYear());
-			
-			List<Event> events = CalendarDBManager.getInstance().readEvents(formattedDate);
-			
-			int numberOfEvents = events.size();
-			
-			if(numberOfEvents > 0)
+
+			TextView dayTextView1 = (TextView)v.findViewById(R.id.dayTextView1);
+
+			if(!isWithoutEvent)
 			{
-				TextView dayTextView = (TextView)v.findViewById(R.id.dayTextView1);
-				
-				dayTextView.setText(String.valueOf(numberOfEvents));
-				
-				dayTextView.setVisibility(View.VISIBLE);
-				
-				dayTextView.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) 
-					{
-						new EventModificationGUI().createEventModificationList(context, day, month, year);
-					}
-				});
+				List<Event> events = CalendarDBManager.getInstance().readEvents(formattedDate);
+
+				int numberOfEvents = events.size();
+
+				if(numberOfEvents > 0)
+				{
+					dayTextView1.setText(String.valueOf(numberOfEvents));
+
+					dayTextView1.setVisibility(View.VISIBLE);
+
+					dayTextView1.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v)
+						{
+							new EventModificationGUI().createEventModificationList(context, day, month, year);
+						}
+					});
+				}
 			}
+			else
+			{
+				dayTextView1.setVisibility(View.GONE);
+			}
+
 			
 			final TextView dayTextView = (TextView)v.findViewById(R.id.dayTextView2);
 
@@ -164,19 +174,31 @@ public class CalendarAdapter extends BaseAdapter
 			{
 				dayTextView.setVisibility(View.VISIBLE);
 				dayTextView.setText(String.valueOf(day));
-				dayTextView.setOnClickListener(new OnClickListener() 
+
+				if(!isWithoutEvent)
 				{
-					@Override
-					public void onClick(View v) 
-					{
-						dayTextView.setBackgroundResource(R.drawable.today);
-						
-						createPopUpMenuForDate(dayTextView, month, year, day);
-					}
-				});
+					dayTextView.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							dayTextView.setBackgroundResource(R.drawable.today);
+
+							createPopUpMenuForDate(dayTextView, month, year, day);
+						}
+					});
+				}
+				else
+				{
+					//TODO height to be read from drawable file
+					dayTextView.setBackgroundResource(R.drawable.calendar_readonly_edittext);
+
+					dayRelativeLayout.setMinimumHeight(0);
+
+					dayRelativeLayout.setMinimumWidth(0);
+
+				}
 			}
 		}
-		
+
 		return v;
 	}
 	
@@ -223,9 +245,7 @@ public class CalendarAdapter extends BaseAdapter
 	        }
 	    	j=1; // sunday => 1, monday => 7
 	    }
-        
-        System.out.println("refresh days -> daysEventsList1 = "+dateList.size());
-        
+
         if(j>0 && dateList.size() > 0 && j != 1)
         {
         	dateList.remove(j-1);

@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -35,8 +36,6 @@ import com.gp.app.minote.data.Event;
 import com.gp.app.minote.data.Note;
 import com.gp.app.minote.data.NoteItem;
 import com.gp.app.minote.data.TextNote;
-import com.gp.app.minote.exceptions.MiNoteBaseException;
-import com.gp.app.minote.export.MiNoteNotesExporter;
 import com.gp.app.minote.interfaces.MiNoteConstants;
 import com.gp.app.minote.listeners.NotesActionModeCallback;
 import com.gp.app.minote.notes.database.NotesDBManager;
@@ -269,13 +268,20 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 //
 		    case R.id.import_notes :
 
-		    	View view = getLayoutInflater().inflate(R.layout.event_gui, null);
+//		    	View view = getLayoutInflater().inflate(R.layout.event_gui, null);
+//
+//				Dialog dialog = new Dialog(this);
+//
+//				dialog.setContentView(view);
+//
+//				dialog.show();;
 
-				Dialog dialog = new Dialog(this);
-
-				dialog.setContentView(view);
-
-				dialog.show();;
+                Dialog dialog = new Dialog(this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                ProfessionalPACalendarView view = new ProfessionalPACalendarView(this, true);
+                dialog.setContentView(view,  new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                dialog.setCancelable(true);
+                dialog.show();
 
 		    	return true;
 			case R.id.actionSearch :
@@ -342,7 +348,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		Dialog dialog = new Dialog(this);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		dialog.setContentView(new ProfessionalPACalendarView(this));
+		dialog.setContentView(new ProfessionalPACalendarView(this, false));
 		dialog.setCancelable(true);
 		dialog.show();
 	}
