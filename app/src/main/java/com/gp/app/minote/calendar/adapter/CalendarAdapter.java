@@ -15,13 +15,16 @@ import android.widget.TextView;
 
 import com.gp.app.minote.R;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
+import com.gp.app.minote.calendar.ui.CalendarGestureListener;
 import com.gp.app.minote.calendar.ui.EventCreationGUI;
 import com.gp.app.minote.calendar.ui.EventModificationGUI;
 import com.gp.app.minote.data.Event;
 import com.gp.app.minote.util.MiNoteUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -31,27 +34,26 @@ public class CalendarAdapter extends BaseAdapter
 	private static final int GRIDS_OCCUPIED_BY_DAYS_NAMES = 7;
 	private Context context;
 	private Calendar cal;
-	private String[] days;
 	private boolean isWithoutEvent = false;
-	ArrayList<DateInformation> dateList = new ArrayList<DateInformation>();
-	
+	List<DateInformation> dateList = new ArrayList<DateInformation>();
+
 	public CalendarAdapter(Context context, Calendar cal, boolean isWithoutEvent)
 	{
 		this.cal = cal;
 		this.context = context;
 		cal.set(Calendar.DAY_OF_MONTH, 1);
 		this.isWithoutEvent = isWithoutEvent;
-		refreshDays();
+		refreshDays(cal.get(Calendar.DATE), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR));
 	}
 
 	@Override
-	public int getCount() 
+	public int getCount()
 	{
-		return days.length;
+		return dateList.size();
 	}
 
 	@Override
-	public Object getItem(int position) 
+	public Object getItem(int position)
 	{
 		return dateList.get(position);
 	}
@@ -61,31 +63,31 @@ public class CalendarAdapter extends BaseAdapter
 	{
 		return 0;
 	}
-	
+
 	public int getPrevMonth()
 	{
 		if(cal.get(Calendar.MONTH) == cal.getActualMinimum(Calendar.MONTH))
 		{
-			cal.set(Calendar.YEAR, cal.get(Calendar.YEAR-1));
+			cal.set(Calendar.YEAR, cal.get(Calendar.YEAR -1));
 		}
-		
+
 		int month = cal.get(Calendar.MONTH);
-		
+
 		if(month == 0)
 		{
 			return month = 11;
 		}
-		
+
 		return month-1;
 	}
-	
+
 	public int getMonth()
 	{
 		return cal.get(Calendar.MONTH);
 	}
 
 	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) 
+	public View getView(final int position, View convertView, ViewGroup parent)
 	{
 		View v = convertView;
 		LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -112,11 +114,11 @@ public class CalendarAdapter extends BaseAdapter
 		else
 		{
 	        v = vi.inflate(R.layout.day_view, null);
-			
+
 	        Calendar cal = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
-			
+
 	        DateInformation date = dateList.get(position);
-			
+
 	        final int day = date.getDay();
 			final int month = date.getMonth()+1;
 			final int year = date.getYear();
@@ -152,20 +154,20 @@ public class CalendarAdapter extends BaseAdapter
 				dayTextView1.setVisibility(View.GONE);
 			}
 
-			
+
 			final TextView dayTextView = (TextView)v.findViewById(R.id.dayTextView2);
 
 			if(date.getYear() == cal.get(Calendar.YEAR) && date.getMonth() == cal.get(Calendar.MONTH) && date.getDay() == cal.get(Calendar.DAY_OF_MONTH))
 			{
 				dayTextView.setBackgroundResource(R.drawable.today);
 			}
-			
+
 			dayTextView.setVisibility(View.VISIBLE);
-			
+
 			RelativeLayout dayRelativeLayout = (RelativeLayout)v.findViewById(R.id.dayRelativeLayout);
-			
+
 			dayRelativeLayout.setVisibility(View.VISIBLE);
-			
+
 			if(date.getDay() == 0)
 			{
 				dayRelativeLayout.setVisibility(View.GONE);
@@ -201,76 +203,92 @@ public class CalendarAdapter extends BaseAdapter
 
 		return v;
 	}
-	
-	public void refreshDays()
+
+	public void refreshDays(int day, int month, int year)
     {
     	// clear items
     	dateList.clear();
-    	
-    	int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH)+GRIDS_OCCUPIED_BY_DAYS_NAMES;
-        int firstDay = (int)cal.get(Calendar.DAY_OF_WEEK);
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        TimeZone timeZone = TimeZone.getDefault();
-        
-        // figure size of the array
-        if(firstDay==1)
-        {
-        	days = new String[lastDay];
-        }
-        else 
-        {
-        	days = new String[lastDay+firstDay-1];
-        }
-        
-        int j=0;
-        
-        // populate empty days before first real day
-        if(firstDay>1) 
-        {
-	        for(j=0; j< firstDay+GRIDS_OCCUPIED_BY_DAYS_NAMES; j++) 
-	        {
-	        	days[j] = "";
-	        	DateInformation d = new DateInformation(0,0,0);
-	        	dateList.add(d);
-	        }
-        }
-	    else 
-	    {
-	    	for(j=0;j<7;j++) 
-	    	{
-	        	days[j] = "";
-	        	DateInformation d = new DateInformation(0,0,0);
-	        	dateList.add(d);
-	        }
-	    	j=1; // sunday => 1, monday => 7
-	    }
 
-        if(j>0 && dateList.size() > 0 && j != 1)
+        int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int firstDay = (int)cal.get(Calendar.DAY_OF_WEEK);
+
+
+        System.out.println("refreshTable -> year=" + year + " month=" + month +" day="+day+ " firstDay=" + firstDay + " lastDay=" + lastDay);
+
+        Calendar previousMonthCalendar = Calendar.getInstance();
+
+        int previousYear = year;
+        int previousMonth = month;
+
+        if(month == 1)
         {
-        	dateList.remove(j-1);
+            previousYear = previousYear - 1;
+
+            previousMonth = 11;
         }
-        
-     // populate days
-        int dayNumber = 1;
-        for(int i=j-1;i<days.length;i++) 
+        else
         {
-        	DateInformation dayEvents = new DateInformation(dayNumber,year,month);
-        	
-        	Calendar cTemp = Calendar.getInstance();
-        	cTemp.set(year, month, dayNumber);
-        	days[i] = ""+dayNumber;
-        	dayNumber++;
-        	dateList.add(dayEvents);
+            previousMonth--;
+        }
+
+        previousMonthCalendar.set(previousYear, previousMonth, 1);
+        int lastDayOfPreviousMonth = previousMonthCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        System.out.println("refreshTable -> previousMonthYear="+previousYear+" previousMonth="+previousMonth+" lastDayOfPreviousMonth="+lastDayOfPreviousMonth);
+
+        Calendar nextMonthCalendar = Calendar.getInstance();
+        nextMonthCalendar.add(month, 1);
+        int nextMonthYear = nextMonthCalendar.get(Calendar.YEAR);
+        int nextMonth = nextMonthCalendar.get(Calendar.MONTH)+1;
+
+        System.out.println("refreshTable -> nextMonthYear="+nextMonthYear+" nextMonth="+nextMonth);
+
+        TimeZone timeZone = TimeZone.getDefault();
+        int startingDayOfGrid = lastDayOfPreviousMonth - firstDay + 1;
+
+
+        // figure size of the array
+
+        int totalDays = -1;
+
+        int previousMonthAndCurrentMonthGrids = GRIDS_OCCUPIED_BY_DAYS_NAMES + firstDay + lastDay;
+
+        int totalNumberOfGrids = getTotalGridSize(previousMonthAndCurrentMonthGrids);
+
+        for(int i = 0 ; i < GRIDS_OCCUPIED_BY_DAYS_NAMES; i++)
+        {
+            dateList.add(new DateInformation(0, 0, 0));
+        }
+
+        int previousMonthStartDays = lastDayOfPreviousMonth - firstDay + 1;
+
+        int currentMonthStartDate = 1;
+
+        int nextMonthStartDate = 1;
+
+        for(int i = 7, j = 1; i < totalNumberOfGrids; i++, j++)
+        {
+            if(j < firstDay)
+            {
+                dateList.add(new DateInformation(++previousMonthStartDays, previousYear, previousMonth));
+            }
+            else if(j < firstDay + lastDay)
+            {
+                dateList.add(new DateInformation(currentMonthStartDate++, year, month));
+            }
+            else
+            {
+                dateList.add(new DateInformation(nextMonthStartDate++, nextMonthYear, nextMonth));
+            }
         }
     }
-	
+
 	public class DateInformation
 	{
 		private int day;
 		private int year;
 		private int month;
-		
+
 		public DateInformation(int day, int year, int month)
 		{
 			this.day = day;
@@ -281,64 +299,64 @@ public class CalendarAdapter extends BaseAdapter
 			int end = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 			cal.set(year, month, end);
 		}
-		
+
 		public int getMonth()
 		{
 			return month;
 		}
-		
+
 		public int getYear()
 		{
 			return year;
 		}
-		
+
 		public void setDay(int day)
 		{
 			this.day = day;
 		}
-		
+
 		public int getDay()
 		{
 			return day;
 		}
-		
+
 		/**
-		 * 
+		 *
 		 */
 		public String toString()
 		{
 			StringBuilder sb = new StringBuilder();
-			
+
 			sb.append("\nday="+day);
 			sb.append("\nmonth="+month);
-			
+
 			return sb.toString();
 		}
 	}
-	
+
 	private void createPopUpMenuForDate(final TextView dayTV,
 			final int month, final int year, final int day)
 	{
 		final PopupMenu popupMenu = new PopupMenu(context, dayTV);
-		
+
         popupMenu.inflate(R.menu.events_pop_up_menu);
-        
+
         popupMenu.show();
-        
-		popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() 
+
+		popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener()
 		{
 			@Override
 			public boolean onMenuItemClick(MenuItem item)
 			{
 			    createDialogForMenuItem(month, year, day, popupMenu, item);
-					
+
 				return false;
 			}
 		});
 	}
-	
+
 	private void createDialogForMenuItem(final int month, final int year, final int day, final PopupMenu popupMenu,
-			MenuItem item) 
+			MenuItem item)
 	{
 		if(item.getItemId() == R.id.createEvent)
 		{
@@ -353,4 +371,28 @@ public class CalendarAdapter extends BaseAdapter
 			popupMenu.dismiss();
 		}
 	}
+
+    public int getTotalGridSize(int dayCount)
+    {
+        int gridCount = 0;
+
+        if(dayCount <= 28)
+        {
+            gridCount = 28;
+        }
+        else if(dayCount <= 35)
+        {
+            gridCount = 35;
+        }
+        else if(dayCount <= 42)
+        {
+            gridCount = 42;
+        }
+        else if(dayCount <= 49)
+        {
+            gridCount = 49;
+        }
+
+        return gridCount;
+    }
 }

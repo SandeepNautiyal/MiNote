@@ -269,6 +269,7 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 		{
 			cal.set(Calendar.MONTH,cal.get(Calendar.MONTH)+1);
 		}
+
 		rebuildCalendar();
 	}
 	
@@ -277,6 +278,7 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 		if(month != null)
 		{
 			month.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())+" "+cal.get(Calendar.YEAR));
+
 			refreshCalendar();
 		}
 	}
@@ -286,7 +288,8 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 	 */
 	public void refreshCalendar()
 	{
-		mAdapter.refreshDays();
+		mAdapter.refreshDays(cal.get(Calendar.DATE), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR));
+
 		mAdapter.notifyDataSetChanged();
 	}
 	
