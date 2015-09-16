@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/notesLayoutManagerParentRelativeLayout">
     
-<ScrollView 
+<com.gp.app.minote.layout.manager.CustomizedScrollView
     android:id="@+id/notesLayoutManagerScrollView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
     </LinearLayout>
 </LinearLayout>
 
-</ScrollView>
+</com.gp.app.minote.layout.manager.CustomizedScrollView>
 <FrameLayout
     android:id="@+id/notesLayoutManagerFrameLayout"
     android:layout_width="0dip"

@@ -1,13 +1,17 @@
 package com.gp.app.minote.calendar.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.RelativeLayout;
@@ -34,15 +38,13 @@ public class CalendarAdapter extends BaseAdapter
 	private static final int GRIDS_OCCUPIED_BY_DAYS_NAMES = 7;
 	private Context context;
 	private Calendar cal;
-	private boolean isWithoutEvent = false;
 	List<DateInformation> dateList = new ArrayList<DateInformation>();
-
-	public CalendarAdapter(Context context, Calendar cal, boolean isWithoutEvent)
+//    private TextView selectedTextView = null;
+	public CalendarAdapter(Context context, Calendar cal)
 	{
 		this.cal = cal;
 		this.context = context;
 		cal.set(Calendar.DAY_OF_MONTH, 1);
-		this.isWithoutEvent = isWithoutEvent;
 		refreshDays(cal.get(Calendar.DATE), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR));
 	}
 
@@ -122,13 +124,13 @@ public class CalendarAdapter extends BaseAdapter
 	        final int day = date.getDay();
 			final int month = date.getMonth()+1;
 			final int year = date.getYear();
+            boolean isClickable = date.isClickable();
 
 			String formattedDate = MiNoteUtil.pad(date.getDay())+"/"+MiNoteUtil.pad(date.getMonth()+1)+"/"+MiNoteUtil.pad(date.getYear());
 
 			TextView dayTextView1 = (TextView)v.findViewById(R.id.dayTextView1);
 
-			if(!isWithoutEvent)
-			{
+
 				List<Event> events = CalendarDBManager.getInstance().readEvents(formattedDate);
 
 				int numberOfEvents = events.size();
@@ -148,11 +150,11 @@ public class CalendarAdapter extends BaseAdapter
 						}
 					});
 				}
-			}
-			else
-			{
-				dayTextView1.setVisibility(View.GONE);
-			}
+//			}
+//			else
+//			{
+//				dayTextView1.setVisibility(View.GONE);
+//			}
 
 
 			final TextView dayTextView = (TextView)v.findViewById(R.id.dayTextView2);
@@ -168,40 +170,33 @@ public class CalendarAdapter extends BaseAdapter
 
 			dayRelativeLayout.setVisibility(View.VISIBLE);
 
-			if(date.getDay() == 0)
-			{
-				dayRelativeLayout.setVisibility(View.GONE);
-			}
-			else
-			{
+
 				dayTextView.setVisibility(View.VISIBLE);
 				dayTextView.setText(String.valueOf(day));
 
-				if(!isWithoutEvent)
-				{
-					dayTextView.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							dayTextView.setBackgroundResource(R.drawable.today);
+                if(!isClickable)
+                {
+                    dayTextView.setFocusable(false);
+                    dayTextView.setClickable(false);
+                    dayTextView.setTextColor(Color.rgb(105, 105, 105));
+//                    dayRelativeLayout.setBackgroundColor(Color.rgb(128,128,128));
+                }
+                else
+                {
 
-							createPopUpMenuForDate(dayTextView, month, year, day);
-						}
-					});
-				}
-				else
-				{
-					//TODO height to be read from drawable file
-					dayTextView.setBackgroundResource(R.drawable.calendar_readonly_edittext);
+                    dayTextView.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-					dayRelativeLayout.setMinimumHeight(0);
+                            createPopUpMenuForDate(dayTextView, month, year, day);
+                        }
+                    });
 
-					dayRelativeLayout.setMinimumWidth(0);
-
-				}
+                }
 			}
-		}
 
-		return v;
+
+        return v;
 	}
 
 	public void refreshDays(int day, int month, int year)
@@ -234,14 +229,10 @@ public class CalendarAdapter extends BaseAdapter
         previousMonthCalendar.set(previousYear, previousMonth, 1);
         int lastDayOfPreviousMonth = previousMonthCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        System.out.println("refreshTable -> previousMonthYear="+previousYear+" previousMonth="+previousMonth+" lastDayOfPreviousMonth="+lastDayOfPreviousMonth);
-
         Calendar nextMonthCalendar = Calendar.getInstance();
         nextMonthCalendar.add(month, 1);
         int nextMonthYear = nextMonthCalendar.get(Calendar.YEAR);
         int nextMonth = nextMonthCalendar.get(Calendar.MONTH)+1;
-
-        System.out.println("refreshTable -> nextMonthYear="+nextMonthYear+" nextMonth="+nextMonth);
 
         TimeZone timeZone = TimeZone.getDefault();
         int startingDayOfGrid = lastDayOfPreviousMonth - firstDay + 1;
@@ -257,7 +248,7 @@ public class CalendarAdapter extends BaseAdapter
 
         for(int i = 0 ; i < GRIDS_OCCUPIED_BY_DAYS_NAMES; i++)
         {
-            dateList.add(new DateInformation(0, 0, 0));
+            dateList.add(new DateInformation(0, 0, 0, false));
         }
 
         int previousMonthStartDays = lastDayOfPreviousMonth - firstDay + 1;
@@ -270,15 +261,15 @@ public class CalendarAdapter extends BaseAdapter
         {
             if(j < firstDay)
             {
-                dateList.add(new DateInformation(++previousMonthStartDays, previousYear, previousMonth));
+                dateList.add(new DateInformation(++previousMonthStartDays, previousYear, previousMonth, false));
             }
             else if(j < firstDay + lastDay)
             {
-                dateList.add(new DateInformation(currentMonthStartDate++, year, month));
+                dateList.add(new DateInformation(currentMonthStartDate++, year, month, true));
             }
             else
             {
-                dateList.add(new DateInformation(nextMonthStartDate++, nextMonthYear, nextMonth));
+                dateList.add(new DateInformation(nextMonthStartDate++, nextMonthYear, nextMonth, false));
             }
         }
     }
@@ -288,16 +279,14 @@ public class CalendarAdapter extends BaseAdapter
 		private int day;
 		private int year;
 		private int month;
+		private boolean isClickable = true;
 
-		public DateInformation(int day, int year, int month)
+		public DateInformation(int day, int year, int month, boolean isClickable)
 		{
 			this.day = day;
 			this.year = year;
 			this.month = month;
-			Calendar cal = Calendar.getInstance();
-			cal.set(year, month-1, day);
-			int end = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-			cal.set(year, month, end);
+			this.isClickable = isClickable;
 		}
 
 		public int getMonth()
@@ -320,6 +309,7 @@ public class CalendarAdapter extends BaseAdapter
 			return day;
 		}
 
+		public boolean isClickable(){return isClickable;}
 		/**
 		 *
 		 */
@@ -337,11 +327,26 @@ public class CalendarAdapter extends BaseAdapter
 	private void createPopUpMenuForDate(final TextView dayTV,
 			final int month, final int year, final int day)
 	{
+        final int color = dayTV.getDrawingCacheBackgroundColor();
+
+        dayTV.setBackgroundResource(R.drawable.day_selected);
+
+//        selectedTextView = dayTV;
+
 		final PopupMenu popupMenu = new PopupMenu(context, dayTV);
 
         popupMenu.inflate(R.menu.events_pop_up_menu);
 
         popupMenu.show();
+
+		popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener()
+        {
+			@Override
+			public void onDismiss(PopupMenu menu)
+            {
+                dayTV.setBackgroundColor(color);
+			}
+		});
 
 		popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener()
 		{
@@ -350,7 +355,9 @@ public class CalendarAdapter extends BaseAdapter
 			{
 			    createDialogForMenuItem(month, year, day, popupMenu, item);
 
-				return false;
+                dayTV.setBackgroundColor(color);
+
+                return false;
 			}
 		});
 	}

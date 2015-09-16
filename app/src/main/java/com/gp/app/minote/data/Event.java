@@ -16,6 +16,7 @@ public class Event extends Note implements BaseColumns
 	private String startTime;
 	private String endDay;
 	private String endTime;
+	private long creationTime;
 	private boolean isAlarmActivated;
 	public static final String EVENT_NAME = "event";
 	public static final String EVENTS_TABLE_NAME = "events";
@@ -33,6 +34,8 @@ public class Event extends Note implements BaseColumns
 	public static final String END_DAY = "end_day";
 	public static final String COLOR = "color";
 	public static final String IS_ALARM = "is_alarm";
+	public static final String CREATION_TIME = "creation_time";
+
 
 	public Event(String eventName, String location, String startDay, String startTime, String endDate, String endTime)
 	{
@@ -47,6 +50,8 @@ public class Event extends Note implements BaseColumns
 		this.endTime = endTime;
 		
 		this.eventLocation = location;
+
+		this.creationTime = System.currentTimeMillis();
 		
 		eventId = (int)Math.abs((Math.random() * 1000000));
 	}
@@ -100,7 +105,12 @@ public class Event extends Note implements BaseColumns
 	{
 		return endDay;
 	}
-	
+
+    public void setCreationTime(long creationTime)
+    {
+        this.creationTime = creationTime;
+    }
+
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -164,6 +174,11 @@ public class Event extends Note implements BaseColumns
 		return 0;
 	}
 
+	public long getCreationTime()
+	{
+		return creationTime;
+	}
+
 	@Override
 	public int describeContents() 
 	{
@@ -211,4 +226,6 @@ public class Event extends Note implements BaseColumns
 			return new Event[size];
 		}
 	};
+
+
 }

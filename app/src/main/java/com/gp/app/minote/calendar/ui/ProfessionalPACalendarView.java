@@ -47,7 +47,7 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 		public void onDayClicked(AdapterView<?> adapter, View view, int position, long id, DateInformation day);
 	}
 
-	public ProfessionalPACalendarView(Context context, boolean isWithoutEvents)
+	public ProfessionalPACalendarView(Context context)
 	{
 		super(context);
 		this.context = context;
@@ -194,7 +194,7 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 		calendar.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
 		calendar.setDrawSelectorOnTop(true);
 		
-		mAdapter = new CalendarAdapter(context,cal, isWithoutEvents);
+		mAdapter = new CalendarAdapter(context,cal);
 		calendar.setAdapter(mAdapter);
 		
 		addView(calendar);

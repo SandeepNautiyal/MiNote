@@ -69,8 +69,10 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
     
 	private void createTables(SQLiteDatabase db){
 		db.execSQL("CREATE TABLE " + Event.EVENTS_TABLE_NAME + "(" + Event.ID + " integer primary key autoincrement, " +
-				Event.EVENT_NAME + " TEXT, " + Event.LOCATION + " TEXT, " + Event.START_DAY + " INTEGER, "
-				+ Event.START_TIME + " INTEGER, " + Event.END_DAY + " INTEGER, " + Event.END_TIME + " INTEGER, "
+				Event.EVENT_NAME + " TEXT, " + Event.LOCATION + " TEXT, " + Event.CREATION_TIME + " INTEGER, "
+				+ Event.START_DAY + " INTEGER, "
+				+ Event.START_TIME + " INTEGER, " + Event.END_DAY + " INTEGER, "
+				+ Event.END_TIME + " INTEGER, "
 				+ Event.IS_ALARM +" INTEGER);");
 		
 		System.out.println("Create table executed");
@@ -91,6 +93,7 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
 		ContentValues values = new ContentValues();
 		values.put(Event.ID, event.getId());
 		values.put(Event.EVENT_NAME, event.getEventName());
+		values.put(Event.CREATION_TIME, event.getCreationTime());
 		values.put(Event.START_TIME, event.getStartTime());
 		values.put(Event.END_TIME, event.getEndTime());
 		values.put(Event.START_DAY, event.getStartDate());
@@ -125,10 +128,12 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
         	String endDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_DAY));
         	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
     		int alarmAttribte = cursor.getInt(cursor.getColumnIndexOrThrow(Event.IS_ALARM));
+			long creationTime = cursor.getLong(cursor.getColumnIndexOrThrow(Event.CREATION_TIME));
     		boolean isAlarm = alarmAttribte == 1 ? true : false;
         	Event event = new Event(eventName, eventLocation, startDate, startTime, endDate, endTime);
         	event.setEventId(eventId);
         	event.setIsAlarmActivated(isAlarm);
+			event.setCreationTime(creationTime);
         	events.add(event);
         	cursor.moveToNext();
     	}
@@ -181,10 +186,12 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
         	String endDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_DAY));
         	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
     		int alarmAttribte = cursor.getInt(cursor.getColumnIndexOrThrow(Event.IS_ALARM));
-    		boolean isAlarm = alarmAttribte == 1 ? true : false;
+            long creationTime = cursor.getLong(cursor.getColumnIndexOrThrow(Event.CREATION_TIME));
+            boolean isAlarm = alarmAttribte == 1 ? true : false;
         	Event event = new Event(eventName, eventLocation, startDate, startTime, endDate, endTime);
         	event.setEventId(eventId);
         	event.setIsAlarmActivated(isAlarm);
+            event.setCreationTime(creationTime);
         	events.add(event);
         	cursor.moveToNext();
     	}
@@ -241,11 +248,13 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
         	String endDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_DAY));
         	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
         	int alarmAttribte = cursor.getInt(cursor.getColumnIndexOrThrow(Event.IS_ALARM));
-    		boolean isAlarm = alarmAttribte == 1 ? true : false;
+            long creationTime = cursor.getLong(cursor.getColumnIndexOrThrow(Event.CREATION_TIME));
+            boolean isAlarm = alarmAttribte == 1 ? true : false;
     		
         	Event event = new Event(eventName, eventLocation, startDate, readStartTime, endDate, endTime);
         	event.setEventId(itemId);
         	event.setIsAlarmActivated(isAlarm);
+            event.setCreationTime(creationTime);
         	events.add(event);
     	    cursor.moveToNext();
     	}
@@ -273,7 +282,8 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
 		values.put(Event.START_DAY, event.getStartDate());
 		values.put(Event.END_DAY, event.getEndDate());
 		values.put(Event.LOCATION, event.getLocation());
-		values.put(Event.IS_ALARM, event.isAlarmActivated() ? 1 : 0);
+        values.put(Event.CREATION_TIME, event.getCreationTime());
+        values.put(Event.IS_ALARM, event.isAlarmActivated() ? 1 : 0);
 		
     	String where = Event.ID+"=?";
 
@@ -348,13 +358,15 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
         	String readStartTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.START_TIME));
         	String endDate = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_DAY));
         	String endTime = cursor.getString(cursor.getColumnIndexOrThrow(Event.END_TIME));
-        	int alarmAttribte = cursor.getInt(cursor.getColumnIndexOrThrow(Event.IS_ALARM));
+            long creationTime = cursor.getLong(cursor.getColumnIndexOrThrow(Event.CREATION_TIME));
+            int alarmAttribte = cursor.getInt(cursor.getColumnIndexOrThrow(Event.IS_ALARM));
     		boolean isAlarm = alarmAttribte == 1 ? true : false;
     		
         	Event event = new Event(eventName, eventLocation, startDate, readStartTime, endDate, endTime);
         	event.setEventId(itemId);
         	event.setIsAlarmActivated(isAlarm);
         	events.add(event);
+            event.setCreationTime(creationTime);
     	    cursor.moveToNext();
     	}
     	
