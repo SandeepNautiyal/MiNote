@@ -168,6 +168,11 @@ public class CalendarAdapter extends BaseAdapter
 
 			RelativeLayout dayRelativeLayout = (RelativeLayout)v.findViewById(R.id.dayRelativeLayout);
 
+            if(!date.isClickable())
+            {
+                dayRelativeLayout.setBackgroundResource(R.drawable.unselectable_day_layout_border);
+            }
+
 			dayRelativeLayout.setVisibility(View.VISIBLE);
 
 

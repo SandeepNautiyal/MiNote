@@ -52,42 +52,42 @@
     android:id="@+id/notesLayoutManagerFrameLayout"
     android:layout_width="0dip"
     android:layout_height="0dip"
-    android:background="@drawable/layout_border">
+    android:background="@drawable/selectable_day_layout_border">
 </FrameLayout>
 
 <FrameLayout
     android:id="@+id/listNoteFrameLayout"
     android:layout_width="0dip"
     android:layout_height="0dip"
-    android:background="@drawable/layout_border">
+    android:background="@drawable/selectable_day_layout_border">
 </FrameLayout>
 
 <FrameLayout
     android:id="@+id/paragraphNoteFrameLayout"
     android:layout_width="0dip"
     android:layout_height="0dip"
-    android:background="@drawable/layout_border">
+    android:background="@drawable/selectable_day_layout_border">
 </FrameLayout>
 
 <FrameLayout
     android:id="@+id/imageNoteFrameLayout"
     android:layout_width="0dip"
     android:layout_height="0dip"
-    android:background="@drawable/layout_border">
+    android:background="@drawable/selectable_day_layout_border">
 </FrameLayout>
 
 <FrameLayout
     android:id="@+id/calendarFrameLayout"
     android:layout_width="0dip"
     android:layout_height="0dip"
-    android:background="@drawable/layout_border">
+    android:background="@drawable/selectable_day_layout_border">
 </FrameLayout>
 
 <FrameLayout
     android:id="@+id/eventFrameLayout"
     android:layout_width="0dip"
     android:layout_height="0dip"
-    android:background="@drawable/layout_border">
+    android:background="@drawable/selectable_day_layout_border">
 </FrameLayout>
 
 <FrameLayout 
