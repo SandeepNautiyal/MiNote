@@ -44,7 +44,7 @@
         android:layout_alignLeft="@+id/monthInfoRelative"
         android:layout_alignRight="@+id/monthInfoRelative">
 
-        <GridView android:id="@+id/datesGridView"
+        <android.support.v7.widget.RecyclerView android:id="@+id/datesGridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/monthNameEditText"

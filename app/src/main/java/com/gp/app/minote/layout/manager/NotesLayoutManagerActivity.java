@@ -217,6 +217,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	
 	public void copyNote(View view)
 	{
+        if(areNoteButtonCreated)
+        {
+            createNoteTypeButtons();
+        }
+
 		NotesOperationManager.getInstance().copyNote();
 	}
 
@@ -561,7 +566,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		LinearLayout layout = null;
 
-		LinearLayoutOnClickListener clickListener = new LinearLayoutOnClickListener();
+//		LinearLayoutOnClickListener clickListener = new LinearLayoutOnClickListener();
 
 		linearLayouts.clear();
 
@@ -569,22 +574,22 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 		    case 5:
 			    layout = (LinearLayout) findViewById(R.id.linearLayout5);
-                layout.setOnClickListener(clickListener);
+//                layout.setOnClickListener(clickListener);
 		    case 4:
 			    layout = (LinearLayout) findViewById(R.id.linearLayout4);
-                layout.setOnClickListener(clickListener);
+//                layout.setOnClickListener(clickListener);
                 linearLayouts.add(layout);
 		    case 3:
 			    layout = (LinearLayout) findViewById(R.id.linearLayout3);
-                layout.setOnClickListener(clickListener);
+//                layout.setOnClickListener(clickListener);
                 linearLayouts.add(layout);
 		    case 2:
 			    layout = (LinearLayout) findViewById(R.id.linearLayout2);
-                layout.setOnClickListener(clickListener);
+//                layout.setOnClickListener(clickListener);
                 linearLayouts.add(layout);
 		    case 1:
 			    layout = (LinearLayout) findViewById(R.id.linearLayout1);
-                layout.setOnClickListener(clickListener);
+//                layout.setOnClickListener(clickListener);
 //                ViewTreeObserver vto4 = layout.getViewTreeObserver();
 //                vto4.addOnGlobalLayoutListener(new LayoutCreationListener());
                 linearLayouts.add(layout);
@@ -974,14 +979,21 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		}
 	}
 
-	class LinearLayoutOnClickListener implements OnClickListener {
-		@Override
-		public void onClick(View v) 
-		{
-			NotesOperationManager.getInstance().copyNote();
-		}
-
-	}
+//	class LinearLayoutOnClickListener implements OnClickListener {
+//		@Override
+//		public void onClick(View v)
+//		{
+//			NotesOperationManager.getInstance().copyNote();
+//
+//			System.out.println("onClick -> areNoteButtonCreated ="+areNoteButtonCreated);
+//
+//            if(areNoteButtonCreated)
+//			{
+//				createNoteTypeButtons();
+//			}
+//		}
+//
+//	}
 
 	public void openNoteInEditMode(int noteId) 
 	{

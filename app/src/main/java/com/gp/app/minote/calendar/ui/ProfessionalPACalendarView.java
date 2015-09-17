@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -159,7 +161,7 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 		addView(base);
 		
 		//Days and name of days "Sun, Mon  1,2"
-		params = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+		params = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.MATCH_PARENT);
 		if(!isWithoutEvents)
 		{
 			params.bottomMargin = 20;
@@ -170,7 +172,6 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 
 		}
 		params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		params.addRule(RelativeLayout.BELOW, base.getId());
 		
 		calendar = new GridView(context);
@@ -195,8 +196,11 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 		calendar.setDrawSelectorOnTop(true);
 		
 		mAdapter = new CalendarAdapter(context,cal);
+//		GridLayoutManager layoutManager = new GridLayoutManager(context, 7);
+//        layoutManager.set
+//		calendar.setLayoutManager(layoutManager);
 		calendar.setAdapter(mAdapter);
-		
+
 		addView(calendar);
 	}
 
@@ -225,7 +229,7 @@ public class ProfessionalPACalendarView extends RelativeLayout implements OnItem
 		if(calendar != null)
 		{
 			dayListener = listener;
-			calendar.setOnItemClickListener(this);
+//			calendar.setOnItemClickListener(this);
 		}
 	}
 
