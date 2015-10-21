@@ -26,7 +26,7 @@ public class ListViewItemLayout extends RelativeLayout
 	
 	private ImageView imageView = null;
 	
-	private ImageButton importanceImageButton = null;
+	private ImageView importanceImageButton = null;
 	
 //	private ImageButton alarmImageButton = null;
 	
@@ -60,7 +60,7 @@ public class ListViewItemLayout extends RelativeLayout
 		
 		imageView  = (ImageView)findViewById(R.id.compositeControlImageView);
 		
-		importanceImageButton = (ImageButton) findViewById(R.id.compositeControlBulletButton);
+		importanceImageButton = (ImageView) findViewById(R.id.compositeControlBulletButton);
 		
 //		alarmImageButton = (ImageButton) findViewById(R.id.composite_control_alarm_button);
 	}
@@ -135,7 +135,7 @@ public class ListViewItemLayout extends RelativeLayout
 		textView.setText(text.toCharArray(), 0 , text.toCharArray().length);
 	}
 	
-	public ImageButton getImportanceImageButton() {
+	public ImageView getImportanceImageButton() {
 		return importanceImageButton;
 	}
 	

@@ -10,7 +10,6 @@ import com.gp.app.minote.data.Event;
 import com.gp.app.minote.data.Note;
 import com.gp.app.minote.data.NoteItem;
 import com.gp.app.minote.data.TextNote;
-import com.gp.app.minote.interfaces.MiNoteConstants;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;

@@ -2,12 +2,11 @@ package com.gp.app.minote.layout.manager;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -19,35 +18,28 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.gp.app.minote.R;
-import com.gp.app.minote.backend.entities.eventEntityApi.EventEntityApi;
-import com.gp.app.minote.backend.entities.eventEntityApi.model.EventEntity;
 import com.gp.app.minote.colorpicker.ColorPickerCreator;
 import com.gp.app.minote.colorpicker.ColourPickerChangeListener;
 import com.gp.app.minote.compositecontrols.ListViewItemLayout;
 import com.gp.app.minote.data.Note;
 import com.gp.app.minote.data.NoteItem;
 import com.gp.app.minote.data.TextNote;
-import com.gp.app.minote.interfaces.MiNoteConstants;
+import com.gp.app.minote.util.MiNoteConstants;
 import com.gp.app.minote.notes.database.NotesDBManager;
 import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.util.MiNoteParameters;
 import com.gp.app.minote.util.MiNoteUtil;
 
-import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ListItemCreatorActivity extends Activity implements ColourPickerChangeListener
 {
@@ -114,9 +106,9 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			setContentView(scrollView);
 		}
 		
-        ActionBar actionBar = getActionBar();
-		
-		actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(120, 100, 255)));
+//        ActionBar actionBar = getActionBar();
+//
+//		actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(120, 100, 255)));
 	}
 
 	private void editNotes()
@@ -210,33 +202,34 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-	    if (requestCode == MiNoteConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
+		//TODO image deletion to be checked
+	    if (requestCode == MiNoteConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK)
 	    {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-	    	
-	    	ImageLocationPathManager.getInstance().createAndSaveImage(photo);
-	    	
+//            Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+//	    	ImageLocationPathManager.getInstance().createAndSaveImage(photo);
+
 	    	String imagePath = ImageLocationPathManager.getInstance().getMostRecentImageFilePath();
-	    	
+
 	    	Bitmap image = ImageLocationPathManager.getInstance().getImage(imagePath, false);
-	        
+
 	    	String imageName = ImageLocationPathManager.getInstance().getImageName(imagePath);
-	    	
+
 	    	boolean isTextPresentInEditText = lastAddedListItem.getText() != null && !lastAddedListItem.getText().equals("");
-	    	
+
 	    	boolean isImagePresentInImageView = lastAddedListItem.getImageName() != null && !lastAddedListItem.getImageName().equals("");
-	    	
+
 	    	if(isTextPresentInEditText ||  isImagePresentInImageView)
 	    	{
 	    		addNewListItem();
-	    		
+
 	    		updateActivityLayout();
 	    	}
-	    	
+
 	        lastAddedListItem.setImage(imageName, image, true);
-	        
+
 //	        addNewListItem();
-	        
+
 //			updateActivityLayout();
 	    }
 	}
@@ -268,7 +261,14 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 		else if(id == R.id.clickPhoto)
 		{
 			//TODO duplicate
-            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); 
+			String filename = ImageLocationPathManager.getInstance().getImagePath();
+
+			Uri imageUri = Uri.fromFile(new File(filename));
+
+			Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+			cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
+					imageUri);
             
             startActivityForResult(cameraIntent, MiNoteConstants.TAKE_PHOTO_CODE);
 		}
@@ -301,8 +301,8 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 		}
 		
 		currentAddedListItem.setLayoutParams(layoutParams);
-		
-		ImageButton deleteButton = currentAddedListItem.getImportanceImageButton();
+
+        ImageView deleteButton = currentAddedListItem.getImportanceImageButton();
 		
 		if(deleteButton != null)
 		{
@@ -345,24 +345,22 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 
 	private void addAddItemButton() 
 	{
-		Button addNewListItem = (Button)findViewById(MiNoteConstants.ADD_BUTTON_ID);
+		ImageView addNewListItem = (ImageView)findViewById(MiNoteConstants.ADD_BUTTON_ID);
 		
 		activityLayout.removeView(addNewListItem);
 		
-		addNewListItem = new Button(this);
+		addNewListItem = new ImageView(this);
 		
-		addNewListItem.setText("+");
+		addNewListItem.setImageDrawable(getResources().getDrawable(R.drawable.minote_list_addition));
 		
-		addNewListItem.setOnClickListener(new OnClickListener() 
-		{
-			@Override
-			public void onClick(View view)
-			{
-				addNewListItem();
-				
-				updateActivityLayout();
-			}
-		});
+		addNewListItem.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addNewListItem();
+
+                updateActivityLayout();
+            }
+        });
 		
 		addNewListItem.setId(MiNoteConstants.ADD_BUTTON_ID);
 		
@@ -482,68 +480,4 @@ public class ListItemCreatorActivity extends Activity implements ColourPickerCha
 			selectedView.setTextColor(colourCode);
 		}
 	}
-
-//    //TODO to be removed.
-//    class EventStoreAsyncTask extends AsyncTask<Void, Void, String> {
-//
-//        private GoogleCloudMessaging gcm;
-//        private Context context;
-//
-//        // TODO: change to your own sender ID to Google Developers Console project number, as per instructions above
-//        private static final String SENDER_ID = "700276642861";
-//
-//        public EventStoreAsyncTask(Context context) {
-//            this.context = context;
-//        }
-//
-//        @Override
-//        protected String doInBackground(Void... params)
-//        {
-//
-//                EventEntityApi.Builder builder = new EventEntityApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-//                        .setRootUrl("https://minote-997.appspot.com/_ah/api/");
-//                // end of optional local run code
-//
-//                EventEntity eventEntity = new EventEntity();
-//
-//			eventEntity.setEventName("First");
-//
-//			eventEntity.setLocation("First");
-//
-//			eventEntity.setStartDate("18/7/2015");
-//
-//			eventEntity.setStartTime("6:00");
-//
-//			eventEntity.setEndDate("18/7/2015");
-//
-//			eventEntity.setEndTime("7:00");
-//
-//			EventEntityApi eventApi = builder.build();
-//
-//                try
-//                {
-//                    System.out.println("inserting events");
-//
-//                    EventEntityApi.Insert insertEventEntity = eventApi.insert(eventEntity);
-//
-//                    insertEventEntity.execute();
-//
-//                    System.out.println("inserting events1");
-//                }
-//                catch(IOException exception)
-//                {
-//                    System.out.println("IoException ="+exception.getStackTrace());
-//                }
-//
-//
-//
-//            return "Success";
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String msg) {
-//            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-//            Logger.getLogger("REGISTRATION").log(Level.INFO, msg);
-//        }
-//    }
 }

@@ -15,13 +15,13 @@
         android:adjustViewBounds="true"
         android:layout_alignParentLeft="true"/>
     
-    <ImageButton
+    <ImageView
         android:id="@+id/compositeControlBulletButton"
         android:layout_width="35dip"
         android:layout_height="@dimen/composite_control_height"
         android:layout_marginRight="2dip"
         android:contentDescription="@string/set_importance"
-        android:src="@drawable/ic_pin_black_bullet_point" /> 
+        android:src="@drawable/minote_list_item_deletion" />
         
     <EditText
         android:id="@+id/compositeControlTextBox"

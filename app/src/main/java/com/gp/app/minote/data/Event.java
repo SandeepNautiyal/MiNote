@@ -117,8 +117,10 @@ public class Event extends Note implements BaseColumns
 		
 		sb.append("\neventName="+eventName);
 		sb.append("\nlocation="+eventLocation);
-		sb.append("\nstart="+startDay);
-		sb.append("\nend="+endDay);
+		sb.append("\nstartDay="+startDay);
+		sb.append("\nstartTime="+startTime);
+		sb.append("\nendDate="+endDay);
+		sb.append("\nendTime="+endTime);
 		sb.append("\neventId="+eventId);
 
 		return sb.toString();

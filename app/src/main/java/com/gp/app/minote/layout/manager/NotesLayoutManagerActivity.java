@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,16 +12,16 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -29,15 +30,19 @@ import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
+import com.google.android.gms.plus.model.people.Person;
 import com.gp.app.minote.R;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
-import com.gp.app.minote.calendar.ui.ProfessionalPACalendarView;
+import com.gp.app.minote.calendar.interfaces.DBChangeListener;
+import com.gp.app.minote.calendar.ui.EventCreationUI;
+import com.gp.app.minote.calendar.ui.MiNoteCalendar;
+import com.gp.app.minote.calendar.ui.MiNoteEventCalendar;
 import com.gp.app.minote.colorpicker.ColourPickerChangeListener;
 import com.gp.app.minote.data.Event;
 import com.gp.app.minote.data.Note;
 import com.gp.app.minote.data.NoteItem;
 import com.gp.app.minote.data.TextNote;
-import com.gp.app.minote.interfaces.MiNoteConstants;
+import com.gp.app.minote.util.MiNoteConstants;
 import com.gp.app.minote.listeners.NotesActionModeCallback;
 import com.gp.app.minote.notes.database.NotesDBManager;
 import com.gp.app.minote.notes.fragments.FragmentCreationManager;
@@ -48,9 +53,10 @@ import com.gp.app.minote.notes.operations.NotesOperationManager;
 import com.gp.app.minote.start.StartMiNoteActivity;
 import com.gp.app.minote.util.MiNoteParameters;
 
+import java.io.File;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -59,7 +65,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class NotesLayoutManagerActivity extends Activity implements ColourPickerChangeListener, OnQueryTextListener, ScrollViewScrollListener
+public class NotesLayoutManagerActivity extends FragmentActivity implements ColourPickerChangeListener, OnQueryTextListener,
+		ScrollViewScrollListener, DBChangeListener
 {
 	private static final String NUMBER_OF_LINEAR_LAYOUTS = "NUMBER_OF_LINEAR_LAYOUTS";
 
@@ -86,6 +93,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	private static final String APPLIED_FILTER = "currentAppliedFilter";
 
 	private static final String SELECTED_NOTE_IDS = "selectedNoteIds";
+
+    private static final String IS_NOTE_TAB_SELECTED = "isNoteTabSelected";
 
     private int layoutIndexToBeOccupiedNext = 0;
 
@@ -115,31 +124,31 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 	private ActionMode currenActionMode = null;
 
+    private Set<Integer> fiterNoteIds = null;
+
     private CustomizedScrollView scrollView = null;
 
-	private byte EVENT_FILTER = 2;
-	
-	private byte NOTE_FILTER = 1;
-	
-	private byte DEFAULT_FILTER = 0;
-	
-	private byte currentAppliedFilter = 0;
+    private byte currentAppliedFilter = 0;
+
+    private boolean isNoteTabSelected = true;
 
     private Object lock;
-	
-	public NotesLayoutManagerActivity() 
+
+	public NotesLayoutManagerActivity()
 	{
 		super();
 		
 		imageCaptureManager = ImageLocationPathManager.getInstance();
 
-
-	}
+        MiNoteParameters.setNotesActivity(this);
+    }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+
+        System.out.println("onCreate ->");
 
         lock = new Object();
 
@@ -159,22 +168,57 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
         NotesManager.getInstance().deleteAllNotes();
 
-	    createNotes();
+//	    createNotes();
 
 		ActionBar actionBar = getActionBar();
 
-		actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(120, 100, 255)));
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		
-		MiNoteParameters.setNotesActivity(this);
-		
+        actionBar.setDisplayShowTitleEnabled(false);
+
+
+        ActionBar.Tab tab = actionBar.newTab()
+                .setText(MiNoteConstants.NOTES_TAB)
+                .setTabListener(new TabListener<TabFragment>(
+                        this, MiNoteConstants.NOTES_TAB, TabFragment.class));
+        actionBar.addTab(tab);
+
+        tab = actionBar.newTab()
+                .setText(MiNoteConstants.EVENTS_TAB)
+                .setTabListener(new TabListener<TabFragment>(
+                        this, MiNoteConstants.EVENTS_TAB, TabFragment.class));
+        actionBar.addTab(tab);
+
+        actionBar.setStackedBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.minoteTabColor)));
+
+        forceTabs();
+
+//		actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(120, 100, 255)));
+//
+//		actionBar.setDisplayHomeAsUpEnabled(true);
+
 		handleIntent(getIntent());
 
         scrollView = (CustomizedScrollView)parentRelativeLayout.findViewById(R.id.notesLayoutManagerScrollView);
 
         scrollView.setScrollViewListener(this);
 
+        CalendarDBManager.getInstance().addDataChangeListener(this);
+    }
+
+	public void forceTabs()
+	{
+		try {
+			final ActionBar actionBar = getActionBar();
+			final Method setHasEmbeddedTabsMethod = actionBar.getClass()
+					.getDeclaredMethod("setHasEmbeddedTabs", boolean.class);
+			setHasEmbeddedTabsMethod.setAccessible(true);
+			setHasEmbeddedTabsMethod.invoke(actionBar, false);
+		}
+		catch(final Exception e) {
+			// Handle issues as needed: log, warn user, fallback etc
+			// This error is safe to ignore, standard tabs will appear.
+		}
 	}
 
 	@Override
@@ -183,8 +227,10 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		outState.putByte(NUMBER_OF_LINEAR_LAYOUTS, (byte) linearLayoutsCount);
 
 		outState.putByte(APPLIED_FILTER, currentAppliedFilter);
-		
-		outState.putIntegerArrayList(SELECTED_NOTE_IDS, new ArrayList<>(NotesOperationManager.getInstance().getSelectedNoteIds()));
+
+        outState.putBoolean(IS_NOTE_TAB_SELECTED, isNoteTabSelected);
+
+        outState.putIntegerArrayList(SELECTED_NOTE_IDS, new ArrayList<>(NotesOperationManager.getInstance().getSelectedNoteIds()));
 
 		super.onSaveInstanceState(outState);
 	}
@@ -200,7 +246,9 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		currentAppliedFilter =  savedInstanceState
 				.getByte(APPLIED_FILTER);
-		
+
+        isNoteTabSelected = savedInstanceState.getBoolean(IS_NOTE_TAB_SELECTED);
+
 		fillLinearLayoutList();
 		
 		List<Integer> selectedIds =  savedInstanceState.getIntegerArrayList(SELECTED_NOTE_IDS);
@@ -211,8 +259,17 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			
 			NotesOperationManager.getInstance().selectNote(selectedNoteId);
 		}
+
+        if(isNoteTabSelected)
+        {
+            getActionBar().setSelectedNavigationItem(0);
+        }
+        else
+        {
+            getActionBar().setSelectedNavigationItem(1);
+        }
 		
-	    applyFilter(currentAppliedFilter);
+//	    applyFilter(currentAppliedFilter);
 	}
 	
 	public void copyNote(View view)
@@ -259,15 +316,15 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		    case R.id.action_settings :
 			    return true;
 			    
-		    case R.id.defaultFilter :
-		    	applyFilter(DEFAULT_FILTER);
-		    	return true;
-		    case R.id.note :
-		    	applyFilter(NOTE_FILTER);
-		    	return true;
-		    case R.id.event :
-		    	applyFilter(EVENT_FILTER);
-		    	return true;
+//		    case R.id.defaultFilter :
+//		    	applyFilter(MiNoteConstants.DEFAULT_FILTER);
+//		    	return true;
+//		    case R.id.note :
+//		    	applyFilter(MiNoteConstants.NOTE_FILTER);
+//		    	return true;
+//		    case R.id.event :
+//		    	applyFilter(MiNoteConstants.EVENT_FILTER);
+//		    	return true;
 //		    case R.id.export_notes :
 //
 //			    try
@@ -292,12 +349,12 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 //
 //				dialog.show();;
 
-                Dialog dialog = new Dialog(this);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                ProfessionalPACalendarView view = new ProfessionalPACalendarView(this);
-                dialog.setContentView(view,  new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                dialog.setCancelable(true);
-                dialog.show();
+//                Dialog dialog = new Dialog(this);
+//                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                MiNoteCalendar view = new MiNoteCalendar(this);
+//                dialog.setContentView(view,  new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//                dialog.setCancelable(true);
+//                dialog.show();
 
 		    	return true;
 			case R.id.actionSearch :
@@ -313,67 +370,75 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	    }
 	}
 
-	private void applyFilter(byte filterType) 
-	{
-		currentAppliedFilter = filterType;
-		
-		for(Entry<Integer, FrameLayout> entry : childFrames.entrySet())
-		{
-			int noteId = entry.getKey();
-			
-			FrameLayout frameLayout = entry.getValue();
-			
-			Note note = NotesManager.getInstance().getNote(noteId);
-			
-			if(note != null)
-			{
-				if(filterType == 0)
-				{
-					frameLayout.setVisibility(View.VISIBLE);
-				}
-				
-				if(filterType == 1 )
-			    {
-					if(note.getType() == Note.LIST_NOTE || note.getType() == Note.PARAGRAPH_NOTE
-				        || note.getType() == Note.IMAGE_NOTE)
-					{
-					    frameLayout.setVisibility(View.VISIBLE);
-					}
-				    else
-				    {
-						frameLayout.setVisibility(View.GONE);
-				    }
-			    }
-				
-				if(filterType == 2) 
-				{
-					if(note.getType() == Note.EVENT_NOTE)
-					{
-						frameLayout.setVisibility(View.VISIBLE);
-					}
-					else
-					{
-						frameLayout.setVisibility(View.GONE);
-					}
-				}
-			}
-		}
-	}
+//	private void applyFilter(byte filterType)
+//	{
+//		currentAppliedFilter = filterType;
+//
+//		for(Entry<Integer, FrameLayout> entry : childFrames.entrySet())
+//		{
+//			int noteId = entry.getKey();
+//
+//			FrameLayout frameLayout = entry.getValue();
+//
+//			Note note = NotesManager.getInstance().getNote(noteId);
+//
+//			if(note != null)
+//			{
+//				if(filterType == 0)
+//				{
+//					frameLayout.setVisibility(View.VISIBLE);
+//				}
+//
+//				if(filterType == 1 )
+//			    {
+//					if(note.getType() == Note.LIST_NOTE || note.getType() == Note.PARAGRAPH_NOTE
+//				        || note.getType() == Note.IMAGE_NOTE)
+//					{
+//					    frameLayout.setVisibility(View.VISIBLE);
+//					}
+//				    else
+//				    {
+//						frameLayout.setVisibility(View.GONE);
+//				    }
+//			    }
+//
+//				if(filterType == 2)
+//				{
+//					if(note.getType() == Note.EVENT_NOTE)
+//					{
+//						frameLayout.setVisibility(View.VISIBLE);
+//					}
+//					else
+//					{
+//						frameLayout.setVisibility(View.GONE);
+//					}
+//				}
+//			}
+//		}
+//	}
 
 	private void createCalendarView()
 	{
 		Dialog dialog = new Dialog(this);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		ProfessionalPACalendarView view = new ProfessionalPACalendarView(this);
-
+		MiNoteCalendar view = new MiNoteEventCalendar(this);
 //        view.setGravity(Gravity.CENTER);
 		dialog.setContentView(view);
 		dialog.setCancelable(true);
 		dialog.show();
 	}
 
-	private void createImageNote() {
-		Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	private void createImageNote()
+    {
+        String filename = ImageLocationPathManager.getInstance().getImagePath();
+
+        Uri imageUri = Uri.fromFile(new File(filename));
+
+// start default camera
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+        cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
+                imageUri);
 
 		startActivityForResult(cameraIntent,
                 MiNoteConstants.TAKE_PHOTO_CODE);
@@ -412,12 +477,13 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		if (requestCode == MiNoteConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
 		{
-			Bitmap photo = (Bitmap) data.getExtras().get("data");
+//			Bitmap photo = (Bitmap) data.getExtras().get("data");
 
-			ImageLocationPathManager.getInstance().createAndSaveImage(photo);
+            String filePath = ImageLocationPathManager.getInstance().getMostRecentImageFilePath();
 
-			note = createProfessionalPANoteFromImage(imageCaptureManager
-					.getMostRecentImageFilePath());
+//			ImageLocationPathManager.getInstance().createAndSaveImage(photo, imageUri.);
+
+			note = createProfessionalPANoteFromImage(filePath);
 
 			NotesDBManager.getInstance().saveNotes(Arrays.asList(note));
 		} 
@@ -432,7 +498,9 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		if (note != null)
 		{
 			createFragmentForNote(note);
-		}
+
+            changeTabs(true);
+        }
 	}
 
 	private TextNote createProfessionalPANoteFromImage(String imagePath)
@@ -455,7 +523,8 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		note.setTypeOfNote(Note.IMAGE_NOTE);
 
 		note.setLastEditedTime(System.currentTimeMillis());
-		return note;
+
+        return note;
 	}
 
 	public void createFragmentForNote(Note note)
@@ -482,7 +551,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		
 		int fragmentLength = isTextNote ? ((TextNoteFragment)fragment).getFragmentLength() : 8;
 
-		frameLayout.setClickable(true);
+        frameLayout.setClickable(true);
 		
 		int id = MiNoteParameters.getId();
 			
@@ -493,12 +562,24 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 
 		getFragmentManager().beginTransaction().add(id, fragment, tag).commit();
 
-		childFrames.put(noteId, frameLayout);
-		
-		updateActivityView(frameLayout, fragmentLength);
+        childFrames.put(noteId, frameLayout);
+
+        updateActivityView(frameLayout);
 	}
 
-	@Override
+    private void changeTabs(boolean isTextNote)
+    {
+         if(isTextNote)
+         {
+             getActionBar().setSelectedNavigationItem(0);
+         }
+         else
+         {
+             getActionBar().setSelectedNavigationItem(1);
+         }
+    }
+
+    @Override
 	protected void onDestroy()
 	{
 		super.onDestroy();
@@ -544,11 +625,11 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		return numberOfLinearLayouts;
 	}
 
-	private void updateActivityView(FrameLayout frameLayout, int fragmentLength)
+	private void updateActivityView(FrameLayout frameLayout)
 	{
 		int availableLayoutIndex = getAvailableLayoutIndex();
 
-        System.out.println("availableLayoutIndex="+availableLayoutIndex);
+        System.out.println("updateActivityView -> availableLayoutIndex="+availableLayoutIndex);
 
 		LinearLayout linearLayout = linearLayouts.get(availableLayoutIndex);
 
@@ -658,47 +739,56 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	protected void onResume() 
 	{
 		super.onResume();
-		
+
+        createNoteCreatorOptionsFrameLayout();
+	}
+
+	private void createNoteCreatorOptionsFrameLayout()
+	{
 		noteCreatorFrameLayout = (FrameLayout)findViewById(R.id.notesLayoutManagerFrameLayout);
-		
-		noteCreatorFrameLayout.setBackgroundResource(R.drawable.day_selected);
-		
+
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
 
-        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, parentRelativeLayout.getId());
-		
+		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, parentRelativeLayout.getId());
+
 		params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, parentRelativeLayout.getId());
-		
+
 		params.setMargins(10, 0, 40, 80);
-		
+
 		noteCreatorFrameLayout.setLayoutParams(params);
-		
+
 		ImageView button = new ImageView(this);
-		
-		button.setImageDrawable(getResources().getDrawable(R.drawable.color_picker_icon));
-		
+
+		button.setImageDrawable(getResources().getDrawable(R.drawable.minote_plus));
+
 		button.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 createNoteTypeButtons();
             }
         });
-		
+
 		noteCreatorFrameLayout.addView(button);
 	}
 
 	private void createNoteTypeButtons()
 	{
-		createListNoteFrameLayout();
-		
-		createParagraphNoteFrameLayout();
-		
-		createImageNoteFragment();
-		
-		createCalendarFrameLayout();
-		
-		createEventFrameLayout();
+        if(isNoteTabSelected)
+        {
+            createListNoteFrameLayout();
+
+            createParagraphNoteFrameLayout();
+
+            createImageNoteFragment();
+        }
+		else
+        {
+            createCalendarFrameLayout();
+
+            createEventFrameLayout();
+        }
 		
 		areNoteButtonCreated = !areNoteButtonCreated;
 	}
@@ -709,7 +799,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			listNoteFrameLayout = (FrameLayout)findViewById(R.id.listNoteFrameLayout);
 			
-			listNoteFrameLayout.setBackgroundResource(R.drawable.day_selected);
+//			listNoteFrameLayout.setBackgroundResource(R.drawable.day_selected);
 			
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
 			
@@ -723,7 +813,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			
 			ImageView button = new ImageView(this);
 			
-			button.setImageDrawable(getResources().getDrawable(R.drawable.professional_pa_list_view1));
+			button.setImageDrawable(getResources().getDrawable(R.drawable.minote_list));
 			
 			button.setOnClickListener(new OnClickListener() {
 				
@@ -748,7 +838,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			eventFrameLayout = (FrameLayout)findViewById(R.id.eventFrameLayout);
 			
-			eventFrameLayout.setBackgroundResource(R.drawable.day_selected);
+//			eventFrameLayout.setBackgroundResource(R.drawable.day_selected);
 			
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
 			
@@ -762,14 +852,14 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			
 			ImageView button = new ImageView(this);
 			
-			button.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_event));
+			button.setImageDrawable(getResources().getDrawable(R.drawable.minote_reminder));
 			
 			button.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) 
 				{
-					createListNote();
+					createEventDialog();
 				}
 			});
 			
@@ -781,13 +871,20 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		}
 	}
 
-	private void createParagraphNoteFrameLayout() 
+    public void createEventDialog()
+    {
+        new EventCreationUI(this).createEventUI(false);
+    }
+
+
+
+    private void createParagraphNoteFrameLayout()
 	{
 		if(paragraphNoteFrameLayout == null)
 		{
 			paragraphNoteFrameLayout = (FrameLayout)findViewById(R.id.paragraphNoteFrameLayout);
 			
-			paragraphNoteFrameLayout.setBackgroundResource(R.drawable.day_selected);
+//			paragraphNoteFrameLayout.setBackgroundResource(R.drawable.day_selected);
 			
 //	        paragraphNoteFrameLayout.setBackgroundColor(Color.TRANSPARENT);
 			
@@ -803,7 +900,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			
 			ImageView button = new ImageView(this);
 			
-			button.setImageDrawable(getResources().getDrawable(R.drawable.professional_pa_paragraph_view1));
+			button.setImageDrawable(getResources().getDrawable(R.drawable.minote_paragraph));
 			
 			button.setOnClickListener(new OnClickListener() {
 				
@@ -828,7 +925,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		{
 			imageNoteFrameLayout = (FrameLayout)findViewById(R.id.imageNoteFrameLayout);
 			
-			imageNoteFrameLayout.setBackgroundResource(R.drawable.day_selected);
+//			imageNoteFrameLayout.setBackgroundResource(R.drawable.day_selected);
 			
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
 			
@@ -842,7 +939,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 			
 			ImageView button = new ImageView(this);
 			
-			button.setImageDrawable(getResources().getDrawable(R.drawable.professional_pa_camera));
+			button.setImageDrawable(getResources().getDrawable(R.drawable.minote_camera));
 			
 			button.setOnClickListener(new OnClickListener() 
 			{
@@ -865,39 +962,37 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 	{
 		if(calendarFrameLayout == null)
 		{
-			calendarFrameLayout = (FrameLayout)findViewById(R.id.calendarFrameLayout);
-			
-			calendarFrameLayout.setBackgroundResource(R.drawable.day_selected);
+			calendarFrameLayout = (FrameLayout) findViewById(R.id.calendarFrameLayout);
+
+//			calendarFrameLayout.setBackgroundResource(R.drawable.day_selected);
 			
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
+
+            params.addRule(RelativeLayout.ABOVE, R.id.notesLayoutManagerFrameLayout);
+
+            params.addRule(RelativeLayout.ALIGN_LEFT, R.id.notesLayoutManagerFrameLayout);
+
+            params.setMargins(10, 0, 40, 30);
+
+            calendarFrameLayout.setLayoutParams(params);
+
+            ImageView button = new ImageView(this);
+
+            button.setImageDrawable(getResources().getDrawable(R.drawable.minote_calendar));
 			
-			params.addRule(RelativeLayout.ABOVE, R.id.imageNoteFrameLayout);
-			
-			params.addRule(RelativeLayout.ALIGN_LEFT, R.id.imageNoteFrameLayout);
-			
-			params.setMargins(10, 0, 40, 30);
-			
-			calendarFrameLayout.setLayoutParams(params);
-			
-			ImageView button = new ImageView(this);
-			
-			button.setImageDrawable(getResources().getDrawable(R.drawable.calendar_image));
-			
-			button.setOnClickListener(new OnClickListener()
-			{
-				@Override
-				public void onClick(View v) 
-				{
-					createCalendarView();
-				}
-			});
+			button.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    createCalendarView();
+                }
+            });
 			
 			calendarFrameLayout.addView(button);
-		}
+        }
 		else
 		{
 			setFrameLayoutVisibilityState(calendarFrameLayout);
-		}
+        }
 	}
 	
 	private void setFrameLayoutVisibilityState(FrameLayout frameLayout) 
@@ -912,31 +1007,38 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		}
 	}
 
-	private void createNotes()
+	private void createNotes(boolean areNotesToBeCreated)
 	{
-		List<TextNote> parsedNotes = NotesDBManager.getInstance().readNotes();
+        clearAllLayouts();
 
-		Map<Long, Note> notesMap = new TreeMap<Long, Note>();
+        List<TextNote> parsedNotes = NotesDBManager.getInstance().readNotes();
 
-		for(int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++)
-		{
-			TextNote note = parsedNotes.get(i);
+        Map<Long, Note> notesMap = new TreeMap<Long, Note>();
 
-            if(note != null)
-			{
-				 notesMap.put(note.getCreationTime(), note);
-			}
-		}
-
-		List<Event> events = CalendarDBManager.getInstance().readAllEvents();
-
-        for(int i = 0, size = events == null ? 0 : events.size(); i < size; i++)
+        if(areNotesToBeCreated)
         {
-            Event note = events.get(i);
-
-            if (note != null)
+            for(int i = 0, size = parsedNotes == null ? 0 : parsedNotes.size(); i < size; i++)
             {
-                notesMap.put(note.getCreationTime(), note);
+                TextNote note = parsedNotes.get(i);
+
+                if(note != null)
+                {
+                    notesMap.put(note.getCreationTime(), note);
+                }
+            }
+        }
+        else
+        {
+            List<Event> events = CalendarDBManager.getInstance().readAllEvents();
+
+            for(int i = 0, size = events == null ? 0 : events.size(); i < size; i++)
+            {
+                Event note = events.get(i);
+
+                if (note != null)
+                {
+                    notesMap.put(note.getCreationTime(), note);
+                }
             }
         }
 
@@ -953,7 +1055,18 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
         }
 	}
 
-	@Override
+    private void clearAllLayouts()
+    {
+        for(LinearLayout layout : linearLayouts)
+        {
+            if(layout != null)
+            {
+                layout.removeAllViews();
+            }
+        }
+    }
+
+    @Override
 	protected void onPause() 
 	{
 		super.onPause();
@@ -1119,11 +1232,13 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		return availableIndex;
 	}
 	
-	public void filterNotes(Set<Integer> noteIds) 
+	private void filterNotes(Set<Integer> noteIds)
 	{
 		Set<Integer> childFrameIds = childFrames.keySet();
-		
-		if(childFrameIds != null)
+
+        fiterNoteIds = noteIds;
+
+        if(childFrameIds != null)
 		{
 			for(int id : childFrameIds)
 			{
@@ -1132,7 +1247,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 				if(!noteIds.contains(id))
 				{
 					isGone = true;
-				}
+                }
 				
 				FrameLayout frameLayout = childFrames.get(id);
 				
@@ -1141,13 +1256,12 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 					if(isGone)
 					{
 						frameLayout.setVisibility(View.GONE);
-					}
+                    }
 					else
 					{
 						frameLayout.setVisibility(View.VISIBLE);
-					}
+                    }
 				}
-				
 			}
 		}
 	}
@@ -1249,7 +1363,58 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
 		}
 	}
 
-    private class NotesCreatorThread implements Runnable
+	@Override
+	public void recieveNotification(byte command, Event event)
+    {
+        if(command == DBChangeListener.DELETE_COMMAND)
+		{
+			FrameLayout layout =  childFrames.get(event.getId());
+
+			if(layout != null)
+			{
+				for(int i = 0; i < linearLayouts.size(); i++)
+				{
+					LinearLayout linearLayout = linearLayouts.get(i);
+
+					if(linearLayout != null)
+					{
+                        linearLayout.removeView(layout);
+					}
+				}
+			}
+		}
+		else if(command == DBChangeListener.INSERT_COMMAND)
+		{
+            createFragmentForNote(event);
+
+            changeTabs(false);
+        }
+		else if(command == DBChangeListener.UPDATE_COMMAND)
+		{
+            //TODO this use case to be checked.
+
+            FrameLayout layout =  childFrames.get(event.getId());
+
+			if(layout != null)
+			{
+				for(int i = 0; i < linearLayouts.size(); i++)
+				{
+					LinearLayout linearLayout = linearLayouts.get(i);
+
+					if(linearLayout != null)
+					{
+						linearLayout.removeView(layout);
+					}
+				}
+			}
+
+			createFragmentForNote(event);
+
+            changeTabs(false);
+        }
+	}
+
+	private class NotesCreatorThread implements Runnable
     {
         private List<Note> remainingNotesToBeCreated = null;
 
@@ -1265,11 +1430,7 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
             {
                 try
                 {
-                    System.out.println("call -> start waiting for thread"+remainingNotesToBeCreated.size());
-
                     lock.wait();
-
-                    System.out.println("call -> wait over executing");
 
                     for(Note note : remainingNotesToBeCreated)
                     {
@@ -1282,5 +1443,107 @@ public class NotesLayoutManagerActivity extends Activity implements ColourPicker
                 }
             }
         }
+    }
+
+    class TabListener<T extends Fragment> implements ActionBar.TabListener
+    {
+        private Fragment mFragment;
+        private final Activity mActivity;
+        private final String mTag;
+        private final Class<T> mClass;
+
+        /** Constructor used each time a new tab is created.
+         * @param activity  The host Activity, used to instantiate the fragment
+         * @param tag  The identifier tag for the fragment
+         * @param clz  The fragment's Class, used to instantiate the fragment
+         */
+        private TabListener(Activity activity, String tag, Class<T> clz)
+        {
+            mActivity = activity;
+            mTag = tag;
+            mClass = clz;
+        }
+
+    /* The following are each of the ActionBar.TabListener callbacks */
+
+        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft)
+        {
+            // Check if the fragment is already initialized
+            if (mFragment == null)
+            {
+                // If not, instantiate and add it to the activity
+                mFragment = Fragment.instantiate(mActivity, mClass.getName());
+                ft.add(android.R.id.content, mFragment, mTag);
+            }
+            else
+            {
+                // If it exists, simply attach it in order to show it
+                ft.attach(mFragment);
+            }
+
+            if(mTag.equals(MiNoteConstants.NOTES_TAB))
+            {
+                createNotes(true);
+
+                isNoteTabSelected = true;
+
+                if(areNoteButtonCreated)
+                {
+                    makeNoteButtonsInvisible();
+                }
+            }
+            else if(mTag.equals(MiNoteConstants.EVENTS_TAB))
+            {
+                createNotes(false);
+
+                isNoteTabSelected = false;
+
+                if(areNoteButtonCreated)
+                {
+                    makeNoteButtonsInvisible();
+                }
+            }
+        }
+
+        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+            if (mFragment != null) {
+                // Detach the fragment, because another one is being attached
+                ft.detach(mFragment);
+            }
+        }
+
+        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+            // User selected the already selected tab. Usually do nothing.
+        }
+    }
+
+    private void makeNoteButtonsInvisible()
+    {
+        if(calendarFrameLayout != null)
+        {
+            calendarFrameLayout.setVisibility(View.GONE);
+        }
+
+        if(eventFrameLayout != null)
+        {
+            eventFrameLayout.setVisibility(View.GONE);
+        }
+
+        if(listNoteFrameLayout != null)
+        {
+            listNoteFrameLayout.setVisibility(View.GONE);
+        }
+
+        if(paragraphNoteFrameLayout != null)
+        {
+            paragraphNoteFrameLayout.setVisibility(View.GONE);
+        }
+
+        if(imageNoteFrameLayout != null)
+        {
+            imageNoteFrameLayout.setVisibility(View.GONE);
+        }
+
+        areNoteButtonCreated = false;
     }
 }

@@ -55,7 +55,7 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 		
 		TextView editText = (TextView) convertView.findViewById(R.id.compositeControlTextBox);
 		
-		ImageButton bulletPointImage = (ImageButton) convertView.findViewById(R.id.compositeControlBulletButton);
+		ImageView bulletPointImage = (ImageView) convertView.findViewById(R.id.compositeControlBulletButton);
 		
 		final ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
 		
@@ -197,7 +197,7 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 			{
 				final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 				params.addRule(RelativeLayout.BELOW, editText.getId());
-				params.height = LayoutParams.WRAP_CONTENT;
+				params.height = 350;
 				params.width = LayoutParams.MATCH_PARENT;
 				imageView.setLayoutParams(params);
 			}

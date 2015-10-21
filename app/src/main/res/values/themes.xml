@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomActionBarTheme"
+        parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:actionOverflowButtonStyle">@style/MyCustomTheme</item>
+        <item name="android:actionModeBackground">@drawable/selectable_day_layout_border</item>
+
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="MyActionBar"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/minotePrimaryColor</item>
+        <item name="android:height">@dimen/actionbar_height</item>
+    </style>
+
+    <style name="MyCustomTheme">
+        <item name="android:src">@drawable/minote_overflow</item>
+    </style>
+
+
+</resources>

@@ -6,5 +6,5 @@ public interface DBchangePublisher
 {
     void addDataChangeListener(DBChangeListener listener);
     
-	void notifyAllListeners(Event event);
+	void notifyAllListeners(byte command, Event event);
 }

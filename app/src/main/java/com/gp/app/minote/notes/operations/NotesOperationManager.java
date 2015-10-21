@@ -74,7 +74,7 @@ public class NotesOperationManager
 				}
 				else
 				{
-					CalendarDBManager.getInstance().deleteEvent(selectNoteId);
+					CalendarDBManager.getInstance().deleteEvent((Event)note);
 				}
 			}
 		}
@@ -218,10 +218,10 @@ public class NotesOperationManager
 		addSelectedNote(noteId);
 	}
 
-	public void createEventNote(Event event) 
-	{
-		MiNoteParameters.getNotesActivity().createFragmentForNote(event);
-	}
+//	public void createEventNote(Event event)
+//	{
+////		MiNoteParameters.getNotesActivity().createFragmentForNote(event);
+//	}
 
 	public void shareSelectedNote(boolean shareWithFriends)
 	{

@@ -115,29 +115,47 @@ public class ImageLocationPathManager
 		return mostRecentImageFilePath;
 	}
 
-	public void createAndSaveImage(Bitmap imageNote)
-	{
-        String filePath = imageDirectoryPath + MiNoteUtil.createImageNameFromTime()+".jpeg";
+//	public void createAndSaveImage(Bitmap imageNote)
+//	{
+//        String filePath = imageDirectoryPath + MiNoteUtil.createImageNameFromTime()+".jpeg";
+//
+//		OutputStream imagefile = null;
+//
+//		//TODO improve
+//		try
+//		{
+//			imagefile = new FileOutputStream(filePath);
+//		}
+//		catch (FileNotFoundException e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		// Write 'bitmap' to file using JPEG and 80% quality hint for JPEG:
+//		imageNote.compress(CompressFormat.JPEG, 100, imagefile);
+//
+////		compressImage(filePath);
+//
+//        try
+//        {
+//            imagefile.flush();
+//
+//            imagefile.close();
+//        }
+//        catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+//	}
 
-		OutputStream imagefile = null;
-		
-		//TODO improve
-		try 
-		{
-			imagefile = new FileOutputStream(filePath);
-		} 
-		catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-		}
-		
-		// Write 'bitmap' to file using JPEG and 80% quality hint for JPEG:
-		imageNote.compress(CompressFormat.JPEG, 100, imagefile);
-		
-		compressImage(filePath);
-		
-		mostRecentImageFilePath = filePath;
-	}
+    public String getImagePath()
+    {
+        String filePath = imageDirectoryPath + MiNoteUtil.createImageNameFromTime() + ".jpeg";
+
+        mostRecentImageFilePath = filePath;
+
+        return filePath;
+    }
 
 	public String compressImage(String filePath) {
 

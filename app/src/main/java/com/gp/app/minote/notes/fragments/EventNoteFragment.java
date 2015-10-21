@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.gp.app.minote.R;
 import com.gp.app.minote.data.Event;
-import com.gp.app.minote.interfaces.MiNoteConstants;
+import com.gp.app.minote.util.MiNoteConstants;
 import com.gp.app.minote.notes.operations.NotesOperationManager;
 
 public class EventNoteFragment extends Fragment

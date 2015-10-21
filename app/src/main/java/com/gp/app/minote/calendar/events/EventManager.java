@@ -36,7 +36,7 @@ public class EventManager
 		{
 			CalendarDBManager.getInstance().saveEventToDatabase(event);
 			
-			NotesOperationManager.getInstance().createEventNote(event);
+//			NotesOperationManager.getInstance().createEventNote(event);
 		}
 		
 		AlarmRequestCreator.createAlarmRequest(event.getStartDate(), event.getStartTime());

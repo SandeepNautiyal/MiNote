@@ -3,12 +3,11 @@ package com.gp.app.minote.layout.manager;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -18,33 +17,24 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.gp.app.minote.R;
-import com.gp.app.minote.backend.entities.eventEntityApi.EventEntityApi;
-import com.gp.app.minote.backend.entities.eventEntityApi.model.EventEntity;
-import com.gp.app.minote.backend.messaging.Messaging;
 import com.gp.app.minote.colorpicker.ColorPickerCreator;
 import com.gp.app.minote.colorpicker.ColourPickerChangeListener;
 import com.gp.app.minote.data.Note;
 import com.gp.app.minote.data.NoteItem;
 import com.gp.app.minote.data.TextNote;
-import com.gp.app.minote.interfaces.MiNoteConstants;
+import com.gp.app.minote.util.MiNoteConstants;
 import com.gp.app.minote.notes.database.NotesDBManager;
 import com.gp.app.minote.notes.fragments.NotesManager;
 import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.util.MiNoteParameters;
 import com.gp.app.minote.util.MiNoteUtil;
 
-import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ParagraphNoteCreatorActivity extends Activity implements ColourPickerChangeListener
 {
@@ -141,9 +131,9 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 			}
 		}
 
-        ActionBar actionBar = getActionBar();
-		
-		actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(120, 100, 255)));
+//        ActionBar actionBar = getActionBar();
+//
+//		actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(120, 100, 255)));
 	}
 	
 	@Override
@@ -172,8 +162,15 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 		
 		if (id == R.id.action_click_photo) 
 		{
-            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); 
-            
+			String filename = ImageLocationPathManager.getInstance().getImagePath();
+
+			Uri imageUri = Uri.fromFile(new File(filename));
+
+			Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+			cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
+					imageUri);
+
             startActivityForResult(cameraIntent, MiNoteConstants.TAKE_PHOTO_CODE);
 		}
 		else if(id == R.id.pickColor)
@@ -187,22 +184,19 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-	    if (requestCode == MiNoteConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK) 
+		//TODO image deletion to be checked
+	    if (requestCode == MiNoteConstants.TAKE_PHOTO_CODE && resultCode == RESULT_OK)
 	    {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-	    	
-	    	ImageLocationPathManager.getInstance().createAndSaveImage(photo);
-	    	
 	    	String imagePath = ImageLocationPathManager.getInstance().getMostRecentImageFilePath();
-	    	
+
 	    	Bitmap image = ImageLocationPathManager.getInstance().getImage(imagePath, false);
-	        
+
 	    	String imageName = ImageLocationPathManager.getInstance().getImageName(imagePath);
-	    
+
 	        ImageView imageView = (ImageView)findViewById(R.id.paragraphNoteImportanceView);
-	        
+
 	        imageView.setImageBitmap(image);
-	        
+
 	    	listItem.setImageName(imageName);
 	    }
 	}

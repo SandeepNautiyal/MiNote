@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import com.gp.app.minote.R;
 import com.gp.app.minote.data.TextNote;
-import com.gp.app.minote.interfaces.MiNoteConstants;
+import com.gp.app.minote.util.MiNoteConstants;
 
 public class TextNoteFragment extends ListFragment
 {

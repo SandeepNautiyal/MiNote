@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.gp.app.minote.data.Event;
 import com.gp.app.minote.data.Note;
 import com.gp.app.minote.data.TextNote;
-import com.gp.app.minote.interfaces.MiNoteConstants;
+import com.gp.app.minote.util.MiNoteConstants;
 
 public class FragmentCreationManager extends ListFragment
 {

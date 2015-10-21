@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.os.AsyncTask;
 
 import com.gp.app.minote.calendar.interfaces.DBChangeListener;
 import com.gp.app.minote.calendar.interfaces.DBchangePublisher;
@@ -69,13 +70,11 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
     
 	private void createTables(SQLiteDatabase db){
 		db.execSQL("CREATE TABLE " + Event.EVENTS_TABLE_NAME + "(" + Event.ID + " integer primary key autoincrement, " +
-				Event.EVENT_NAME + " TEXT, " + Event.LOCATION + " TEXT, " + Event.CREATION_TIME + " INTEGER, "
-				+ Event.START_DAY + " INTEGER, "
-				+ Event.START_TIME + " INTEGER, " + Event.END_DAY + " INTEGER, "
-				+ Event.END_TIME + " INTEGER, "
-				+ Event.IS_ALARM +" INTEGER);");
-		
-		System.out.println("Create table executed");
+                Event.EVENT_NAME + " TEXT, " + Event.LOCATION + " TEXT, " + Event.CREATION_TIME + " INTEGER, "
+                + Event.START_DAY + " INTEGER, "
+                + Event.START_TIME + " INTEGER, " + Event.END_DAY + " INTEGER, "
+                + Event.END_TIME + " INTEGER, "
+                + Event.IS_ALARM + " INTEGER);");
 	}
 
 	static 
@@ -105,7 +104,7 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
 				 Event.EVENTS_TABLE_NAME,null,
 				 values);
 		
-    	notifyAllListeners(event);
+    	notifyAllListeners(DBChangeListener.INSERT_COMMAND, event);
 	}
 	
 	public List<Event> readAllEvents()
@@ -158,6 +157,7 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
             Event.EVENT_NAME,
             Event.LOCATION,
             Event.IS_ALARM,
+			Event.CREATION_TIME,
     	    };
 
     	// How you want the results sorted in the resulting Cursor
@@ -216,16 +216,15 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
             Event.EVENT_NAME,
             Event.LOCATION,
             Event.IS_ALARM,
-    	    };
+            Event.CREATION_TIME,
+        };
 
     	// How you want the results sorted in the resulting Cursor
     	String sortOrder =
     			Event.START_TIME + " DESC";
 
     	String where = Event.START_DAY+"=?"+" AND "+Event.START_TIME+"=?";
-    	
-    	System.out.println("readEvents -> startTime="+startTime+"startDay="+startDay);
-    	
+
     	Cursor cursor = db.query(
     			Event.EVENTS_TABLE_NAME,  // The table to query
     	    projection,                               // The columns to return
@@ -262,13 +261,13 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
     	return events;
 	}
 	
-	public int deleteEvent(int eventId) 
+	public void deleteEvent(Event event)
 	{
 		SQLiteDatabase db = getWritableDatabase();
 
-		int result = db.delete(Event.EVENTS_TABLE_NAME, Event.ID + "=?", new String[]{Integer.toString(eventId)});
-	
-		return result;
+		db.delete(Event.EVENTS_TABLE_NAME, Event.ID + "=?", new String[]{Integer.toString(event.getId())});
+
+        notifyAllListeners(DBChangeListener.DELETE_COMMAND, event);
 	}
 
 	public long updateEventInDatabase(Event event)
@@ -289,7 +288,7 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
 
 		long newRowId = db.update(Event.EVENTS_TABLE_NAME, values, where, new String[]{String.valueOf(event.getId())});
     	
-    	notifyAllListeners(event);
+    	notifyAllListeners(DBChangeListener.UPDATE_COMMAND, event);
     	
     	return newRowId;
 	}
@@ -304,11 +303,13 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
 	}
 
 	@Override
-	public void notifyAllListeners(Event event)
+	public void notifyAllListeners(byte command, Event event)
 	{
 		for(DBChangeListener listener : listsners)
 		{
-			listener.recieveNotification(event);
+			System.out.println("notifyAllListeners -> listener="+listener);
+
+			listener.recieveNotification(command, event);
 		}
 	}
 
@@ -378,20 +379,56 @@ public class CalendarDBManager extends SQLiteOpenHelper implements DBchangePubli
 	{
 		List<Event> events = readAllEvents();
 		
-		Set<Integer> eventIds = new HashSet<Integer>();
-		
-        for(int i = 0; i < events.size(); i++)
-        {
-        	Event event = events.get(i);
-        	
-        	if(event.getEventName().contains(query) || event.getLocation().contains(query) ||
-        		event.getStartDate().contains(query) || event.getStartTime().contains(query) ||
-        		    event.getEndDate().contains(query) || event.getEndTime().contains(query))
-        	{
-            	eventIds.add(events.get(i).getId());
-        	}
-        }
-        
+		Set<Integer> eventIds = null;
+
+
+			eventIds = new HashSet<Integer>();
+
+			for(int i = 0; i < events.size(); i++)
+			{
+				Event event = events.get(i);
+
+				if(query != null)
+				{
+					if(event.getEventName().contains(query) || event.getLocation().contains(query) ||
+							event.getStartDate().contains(query) || event.getStartTime().contains(query) ||
+							event.getEndDate().contains(query) || event.getEndTime().contains(query))
+					{
+						eventIds.add(events.get(i).getId());
+					}
+				}
+				else
+				{
+					eventIds.add(events.get(i).getId());
+				}
+			}
+
 		return eventIds;
+	}
+
+	private class NotifyListeners extends AsyncTask<Void,Void, Void>
+	{
+		private byte command;
+
+		private Event event;
+
+		private final DBChangeListener listener;
+
+		private NotifyListeners(byte command, Event event, DBChangeListener listener)
+		{
+			this.command = command;
+
+			this.event = event;
+
+			this.listener = listener;
+		}
+
+		@Override
+		protected Void doInBackground(Void... params)
+		{
+			listener.recieveNotification(command, event);
+
+			return  null;
+		}
 	}
 }

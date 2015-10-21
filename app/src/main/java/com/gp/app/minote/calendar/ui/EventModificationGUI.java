@@ -15,7 +15,7 @@ import com.gp.app.minote.data.Event;
 
 import java.util.List;
 
-public class EventModificationGUI implements DBChangeListener
+public class EventModificationGUI
 {
 	private EventListAdapater listAdapter = null;
 	
@@ -23,9 +23,9 @@ public class EventModificationGUI implements DBChangeListener
 	
 	public EventModificationGUI()
 	{
-		CalendarDBManager.getInstance().addDataChangeListener(this);
+//		CalendarDBManager.getInstance().addDataChangeListener(this);
 	}
-	
+
     public void createEventModificationList(Context context, int day, int month, int year)
     {
     	String startDay = pad(day)+"/"+ pad(month)+"/"+Integer.toString(year);
@@ -58,11 +58,11 @@ public class EventModificationGUI implements DBChangeListener
 		   return "0" + String.valueOf(c);
 	}
 
-	@Override
-	public void recieveNotification(Event event) 
-	{
-		listAdapter.remove(event);
-		listAdapter.add(event);
-		listAdapter.notifyDataSetChanged();
-	}
+//	@Override
+//	public void recieveNotification(Event event)
+//	{
+//		listAdapter.remove(event);
+//		listAdapter.add(event);
+//		listAdapter.notifyDataSetChanged();
+//	}
 }

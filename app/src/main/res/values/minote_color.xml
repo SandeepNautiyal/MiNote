@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="minotePrimaryColor" type="color">#7864FF</item>
+    <item name="minoteTabColor" type="color">#A094EE</item>
+</resources>

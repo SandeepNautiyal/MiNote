@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dayRelativeLayout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:minHeight="@dimen/min_cell_height"
-    android:minWidth="@dimen/min_cell_width"
-    android:background="@drawable/selectable_day_layout_border" >
+    android:layout_width="90dip"
+    android:layout_height="120dip">
 
-    <TextView android:id="@+id/dayTextView1"
-        android:layout_width="@dimen/text_height_width"
-        android:layout_height="@dimen/text_height_width"
+   <TextView android:id="@+id/eventTextView"
+        android:layout_width="15dip"
+        android:layout_height="15dip"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:background="#00ccdd"
-        android:layout_margin="2.1dp"
-        android:visibility="invisible"
+        android:layout_alignParentLeft="true"
+        android:textSize="12dip"
         android:gravity="center"
+        android:padding="1dip"
+        android:layout_margin="1dip"
+        android:visibility="invisible"
         android:textAppearance="?android:attr/textAppearanceSmall"/>
     
     <TextView
-        android:id="@+id/dayTextView2"
-        android:layout_width="30dip"
-        android:layout_height="30dp"
-        android:layout_below="@+id/dayTextView1"
+        android:id="@+id/dayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_gravity="center"
         android:gravity="center"
+        android:layout_below="@+id/eventTextView"
+        android:minWidth="35dp"
+        android:minHeight="40dp"
         android:textAppearance="?android:attr/textAppearanceSmall"/>
 </RelativeLayout>

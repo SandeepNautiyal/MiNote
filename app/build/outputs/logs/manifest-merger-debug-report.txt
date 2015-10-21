@@ -273,7 +273,7 @@ MERGED from [com.android.support:support-v4:22.2.0] E:\New Eclipse Workspace\MiN
 	android:icon
 		ADDED from E:\New Eclipse Workspace\MiNote\app\src\main\AndroidManifest.xml:33:9-61
 	android:theme
-		ADDED from E:\New Eclipse Workspace\MiNote\app\src\main\AndroidManifest.xml:35:9-56
+		ADDED from E:\New Eclipse Workspace\MiNote\app\src\main\AndroidManifest.xml:35:9-52
 activity#com.gp.app.minote.start.StartMiNoteActivity
 ADDED from E:\New Eclipse Workspace\MiNote\app\src\main\AndroidManifest.xml:36:9-44:20
 	android:label

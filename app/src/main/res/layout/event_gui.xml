@@ -1,5 +1,3 @@
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,25 +6,26 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-     tools:context="com.example.ourproject.MainActivity" >
+    android:paddingTop="@dimen/activity_vertical_margin">
 
 
     <EditText
-        android:id="@+id/textView1"
+        android:id="@+id/eventName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="2dip"
         android:background="@drawable/edittext_selector"
         android:layout_alignParentTop="true"
-        android:hint="Event" />
+        android:hint=" Event" />
     <EditText
-        android:id="@+id/textView2"
+        android:id="@+id/eventLocation"
         android:background="@drawable/edittext_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="2dip"
         android:layout_alignParentTop="true"
         android:layout_marginTop="15dp"
-        android:hint="Description" />
+        android:hint=" Description" />
 
 <TableLayout
         android:layout_width="fill_parent"
@@ -52,25 +51,6 @@
              android:layout_weight=".15"
              />
         </TableRow>
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/cell_shape1" 
-            android:weightSum="1"
-            >
-
-            <TextView
-                android:id="@+id/alarm"
-                android:layout_weight=".85"
-                android:text="Alarm"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                />
-
-         <CheckBox 
-            android:layout_weight=".15"
-             />
-        </TableRow>
          <TableRow
             android:id="@+id/tableRow3"
             android:layout_width="fill_parent"
@@ -86,8 +66,9 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 />
 
-         <CheckBox 
-            android:layout_weight=".15"
+         <CheckBox
+             android:id="@+id/notificationDayCheck"
+             android:layout_weight=".15"
              />
         </TableRow>
         <TableRow
@@ -99,29 +80,20 @@
 
     <LinearLayout 
          android:id="@+id/l1"
-        android:orientation="vertical"
-        android:layout_weight=".5" 
-        android:background="@drawable/cell_shape1" 
-       android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true">
-            <TextView
-                android:id="@+id/tv1"
-                android:text="Start Date"
+         android:orientation="vertical"
+         android:layout_weight=".5"
+         android:background="@drawable/cell_shape1"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:clickable="true">
+         <TextView
+                android:id="@+id/startDate"
+                android:text=" Start Date"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                />
-                <TextView
-                android:id="@+id/tv2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                />
-          
-    
-    
+                android:layout_height="match_parent"
+                android:background="#aabcde"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
     </LinearLayout>
 
 
@@ -134,21 +106,13 @@
         android:layout_height="wrap_content"
         android:clickable="true">
             <TextView
-                android:id="@+id/tv3"
-                android:text="End Date"
+                android:id="@+id/endDate"
+                android:text=" End Date"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 />
-                <TextView
-                android:id="@+id/tv4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                />
-          
-    
     
     </LinearLayout>
 
@@ -169,22 +133,13 @@
         android:layout_height="wrap_content"
         android:clickable="true">
             <TextView
-                android:id="@+id/tv5"
-                android:text="Start Time"
+                android:id="@+id/startTime"
+                android:text=" Start Time"
                 android:textStyle="bold"
-                android:onClick="showClock"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 />
-                <TextView
-                android:id="@+id/tv6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                />
-          
-    
     
     </LinearLayout>
 
@@ -198,22 +153,14 @@
         android:layout_height="wrap_content"
         android:clickable="true">
             <TextView
-                android:id="@+id/tv7"
-                android:text="End Time"
+                android:id="@+id/endTime"
+                android:text=" End Time"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 />
-                <TextView
-                android:id="@+id/tv8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                />
-          
-    
-    
+
     </LinearLayout>
 
         </TableRow>
@@ -268,5 +215,6 @@
              
 </LinearLayout>
 </LinearLayout>
+
 </LinearLayout>
 

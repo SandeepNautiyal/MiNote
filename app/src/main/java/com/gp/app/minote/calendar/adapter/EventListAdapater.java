@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.gp.app.minote.R;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
-import com.gp.app.minote.calendar.ui.EventCreationGUI;
+import com.gp.app.minote.calendar.ui.EventCreationUI;
 import com.gp.app.minote.data.Event;
 
 import java.util.List;
@@ -75,7 +75,7 @@ public class EventListAdapater extends ArrayAdapter<Event>
 				
 				notifyDataSetChanged();
 				
-				CalendarDBManager.getInstance().deleteEvent(event.getId());
+				CalendarDBManager.getInstance().deleteEvent(event);
 			}
 		});
         
@@ -84,27 +84,10 @@ public class EventListAdapater extends ArrayAdapter<Event>
 
 	private void createEventEditGUI(Event event) 
 	{
-		String date = event.getStartDate();
-		
-		String [] dateAsArray = date.split("/");
-		
-		EventCreationGUI eventCreationGUI = new EventCreationGUI();
-		
-		eventCreationGUI.createGuiForEventAddition(context, Integer.valueOf(dateAsArray[0]), Integer.valueOf(dateAsArray[1]), Integer.valueOf(dateAsArray[2]), EventCreationGUI.CREATE_GUI_IN_EDIT_MODE);
-		
-		eventCreationGUI.setEventId(event.getId());
-		
-		eventCreationGUI.setEventName(event.getEventName());
-		
-		eventCreationGUI.setLocation(event.getLocation());
-		
-		eventCreationGUI.setStartTime(event.getStartDate(), event.getStartTime());
-		
-		eventCreationGUI.setEndTime(event.getEndDate(), event.getEndTime());
-		
-		if(event.isAlarmActivated())
-		{
-			eventCreationGUI.activateAlarm();
-		}
+		EventCreationUI eventCreationGUI = new EventCreationUI(context);
+
+		eventCreationGUI.createEventUI(true);
+
+		eventCreationGUI.setEvent(event);
 	}
 }

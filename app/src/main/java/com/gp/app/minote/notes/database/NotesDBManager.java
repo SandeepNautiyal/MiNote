@@ -350,15 +350,25 @@ public class NotesDBManager extends SQLiteOpenHelper implements NotesSearch
 	{
 		Map<String, Integer> notesData = readNoteItems();
 		
-		Set<Integer> noteIds = new HashSet<Integer>();
+		Set<Integer> noteIds = null;
 
-		for (Entry<String, Integer> entry : notesData.entrySet())
+		if(query != null)
 		{
-			if (entry.getKey().toUpperCase(Locale.US).contains(query.toUpperCase(Locale.US))) 
+			noteIds = new HashSet<Integer>();
+
+			for (Entry<String, Integer> entry : notesData.entrySet())
 			{
-				noteIds.add(entry.getValue());
+				if (entry.getKey().toUpperCase(Locale.US).contains(query.toUpperCase(Locale.US)))
+				{
+					noteIds.add(entry.getValue());
+				}
 			}
 		}
+		else
+		{
+			noteIds = new HashSet<>(notesData.values());
+		}
+
 
 		return noteIds;
 	}

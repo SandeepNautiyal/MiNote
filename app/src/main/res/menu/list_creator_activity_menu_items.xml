@@ -3,41 +3,30 @@
     tools:context="com.gp.app.professionalpa.ListItemCreatorActivity" >
 
     <item android:id="@+id/pickColor"
-        android:icon="@drawable/color_picker_icon"
+        android:icon="@drawable/minote_color_picker"
         android:title="@string/pickColour"
         android:showAsAction="always" />
     
     <item android:id="@+id/clickPhoto"
-        android:icon="@drawable/professional_pa_camera"
+        android:icon="@drawable/minote_camera_white"
         android:title="@string/action_click_photo"
         android:showAsAction="always" />
     
     <item android:id="@+id/saveListNote"
-        android:icon="@drawable/save"
+        android:icon="@drawable/minote_save"
         android:title="@string/save"
         android:showAsAction="always"/>
     
-    <item android:id="@+id/action_create_paragraph_view"
-        android:icon="@drawable/professional_pa_paragraph_view1"
-        android:title="@string/action_create_list_view"
-        android:showAsAction="always" />
+    <!--<item android:id="@+id/action_search"-->
+        <!--android:icon="@drawable/minote_search"-->
+        <!--android:title="@string/action_search"-->
+        <!--android:showAsAction="always" />-->
     
-    <item android:id="@+id/action_search"
-        android:icon="@drawable/professional_pa_action_search"
-        android:title="@string/action_search"
-        android:showAsAction="always" />
-    
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
-    
-    <item
+    <!--<item
         android:id="@+id/action_clear_all_notes"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/clear_all_notes"/>
+        android:title="@string/clear_all_notes"/> -->
     
     <item
         android:id="@+id/action_exit_professional_pa_application"

@@ -79,8 +79,6 @@ public class ColourPickerAdapter extends ArrayAdapter<ColourProperties>
 			@Override
 			public void onClick(View view) 
 			{
-				System.out.println("onClick -> view="+view);
-				
 				((ColourPickerChangeListener)noteActivityContext).changeColour(view.getId());
 				
 				parentDialog.dismiss();

@@ -51,6 +51,8 @@ public class StartMiNoteActivity extends Activity {
 			startLayoutManager.setAction("START_LAYOUT_MANAGER_ACTIVITY");
 
 			startActivity(startLayoutManager);
+
+			finish();
 		}
 
 		setContentView(R.layout.activity_start_professional_pa_application);
@@ -98,7 +100,9 @@ public class StartMiNoteActivity extends Activity {
 		startLayoutManager.setAction("START_LAYOUT_MANAGER_ACTIVITY");
 
 		startActivity(startLayoutManager);
-	}
+
+        finish();
+    }
 
 	//TODO to be removed.
 	class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String>

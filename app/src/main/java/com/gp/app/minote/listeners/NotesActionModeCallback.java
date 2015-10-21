@@ -1,9 +1,11 @@
 package com.gp.app.minote.listeners;
 
+import android.graphics.Color;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.gp.app.minote.R;
 import com.gp.app.minote.notes.operations.NotesOperationManager;
@@ -20,7 +22,7 @@ public class NotesActionModeCallback implements ActionMode.Callback
         MenuInflater inflater = mode.getMenuInflater();
     
         inflater.inflate(R.menu.contextual_menu, menu);
-        
+
         return true;
     }
 

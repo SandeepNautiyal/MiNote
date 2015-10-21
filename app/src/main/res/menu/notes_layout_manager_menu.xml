@@ -3,7 +3,7 @@
     tools:context="com.gp.app.professionalpa.NotesLayoutManagerActivity" >
 
     <item android:id="@+id/actionSearch"
-        android:icon="@drawable/professional_pa_action_search"
+        android:icon="@drawable/minote_search"
         android:title="@string/action_search"
         android:showAsAction="collapseActionView|ifRoom"
         android:actionViewClass="android.widget.SearchView"/>
