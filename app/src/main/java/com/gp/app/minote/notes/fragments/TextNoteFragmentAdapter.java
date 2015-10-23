@@ -161,9 +161,9 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 				
 				editText.setTypeface(null, Typeface.BOLD);
 				
-				editText.setBackgroundResource(R.drawable.note_title_border);
+//				editText.setBackgroundResource(R.drawable.note_title_border);
 				
-				editText.setBackgroundColor(Color.rgb(120, 100, 255));
+//				editText.setBackgroundColor(Color.rgb(120, 100, 255));
 			}
 			
 		    editText.setLayoutParams(params);

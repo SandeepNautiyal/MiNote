@@ -13,6 +13,7 @@
         parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/minotePrimaryColor</item>
         <item name="android:height">@dimen/actionbar_height</item>
+        <item name="android:backgroundSplit">@color/minotePrimaryColor</item>
     </style>
 
     <style name="MyCustomTheme">

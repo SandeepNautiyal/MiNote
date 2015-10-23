@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -24,9 +23,9 @@ public class ListViewItemLayout extends RelativeLayout
 	
 	private EditText textView = null;
 	
-	private ImageView imageView = null;
+	private ImageView contentImageView = null;
 	
-	private ImageView importanceImageButton = null;
+	private ImageView deleteImageView = null;
 	
 //	private ImageButton alarmImageButton = null;
 	
@@ -58,9 +57,9 @@ public class ListViewItemLayout extends RelativeLayout
 
 		textView = (EditText) findViewById(R.id.compositeControlTextBox);
 		
-		imageView  = (ImageView)findViewById(R.id.compositeControlImageView);
+		contentImageView = (ImageView)findViewById(R.id.compositeControlImageView);
 		
-		importanceImageButton = (ImageView) findViewById(R.id.compositeControlBulletButton);
+		deleteImageView = (ImageView) findViewById(R.id.compositeControlBulletButton);
 		
 //		alarmImageButton = (ImageButton) findViewById(R.id.composite_control_alarm_button);
 	}
@@ -79,11 +78,11 @@ public class ListViewItemLayout extends RelativeLayout
 	    
 	    bundle.putString("TEXT_VALUE", textView.getText().toString());
 	    
-	    if(imageView.getDrawable() != null)
+	    if(contentImageView.getDrawable() != null)
 	    {
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-			Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+			Bitmap image = ((BitmapDrawable) contentImageView.getDrawable()).getBitmap();
 			
 			image.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
@@ -109,7 +108,7 @@ public class ListViewItemLayout extends RelativeLayout
 	      
 		  Bitmap image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
 			
-		  this.imageView.setImageBitmap(image);
+		  this.contentImageView.setImageBitmap(image);
 		  
 	      this.textView.setText(bundle.getString("TEXT_VALUE"));
 	      
@@ -135,29 +134,30 @@ public class ListViewItemLayout extends RelativeLayout
 		textView.setText(text.toCharArray(), 0 , text.toCharArray().length);
 	}
 	
-	public ImageView getImportanceImageButton() {
-		return importanceImageButton;
+	public ImageView getDeleteImageView()
+	{
+		return deleteImageView;
 	}
 	
 	public void setImage(String imageName, Bitmap image, boolean changeSize)
 	{
 		if(changeSize)
 		{
-			ViewGroup.LayoutParams imageViewParams = imageView.getLayoutParams();
+			ViewGroup.LayoutParams imageViewParams = contentImageView.getLayoutParams();
 		    imageViewParams.height =  350;
 		    imageViewParams.width = 350;
 		    image = Bitmap.createScaledBitmap(image, 300, 300,true);
-		    imageView.setLayoutParams(imageViewParams);
+		    contentImageView.setLayoutParams(imageViewParams);
 		}
 		else
 		{
-			ViewGroup.LayoutParams imageViewParams = imageView.getLayoutParams();
+			ViewGroup.LayoutParams imageViewParams = contentImageView.getLayoutParams();
 		    imageViewParams.height =  LayoutParams.MATCH_PARENT;
 		    imageViewParams.width = LayoutParams.MATCH_PARENT;
-		    imageView.setLayoutParams(imageViewParams);
+		    contentImageView.setLayoutParams(imageViewParams);
 		}
 	    
-	    imageView.setImageBitmap(image);
+	    contentImageView.setImageBitmap(image);
 	    
 	    textView.setVisibility(View.GONE);
 	    

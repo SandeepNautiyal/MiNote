@@ -2,6 +2,7 @@ package com.gp.app.minote.notes.fragments;
 
 
 import android.app.ListFragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,20 +62,20 @@ public class TextNoteFragment extends ListFragment
 				
 				listView.setDivider(null);
 				
-				listView.setDividerHeight(0);			
-				
+				listView.setDividerHeight(0);
+
+                listView.setElevation(5.0f);
+
 				setListViewHeightBasedOnItems();
 //				setListShown(true);
 				listView.setBackgroundColor(note.getNoteColor());
 				
-				listView.setBackgroundResource(R.drawable.list_view_border_blue);
-				
+//				listView.setBackgroundResource(R.drawable.list_view_border_blue);
+
+                listView.setBackgroundColor(Color.rgb(240,240,240));
+
+                listView.getBackground().setAlpha(255);
 				MarginLayoutParams p = (MarginLayoutParams)listView.getLayoutParams();
-				
-				if(p != null)
-				{
-					p.setMargins(5,5,5,5);
-				}
 				
 				adapter.notifyDataSetChanged();
 		    }

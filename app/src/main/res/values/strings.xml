@@ -13,13 +13,13 @@
     <string name="change_importance">Change Importance</string>
     <string name="application_alarm">Alarm</string>
     <string name="add_list_item">Add more items</string>
-    <string name="title_activity_list_item_creator">Create List</string>
+    <string name="title_activity_list_item_creator">List Note</string>
     <string name="add_more_items">Add more items</string>
     <string name="save">Save</string>
     <string name="add">Add</string>
     <string name="set_importance">Set Importance</string>
     <string name="set_alarm">Set Alarm</string>
-    <string name="paragraph_note_creator_activity_title">Create Note</string>
+    <string name="paragraph_note_creator_activity_title">Paragraph Note</string>
     <string name="export_notes">Export Notes</string>
     <string name="import_notes">Import Notes</string>
     <string name="action_discard_notes">Delete</string>

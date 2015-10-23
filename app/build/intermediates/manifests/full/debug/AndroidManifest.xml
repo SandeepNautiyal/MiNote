@@ -53,7 +53,8 @@
         <activity
             android:name="com.gp.app.minote.layout.manager.NotesLayoutManagerActivity"
             android:label="@string/notes_layout_manager_activity_title"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -68,9 +69,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.gp.app.minote.layout.manager.ListItemCreatorActivity"
+            android:name="com.gp.app.minote.layout.manager.ListCreatorActivity"
             android:label="@string/title_activity_list_item_creator"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
         </activity>
 
         <receiver

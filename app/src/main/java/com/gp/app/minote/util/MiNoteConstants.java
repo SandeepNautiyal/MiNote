@@ -2,10 +2,6 @@ package com.gp.app.minote.util;
 
 public interface MiNoteConstants 
 {
-    int ADD_BUTTON_ID = 100000;
-    
-    int SAVE_BUTTON_ID = 100001;
-    
     int TAKE_PHOTO_CODE = 1888;
 
 	String NOTE_DATA = "LIST_ITEMS";

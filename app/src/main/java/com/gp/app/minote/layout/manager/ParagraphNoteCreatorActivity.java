@@ -189,7 +189,9 @@ public class ParagraphNoteCreatorActivity extends Activity implements ColourPick
 	    {
 	    	String imagePath = ImageLocationPathManager.getInstance().getMostRecentImageFilePath();
 
-	    	Bitmap image = ImageLocationPathManager.getInstance().getImage(imagePath, false);
+			ImageLocationPathManager.getInstance().compressImage(imagePath);
+
+			Bitmap image = ImageLocationPathManager.getInstance().getImage(imagePath, false);
 
 	    	String imageName = ImageLocationPathManager.getInstance().getImageName(imagePath);
 

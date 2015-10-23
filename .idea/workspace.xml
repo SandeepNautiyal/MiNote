@@ -24,236 +24,68 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.gp.app.minote" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="674" />
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="453" />
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="357" />
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="450" mnemonic="C" />
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="912" />
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="759" />
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="473" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="669" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="448" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="352" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="445" mnemonic="C" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="907" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="754" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" line="468" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02ca7fe2-e361-40d4-8352-f4ca72f98141" name="Default" comment="GUI optimized. overlay framelayout not invisible when layout is clicked.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/minote_calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/minote_calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/minote_calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/minote_calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxxhdpi/minote_calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_camera.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_camera.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_camera.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_camera.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_camera.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_camera_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_camera_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_camera_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_camera_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_camera_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_color_picker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_color_picker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_color_picker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_color_picker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_color_picker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/minote_color_picker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/minote_color_picker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/minote_color_picker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/minote_color_picker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxxhdpi/minote_color_picker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_copy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_copy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_copy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_copy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_copy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_group.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_group.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_group.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_group.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_group.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_list.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_list.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_list.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_list.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_list.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_list_addition.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_list_addition.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_list_addition.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_list_addition.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_list_item_deletion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_list_item_deletion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_list_item_deletion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_list_item_deletion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_list_item_deletion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_overflow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_overflow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_overflow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_overflow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_overflow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_paragraph.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_paragraph.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_paragraph.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_paragraph.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_paragraph.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_plus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_plus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_plus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_plus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_plus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_reminder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_reminder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_reminder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_reminder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_reminder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/minote_reminder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/minote_reminder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/minote_reminder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/minote_reminder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxxhdpi/minote_reminder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_save.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_search.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_search.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_search.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_search.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_search.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_share.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_share.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_share.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_share.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_share.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/paragraph_note.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/paragraph_note.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/paragraph_note.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/paragraph_note.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/paragraph_note.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/CalendarDateClickListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/CalendarGridView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/adapter/DateInformation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/GridCordinates.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/GridViewUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/MiNoteCalendar.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/MiNoteEventCalendar.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/adapter/MonthInformation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/TabFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/analog_clock_layout.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/calendar_grid_layout.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values/minote_color.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/tab_fragment_layout.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\java\com\gp\app\minote\calendar\adapter\CalendarAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\java\com\gp\app\minote\calendar\ui\ProfessionalPACalendarView.java" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-hdpi\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-hdpi\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-hdpi\ic_action_group.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-mdpi\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-mdpi\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-mdpi\ic_action_group.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-xhdpi\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-xhdpi\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-xhdpi\ic_action_group.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-xxhdpi\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-xxhdpi\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-xxxhdpi\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-xxxhdpi\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable-xxxhdpi\ic_action_group.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\res\layout\calendar_view.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\res\drawable-hdpi\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\res\drawable-hdpi\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\res\drawable-mdpi\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\res\drawable-mdpi\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\res\drawable-xhdpi\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\res\drawable-xhdpi\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\res\drawable-xxhdpi\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\res\drawable-xxhdpi\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\res\drawable-xxxhdpi\color_picker_icon.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\res\drawable-xxxhdpi\ic_action_edit.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\New Eclipse Workspace\MiNote\res\layout\calendar_view.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" />
+    <list default="true" id="02ca7fe2-e361-40d4-8352-f4ca72f98141" name="Default" comment="Calendar improved, separate tab introduced for events and image note optimized.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_colorpicke_blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_colorpicke_blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_colorpicke_blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_colorpicke_blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_colorpicke_blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/minote_save_blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/minote_save_blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/minote_save_blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/minote_save_blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/minote_save_blue.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values/ids.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$style.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/events/database/CalendarDBManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/events/database/CalendarDBManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/colorpicker/ColourPickerAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/colorpicker/ColourPickerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/interfaces/DBChangeListener.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/interfaces/DBChangeListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/interfaces/DBchangePublisher.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/interfaces/DBchangePublisher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/Event.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/Event.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/adapter/EventListAdapater.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/adapter/EventListAdapater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/events/EventManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/events/EventManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/EventModificationGUI.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/EventModificationGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/EventNoteFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/EventNoteFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/ExpandableGridView.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/ExpandableGridView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/FragmentCreationManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/FragmentCreationManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/images/ImageLocationPathManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/images/ImageLocationPathManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/compositecontrols/ListViewItemLayout.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/compositecontrols/ListViewItemLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/util/MiNoteUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/util/MiNoteUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/listeners/NotesActionModeCallback.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/listeners/NotesActionModeCallback.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/database/NotesDBManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/database/NotesDBManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/util/MiNoteConstants.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/util/MiNoteConstants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/operations/NotesOperationManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/operations/NotesOperationManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/gp/app/minote/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/gp/app/minote/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/start/StartMiNoteActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/start/StartMiNoteActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragmentAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragmentAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout-land/activity_notes_layout_manager.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout-land/activity_notes_layout_manager.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout-large-land/activity_notes_layout_manager.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout-large-land/activity_notes_layout_manager.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout-large-port/activity_notes_layout_manager.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout-large-port/activity_notes_layout_manager.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout-port/activity_notes_layout_manager.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout-port/activity_notes_layout_manager.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout-small-land/activity_notes_layout_manager.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout-small-land/activity_notes_layout_manager.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout-small-port/activity_notes_layout_manager.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout-small-port/activity_notes_layout_manager.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout-xlarge-land/activity_notes_layout_manager.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout-xlarge-land/activity_notes_layout_manager.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout-xlarge-port/activity_notes_layout_manager.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout-xlarge-port/activity_notes_layout_manager.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/button_focused.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/button_focused.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/button_normal.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/button_normal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/button_text.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/button_text.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/composite_control_for_list_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/composite_control_for_list_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/contextual_menu.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/contextual_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/day_of_week.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_of_week.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/day_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout-land/activity_notes_layout_manager.xml" afterPath="$PROJECT_DIR$/res/layout-land/activity_notes_layout_manager.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout-port/activity_notes_layout_manager.xml" afterPath="$PROJECT_DIR$/res/layout-port/activity_notes_layout_manager.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/event_gui.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/event_gui.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/list_creator_activity_menu_items.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/list_creator_activity_menu_items.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_creator_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_creator_activity.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/notes_layout_manager_menu.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/notes_layout_manager_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/notes_selection_menu.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/notes_selection_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/paragraph_notes_activity_menu_items.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/paragraph_notes_activity_menu_items.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-v14/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-v14/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/professional_pa_frame_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/professional_pa_frame_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\java\com\gp\app\minote\calendar\ui\EventCreationGUI.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/EventCreationUI.java" />
-      <change type="MOVED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\java\com\gp\app\minote\interfaces\MiNoteConstants.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/util/MiNoteConstants.java" />
+      <change type="MOVED" beforePath="E:\New Eclipse Workspace\MiNote\app\src\main\java\com\gp\app\minote\layout\manager\ListItemCreatorActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListCreatorActivity.java" />
     </list>
     <ignored path="minote.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -330,8 +162,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties converted="true" />
     <breakpoint_rules converted="true" />
+    <ui_properties converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="ExternalProjectsManager">
@@ -348,13 +180,131 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NotesLayoutManagerActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NotesLayoutManagerActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3478261">
-              <caret line="753" column="20" selection-start-line="753" selection-start-column="20" selection-end-line="753" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="744" column="85" selection-start-line="744" selection-start-column="85" selection-end-line="744" selection-end-column="85" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list_item_creator_activity.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_creator_activity.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.275862">
+              <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+              <folding>
+                <element signature="e#765#798#0" expanded="true" />
+                <element signature="e#831#866#0" expanded="true" />
+                <element signature="e#900#935#0" expanded="true" />
+                <element signature="e#967#1000#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="48" column="41" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
+              <folding>
+                <element signature="e#2409#2456#0" expanded="true" />
+                <element signature="e#2635#2677#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.0">
+              <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListCreatorActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListCreatorActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="492" column="5" selection-start-line="492" selection-start-column="5" selection-end-line="492" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1878#1884#0" expanded="true" />
+                <element signature="e#2554#2741#0" expanded="true" />
+                <element signature="e#2740#2741#0" expanded="true" />
+                <element signature="e#8469#8981#0" expanded="true" />
+                <element signature="e#8980#8981#0" expanded="true" />
+                <element signature="e#9053#9231#0" expanded="true" />
+                <element signature="e#9230#9231#0" expanded="true" />
+                <element signature="e#9840#10029#0" expanded="true" />
+                <element signature="e#10028#10029#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MiNoteConstants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/util/MiNoteConstants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ids.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/ids.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_notes_layout_manager.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/activity_notes_layout_manager.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.24634147">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dimens.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="18" column="52" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListViewItemLayout.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/compositecontrols/ListViewItemLayout.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
+              <folding>
+                <element signature="e#3447#3448#0" expanded="true" />
+                <element signature="e#3476#3477#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -368,9 +318,9 @@
         <option value="layoutResourceFile" />
         <option value="Interface" />
         <option value="resourceFile" />
-        <option value="valueResourceFile" />
         <option value="layoutResourceFile_vertical" />
         <option value="Class" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -2709,24 +2659,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/DateClickListner.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/EventCalendarDateClickListner.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/event_gui.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/calendar_grid_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/CalendarDateClickListener.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/EventCreationGUI.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/time_picker_and_date_picker_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/analog_clock_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/Event.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/MiNoteCalendar.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/MiNoteEventCalendar.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/ui/EventCreationUI.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/adapter/EventListAdapater.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-large-land/activity_notes_layout_manager.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-small-land/activity_notes_layout_manager.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-small-port/activity_notes_layout_manager.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-xlarge-land/activity_notes_layout_manager.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-xlarge-port/activity_notes_layout_manager.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/notes_selection_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/actionmode_backgroud_color.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/actionmode_background.xml" />
@@ -2736,30 +2671,45 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values-v14/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/contextual_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/themes.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ScreenSlidePagerAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/tab_fragment_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/interfaces/MiNoteConstants.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/database/NotesDBManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/events/database/CalendarDBManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/TabFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-port/activity_notes_layout_manager.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_notes_layout_manager.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/util/MiNoteConstants.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/TabListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/minote_color.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/list_creator_activity_menu_items.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/paragraph_notes_activity_menu_items.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/start/StartMiNoteActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/images/ImageLocationPathManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/composite_control_for_list_view.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/compositecontrols/ListViewItemLayout.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout-port/activity_notes_layout_manager.xml" />
+        <option value="$PROJECT_DIR$/res/layout-land/activity_notes_layout_manager.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-large-land/activity_notes_layout_manager.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-large-port/activity_notes_layout_manager.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-small-land/activity_notes_layout_manager.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-small-port/activity_notes_layout_manager.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-xlarge-land/activity_notes_layout_manager.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-xlarge-port/activity_notes_layout_manager.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragmentAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-port/activity_notes_layout_manager.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_notes_layout_manager.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/professional_pa_frame_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/event_gui.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/themes.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_creator_activity.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/compositecontrols/ListViewItemLayout.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/util/MiNoteConstants.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/ids.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListCreatorActivity.java" />
       </list>
     </option>
   </component>
@@ -2833,6 +2783,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2880,6 +2831,60 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout-port" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout-land" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProfessionalPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiNote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3055,36 +3060,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="values-v14" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProfessionalPA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiNote" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="values" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -3115,97 +3090,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProfessionalPA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiNote" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="layout-port" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProfessionalPA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiNote" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout-large-port" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProfessionalPA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiNote" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout-large-land" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3295,127 +3180,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="drawable-xxxhdpi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProfessionalPA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiNote" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable-xxhdpi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProfessionalPA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiNote" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable-xhdpi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProfessionalPA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiNote" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable-mdpi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProfessionalPA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiNote" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable-hdpi" />
+              <option name="myItemId" value="color" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3765,10 +3530,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="AndroidView" />
       <pane id="Scratches" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3790,13 +3554,29 @@
     <property name="dynamic.classpath" value="false" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="SearchEverywhereHistoryKey" value=".properties&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/project.properties&#10;gradle.properties&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/gradle/wrapper/gradle-wrapper.properties&#10;NoteIt&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/src/com/gp/app/minote/data/NoteItem.java&#10;TextNoteFra&#9;PSI&#9;JAVA://com.gp.app.minote.notes.fragments.TextNoteFragmentAdapter&#10;colo&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/res/drawable-hdpi/color_picker_icon.png&#10;cale&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/app/src/main/java/com/gp/app/minote/calendar/events/database/CalendarDBManager.java&#10;R&#9;PSI&#9;JAVA://com.gp.app.minote.R&#10;CalendarDb&#9;PSI&#9;JAVA://com.gp.app.minote.calendar.events.database.CalendarDBManager&#10;Andr&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/app/src/main/AndroidManifest.xml&#10;JDOpers&#9;PSI&#9;JAVA://org.datanucleus.api.jdo.JDOPersistenceManager&#10;NucleusJd&#9;PSI&#9;JAVA://org.datanucleus.api.jdo.NucleusJDOHelper&#10;gitign&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/gen/.gitignore&#10;giti&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/gen/.gitignore&#10;gitignore&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/bin/classes/.gitignore&#10;lo&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/minote-backend/src/main/webapp/WEB-INF/logging.properties" />
+    <property name="SearchEverywhereHistoryKey" value="TextFr&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragmentAdapter.java&#10;NoteIt&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/app/src/main/java/com/gp/app/minote/data/NoteItem.java&#10;Image&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/app/src/main/java/com/gp/app/minote/notes/images/ImageLocationPathManager.java&#10;ListCreat&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java&#10;.properties&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/project.properties&#10;gradle.properties&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/gradle/wrapper/gradle-wrapper.properties&#10;TextNoteFra&#9;PSI&#9;JAVA://com.gp.app.minote.notes.fragments.TextNoteFragmentAdapter&#10;colo&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/res/drawable-hdpi/color_picker_icon.png&#10;cale&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/app/src/main/java/com/gp/app/minote/calendar/events/database/CalendarDBManager.java&#10;R&#9;PSI&#9;JAVA://com.gp.app.minote.R&#10;CalendarDb&#9;PSI&#9;JAVA://com.gp.app.minote.calendar.events.database.CalendarDBManager&#10;Andr&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/app/src/main/AndroidManifest.xml&#10;JDOpers&#9;PSI&#9;JAVA://org.datanucleus.api.jdo.JDOPersistenceManager&#10;NucleusJd&#9;PSI&#9;JAVA://org.datanucleus.api.jdo.NucleusJDOHelper&#10;gitign&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/gen/.gitignore&#10;giti&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/gen/.gitignore&#10;gitignore&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/bin/classes/.gitignore&#10;lo&#9;FILE&#9;file://E:/New Eclipse Workspace/MiNote/minote-backend/src/main/webapp/WEB-INF/logging.properties" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.SHOW" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="48" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="123" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="49" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="350" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="48" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="48" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="49" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="425" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -3820,15 +3600,15 @@
       <recent name="com.gp.app.minote" />
       <recent name="com.gp.app.minote.layout.manager" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.gp.app.minote" />
-      <recent name="com.gp.app.minote.gcm" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable" />
     </key>
     <key name="android.template.parentActivityClass">
       <recent name="" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\New Eclipse Workspace\MiNote\app\src\main\res\drawable" />
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.gp.app.minote" />
+      <recent name="com.gp.app.minote.gcm" />
     </key>
   </component>
   <component name="RunManager" selected="Android Application.app">
@@ -4133,7 +3913,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442493144439</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Calendar improved, separate tab introduced for events and image note optimized.">
+      <created>1445429256341</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1445429256341</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -4158,37 +3944,37 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2249191" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.48058254" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23387097" sideWeight="0.26779935" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32419354" sideWeight="0.4037217" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2467742" sideWeight="0.23867314" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295082" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.487055" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23870967" sideWeight="0.7208738" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32096773" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32419354" sideWeight="0.5420712" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2467742" sideWeight="0.75" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32096773" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2467742" sideWeight="0.76132685" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32419354" sideWeight="0.4579288" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32419354" sideWeight="0.4449838" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928804" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928804" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3341424" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32419354" sideWeight="0.29692557" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3341424" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32419354" sideWeight="0.2815534" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2249191" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32419354" sideWeight="0.3276699" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46774194" sideWeight="0.48139158" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -4199,11 +3985,11 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2612903" sideWeight="0.3907767" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2612903" sideWeight="0.5695793" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2612903" sideWeight="0.6092233" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32096773" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928804" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32096773" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2612903" sideWeight="0.6092233" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928804" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33656958" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32419354" sideWeight="0.36731392" order="2" side_tool="false" content_ui="tabs" />
@@ -4223,8 +4009,8 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32419354" sideWeight="0.3381877" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46774194" sideWeight="0.48139158" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928804" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -4252,7 +4038,8 @@
     <MESSAGE value="previous month and next day also visible in current month in calendar." />
     <MESSAGE value="calendar look and feel changed. Previous month and next month date now visible." />
     <MESSAGE value="GUI optimized. overlay framelayout not invisible when layout is clicked." />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI optimized. overlay framelayout not invisible when layout is clicked." />
+    <MESSAGE value="Calendar improved, separate tab introduced for events and image note optimized." />
+    <option name="LAST_COMMIT_MESSAGE" value="Calendar improved, separate tab introduced for events and image note optimized." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4277,37 +4064,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
-          <line>831</line>
+          <line>826</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
-          <line>827</line>
+          <line>822</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
-          <line>1302</line>
+          <line>1297</line>
           <properties />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
-          <line>564</line>
+          <line>561</line>
           <properties />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
-          <line>538</line>
+          <line>535</line>
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
-          <line>952</line>
+          <line>947</line>
           <properties />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
@@ -4318,7 +4105,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
-          <line>357</line>
+          <line>352</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -4328,218 +4115,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
-          <line>748</line>
+          <line>743</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
-          <line>920</line>
+          <line>915</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
-          <line>561</line>
+          <line>558</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
-          <line>118</line>
+          <line>115</line>
           <properties field="calendarFrameLayout" class="com.gp.app.minote.layout.manager.NotesLayoutManagerActivity" />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java</url>
+          <line>740</line>
+          <properties class="com.gp.app.minote.layout.manager.NotesLayoutManagerActivity" method="createNoteCreatorOptionsFrameLayout" />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="23" />
+      <option name="time" value="24" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="android-dummy://E:\New Eclipse Workspace\MiNote//Theme Editor">
-      <provider selected="true" editor-type-id="themeEditor">
-        <state theme-name="@style/AppBaseTheme" module-name="app" proportion="0.5" />
-      </provider>
-    </entry>
-    <entry file="jar://E:/Softwares/Android SDK/android-sdk/extras/android/m2repository/com/android/support/appcompat-v7/22.2.0/appcompat-v7-22.2.0-sources.jar!/android/support/v7/app/ActionBarActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Softwares/Android SDK/android-sdk/sources/android-21/android/view/ActionMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="192" column="25" selection-start-line="192" selection-start-column="25" selection-end-line="192" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/professional_pa_action_search.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/searchable.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/notes_layout_manager_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="45" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-v14/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.6666665">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/selectable_day_layout_border.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="51" selection-start-line="2" selection-start-column="51" selection-end-line="2" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.4074074">
-          <caret line="15" column="59" selection-start-line="15" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/contextual_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/themes.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.518518">
-          <caret line="14" column="59" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/Softwares/Android SDK/android-sdk/extras/android/m2repository/com/android/support/support-v4/22.2.0/support-v4-22.2.0-sources.jar!/android/support/v4/app/FragmentStatePagerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/listview_for_list_fragment.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/tab_fragment_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.862069">
-          <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Softwares/Android SDK/android-sdk/sources/android-21/android/app/ActionBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1268" column="21" selection-start-line="1268" selection-start-column="21" selection-end-line="1268" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/EventNoteFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/database/search/NotesSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="20" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/calendar/events/database/CalendarDBManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="404" column="0" selection-start-line="404" selection-start-column="0" selection-end-line="404" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/database/NotesDBManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="350" column="46" selection-start-line="350" selection-start-column="46" selection-end-line="350" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-port/activity_notes_layout_manager.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="80" selection-start-line="6" selection-start-column="80" selection-end-line="6" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/activity_notes_layout_manager.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="80" selection-start-line="6" selection-start-column="80" selection-end-line="6" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-large-land/activity_notes_layout_manager.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="39" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/TabFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4608,20 +4214,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/NoteItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="101" column="82" selection-start-line="101" selection-start-column="68" selection-end-line="101" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/images/ImageLocationPathManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="154" column="31" selection-start-line="154" selection-start-column="8" selection-end-line="154" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/FragmentCreationManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4629,84 +4221,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://E:/Softwares/Android SDK/android-sdk/sources/android-21/android/app/Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10514542">
-          <caret line="4759" column="7" selection-start-line="4759" selection-start-column="7" selection-end-line="4759" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="47" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="186" column="43" selection-start-line="186" selection-start-column="8" selection-end-line="186" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/minote_color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="56" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/composite_control_for_list_view.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/compositecontrols/ListViewItemLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="137" column="30" selection-start-line="137" selection-start-column="21" selection-end-line="137" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListItemCreatorActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="317" column="15" selection-start-line="317" selection-start-column="15" selection-end-line="317" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragmentAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
-          <folding />
-        </state>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.65217394">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4714,6 +4243,437 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_item_creator_activity.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ScrollViewScrollListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/CustomizedScrollView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="29" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout-port/activity_notes_layout_manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout-land/activity_notes_layout_manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="12" selection-start-line="49" selection-start-column="12" selection-end-line="49" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-large-land/activity_notes_layout_manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.3448277">
+          <caret line="53" column="2" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-large-port/activity_notes_layout_manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.2413793">
+          <caret line="45" column="2" selection-start-line="45" selection-start-column="2" selection-end-line="45" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-small-land/activity_notes_layout_manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.413793">
+          <caret line="36" column="2" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-small-port/activity_notes_layout_manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-xlarge-land/activity_notes_layout_manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="2" selection-start-line="61" selection-start-column="2" selection-end-line="61" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-xlarge-port/activity_notes_layout_manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="61" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/images/ImageLocationPathManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="159" column="31" selection-start-line="159" selection-start-column="18" selection-end-line="159" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1015#1016#0" expanded="false" />
+            <element signature="e#1044#1045#0" expanded="false" />
+            <element signature="e#2632#2633#0" expanded="false" />
+            <element signature="e#2669#2670#0" expanded="false" />
+            <element signature="e#9226#9227#0" expanded="false" />
+            <element signature="e#9276#9277#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Softwares/Android SDK/android-sdk/sources/android-21/android/app/Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4786" column="16" selection-start-line="4786" selection-start-column="16" selection-end-line="4786" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#260237#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#36141#36142#0" expanded="false" />
+            <element signature="e#36202#36203#0" expanded="false" />
+            <element signature="e#38000#38001#0" expanded="false" />
+            <element signature="e#38030#38031#0" expanded="false" />
+            <element signature="e#38417#38418#0" expanded="false" />
+            <element signature="e#38452#38453#0" expanded="false" />
+            <element signature="e#38560#38561#0" expanded="false" />
+            <element signature="e#38595#38596#0" expanded="false" />
+            <element signature="e#38698#38699#0" expanded="false" />
+            <element signature="e#38736#38737#0" expanded="false" />
+            <element signature="e#38850#38851#0" expanded="false" />
+            <element signature="e#38880#38881#0" expanded="false" />
+            <element signature="e#38994#38995#0" expanded="false" />
+            <element signature="e#39031#39032#0" expanded="false" />
+            <element signature="e#39379#39380#0" expanded="false" />
+            <element signature="e#39409#39410#0" expanded="false" />
+            <element signature="e#40668#40669#0" expanded="false" />
+            <element signature="e#40741#40742#0" expanded="false" />
+            <element signature="e#49531#49532#0" expanded="false" />
+            <element signature="e#49583#49584#0" expanded="false" />
+            <element signature="e#53256#53257#0" expanded="false" />
+            <element signature="e#53286#53287#0" expanded="false" />
+            <element signature="e#55436#55437#0" expanded="false" />
+            <element signature="e#55483#55484#0" expanded="false" />
+            <element signature="e#55699#55700#0" expanded="false" />
+            <element signature="e#55738#55739#0" expanded="false" />
+            <element signature="e#67164#67165#0" expanded="false" />
+            <element signature="e#67192#67193#0" expanded="false" />
+            <element signature="e#67972#67973#0" expanded="false" />
+            <element signature="e#67999#68000#0" expanded="false" />
+            <element signature="e#75727#75728#0" expanded="false" />
+            <element signature="e#75768#75769#0" expanded="false" />
+            <element signature="e#80051#80052#0" expanded="false" />
+            <element signature="e#80078#80079#0" expanded="false" />
+            <element signature="e#81776#81777#0" expanded="false" />
+            <element signature="e#81803#81804#0" expanded="false" />
+            <element signature="e#83854#83855#0" expanded="false" />
+            <element signature="e#83887#83888#0" expanded="false" />
+            <element signature="e#91283#91284#0" expanded="false" />
+            <element signature="e#91334#91335#0" expanded="false" />
+            <element signature="e#97560#97561#0" expanded="false" />
+            <element signature="e#97612#97613#0" expanded="false" />
+            <element signature="e#97782#97783#0" expanded="false" />
+            <element signature="e#97836#97837#0" expanded="false" />
+            <element signature="e#105557#105558#0" expanded="false" />
+            <element signature="e#105585#105586#0" expanded="false" />
+            <element signature="e#106960#106961#0" expanded="false" />
+            <element signature="e#106988#106989#0" expanded="false" />
+            <element signature="e#108012#108013#0" expanded="false" />
+            <element signature="e#108040#108041#0" expanded="false" />
+            <element signature="e#109490#109491#0" expanded="false" />
+            <element signature="e#109518#109519#0" expanded="false" />
+            <element signature="e#110748#110749#0" expanded="false" />
+            <element signature="e#110776#110777#0" expanded="false" />
+            <element signature="e#115258#115259#0" expanded="false" />
+            <element signature="e#115282#115283#0" expanded="false" />
+            <element signature="e#119787#119788#0" expanded="false" />
+            <element signature="e#119814#119815#0" expanded="false" />
+            <element signature="e#131688#131689#0" expanded="false" />
+            <element signature="e#131725#131726#0" expanded="false" />
+            <element signature="e#134525#134526#0" expanded="false" />
+            <element signature="e#134589#134590#0" expanded="false" />
+            <element signature="e#135814#135815#0" expanded="false" />
+            <element signature="e#135871#135872#0" expanded="false" />
+            <element signature="e#136207#136208#0" expanded="false" />
+            <element signature="e#136264#136265#0" expanded="false" />
+            <element signature="e#136566#136567#0" expanded="false" />
+            <element signature="e#136604#136605#0" expanded="false" />
+            <element signature="e#136740#136741#0" expanded="false" />
+            <element signature="e#136803#136804#0" expanded="false" />
+            <element signature="e#138400#138401#0" expanded="false" />
+            <element signature="e#138427#138428#0" expanded="false" />
+            <element signature="e#140129#140130#0" expanded="false" />
+            <element signature="e#140170#140171#0" expanded="false" />
+            <element signature="e#140364#140365#0" expanded="false" />
+            <element signature="e#140409#140410#0" expanded="false" />
+            <element signature="e#142119#142120#0" expanded="false" />
+            <element signature="e#142155#142156#0" expanded="false" />
+            <element signature="e#151843#151844#0" expanded="false" />
+            <element signature="e#151889#151890#0" expanded="false" />
+            <element signature="e#153631#153632#0" expanded="false" />
+            <element signature="e#153685#153686#0" expanded="false" />
+            <element signature="e#168937#168938#0" expanded="false" />
+            <element signature="e#168985#168986#0" expanded="false" />
+            <element signature="e#170793#170794#0" expanded="false" />
+            <element signature="e#170839#170840#0" expanded="false" />
+            <element signature="e#193306#193307#0" expanded="false" />
+            <element signature="e#193338#193339#0" expanded="false" />
+            <element signature="e#193517#193518#0" expanded="false" />
+            <element signature="e#193550#193551#0" expanded="false" />
+            <element signature="e#194114#194115#0" expanded="false" />
+            <element signature="e#194160#194161#0" expanded="false" />
+            <element signature="e#196059#196060#0" expanded="false" />
+            <element signature="e#196088#196089#0" expanded="false" />
+            <element signature="e#197808#197809#0" expanded="false" />
+            <element signature="e#197832#197833#0" expanded="false" />
+            <element signature="e#200003#200004#0" expanded="false" />
+            <element signature="e#200031#200032#0" expanded="false" />
+            <element signature="e#209802#209803#0" expanded="false" />
+            <element signature="e#209835#209836#0" expanded="false" />
+            <element signature="e#212070#212071#0" expanded="false" />
+            <element signature="e#212112#212113#0" expanded="false" />
+            <element signature="e#212704#212705#0" expanded="false" />
+            <element signature="e#212733#212734#0" expanded="false" />
+            <element signature="e#212773#212774#0" expanded="false" />
+            <element signature="e#212807#212808#0" expanded="false" />
+            <element signature="e#219273#219274#0" expanded="false" />
+            <element signature="e#219332#219333#0" expanded="false" />
+            <element signature="e#220741#220742#0" expanded="false" />
+            <element signature="e#220796#220797#0" expanded="false" />
+            <element signature="e#221939#221940#0" expanded="false" />
+            <element signature="e#221966#221967#0" expanded="false" />
+            <element signature="e#234146#234147#0" expanded="false" />
+            <element signature="e#234176#234177#0" expanded="false" />
+            <element signature="e#247227#247228#0" expanded="false" />
+            <element signature="e#247293#247294#0" expanded="false" />
+            <element signature="e#247762#247763#0" expanded="false" />
+            <element signature="e#247794#247795#0" expanded="false" />
+            <element signature="e#256753#256754#0" expanded="false" />
+            <element signature="e#256784#256785#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ParagraphNoteCreatorActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="192" column="0" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1550#1556#0" expanded="false" />
+            <element signature="e#2039#2185#0" expanded="false" />
+            <element signature="e#2184#2185#0" expanded="false" />
+            <element signature="e#2232#2378#0" expanded="false" />
+            <element signature="e#2377#2378#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/data/NoteItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="149" column="22" selection-start-line="149" selection-start-column="19" selection-end-line="149" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/selectable_day_layout_border.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26086956">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/list_view_border_blue.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragmentAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="190" column="20" selection-start-line="190" selection-start-column="12" selection-end-line="190" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/event_gui.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="31.62069">
+          <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-port/activity_notes_layout_manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.275862">
+          <caret line="50" column="31" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/notes/fragments/TextNoteFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="77" column="86" selection-start-line="77" selection-start-column="86" selection-end-line="77" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/listview_for_list_fragment.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.5172415">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/professional_pa_frame_layout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.6896553">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/color/date_number_text_color.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Softwares/Android SDK/android-sdk/sources/android-21/android/widget/RelativeLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1336" column="15" selection-start-line="1336" selection-start-column="15" selection-end-line="1336" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#76719#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#8882#8883#0" expanded="false" />
+            <element signature="e#8917#8918#0" expanded="false" />
+            <element signature="e#8983#8984#0" expanded="false" />
+            <element signature="e#9022#9023#0" expanded="false" />
+            <element signature="e#10275#10276#0" expanded="false" />
+            <element signature="e#10303#10304#0" expanded="false" />
+            <element signature="e#10796#10797#0" expanded="false" />
+            <element signature="e#10835#10836#0" expanded="false" />
+            <element signature="e#11106#11107#0" expanded="false" />
+            <element signature="e#11137#11138#0" expanded="false" />
+            <element signature="e#57192#57193#0" expanded="false" />
+            <element signature="e#57229#57230#0" expanded="false" />
+            <element signature="e#57346#57347#0" expanded="false" />
+            <element signature="e#57383#57384#0" expanded="false" />
+            <element signature="e#68912#68913#0" expanded="false" />
+            <element signature="e#68949#68950#0" expanded="false" />
+            <element signature="e#69523#69529#0" expanded="false" />
+            <element signature="e#69728#69734#0" expanded="false" />
+            <element signature="e#69914#69920#0" expanded="false" />
+            <element signature="e#75597#75620#0" expanded="false" />
+            <element signature="e#75778#75784#0" expanded="false" />
+            <element signature="e#76165#76171#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/minote_color.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/themes.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.444445">
+          <caret line="15" column="70" selection-start-line="15" selection-start-column="70" selection-end-line="15" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_creator_activity.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.275862">
+          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+          <folding>
+            <element signature="e#765#798#0" expanded="true" />
+            <element signature="e#831#866#0" expanded="true" />
+            <element signature="e#900#935#0" expanded="true" />
+            <element signature="e#967#1000#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.0">
+          <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -4721,19 +4681,87 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/util/MiNoteConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/ids.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="52" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="41" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
+          <folding>
+            <element signature="e#2409#2456#0" expanded="true" />
+            <element signature="e#2635#2677#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/NotesLayoutManagerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3478261">
-          <caret line="753" column="20" selection-start-line="753" selection-start-column="20" selection-end-line="753" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="744" column="85" selection-start-line="744" selection-start-column="85" selection-end-line="744" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/compositecontrols/ListViewItemLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
+          <folding>
+            <element signature="e#3447#3448#0" expanded="true" />
+            <element signature="e#3476#3477#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gp/app/minote/layout/manager/ListCreatorActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="492" column="5" selection-start-line="492" selection-start-column="5" selection-end-line="492" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1878#1884#0" expanded="true" />
+            <element signature="e#2554#2741#0" expanded="true" />
+            <element signature="e#2740#2741#0" expanded="true" />
+            <element signature="e#8469#8981#0" expanded="true" />
+            <element signature="e#8980#8981#0" expanded="true" />
+            <element signature="e#9053#9231#0" expanded="true" />
+            <element signature="e#9230#9231#0" expanded="true" />
+            <element signature="e#9840#10029#0" expanded="true" />
+            <element signature="e#10028#10029#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/activity_notes_layout_manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.24634147">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
   </component>
