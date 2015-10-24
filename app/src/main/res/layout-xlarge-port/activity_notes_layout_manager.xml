@@ -2,9 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#CECEC4"
     android:id="@+id/notesLayoutManagerParentRelativeLayout">
     
-<com.gp.app.minote.layout.manager.CustomizedScrollView
+<ScrollView
     android:id="@+id/notesLayoutManagerScrollView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -51,7 +52,7 @@
     
 </LinearLayout>
 
-</com.gp.app.minote.layout.manager.CustomizedScrollView>
+</ScrollView>
 <FrameLayout
     android:id="@+id/notesLayoutManagerFrameLayout"
     android:layout_width="0dip"

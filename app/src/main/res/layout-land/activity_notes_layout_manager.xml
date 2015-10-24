@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:onClick="copyNote"
+    android:background="#CECEC4"
     android:id="@+id/notesLayoutManagerParentRelativeLayout"
     tools:context="com.gp.app.minote.layout.manager.NotesLayoutManagerActivity">
 

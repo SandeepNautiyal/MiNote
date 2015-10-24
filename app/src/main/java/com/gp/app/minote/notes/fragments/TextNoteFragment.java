@@ -75,8 +75,11 @@ public class TextNoteFragment extends ListFragment
                 listView.setBackgroundColor(Color.rgb(240,240,240));
 
                 listView.getBackground().setAlpha(255);
+
 				MarginLayoutParams p = (MarginLayoutParams)listView.getLayoutParams();
-				
+
+                p.setMargins(5,5,5,5);
+
 				adapter.notifyDataSetChanged();
 		    }
 		}

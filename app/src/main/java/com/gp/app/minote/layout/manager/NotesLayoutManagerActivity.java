@@ -148,8 +148,6 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
 	{
 		super.onCreate(savedInstanceState);
 
-        System.out.println("onCreate ->");
-
         lock = new Object();
 
 		if(MiNoteParameters.getApplicationContext() == null)
@@ -453,7 +451,7 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
 
 	private void createListNote() {
 		Intent intent = new Intent(getApplicationContext(),
-				ListItemCreatorActivity.class);
+				ListCreatorActivity.class);
 
 		startActivityForResult(intent, LIST_ACTIVITY_RESULT_CREATED);
 	}
@@ -482,6 +480,9 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
             String filePath = ImageLocationPathManager.getInstance().getMostRecentImageFilePath();
 
 //			ImageLocationPathManager.getInstance().createAndSaveImage(photo, imageUri.);
+
+			//TODO can be removed if quality of image not good, but it increases loading time in activity
+			ImageLocationPathManager.getInstance().compressImage(filePath);
 
 			note = createProfessionalPANoteFromImage(filePath);
 
@@ -1119,7 +1120,7 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
 			if(textNote.isListNote())
 			{
 				Intent intent = new Intent(getApplicationContext(),
-						ListItemCreatorActivity.class);
+						ListCreatorActivity.class);
 
 				intent.putExtra(MiNoteConstants.NOTE_ID, noteId);
 				
@@ -1278,8 +1279,6 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
     {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) 
         {
-        	System.out.println("handleIntent -> intent.getAction()="+intent.getAction());
-        	
         	getActionBar().setDisplayShowHomeEnabled(false);
         	
             getActionBar().setDisplayShowTitleEnabled(false);
@@ -1413,37 +1412,6 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
             changeTabs(false);
         }
 	}
-
-	private class NotesCreatorThread implements Runnable
-    {
-        private List<Note> remainingNotesToBeCreated = null;
-
-        public NotesCreatorThread(List<Note> notes)
-        {
-            remainingNotesToBeCreated = notes;
-        }
-
-        @Override
-        public void run()
-        {
-            synchronized (lock)
-            {
-                try
-                {
-                    lock.wait();
-
-                    for(Note note : remainingNotesToBeCreated)
-                    {
-                        createFragmentForNote(note);
-                    }
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
     class TabListener<T extends Fragment> implements ActionBar.TabListener
     {

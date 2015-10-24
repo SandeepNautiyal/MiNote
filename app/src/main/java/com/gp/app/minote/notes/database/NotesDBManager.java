@@ -13,6 +13,7 @@ import com.gp.app.minote.util.MiNoteParameters;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -128,16 +129,16 @@ public class NotesDBManager extends SQLiteOpenHelper implements NotesSearch
 	{
 		SQLiteDatabase db = getReadableDatabase();
 
-		List<TextNote> notes = new ArrayList<TextNote>();
+		List<TextNote> notes = new LinkedList<TextNote>();
 
     	String sortOrder =
-    			TextNote.NOTE_ID + " DESC";
+    			TextNote.NOTE_MODIFIED_TIME + " DESC";
 
     	Cursor cursor = null;
     	
     	if(noteId == null)
     	{
-    		cursor = db.rawQuery("select * from "+TextNote.NOTE_TABLE_NAME, null);
+    		cursor = db.rawQuery("select * from "+TextNote.NOTE_TABLE_NAME+" order by "+sortOrder, null);
     	}
     	else
     	{
