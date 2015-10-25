@@ -2578,16 +2578,17 @@ containing a value of this type.
         public static final int search_hint=0x7f070073;
         public static final int set_alarm=0x7f070074;
         public static final int set_importance=0x7f070075;
-        public static final int status_bar_notification_info_overflow=0x7f070076;
-        public static final int store_picture_message=0x7f070077;
-        public static final int store_picture_title=0x7f070078;
-        public static final int sunday=0x7f070079;
-        public static final int thursday=0x7f07007a;
-        public static final int title_activity_list_item_creator=0x7f07007b;
-        public static final int title_activity_share_note=0x7f07007c;
-        public static final int tuesday=0x7f07007d;
+        public static final int show_events=0x7f070076;
+        public static final int status_bar_notification_info_overflow=0x7f070077;
+        public static final int store_picture_message=0x7f070078;
+        public static final int store_picture_title=0x7f070079;
+        public static final int sunday=0x7f07007a;
+        public static final int thursday=0x7f07007b;
+        public static final int title_activity_list_item_creator=0x7f07007c;
+        public static final int title_activity_share_note=0x7f07007d;
+        public static final int tuesday=0x7f07007e;
         public static final int wallet_buy_button_place_holder=0x7f070037;
-        public static final int wednesday=0x7f07007e;
+        public static final int wednesday=0x7f07007f;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f090074;

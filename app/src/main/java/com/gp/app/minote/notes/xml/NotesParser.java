@@ -77,16 +77,9 @@ public class NotesParser extends DefaultHandler
 
 			currentNote.setNoteColor(Integer.valueOf(noteColor));
 
-			try 
-			{
-				currentNote.setCreationTime(MiNoteUtil.parseDateAndTimeString(CreationTime, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz"));
+			currentNote.setCreationTime(MiNoteUtil.parseDateAndTimeString(CreationTime, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz"));
 
-				currentNote.setLastEditedTime(MiNoteUtil.parseDateAndTimeString(lastEditedTime, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz"));
-			} 
-			catch (ParseException exception)
-			{
-				//TODO improve
-			}
+			currentNote.setLastEditedTime(MiNoteUtil.parseDateAndTimeString(lastEditedTime, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz"));
 			
 			currentNote.setTypeOfNote(Byte.valueOf(typeOfNote));
 		}

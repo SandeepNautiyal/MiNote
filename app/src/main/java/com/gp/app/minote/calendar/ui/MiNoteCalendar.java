@@ -25,12 +25,15 @@ public class MiNoteCalendar extends GridLayout implements OnClickListener
     private static final byte CURRENT_MONTH =  0;
     private static final byte NEXT_MONTH =  1;
     protected Context context;
-	private Calendar currentVisibleMonthCalendar;
+	protected Calendar currentVisibleMonthCalendar;
 
     private ImageButton previousMonthImageButton = null;
     private ImageButton nextMonthImageButton = null;
     protected int month = Calendar.getInstance().get(Calendar.MONTH);
     protected int year = Calendar.getInstance().get(Calendar.YEAR);
+    protected final int todayDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    protected final int todayDateMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
+    protected final int todayDateYear = Calendar.getInstance().get(Calendar.YEAR);
     protected TextView monthNameTextView = null;
 	private List<DateInformation> dateList = new ArrayList<>();
     protected List<CalendarGridView> calendarGrids = new ArrayList<>();
@@ -150,7 +153,7 @@ public class MiNoteCalendar extends GridLayout implements OnClickListener
 
 		int previousMonthStartDays = lastDayOfPreviousMonth - firstDay + 1;
 
-		int currentMonthStartDate = 1;
+		int currentMonthDate = 1;
 
 		int nextMonthStartDate = 1;
 
@@ -167,12 +170,12 @@ public class MiNoteCalendar extends GridLayout implements OnClickListener
 
                 int date = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
-                if(isCurrentMonth && currentMonthStartDate == date)
+                if(isCurrentMonth && currentMonthDate == date)
                 {
                     isTodaysDate = true;
                 }
 
-                DateInformation dateInformation = new DateInformation(currentMonthStartDate++, currentYear, currentMonth+1, true);
+                DateInformation dateInformation = new DateInformation(currentMonthDate++, currentYear, currentMonth+1, true);
 
                 dateInformation.setIsTodaysDate(isTodaysDate);
 

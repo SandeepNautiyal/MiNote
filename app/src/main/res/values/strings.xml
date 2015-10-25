@@ -54,4 +54,5 @@
     <string name="enter_email_id">Enter Email Id</string>
     <string name="hello_world">Hello world!</string>
     <string name="edit_emailId">Edit Email</string>
+    <string name="show_events">Show Events</string>
 </resources>

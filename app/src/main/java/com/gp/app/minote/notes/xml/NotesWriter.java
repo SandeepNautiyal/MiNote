@@ -207,8 +207,7 @@ public class NotesWriter
                     String attribute= attr.getValue();                      
                     System.out.println("attribute: " + attribute); 
                     
-                    try 
-                    {
+
 						long readCreationTime = MiNoteUtil.parseDateAndTimeString(attribute, "E yyyy.MM.dd 'at' hh:mm:ss:SSS a zzz");
 						
 						if(readCreationTime == creationTime)
@@ -221,11 +220,7 @@ public class NotesWriter
 
 							break;
 						}
-					}
-                    catch (ParseException e) 
-                    {
-						e.printStackTrace();
-					}
+
                 }
             }
 		}

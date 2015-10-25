@@ -19,14 +19,18 @@ public class EventModificationGUI
 {
 	private EventListAdapater listAdapter = null;
 	
-	private ListView listView = null; 
+	private ListView listView = null;
+
+	private boolean isReadOnly = false;
 	
-	public EventModificationGUI()
+	public EventModificationGUI(boolean isReadOnly)
 	{
+		this.isReadOnly = isReadOnly;
 //		CalendarDBManager.getInstance().addDataChangeListener(this);
 	}
 
-    public void createEventModificationList(Context context, int day, int month, int year)
+
+	public void createEventModificationList(Context context, int day, int month, int year)
     {
     	String startDay = pad(day)+"/"+ pad(month)+"/"+Integer.toString(year);
     	List<Event> events = EventManager.getEvents(startDay);
@@ -44,7 +48,7 @@ public class EventModificationGUI
     	Dialog dialog = new Dialog(context);
 	    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 	    dialog.setContentView(linearLayout);
-	    listAdapter = new EventListAdapater(context, events);
+	    listAdapter = new EventListAdapater(context, events, isReadOnly);
 	    listView.setAdapter(listAdapter);
 	    dialog.setCancelable(true);
 	    dialog.show();

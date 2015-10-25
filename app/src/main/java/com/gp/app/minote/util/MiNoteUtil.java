@@ -288,13 +288,22 @@ public class MiNoteUtil
     	 return Environment.getExternalStorageDirectory() + MiNoteConstants.PROFESSIONAL_PA_EXPORT_PATH;
      }
      
-    public static long parseDateAndTimeString(String time, String format) throws ParseException 
+    public static long parseDateAndTimeString(String time, String format)
  	{
  		SimpleDateFormat formatter = new SimpleDateFormat(format);
 
- 		Date creationDate = formatter.parse(time);
- 		
- 		return creationDate.getTime();
+        Date creationDate = null;
+
+        try
+        {
+            creationDate = formatter.parse(time);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        return creationDate  == null ? 0 : creationDate.getTime();
  	}
     
     public static String createStringForDate(long creationTimeAndDate, String format) {
@@ -339,8 +348,7 @@ public class MiNoteUtil
 		
 		String [] dateToken = null;
 		
-		try 
-    	{
+
 			timeTokens = time.split(":");
 				
 			dateToken = date.split("/");
@@ -348,12 +356,7 @@ public class MiNoteUtil
     		String createdStartTime = dateToken[2]+dateToken[1]+dateToken[0]+timeTokens[0]+timeTokens[1];
     		
     		parsedTime = MiNoteUtil.parseDateAndTimeString(createdStartTime,"yyyyMMddHHmm");
-    	} 
-    	catch (ParseException e) 
-    	{
-    		//TODO improve
-			e.printStackTrace();
-		}
+
 		
 		return parsedTime;
     }

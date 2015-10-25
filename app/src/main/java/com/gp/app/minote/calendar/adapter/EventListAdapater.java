@@ -18,17 +18,21 @@ import java.util.List;
 
 public class EventListAdapater extends ArrayAdapter<Event>
 {
+	private final boolean isReadOnly;
+
 	private List<Event> events = null;
 	
 	private Context context = null;
 	
-	public EventListAdapater(Context context, List<Event> events)
+	public EventListAdapater(Context context, List<Event> events, boolean isReadOnly)
 	{
 		super(context, 0, events);
 		
 		this.context  = context;
 		
 		this.events = events;
+
+		this.isReadOnly = isReadOnly;
 	}
 
 	@Override
@@ -56,28 +60,35 @@ public class EventListAdapater extends ArrayAdapter<Event>
         eventEndTime.setText(event.getEndTime());
          
         Button cancelButton = (Button) convertView.findViewById(R.id.eventsDialogCancelButton);
-		
-        convertView.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) 
+
+		if(!isReadOnly)
+		{
+			convertView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v)
+				{
+					createEventEditGUI(event);
+				}
+			});
+
+			cancelButton.setOnClickListener(new OnClickListener()
 			{
-				createEventEditGUI(event);
-			}
-		});
-        
-        cancelButton.setOnClickListener(new OnClickListener() 
-        {
-			@Override
-			public void onClick(View v) 
-			{
-				remove(event);
-				
-				notifyDataSetChanged();
-				
-				CalendarDBManager.getInstance().deleteEvent(event);
-			}
-		});
+				@Override
+				public void onClick(View v)
+				{
+					remove(event);
+
+					notifyDataSetChanged();
+
+					CalendarDBManager.getInstance().deleteEvent(event);
+				}
+			});
+		}
+		else
+		{
+			cancelButton.setVisibility(View.GONE);
+		}
         
 	    return convertView;
 	}
