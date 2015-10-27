@@ -1,14 +1,17 @@
 package com.gp.app.minote.calendar.ui;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gp.app.minote.R;
@@ -38,6 +41,7 @@ public class MiNoteCalendar extends GridLayout implements OnClickListener
 	private List<DateInformation> dateList = new ArrayList<>();
     protected List<CalendarGridView> calendarGrids = new ArrayList<>();
     private CalendarDateClickListener calendarDateClickListener;
+    private GridLayout gridLayout = null;
 
     public MiNoteCalendar(Context context)
 	{
@@ -72,17 +76,15 @@ public class MiNoteCalendar extends GridLayout implements OnClickListener
 
 	private void init()
 	{
-        int id = (int)Math.abs(Math.random() * 100000);
-
-		super.setId(id);
+		super.setId(R.id.minote_calendar);
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.calendar_grid_layout, null);
+        gridLayout = (GridLayout)inflater.inflate(R.layout.calendar_grid_layout, null);
 
-		addView(view);
+		addView(gridLayout);
 
-        previousMonthImageButton = (ImageButton) view.findViewById(R.id.previousMonthImageButton);
+        previousMonthImageButton = (ImageButton) gridLayout.findViewById(R.id.previousMonthImageButton);
 
 		previousMonthImageButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -92,9 +94,9 @@ public class MiNoteCalendar extends GridLayout implements OnClickListener
 			}
 		});
 
-		monthNameTextView = (TextView) view.findViewById(R.id.monthNameTextView);
+		monthNameTextView = (TextView) gridLayout.findViewById(R.id.monthNameTextView);
 
-		nextMonthImageButton = (ImageButton) view.findViewById(R.id.nextMonthImageButton);
+		nextMonthImageButton = (ImageButton) gridLayout.findViewById(R.id.nextMonthImageButton);
 
 		nextMonthImageButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -103,9 +105,9 @@ public class MiNoteCalendar extends GridLayout implements OnClickListener
             }
         });
 
-        for(int i = 10; i < ((GridLayout) view).getChildCount(); i++)
+        for(int i = 10; i < ((GridLayout) gridLayout).getChildCount(); i++)
         {
-            CalendarGridView gridView = (CalendarGridView)((GridLayout) view).getChildAt(i);
+            CalendarGridView gridView = (CalendarGridView)((GridLayout) gridLayout).getChildAt(i);
 
             calendarGrids.add(gridView);
         }
@@ -324,7 +326,7 @@ public class MiNoteCalendar extends GridLayout implements OnClickListener
 
             if (dateInformation.isTodaysDate())
             {
-                calendarGridView.getDayTextView().setBackgroundResource(R.drawable.today);
+                calendarGridView.getDayTextView().setTextColor(Color.rgb(255, 0, 0));
             }
 
             final TextView textView = calendarGridView.getDayTextView();

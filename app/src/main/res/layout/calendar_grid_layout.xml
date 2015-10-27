@@ -144,16 +144,16 @@
         android:id="@+id/day1"
         android:layout_row="2"
         android:layout_column="0"
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:layout_margin="2dip"
         android:padding="3dip"
         android:layout_gravity="center"
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day2"
         android:layout_row="2"
         android:layout_column="1"
@@ -163,8 +163,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day3"
         android:layout_row="2"
         android:layout_column="2"
@@ -174,8 +174,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day4"
         android:layout_row="2"
         android:layout_column="3"
@@ -185,8 +185,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day5"
         android:layout_row="2"
         android:layout_column="4"
@@ -196,8 +196,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day6"
         android:layout_row="2"
         android:layout_column="5"
@@ -207,8 +207,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day7"
         android:layout_row="2"
         android:layout_column="6"
@@ -220,8 +220,8 @@
     <!-- Row 3-->
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day8"
         android:layout_row="3"
         android:layout_column="0"
@@ -231,8 +231,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day9"
         android:layout_row="3"
         android:layout_column="1"
@@ -242,8 +242,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day10"
         android:layout_row="3"
         android:layout_column="2"
@@ -253,8 +253,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day11"
         android:layout_row="3"
         android:layout_column="3"
@@ -264,8 +264,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day12"
         android:layout_row="3"
         android:layout_column="4"
@@ -275,8 +275,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day13"
         android:layout_row="3"
         android:layout_column="5"
@@ -286,8 +286,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day14"
         android:layout_row="3"
         android:layout_column="6"
@@ -299,8 +299,8 @@
     <!-- Row 4-->
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day15"
         android:layout_row="4"
         android:layout_column="0"
@@ -310,8 +310,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day16"
         android:layout_row="4"
         android:layout_column="1"
@@ -321,8 +321,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day17"
         android:layout_row="4"
         android:layout_column="2"
@@ -332,8 +332,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day18"
         android:layout_row="4"
         android:layout_column="3"
@@ -343,8 +343,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day19"
         android:layout_row="4"
         android:layout_column="4"
@@ -354,8 +354,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day20"
         android:layout_row="4"
         android:layout_column="5"
@@ -365,8 +365,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day21"
         android:layout_row="4"
         android:layout_column="6"
@@ -378,8 +378,8 @@
     <!-- Row 5-->
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day22"
         android:layout_row="5"
         android:layout_column="0"
@@ -389,8 +389,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day23"
         android:layout_row="5"
         android:layout_column="1"
@@ -400,8 +400,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day24"
         android:layout_row="5"
         android:layout_column="2"
@@ -411,8 +411,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day25"
         android:layout_row="5"
         android:layout_column="3"
@@ -422,8 +422,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day26"
         android:layout_row="5"
         android:layout_column="4"
@@ -433,8 +433,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day27"
         android:layout_row="5"
         android:layout_column="5"
@@ -444,8 +444,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day28"
         android:layout_row="5"
         android:layout_column="6"
@@ -457,87 +457,80 @@
     <!-- Row 6-->
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day29"
         android:layout_row="6"
         android:layout_column="0"
         android:layout_gravity="center"
         android:layout_margin="2dip"
-        android:padding="3dip"
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day30"
         android:layout_row="6"
         android:layout_column="1"
         android:layout_gravity="center"
         android:layout_margin="2dip"
-        android:padding="3dip"
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day31"
         android:layout_row="6"
         android:layout_column="2"
         android:layout_gravity="center"
         android:layout_margin="2dip"
-        android:padding="3dip"
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day32"
         android:layout_row="6"
         android:layout_column="3"
         android:layout_gravity="center"
         android:layout_margin="2dip"
-        android:padding="3dip"
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day33"
         android:layout_row="6"
         android:layout_column="4"
         android:layout_gravity="center"
         android:layout_margin="2dip"
-        android:padding="3dip"
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day34"
         android:layout_row="6"
         android:layout_column="5"
         android:layout_gravity="center"
         android:layout_margin="2dip"
-        android:padding="3dip"
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day35"
         android:layout_row="6"
         android:layout_column="6"
         android:layout_gravity="center"
         android:layout_margin="2dip"
-        android:padding="3dip"
         android:background="@drawable/selectable_day_layout_border"/>
 
     <!-- Row 7-->
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day36"
         android:layout_row="7"
         android:layout_column="0"
@@ -547,8 +540,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day37"
         android:layout_row="7"
         android:layout_column="1"
@@ -558,8 +551,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day38"
         android:layout_row="7"
         android:layout_column="2"
@@ -569,8 +562,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day39"
         android:layout_row="7"
         android:layout_column="3"
@@ -580,8 +573,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day40"
         android:layout_row="7"
         android:layout_column="4"
@@ -591,8 +584,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day41"
         android:layout_row="7"
         android:layout_column="5"
@@ -602,8 +595,8 @@
         android:background="@drawable/selectable_day_layout_border"/>
 
     <com.gp.app.minote.calendar.ui.CalendarGridView
-        android:layout_width="30dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="50dip"
         android:id="@+id/day42"
         android:layout_row="7"
         android:layout_column="6"

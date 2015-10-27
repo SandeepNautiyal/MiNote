@@ -58,7 +58,9 @@ public class EventListAdapater extends ArrayAdapter<Event>
         TextView eventEndTime = (TextView) convertView.findViewById(R.id.eventsModificationToTimeTextView);
 		
         eventEndTime.setText(event.getEndTime());
-         
+
+		Button editButton = (Button) convertView.findViewById(R.id.eventsDialogEditButton);
+
         Button cancelButton = (Button) convertView.findViewById(R.id.eventsDialogCancelButton);
 
 		if(!isReadOnly)
@@ -88,6 +90,8 @@ public class EventListAdapater extends ArrayAdapter<Event>
 		else
 		{
 			cancelButton.setVisibility(View.GONE);
+
+			editButton.setVisibility(View.GONE);
 		}
         
 	    return convertView;

@@ -95,6 +95,10 @@ public class MiNoteEventCalendar extends MiNoteCalendar implements
 
         TextView eventTextView = calendarGridView.getEventTextView();
 
+        System.out.println("initEventCalendar -> eventTextView="+eventTextView.getText());
+
+        eventTextView.setVisibility(View.VISIBLE);
+
         if (numberOfEvents > 0) {
             eventTextView.setText(String.valueOf(numberOfEvents));
 
@@ -107,8 +111,6 @@ public class MiNoteEventCalendar extends MiNoteCalendar implements
 
                     String todaysDate = MiNoteUtil.pad(todayDate) + "/" + MiNoteUtil.pad(todayDateMonth) + "/" + MiNoteUtil.pad(todayDateYear);
 
-                    System.out.println("initEventCalendar -> todaysDate=" + todaysDate + " formattedDate=" + formattedDate);
-
                     final long todaysTime = MiNoteUtil.parseDateAndTimeString(todaysDate, "dd/mm/yyyy");
 
                     final boolean isReadOnly = currentGridTime < todaysTime;
@@ -118,7 +120,7 @@ public class MiNoteEventCalendar extends MiNoteCalendar implements
                 }
             });
 
-            eventTextView.setBackgroundColor(Color.rgb(120, 100, 255));
+            eventTextView.setBackgroundColor(getResources().getColor(R.color.minotePrimaryColor));
         }
     }
 

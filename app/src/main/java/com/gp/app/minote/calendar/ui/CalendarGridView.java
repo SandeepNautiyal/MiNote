@@ -82,11 +82,6 @@ public class CalendarGridView extends RelativeLayout
         this.isGridActivtated = isGridActivtated;
     }
 
-    public boolean isGridActivtated()
-    {
-        return isGridActivtated;
-    }
-
     class GridClickListener implements OnClickListener
     {
         @Override

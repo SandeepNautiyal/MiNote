@@ -17,4 +17,6 @@
     <dimen name="actionbar_height">50dp</dimen>
     <dimen name="list_item_addition_button_width">10dp</dimen>
     <dimen name="list_item_addition_button_height">10dp</dimen>
+    <dimen name="read_only_calendar_width">35dp</dimen>
+    <dimen name="read_only_calendar_height">35dp</dimen>
 </resources>

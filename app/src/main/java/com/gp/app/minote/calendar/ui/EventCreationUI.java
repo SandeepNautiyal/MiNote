@@ -194,7 +194,6 @@ public class EventCreationUI
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         MiNoteCalendar noteCalendar = new MiNoteCalendar(context);
-
         noteCalendar.setDateClickListener(new CalendarDateClickListener() {
             @Override
             public void clickedDate(int day, int month, int year) {

@@ -2,4 +2,5 @@
 <resources>
     <item name="list_item_add_button" type="id"/>
     <item name="save_list_button" type="id"/>
+    <item name="minote_calendar" type="id"/>
 </resources>
