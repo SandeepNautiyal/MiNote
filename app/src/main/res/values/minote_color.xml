@@ -2,4 +2,5 @@
 <resources>
     <item name="minotePrimaryColor" type="color">#7864FF</item>
     <item name="minoteTabColor" type="color">#A094EE</item>
+    <item name="selectionColor" type="color">#BEC1C1</item>
 </resources>

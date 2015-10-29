@@ -9,12 +9,10 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.view.ActionMode;
 import android.view.KeyEvent;
@@ -26,11 +24,11 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
-import com.google.android.gms.plus.model.people.Person;
 import com.gp.app.minote.R;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
 import com.gp.app.minote.calendar.interfaces.DBChangeListener;
@@ -38,6 +36,7 @@ import com.gp.app.minote.calendar.ui.EventCreationUI;
 import com.gp.app.minote.calendar.ui.MiNoteCalendar;
 import com.gp.app.minote.calendar.ui.MiNoteEventCalendar;
 import com.gp.app.minote.colorpicker.ColourPickerChangeListener;
+import com.gp.app.minote.compositecontrols.ListViewItemLayout;
 import com.gp.app.minote.data.Event;
 import com.gp.app.minote.data.Note;
 import com.gp.app.minote.data.NoteItem;
@@ -61,7 +60,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -630,18 +628,21 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
 	{
 		int availableLayoutIndex = getAvailableLayoutIndex();
 
-        System.out.println("updateActivityView -> availableLayoutIndex="+availableLayoutIndex);
+        System.out.println("updateActivityView -> availableLayoutIndex=" + availableLayoutIndex);
 
-		LinearLayout linearLayout = linearLayouts.get(availableLayoutIndex);
-
-		LinearLayout parentView = (LinearLayout) frameLayout.getParent();
-
-		if (parentView != null) 
+		if(availableLayoutIndex < linearLayouts.size())
 		{
-			parentView.removeView(frameLayout);
-		}
+			LinearLayout linearLayout = linearLayouts.get(availableLayoutIndex);
 
-		linearLayout.addView(frameLayout, 0);
+			LinearLayout parentView = (LinearLayout) frameLayout.getParent();
+
+			if (parentView != null)
+			{
+				parentView.removeView(frameLayout);
+			}
+
+			linearLayout.addView(frameLayout, 0);
+		}
 	}
 
 	private void fillLinearLayoutList() 
@@ -1189,22 +1190,39 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
 		}
 	}
 
-	private void resetNoteColor(int selectedNoteId) 
+	private void resetNoteColor(int selectedNoteId)
 	{
 		FrameLayout frameLayout = childFrames.get(selectedNoteId);
 
 		if(frameLayout != null)
 		{
 			View view = frameLayout.getChildAt(0);
-			
+
 			if(view != null)
 			{
 				Note note = NotesManager.getInstance().getNote(selectedNoteId);
 
 				if(note != null && note.getType() != Note.EVENT_NOTE)
 				{
-					view.setBackgroundColor(((TextNote)note).getNoteColor());
-				}
+                    view.setBackgroundColor(((TextNote) note).getNoteColor());
+
+                    ListView listView = (ListView) view;
+
+                    for (int i = 0; i < listView.getChildCount(); i++) {
+                        View childView = listView.getChildAt(i);
+
+                        if (childView instanceof RelativeLayout) {
+                            RelativeLayout item = (RelativeLayout) childView;
+
+                            final ImageView imageView = (ImageView) item.findViewById(R.id.compositeControlImageView);
+
+                            if (imageView != null) {
+                                imageView.setColorFilter(Color.argb(0, 0, 0, 0));
+                            }
+                        }
+
+                    }
+                }
 				else
 				{
 					view.setBackgroundColor(Color.rgb(255, 255, 255));
@@ -1212,7 +1230,7 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
 			}
 		}
 	}
-	
+
 	private int getAvailableLayoutIndex()
 	{
         int availableIndex = -1;
@@ -1313,13 +1331,36 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
 		
 		if(frameLayout != null)
 		{
-			currenActionMode = startActionMode(new NotesActionModeCallback());
+			if(currenActionMode == null)
+			{
+				currenActionMode = startActionMode(new NotesActionModeCallback());
+			}
 
 			View view = frameLayout.getChildAt(0);
 
 			if(view != null)
 			{
-				view.setBackgroundResource(R.drawable.blue);
+                ListView listView = (ListView)view;
+
+                for(int i = 0; i < listView.getChildCount(); i++)
+                {
+                    View childView = listView.getChildAt(i);
+
+                    if(childView instanceof RelativeLayout)
+                    {
+                        RelativeLayout item = (RelativeLayout)childView;
+
+                        final ImageView imageView = (ImageView) item.findViewById(R.id.compositeControlImageView);
+
+                        if(imageView != null)
+                        {
+                            imageView.setColorFilter(Color.argb(70, 105, 105, 105));
+                        }
+                    }
+
+                }
+
+				view.setBackgroundColor(Color.argb(70, 105, 105, 105));
 			}
 		}
 	}
@@ -1343,10 +1384,15 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
 	public void deSelectNote(int noteId)
 	{
 		resetNoteColor(noteId);
-		
-		if(NotesOperationManager.getInstance().getSelectedNoteIds().size() == 0)
+
+        if(NotesOperationManager.getInstance().getSelectedNoteIds().size() == 0)
 		{
 			currenActionMode.finish();
+
+            if(currenActionMode != null)
+            {
+                currenActionMode = null;
+            }
 		}
 		else if(NotesOperationManager.getInstance().getSelectedNoteIds().size() == 1
 				&& !NotesOperationManager.getInstance().isSelectedNoteEvent())

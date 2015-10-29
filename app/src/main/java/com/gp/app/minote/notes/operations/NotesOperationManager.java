@@ -175,9 +175,7 @@ public class NotesOperationManager
 	public void addSelectedNote(int noteId) 
 	{
 		selectedNoteIds.add(noteId);
-		
-		Note note = NotesManager.getInstance().getNote(noteId);
-		
+
 		MiNoteParameters.getNotesActivity().setNoteSelected(noteId);
 	}
 	
@@ -204,13 +202,15 @@ public class NotesOperationManager
 	}
 
 	public void deSelectNote(int noteId) 
-	{   
+	{
+		System.out.println("deSelectNote -> selectedNoteIds="+selectedNoteIds+ "noteId="+noteId);
+
 		if(selectedNoteIds.contains(noteId))
 		{
-			MiNoteParameters.getNotesActivity().deSelectNote(noteId);
-			
 			selectedNoteIds.remove((Integer)noteId);
-		}
+
+            MiNoteParameters.getNotesActivity().deSelectNote(noteId);
+        }
 	}
 
 	public void selectNote(int noteId) 

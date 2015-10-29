@@ -1,5 +1,6 @@
 package com.gp.app.minote.data;
 
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -30,7 +31,7 @@ public class TextNote extends Note
 	
 	private long lastEditedTime = 0L;
 	
-	private int noteColor = 0;
+	private int noteColor = Color.rgb(240, 240, 240);
 
 	public TextNote(int noteId, byte noteType, List<NoteItem> values) 
 	{
@@ -213,10 +214,14 @@ public class TextNote extends Note
 	public void setNoteColor(int noteColor)
 	{
 		this.noteColor = noteColor;
+
+		System.out.println("setNoteColor -> color=" + noteColor);
 	}
 	
 	public int getNoteColor() 
 	{
+		System.out.println("getNoteColor -> color=" + noteColor);
+
 		return noteColor;
 	}
 	
