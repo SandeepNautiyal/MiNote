@@ -2,19 +2,12 @@ package com.gp.app.minote.notes.operations;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.view.Window;
 import android.widget.GridView;
-import android.widget.Toast;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.extensions.android.json.AndroidJsonFactory;
-import com.gp.app.minote.backend.messaging.Messaging;
 import com.gp.app.minote.calendar.events.database.CalendarDBManager;
 import com.gp.app.minote.colorpicker.ColourPickerAdapter;
 import com.gp.app.minote.colorpicker.ColourProperties;
@@ -29,13 +22,10 @@ import com.gp.app.minote.notes.images.ImageLocationPathManager;
 import com.gp.app.minote.util.MiNoteParameters;
 import com.gp.app.minote.util.MiNoteUtil;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class NotesOperationManager 
 {
@@ -176,7 +166,7 @@ public class NotesOperationManager
 	{
 		selectedNoteIds.add(noteId);
 
-		MiNoteParameters.getNotesActivity().setNoteSelected(noteId);
+		MiNoteParameters.getNotesActivity().selectNote(noteId);
 	}
 	
 	public boolean isNoteSelected()

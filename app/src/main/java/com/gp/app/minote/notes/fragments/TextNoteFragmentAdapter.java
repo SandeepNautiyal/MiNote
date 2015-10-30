@@ -56,8 +56,8 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 		TextView editText = (TextView) convertView.findViewById(R.id.compositeControlTextBox);
 		
 		ImageView bulletPointImage = (ImageView) convertView.findViewById(R.id.compositeControlBulletButton);
-		
-		final ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
+
+        final ImageView imageView = (ImageView) convertView.findViewById(R.id.compositeControlImageView);
 		
         final int noteId = note.getId();
         
@@ -136,7 +136,8 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 				bulletPointImageViewParams.height = compressedViewHeight;
 				bulletPointImageViewParams.width = (int) androidResources.getDimension(R.dimen.composite_control_importance_button_compressed_width);
 				bulletPointImage.setLayoutParams(bulletPointImageViewParams);
-			}
+                bulletPointImage.setBackgroundColor(note.getNoteColor());
+            }
 		} 
 		else if (noteType == Note.PARAGRAPH_NOTE) 
 		{
@@ -145,8 +146,6 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 			importanceButtonParams.width = 0;
 			bulletPointImage.setLayoutParams(importanceButtonParams);
 			bulletPointImage.setVisibility(View.GONE);
-			
-			editText.setPadding(10, 0, 10, 0);
 		}
 
 		if (noteListItem.getText() != null && !noteListItem.getText().equals(""))
@@ -160,10 +159,6 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 				editText.setGravity(Gravity.CENTER);
 				
 				editText.setTypeface(null, Typeface.BOLD);
-				
-//				editText.setBackgroundResource(R.drawable.note_title_border);
-				
-//				editText.setBackgroundColor(Color.rgb(120, 100, 255));
 			}
 			
 		    editText.setLayoutParams(params);
@@ -189,7 +184,8 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 			editText.setFocusable(false);
 			editText.setClickable(true);
 			editText.setTextColor(noteListItem.getTextColour());
-		}
+            editText.setBackgroundColor(note.getNoteColor());
+        }
 
 		if (noteListItem.getImageName() != null && !noteListItem.getImageName().equals("")) 
 		{
@@ -217,12 +213,7 @@ public class TextNoteFragmentAdapter extends ArrayAdapter<NoteItem>
 			importanceButtonParams.width = 0;
 			bulletPointImage.setLayoutParams(importanceButtonParams);
 			bulletPointImage.setVisibility(View.INVISIBLE);
-			
-//			LayoutParams textButtonParams = editText.getLayoutParams();
-//			textButtonParams.height = 0;
-//			textButtonParams.width = 0;
-//			editText.setLayoutParams(textButtonParams);
-//			editText.setVisibility(View.INVISIBLE);
+            imageView.setBackgroundColor(note.getNoteColor());
 		}
 
 	    return convertView;

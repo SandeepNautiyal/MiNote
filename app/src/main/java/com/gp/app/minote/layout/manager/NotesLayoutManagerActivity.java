@@ -10,7 +10,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -1200,6 +1202,14 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
 
 			if(view != null)
 			{
+                Drawable drawable = view.getBackground();
+
+                drawable.invalidateSelf();
+
+                drawable = drawable.mutate();
+//
+                drawable.setColorFilter(null);
+
 				Note note = NotesManager.getInstance().getNote(selectedNoteId);
 
 				if(note != null && note.getType() != Note.EVENT_NOTE)
@@ -1217,7 +1227,7 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
                             final ImageView imageView = (ImageView) item.findViewById(R.id.compositeControlImageView);
 
                             if (imageView != null) {
-                                imageView.setColorFilter(Color.argb(0, 0, 0, 0));
+                                imageView.setColorFilter(null);
                             }
                         }
 
@@ -1325,7 +1335,7 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
 		return false;
 	}
 
-	public void setNoteSelected(int noteId) 
+	public void selectNote(int noteId)
 	{
 		FrameLayout frameLayout = childFrames.get(noteId);
 		
@@ -1354,13 +1364,19 @@ public class NotesLayoutManagerActivity extends FragmentActivity implements Colo
 
                         if(imageView != null)
                         {
-                            imageView.setColorFilter(Color.argb(70, 105, 105, 105));
+                            imageView.setColorFilter(Color.argb(50, 128, 128, 128));
                         }
                     }
 
                 }
 
-				view.setBackgroundColor(Color.argb(70, 105, 105, 105));
+                Drawable drawable = view.getBackground();
+
+                drawable.invalidateSelf();
+
+                drawable = drawable.mutate();
+
+                drawable.setColorFilter(Color.argb(50, 128, 128, 128), PorterDuff.Mode.SRC_ATOP);
 			}
 		}
 	}
