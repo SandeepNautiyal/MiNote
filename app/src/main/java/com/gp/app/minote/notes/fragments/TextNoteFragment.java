@@ -72,7 +72,7 @@ public class TextNoteFragment extends ListFragment
 				
 //				listView.setBackgroundResource(R.drawable.list_view_border_blue);
 
-                listView.setBackgroundColor(Color.rgb(240,240,240));
+//                listView.setBackgroundColor(Color.rgb(240,240,240));
 
                 listView.getBackground().setAlpha(255);
 
