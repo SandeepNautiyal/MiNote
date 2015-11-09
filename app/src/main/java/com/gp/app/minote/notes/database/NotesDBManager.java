@@ -173,6 +173,7 @@ public class NotesDBManager extends SQLiteOpenHelper implements NotesSearch
     		int readNoteId = (int)cursor.getInt(cursor.getColumnIndexOrThrow(TextNote.NOTE_ID));
     		byte noteType = (byte)cursor.getInt(cursor.getColumnIndexOrThrow(TextNote.NOTE_TYPE));
         	int noteColor = (int)cursor.getInt(cursor.getColumnIndexOrThrow(TextNote.NOTE_COLOR));
+			System.out.println("readNotes -> noteColor="+noteColor);
         	long creationTime = cursor.getLong(cursor.getColumnIndexOrThrow(TextNote.NOTE_CREATION_TIME));
         	long lastEditedTime = cursor.getLong(cursor.getColumnIndexOrThrow(TextNote.NOTE_MODIFIED_TIME));
         	TextNote note = new TextNote(readNoteId, noteType, noteColor, creationTime, lastEditedTime);

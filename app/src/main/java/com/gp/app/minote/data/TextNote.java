@@ -214,14 +214,10 @@ public class TextNote extends Note
 	public void setNoteColor(int noteColor)
 	{
 		this.noteColor = noteColor;
-
-		System.out.println("setNoteColor -> color=" + noteColor);
 	}
 	
 	public int getNoteColor() 
 	{
-		System.out.println("getNoteColor -> color=" + noteColor);
-
 		return noteColor;
 	}
 	

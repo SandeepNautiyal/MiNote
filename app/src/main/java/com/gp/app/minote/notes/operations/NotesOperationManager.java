@@ -205,7 +205,10 @@ public class NotesOperationManager
 
 	public void selectNote(int noteId) 
 	{
-		addSelectedNote(noteId);
+		if(!selectedNoteIds.contains(noteId))
+		{
+			addSelectedNote(noteId);
+		}
 	}
 
 //	public void createEventNote(Event event)

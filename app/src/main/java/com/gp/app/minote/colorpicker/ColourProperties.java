@@ -14,7 +14,7 @@ public enum ColourProperties
     
     GRAY(Color.GRAY, "Gray"),
     
-    WHITE(Color.WHITE, "White"),
+    WHITE(Color.rgb(240, 240, 240), "White"),
     
     CYAN(Color.CYAN, "Cyan"),
     

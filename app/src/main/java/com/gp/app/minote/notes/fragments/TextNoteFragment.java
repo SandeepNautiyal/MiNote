@@ -64,7 +64,7 @@ public class TextNoteFragment extends ListFragment
 				
 				listView.setDividerHeight(0);
 
-                listView.setElevation(5.0f);
+//                listView.setElevation(5.0f);
 
 				setListViewHeightBasedOnItems();
 //				setListShown(true);
@@ -80,7 +80,7 @@ public class TextNoteFragment extends ListFragment
 
 				if(p != null)
 				{
-					p.setMargins(5,5,5,5);
+					p.setMargins(1,2,1,2);
 				}
 
 				adapter.notifyDataSetChanged();

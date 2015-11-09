@@ -480,7 +480,7 @@ public class ListCreatorActivity extends Activity implements ColourPickerChangeL
 	}
 	
 	@Override
-	public void changeColour(int colourCode) 
+	public void setNoteColor(int colourCode)
 	{
         EditText selectedView = (EditText)selectedViews.get(0);
 		

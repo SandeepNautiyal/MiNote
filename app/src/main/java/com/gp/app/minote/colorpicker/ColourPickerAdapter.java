@@ -68,18 +68,18 @@ public class ColourPickerAdapter extends ArrayAdapter<ColourProperties>
 		return row; 
 	} 
 	
-	private void setColourButtonProperties(ColourProperties properties, Button colourButton) 
+	private void setColourButtonProperties(final ColourProperties properties, Button colourButton)
 	{
 		colourButton.setBackgroundColor(properties.getColorKey());
 		
-		colourButton.setId(properties.getColorKey());
+//		colourButton.setId(properties.getColorKey());
 		
 		colourButton.setOnClickListener(new OnClickListener() 
 		{
 			@Override
 			public void onClick(View view) 
 			{
-				((ColourPickerChangeListener)noteActivityContext).changeColour(view.getId());
+				((ColourPickerChangeListener)noteActivityContext).setNoteColor(properties.getColorKey());
 				
 				parentDialog.dismiss();
 			}

@@ -30,6 +30,7 @@
         android:ems="10"
         android:layout_toRightOf="@+id/compositeControlBulletButton"
         android:layout_alignTop="@+id/compositeControlBulletButton"
+        android:paddingLeft="5dip"
         android:inputType="textAutoCorrect|textMultiLine|textAutoComplete|textCapSentences"
         android:maxLines="15"
         android:maxLength="400"/>
